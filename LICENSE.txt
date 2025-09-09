@@ -1,0 +1,11 @@
+Copyright (c) 2025 Amanda Brito, Anahi Narieli, Débora Carvalho, Isabella Gonçalves, Julia Bongiovani e Luna Leão.
+
+Todos os direitos reservados.
+
+Este projeto foi desenvolvido exclusivamente para a docente e palestrante Kelly Cristina Marques.
+
+Nenhuma parte deste software, incluindo código-fonte, documentação, imagens, ou qualquer outro conteúdo, 
+pode ser copiada, modificada, distribuída, publicada ou utilizada de qualquer forma sem a autorização 
+expressa por escrito dos autores.
+
+Uso comercial ou redistribuição não autorizada é estritamente proibido.
