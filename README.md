@@ -2,6 +2,8 @@
 
 Aplicação web para difundir conteúdos sobre o Patrimônio Cultural Imaterial Brasileiro.
 
+<br>
+
 ## Requisitos funcionais
 
 ### Administrador
@@ -35,9 +37,13 @@ Aplicação web para difundir conteúdos sobre o Patrimônio Cultural Imaterial 
 
 **Back-end:** Ruby, Python, PostgreSQL
 
+<br>
+
 ## Paleta de cores
 
 <img src=".github/assets/paleta-cores-pindorama.png" style="height:130px;" />
+
+<br>
 
 ## Instalação
 
@@ -65,61 +71,19 @@ Inicie o servidor
   npm run dev
 ```
 
-## Licença
+<br>
+
+## 📄 Licença
 
 Este projeto está protegido. Para mais detalhes, consulte o arquivo [LICENSE](LICENSE.txt) na raiz do repositório.
 
+<br>
+
 ## Desenvolvedoras
 
-<div style="display: flex; flex-direction: row; align-items: center; justify-content: start; gap: 20px;">
-  <div style="text-align: center;">
-    <a href="https://github.com/Amanda-Brit0" target="_blank">
-      <img src="https://avatars.githubusercontent.com/u/160365656?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Amanda Brito</sub>
-    </a>
-  </div>
-
-  <div style="text-align: center;">
-    <a href="https://github.com/AnahiMamani" target="_blank">
-      <img src="https://avatars.githubusercontent.com/u/115493470?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Anahi Narieli</sub>
-    </a>
-  </div>
-
-  <div style="text-align: center;">
-    <a href="https://github.com/Debora-Carvalho" target="_blank">
-      <img src="https://avatars2.githubusercontent.com/u/104103793?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Débora Carvalho</sub>
-    </a>
-  </div>
-
-  <div style="text-align: center;">
-    <a href="https://github.com/IsabellaSGoncalves" target="_blank">
-      <img src="https://avatars.githubusercontent.com/u/161075154?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Isabella Gonçalves</sub>
-    </a>
-  </div>
-
-  <div style="text-align: center;">
-    <a href="https://github.com/BONJIU" target="_blank">
-      <img src="https://avatars.githubusercontent.com/u/160390898?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Julia Bongiovani</sub>
-    </a>
-  </div>
-
-  <div style="text-align: center;">
-    <a href="https://github.com/LunaLeao" target="_blank">
-      <img src="https://avatars.githubusercontent.com/u/164408694?v=4" style="width:80px; height:80px; border-radius:50%;" />
-      <br>
-      <sub>Luna Leão</sub>
-    </a>
-  </div>
-</div>
+| Amanda Brito                                                                                                                                                                                                                                                      | Anahi Narieli                                                                                                                                                                                                                                                    | Débora Carvalho                                                                                                                                                                                                                                                       | Isabella Gonçalves                                                                                                                                                                                                                                                      | Julia Bongiovani                                                                                                                                                                                                                                            | Luna Leão                                                                                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://avatars.githubusercontent.com/u/160365656?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Amanda-Brit0) | <img src="https://avatars.githubusercontent.com/u/115493470?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AnahiMamani) | <img src="https://avatars2.githubusercontent.com/u/104103793?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Debora-Carvalho) | <img src="https://avatars.githubusercontent.com/u/161075154?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/IsabellaSGoncalves) | <img src="https://avatars.githubusercontent.com/u/160390898?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/BONJIU) | <img src="https://avatars.githubusercontent.com/u/164408694?v=4" width="80" height="80" style="border-radius:50%;" /><br>[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LunaLeao) |
 
 <br><br>
 
