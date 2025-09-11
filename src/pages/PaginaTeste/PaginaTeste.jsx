@@ -2,10 +2,10 @@ import styles from './PaginaTeste.module.scss';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
 
 import CardPadrao from '../../components/CardPadrao/CardPadrao.jsx';
-import ThemeToggle from '../../components/ThemeToggle.jsx';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 
 function PaginaTeste() {
-	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
+	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
 
 	return (
 		<>

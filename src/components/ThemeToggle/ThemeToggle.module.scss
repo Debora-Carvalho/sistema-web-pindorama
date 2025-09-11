@@ -1,0 +1,23 @@
+.containerButton {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10rem;
+	height: min-content;
+	padding: 10px;
+	border-radius: 20px;
+	border: 2px solid var(--text);
+	color: var(--text);
+
+	&:hover {
+		background-color: var(--primary);
+	}
+}

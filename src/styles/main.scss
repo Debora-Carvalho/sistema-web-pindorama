@@ -1,5 +1,4 @@
-// importar os outros arquivos de estilizacao
-
+@use './base/_reset' as *;
 @use "./abstracts/_variables" as vars;
 @use "./abstracts/_mixins" as mixins;
 
@@ -8,11 +7,6 @@
 
 :root {
 	--bg-image: url("/icons/icon-teste-tema-default.png");
-}
-
-body {
-	margin: 0;
-	padding: 0;
 }
 
 [data-theme="dark"] {
