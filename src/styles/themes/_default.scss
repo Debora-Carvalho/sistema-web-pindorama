@@ -1,7 +1,10 @@
-@use '../abstracts/_variables' as *;
-
 $default: (
-	primary: #3983e5,
-	secondary: #eddc2a,
-	tertiary: #cacaca,
+	background: #f8fafc,
+	surface: #ffffff,
+	text: #0f172a,
+	primary: #0077ff,
+	secondary: #6b7280,
+	muted: #9ca3af,
+	success: #10b981,
+	danger: #ef4444,
 );

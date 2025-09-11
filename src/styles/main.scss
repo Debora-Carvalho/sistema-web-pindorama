@@ -1,1 +1,24 @@
 // importar os outros arquivos de estilizacao
+
+@use "./abstracts/_variables" as vars;
+@use "./abstracts/_mixins" as mixins;
+
+// gera as variáveis CSS para cada tema
+@include mixins.generate-theme-css-vars();
+
+:root {
+	--bg-image: url("/icons/icon-teste-tema-default.png");
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+[data-theme="dark"] {
+	--bg-image: url("/icons/icon-teste-tema-dark.png");
+}
+
+[data-theme="nordestino"] {
+	--bg-image: url("/icons/icon-teste-tema-nordestino.png");
+}

@@ -1,8 +1,10 @@
-// themes/_dark.scss
-@use '../abstracts/_variables' as *;
-
 $dark: (
-	primary: #222,
-	secondary: #26ccc9,
-	tertiary: #85afaf,
+	background: #0b1220,
+	surface: #111827,
+	text: #e5e7eb,
+	primary: #60a5fa,
+	secondary: #9ca3af,
+	muted: #6b7280,
+	success: #34d399,
+	danger: #f87171,
 );

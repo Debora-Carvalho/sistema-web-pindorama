@@ -1,18 +1,23 @@
-// @use "sass:map";
-// @use "../themes/default" as default;
-// @use "../themes/dark" as dark;
-// @use "../themes/nordestino" as nordestino;
+@use "sass:map";
+@use "../themes/default" as theme_default;
+@use "../themes/dark" as theme_dark;
+@use "../themes/nordestino" as theme_nord;
 
-// $themes: (
-// 	default: default.$default,
-// 	dark: dark.$dark,
-// 	nordestino: nordestino.$nordestino,
-// );
+// combinar os mapas de tema num só mapa
+$themes: (
+	default: theme_default.$default,
+	dark: theme_dark.$dark,
+	nordestino: theme_nord.$nordestino
+);
 
-// @mixin themify($property, $key) {
-// 	@each $theme, $color in $themes {
-// 		&.#{$theme} {
-// 			#{$property}: map.get($color, $key);
-// 		}
-// 	}
-// }
+// Mixin que cria variáveis CSS (--background, --text, --primary, ...) em cada classe de body
+// Ex.: body.default { --background: #fff; --text: #000; ... }
+@mixin generate-theme-css-vars() {
+	@each $theme-name, $theme-map in $themes {
+		body.#{$theme-name} {
+			@each $token, $value in $theme-map {
+				--#{$token}: #{$value};
+			}
+		}
+	}
+}
