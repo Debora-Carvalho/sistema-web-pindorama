@@ -1,0 +1,18 @@
+// @use "sass:map";
+// @use "../themes/default" as default;
+// @use "../themes/dark" as dark;
+// @use "../themes/nordestino" as nordestino;
+
+// $themes: (
+// 	default: default.$default,
+// 	dark: dark.$dark,
+// 	nordestino: nordestino.$nordestino,
+// );
+
+// @mixin themify($property, $key) {
+// 	@each $theme, $color in $themes {
+// 		&.#{$theme} {
+// 			#{$property}: map.get($color, $key);
+// 		}
+// 	}
+// }
