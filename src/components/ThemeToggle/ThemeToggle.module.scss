@@ -14,10 +14,10 @@
 	height: min-content;
 	padding: 10px;
 	border-radius: 20px;
-	border: 2px solid var(--text);
-	color: var(--text);
+	border: 2px solid var(--neutral-primary);
+	color: var(--text-principal);
 
 	&:hover {
-		background-color: var(--primary);
+		background-color: var(--background-secondary);
 	}
 }

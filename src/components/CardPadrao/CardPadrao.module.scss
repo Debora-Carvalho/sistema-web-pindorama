@@ -5,11 +5,10 @@
 	justify-content: center;
 	width: 10%;
 	height: 10%;
-	border-color: #03030c;
+	border-color: var(--neutral-primary);
 	border-width: 10px;
 }
 
 .texto {
-	font-size: 20px;
-	color: #03030c;
+	color: var(--text-principal);
 }
