@@ -1,11 +1,10 @@
-//import PaginaInicial from './pages/PaginaInicial/PaginaInicial.jsx';
-import PaginaTeste from './pages/PaginaTeste/PaginaTeste.jsx';
+import AppRoutes from "./routes/router.jsx";
 
 function App() {
 	return (
-		<>
-			<PaginaTeste />
-		</>
+		<div className="App">
+			<AppRoutes />
+		</div>
 	)
 }
 
