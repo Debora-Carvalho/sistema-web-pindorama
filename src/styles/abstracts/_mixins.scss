@@ -10,8 +10,6 @@ $themes: (
 	nordestino: theme_nord.$nordestino
 );
 
-// Mixin que cria variáveis CSS (--background, --text, --primary, ...) em cada classe de body
-// Ex.: body.default { --background: #fff; --text: #000; ... }
 @mixin generate-theme-css-vars() {
 	@each $theme-name, $theme-map in $themes {
 		body.#{$theme-name} {
