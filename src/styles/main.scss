@@ -1,5 +1,5 @@
 @use "./base/_reset" as *;
-@use "./abstracts/_variables" as vars;
+@use "./abstracts/_variables" as *;
 @use "./abstracts/_mixins" as mixins;
 @use "./abstracts/_functions" as *;
 
@@ -7,7 +7,6 @@
 @include mixins.generate-theme-css-vars();
 
 :root {
-	--text-font: "Comfortaa", sans-serif;
 	--bg-image: url("/icons/icon-teste-tema-default.png");
 }
 
