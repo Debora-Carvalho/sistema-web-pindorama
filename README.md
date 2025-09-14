@@ -2,6 +2,8 @@
 
 Aplicação web para difundir conteúdos sobre o Patrimônio Cultural Imaterial Brasileiro.
 
+Acesse o site em: https://pindorama-cultura.vercel.app/
+
 <br>
 
 ## Requisitos funcionais
@@ -62,6 +64,7 @@ Entre no diretório do projeto
 Instale as dependências
 
 ```bash
+
   npm install
 ```
 
