@@ -1,0 +1,36 @@
+@use "../../styles/abstracts/variables" as *;
+
+.containerHeaderPrincipal {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 10vh;
+	top: 0;
+	padding: 20px;
+	background: var(--background-secondary);
+}
+
+.logoHeaderPrincipal {
+	cursor: pointer;
+}
+
+.headerPrincipalItems {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+}
+
+.headerBtn {
+	font-family: $font-family-principal;
+	color: var(--text-secondary);
+}
+
+.active {
+	background: var(--primary-200);
+	border-radius: 20px;
+	padding: 10px 20px;
+}
