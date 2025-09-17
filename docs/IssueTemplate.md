@@ -7,7 +7,7 @@ labels: 'Deixe vazio se nenhuma das opções for cabivel'
 
 assignees: 'Deixe vazio ate que uma do grupo decida pegar esta issue'
 
-Apartir daqui começa o template.
+A partir daqui começa o template.
 
 ### 🧩 Contexto  
 Descreva brevemente o que está acontecendo ou o que você gostaria de adicionar.  

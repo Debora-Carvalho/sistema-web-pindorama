@@ -1,11 +1,81 @@
-.container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+
+.containerLogin{
+	display: grid; 
+	grid-template-columns: 6fr 4fr; 
+	width: 100%;
+	min-height: 100vh;
+	background-color: #DFD4B8;
+	overflow: hidden;
 }
 
-.titulo {
-	font-size: 40px;
-	color: #3D3DDD;
+.doguinho{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.columDoguinho, .columForm{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.tituloLogin {
+	font-size: 50px;
+	color: #783d19;
+	font-weight: bold;
+}
+
+.inputLogin{
+  flex: 1; 
+  background-color: rgba(210,152,102,0.36); 
+  border: 1px solid #783d19;
+  border-radius: 10px;
+  height: 40px;
+  margin-left: 30px;
+}
+
+.word{
+	color: black;
+	font-weight: 400;
+	margin: 1em;
+	font-size: 20px;
+}
+
+.sectionSenha{
+  display: flex;
+  align-items: center; 
+  gap: 0.5rem;
+}
+.btnLogin{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.btnEntrarLogin{
+	width: 30px;
+	height: 30px;
+}
+
+.resetSenha{
+	margin-top: 2em;
+	font-size: 20px;
+}
+
+.btnVoltarInicial{
+	position: relative;
+	bottom: 15em;
+	left: 13em;
+	width: 70px;
+	height: 70px;
+	
 }
