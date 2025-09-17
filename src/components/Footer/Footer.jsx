@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import FooterCopy from './FooterCopy/FooterCopy.jsx';
+import FormContato from './FormContato/FormContato.jsx';
 import styles from './Footer.module.scss';
 import iconElementoApoio from '../../assets/icons/icon-cacto-apoio-footer.png';
 
@@ -9,7 +10,9 @@ function Footer() {
 			<div className={styles.containerFooter}>
 				<p>Pindorama</p>
 
-				<div>Formulario</div>
+				<div>
+					<FormContato />
+				</div>
 
 				<div className={styles.linksFooter}>
 					<h2>Links</h2>
@@ -21,7 +24,7 @@ function Footer() {
 				</div>
 
 				<div>
-					<img src={iconElementoApoio} alt='Ilustração de apoio' />
+					<img src={iconElementoApoio} alt='Ilustração de apoio' className={styles.iconFooter} />
 				</div>
 			</div>
 

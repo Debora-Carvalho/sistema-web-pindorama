@@ -29,3 +29,10 @@ footer {
 		color: var(--text-secondary);
 	}
 }
+
+.iconFooter {
+	display: flex;
+	align-self: flex-end;
+	padding-bottom: 0;
+	bottom: 0;
+}
