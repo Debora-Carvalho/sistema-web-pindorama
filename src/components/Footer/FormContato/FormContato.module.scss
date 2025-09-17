@@ -1,0 +1,49 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.formContato {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px 0;
+	gap: 10px;
+
+	h2 {
+		font-family: $font-family-principal;
+		color: var(--text-secondary);
+	}
+
+	.groupInput {
+		display: flex;
+		flex-direction: row;
+		gap: 20px;
+	}
+
+	.itemGroupInput {
+		display: flex;
+		flex-direction: column;
+
+		label,
+		input,
+		textarea {
+			font-family: $font-family-principal;
+		}
+
+		label {
+			color: var(--text-secondary);
+		}
+
+		input,
+		textarea {
+			border-radius: 10px;
+			border: 1px solid var(--primary-900);
+			padding: 10px;
+		}
+	}
+
+	.btnFormContato {
+		background-color: var(--primary-900);
+		color: var(--text-secondary);
+		border-radius: 20px;
+		height: 40px;
+	}
+}
