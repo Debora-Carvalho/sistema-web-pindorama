@@ -1,8 +1,8 @@
 import styles from './PaginaInicial.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import Header from '../../../components/Header/Header.jsx';
+import Footer from '../../../components/Footer/Footer.jsx';
 
-import CardPadrao from '../../../components/CardPadrao/CardPadrao.jsx';
-import ThemeToggle from '../../../components/ThemeToggle/ThemeToggle.jsx';
 
 function PaginaInicial() {
 	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
@@ -10,12 +10,14 @@ function PaginaInicial() {
 	return (
 		<>
 			<div className={styles.container}>
+				<Header />
+
 				<p className={styles.titulo}>
-					Pagina inicial aqui
+					Página inicial aqui
 				</p>
 
-				<ThemeToggle />
-				<CardPadrao />
+				<Footer />
+
 			</div>
 		</>
 	)

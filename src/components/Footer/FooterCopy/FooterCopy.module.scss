@@ -1,0 +1,26 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.containerFooterCopy {
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+	align-items: center;
+	justify-content: space-between;
+	background: var(--background-secondary);
+	border-top: 1px solid var(--text-secondary);
+	padding: 20px;
+
+	.text,
+	.itemLinkFooterCopy {
+		font-family: $font-family-principal;
+		color: var(--text-secondary);
+	}
+
+	.linksFooterCopy {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+	}
+}

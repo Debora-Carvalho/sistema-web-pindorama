@@ -1,0 +1,38 @@
+@use "../../styles/abstracts/variables" as *;
+
+footer {
+	display: flex;
+	flex-direction: column;
+}
+
+.containerFooter {
+	display: flex;
+	width: 100vw;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	background: var(--background-secondary);
+	padding: 20px 20px 0 20px;
+}
+
+.linksFooter {
+	display: flex;
+	flex-direction: column;
+
+	h2 {
+		font-family: $font-family-principal;
+		color: var(--text-secondary);
+	}
+
+	.itemLinkFooter {
+		font-family: $font-family-principal;
+		color: var(--text-secondary);
+	}
+}
+
+.iconFooter {
+	display: flex;
+	align-self: flex-end;
+	padding-bottom: 0;
+	bottom: 0;
+}
