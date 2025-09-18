@@ -10,7 +10,7 @@ function Header() {
 			navigate("/inicio");
 		}
 		if (section === 'artigos') {
-			navigate('/artigos');
+			navigate('/criar-artigo');
 		}
 		if (section === 'eventos') {
 			navigate('/eventos');
@@ -43,7 +43,7 @@ function Header() {
 					</button>
 
 					<button
-						className={`${styles['headerBtn']} ${location.pathname === '/artigos' ? styles.active : ''}`}
+						className={`${styles['headerBtn']} ${location.pathname === '/criar-artigo' ? styles.active : ''}`}
 						onClick={() => handleClick('artigos')}
 					>
 						Artigos
