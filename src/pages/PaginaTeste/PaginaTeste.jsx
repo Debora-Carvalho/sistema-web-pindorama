@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import styles from './PaginaTeste.module.scss';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
 
 import CardPadrao from '../../components/CardPadrao/CardPadrao.jsx';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
+import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
+
+	const [popupAberto, setPopupAberto] = useState(false);
 
 	return (
 		<>
@@ -19,6 +23,17 @@ function PaginaTeste() {
 				</p>
 
 				<ThemeToggle />
+
+				<button onClick={() => setPopupAberto(true)}>
+					Mostrar Popup de Sucesso
+				</button>
+
+				<PopupSucesso
+					aberto={popupAberto}
+					mensagem="Seu artigo foi criado com sucesso."
+					textoBotao="Ok, entendi!"
+					onBotaoClick={() => setPopupAberto(false)}
+				/>
 
 				<CardPadrao />
 			</div>
