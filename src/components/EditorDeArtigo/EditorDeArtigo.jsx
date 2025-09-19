@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import styles from './EditorDeArtigo.module.sass';
-import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
+import styles from './EditorDeArtigo.module.scss';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
 const EditorDeArtigo = () => {
     const editorRef = useRef(null);
+    const { globalTheme } = useContext(ThemeContext);
 
     const handleSalvar = () => {
         if (editorRef.current) {
@@ -26,6 +27,8 @@ const EditorDeArtigo = () => {
                         menubar: false,
                         elementpath: false,
                         branding: false,
+                        content_css: '/editor-styles.css',
+                        body_class: globalTheme,
                         plugins: [
                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -34,18 +37,11 @@ const EditorDeArtigo = () => {
                         toolbar: 'undo redo | blocks | ' +
                             'bold italic forecolor | alignleft aligncenter ' +
                             'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | help',
-                        content_style: 
-                            `body { 
-                                background-color: $themes;
-                                font-family: $text
-                            }`
+                            'removeformat | image | link | help',
+                           
                     }}
                 />
             </div>
-            <button onClick={handleSalvar} className={styles.botaoSalvar}>
-                Salvar Artigo
-            </button>
         </div>
     );
 };
