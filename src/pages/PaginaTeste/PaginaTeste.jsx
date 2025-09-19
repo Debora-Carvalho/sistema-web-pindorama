@@ -5,11 +5,20 @@ import useTituloDocumento from '../../hooks/useTituloDocumento.js';
 import CardPadrao from '../../components/CardPadrao/CardPadrao.jsx';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
+import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
 
 	const [popupAberto, setPopupAberto] = useState(false);
+
+	const [popupConfirmarAberto, setPopupConfirmarAberto] = useState(false);
+	const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
+
+	const handleConfirmar = () => {
+		setPopupConfirmarAberto(false); // fecha o confirmar
+		setPopupSucessoAberto(true); // abre o sucesso
+	};
 
 	return (
 		<>
@@ -33,6 +42,24 @@ function PaginaTeste() {
 					mensagem="Seu artigo foi criado com sucesso."
 					textoBotao="Ok, entendi!"
 					onBotaoClick={() => setPopupAberto(false)}
+				/>
+
+				<button onClick={() => setPopupConfirmarAberto(true)}>
+					Mostrar Popup de Confirmação
+				</button>
+
+				<PopupConfirmar
+					aberto={popupConfirmarAberto}
+					mensagem="Tem certeza que deseja confirmar esta ação?"
+					onCancelar={() => setPopupConfirmarAberto(false)}
+					onConfirmar={handleConfirmar}
+				/>
+
+				<PopupSucesso
+					aberto={popupSucessoAberto}
+					mensagem="Ação confirmada com sucesso!"
+					textoBotao="Fechar"
+					onBotaoClick={() => setPopupSucessoAberto(false)}
 				/>
 
 				<CardPadrao />
