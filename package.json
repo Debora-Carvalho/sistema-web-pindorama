@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:editor-css": "sass src/styles/editor.scss public/editor-styles.css",
+    "watch:editor-css": "sass --watch src/styles/editor.scss public/editor-styles.css"
   },
   "dependencies": {
     "@tinymce/tinymce-react": "^6.3.0",

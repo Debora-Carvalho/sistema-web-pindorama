@@ -1,0 +1,8 @@
+// Em: src/styles/editor.scss
+
+// 1. Importa seu mixin que sabe como gerar as variáveis de tema
+// (Ajuste o caminho se o seu _mixins.scss estiver em outro lugar)
+@use 'abstracts/mixins';
+
+// 2. Chama o mixin para ele fazer o trabalho de gerar o CSS para todos os temas
+@include mixins.generate-theme-css-vars;
