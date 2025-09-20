@@ -1,5 +1,3 @@
-// Em: src/components/Navbar/Navbar.jsx
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
