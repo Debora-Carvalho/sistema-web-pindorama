@@ -1,0 +1,48 @@
+import { useState } from 'react';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_URL = `${API_BASE_URL}/login/api/administradores`;
+
+export const useLogin = () => {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const login = async (password) => {
+        setLoading(true);
+        setError(null);
+        try {
+
+            const loginResposta = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ administrador: { senha: password } }),
+                credentials: 'include',
+            });
+
+            if (!loginResposta.ok) {
+                const errorData = await loginResposta.json();
+                throw new Error(errorData.error || 'Login não sucedido');
+            }
+
+            const sessionResposta = await fetch(API_URL, { method: 'GET', credentials: 'include' });
+
+            if (!sessionResposta.ok) {
+                throw new Error('Erro ao carregar dados da sessão');
+            }
+
+            const sessionData = await sessionResposta.json();
+            setData(sessionData);
+
+        } catch (err) {
+            setError(err.message);
+            throw err;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { data, loading, error, login };
+};
