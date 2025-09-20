@@ -1,0 +1,92 @@
+.base {
+  background-color: var(--background-primary);
+  padding: 2rem 5%;
+}
+
+.logo {
+  width: 15%;
+  margin-bottom: 3rem;
+}
+
+.gridContainer {
+  display: grid;
+  // Duas colunas de tamanho igual
+  grid-template-columns: 1fr 1fr;
+  // Alinha o conteúdo de cada card no topo
+  align-items: start;
+  // Define um espaço entre as linhas e colunas
+  gap: 1.5rem 2.5rem; // 1.5rem vertical, 2.5rem horizontal
+
+  // Define o "mapa" do layout
+  grid-template-areas:
+    "saudacao titulo-eventos"
+    "botao-criar lista-eventos";
+}
+
+.saudacao {
+  grid-area: saudacao;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 40px;
+  margin: 0; // Removemos margens para o grid controlar
+}
+
+.tituloSecao {
+  grid-area: titulo-eventos;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 30px;
+  color: var(--text-principal);
+  margin: 0;
+  align-self: end;
+}
+
+.botaoCriar {
+  grid-area: botao-criar;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 25px;
+  background-color: var(--primary-100);
+  border-radius: 20px;
+  min-height: 200px;
+  box-shadow: 4px 4px 6px rgba(120, 61, 25, 0.68);
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 6px 10px 18px rgba(120, 61, 25, 0.75);
+  }
+}
+
+.listaEventosContainer {
+  grid-area: lista-eventos;
+  width: 100%;
+}
+
+.addIcon {
+  font-size: 100px;
+  padding: 10px;
+  display: flex;
+}
+
+.criarTitles {
+  display: flex;
+  flex-direction: column;
+}
+
+.criarTitulo {
+  color: var(--primary-900);
+  font-size: 48px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.criarSubt {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+}

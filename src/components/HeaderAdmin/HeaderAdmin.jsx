@@ -8,7 +8,7 @@ import { FaFileAlt, FaCalendarCheck, FaCog, FaSignOutAlt } from 'react-icons/fa'
 
 // Dados dos itens de navegação para facilitar a renderização
 const navItems = [
-    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/criar-artigo' },
+    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/admin/criar-artigo' },
     { id: 2, label: 'Eventos', icon: <FaCalendarCheck /> },
     { id: 3, label: 'Configurações', icon: <FaCog /> },
 ];
@@ -17,7 +17,7 @@ const logoutItem = { id: 4, label: 'Logout', icon: <FaSignOutAlt /> };
 
 export default function HeaderAdmin() {
     const location = useLocation();
-    const isCollapsed = location.pathname !== '/inicio-administrador'
+    const isCollapsed = location.pathname !== '/admin/inicio'
 
 
     // Variantes de animação para o contêiner principal

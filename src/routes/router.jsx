@@ -16,8 +16,8 @@ const AppRoutes = () => {
 				<Route path="/login" element={<PaginaLogin />} />
 
 				<Route element={<AdminLayout />}>
-					<Route path="/inicio-administrador" element={<PaginaInicialAdmin />} />
-					<Route path="/criar-artigo" element={<PaginaCriarArtigo />} />
+					<Route path="/admin/inicio" element={<PaginaInicialAdmin />} />
+					<Route path="/admin/criar-artigo" element={<PaginaCriarArtigo />} />
 					{/* Lembrar de colocar aqui as outras rotas de admin */}
 				</Route>
 			</Routes>

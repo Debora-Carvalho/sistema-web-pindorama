@@ -6,6 +6,7 @@ import CardPadrao from '../../components/CardPadrao/CardPadrao.jsx';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
+import PopupCriar from "../../components/Popups/PopupCriar/PopupCriar.jsx";
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
@@ -14,6 +15,7 @@ function PaginaTeste() {
 
 	const [popupConfirmarAberto, setPopupConfirmarAberto] = useState(false);
 	const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
+	const [popupCriarAberto, setPopupCriarAberto] = useState(false);
 
 	const handleConfirmar = () => {
 		setPopupConfirmarAberto(false); // fecha o confirmar
@@ -62,6 +64,15 @@ function PaginaTeste() {
 					mensagem="Ação confirmada com sucesso!"
 					textoBotao="Fechar"
 					onBotaoClick={() => setPopupSucessoAberto(false)}
+				/>
+
+				<button onClick={() => setPopupCriarAberto(true)}>
+					Mostrar Popup para selecionar criação de artigo ou evento
+				</button>
+
+				<PopupCriar
+					aberto={popupCriarAberto}
+					onFechar={() => setPopupCriarAberto(false)}
 				/>
 
 				<CardPadrao />

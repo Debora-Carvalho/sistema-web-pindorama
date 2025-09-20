@@ -1,0 +1,87 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.popupOverlayCriar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0, 0.6); /* desfoque do fundo*/
+    backdrop-filter: blur(1px);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: $font-family-subtitulo;
+
+    .popupBoxCriar {
+        background-color: var(--primary-100);
+        border-radius: 20px;
+        padding: 1rem 2rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btnFechar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-self: end;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .popupActions {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .btnLinkArtigos, .btnLinkEventos {
+            background-color: var(--highlight);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btnLinkArtigos:hover, .btnLinkEventos:hover {
+            background-color: var(--primary-300);
+        }
+    }
+}
+
+
+/*Responsividade*/
+
+@media (max-width: 768px) {
+
+    .popupBoxCriar {
+        width: 90%;
+        max-width: 300px; 
+        margin: 0 auto; 
+        padding: 20px;
+        border-radius: 20px;
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        .btnLinkArtigos, .btnLinkEventos {
+            padding: 0.6rem 1.5rem;
+        }
+    }
+}

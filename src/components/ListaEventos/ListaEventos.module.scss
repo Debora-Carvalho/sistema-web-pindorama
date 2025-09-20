@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  // Cria duas colunas de tamanho igual
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem; // Espaço entre os cards
+}
