@@ -22,7 +22,9 @@ function PaginaTeste() {
 
 	return (
 		<>
+			
 			<div className={styles.container}>
+				
 				<p className={styles.titulo}>
 					Olá, sou uma página teste
 				</p>
