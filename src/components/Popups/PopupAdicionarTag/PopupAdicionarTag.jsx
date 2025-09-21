@@ -105,6 +105,12 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
 
     // confirmar seleção
     const handleConfirmar = () => {
+        if (tagsSelecionadas.length === 0) {
+            setErro("Adicione pelo menos 1 tag para confirmar.");
+            setTimeout(() => setErro(""), 3000);
+            return;
+        } 
+
         onConfirmar(tagsSelecionadas);
         setTagsSelecionadas([]);
         setBusca("");
@@ -143,7 +149,6 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
                     <button
                         className={styles.btnConfirmar}
                         onClick={handleConfirmar}
-                        disabled={tagsSelecionadas.length === 0}
                     >
                         Confirmar
                     </button>
