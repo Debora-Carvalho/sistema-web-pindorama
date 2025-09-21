@@ -1,0 +1,41 @@
+$card-bg: #893A1A;
+$date-bg: #1f3d2b; 
+$card-text-color: #f0e4d4;
+$date-text-color: #ffffff;
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: $card-bg;
+  padding: 12px;
+  border-radius: 15px;
+  color: $card-text-color;
+  font-family: 'Comfortaa', sans-serif; 
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $date-bg;
+  color: $date-text-color;
+  padding: 8px;
+  border-radius: 10px;
+  font-weight: bold;
+  min-width: 50px; 
+}
+
+.dia {
+  font-size: 20px;
+}
+
+.mes {
+  font-size: 14px;
+}
+
+.titulo {
+  font-size: 16px;
+  line-height: 1.2;
+}
