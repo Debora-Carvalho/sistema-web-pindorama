@@ -2,10 +2,12 @@ import { useState } from 'react';
 import styles from './PaginaTeste.module.scss';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
 
-import CardPadrao from '../../components/CardPadrao/CardPadrao.jsx';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
+import PopupCriar from "../../components/Popups/PopupCriar/PopupCriar.jsx";
+
+import PopupAdicionarTag from "../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
@@ -14,10 +16,19 @@ function PaginaTeste() {
 
 	const [popupConfirmarAberto, setPopupConfirmarAberto] = useState(false);
 	const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
+	const [popupCriarAberto, setPopupCriarAberto] = useState(false);
 
 	const handleConfirmar = () => {
 		setPopupConfirmarAberto(false); // fecha o confirmar
 		setPopupSucessoAberto(true); // abre o sucesso
+	};
+
+	const [popupTagAberto, setPopupTagAberto] = useState(false);
+	const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
+
+	const handleConfirmarTags = (tags) => {
+		setTagsSelecionadas(tags);
+		setPopupTagAberto(false);
 	};
 
 	return (
@@ -62,7 +73,35 @@ function PaginaTeste() {
 					onBotaoClick={() => setPopupSucessoAberto(false)}
 				/>
 
-				<CardPadrao />
+				<button onClick={() => setPopupCriarAberto(true)}>
+					Mostrar Popup para selecionar criação de artigo ou evento
+				</button>
+
+				<PopupCriar
+					aberto={popupCriarAberto}
+					onFechar={() => setPopupCriarAberto(false)}
+				/>
+
+				<button onClick={() => setPopupTagAberto(true)}>
+					Adicionar Tags ao Artigo
+				</button>
+
+				<PopupAdicionarTag
+					aberto={popupTagAberto}
+					onCancelar={() => setPopupTagAberto(false)}
+					onConfirmar={handleConfirmarTags}
+				/>
+
+				{tagsSelecionadas.length > 0 && (
+					<div>
+						<h3>Tags escolhidas:</h3>
+						<ul>
+							{tagsSelecionadas.map((tag) => (
+								<li key={tag}>#{tag}</li>
+							))}
+						</ul>
+					</div>
+				)}
 			</div>
 		</>
 	)
