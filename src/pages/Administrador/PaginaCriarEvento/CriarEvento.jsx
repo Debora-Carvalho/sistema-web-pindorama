@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
-import EditorDeArtigo from '../../../components/EditorDeArtigo/EditorDeArtigo.jsx';
-import styles from './CriarArtigo.module.scss';
+import styles from './CriarEvento.module.scss';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
 import PopupConfirmar from '../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx';
 import PopupSucesso from '../../../components/Popups/PopupSucesso/PopupSucesso.jsx';
 
-const nomeAutora = "Kelly Cristina Marques";
-
-
-function PaginaCriarArtigo() {
-    useTituloDocumento("Criar Artigo | Pindorama");
+function PaginaCriarEvento() {
+    useTituloDocumento("Criar Evento | Pindorama");
 
     const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
     const [mostrarSucesso, setMostrarSucesso] = useState(false);
@@ -23,13 +19,13 @@ function PaginaCriarArtigo() {
 
     const handleConfirmarExclusao = () => {
         setTitulo('');
-        setConteudo(''); 
         setImagemCapa(null);
         setPreviewCapa('');
         setMostrarConfirmacao(false);
         setMostrarSucesso(true);
     };
 
+    // 4. Função para cancelar a exclusão
     const handleCancelarExclusao = () => {
         setMostrarConfirmacao(false);
     };
@@ -39,13 +35,8 @@ function PaginaCriarArtigo() {
     };
 
     const [titulo, setTitulo] = useState('');
-    const [conteudo, setConteudo] = useState('');
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
-
-    const handleEditorChange = (content) => {
-        setConteudo(content);
-    };
 
     const handleImagemChange = (e) => {
         const file = e.target.files[0];
@@ -58,15 +49,15 @@ function PaginaCriarArtigo() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const artigoParaEnviar = {
+        const eventoParaEnviar = {
             titulo: titulo,
-            conteudo: conteudo,
+            
             imagemCapa: imagemCapa,
             autora: nomeAutora,
             dataPublicacao: new Date(),
         };
 
-        console.log("Objeto do artigo pronto para ser enviado:", artigoParaEnviar);
+        console.log("Objeto do evento pronto para ser enviado:", eventoParaEnviar);
         alert("Artigo enviado! Verifique o console para ver os dados.");
     };
 
@@ -98,22 +89,13 @@ function PaginaCriarArtigo() {
                     />
                 </div>
 
-                {/* A form vazia foi removida */}
-
-                <div className={styles.campoEditor}>
-                    <EditorDeArtigo
-                        value={conteudo}
-                        onContentChange={handleEditorChange}
-                    />
-                </div>
-
                 <div className={styles.campoDropdowns}>
                     <button type='button' className={styles.selectWrapper}>
                         <FaTags />
                         Tags
                     </button>
 
-                    <button type='button' className={styles.selectWrapper}>
+                    <button type='button' className={styles.botoesInfo}>
                         <FaMapMarkerAlt />
                         Local
                     </button>
@@ -170,4 +152,4 @@ function PaginaCriarArtigo() {
     );
 }
 
-export default PaginaCriarArtigo;
+export default PaginaCriarEvento;

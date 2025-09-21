@@ -25,6 +25,7 @@ function EditorDeArtigo({ value, onContentChange }){
                         menubar: false,
                         elementpath: false,
                         branding: false,
+                        placeholder: "Digite seu artigo aqui",
                         content_css: '/editor-styles.css',
                         body_class: globalTheme,
                         plugins: [
