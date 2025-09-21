@@ -1,0 +1,82 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: transparent;
+  position: fixed;
+  top: 20px;
+  right: 0.8%;
+  z-index: 1000;
+}
+
+.mainNavGroup {
+  padding: 8px;
+  background-color: rgba(210, 152, 102, 0.67);
+  border-radius: 50px;
+  transition: background-color 0.2s ease, padding 0.2s ease;
+
+  // Estilos para quando a navbar estiver encolhida
+  &.collapsed {
+    background-color: transparent; // Fundo some
+    padding: 0;
+  }
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: "Roboto Condensed", sans-serif;
+  color: var(--text-principal);
+  border-radius: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: var(--primary-100);
+  }
+
+  &.collapsed {
+    background-color: rgba(210, 152, 102, 0.67);
+    padding: 15px;
+    justify-content: center;
+  }
+}
+
+.logoutButton {
+  background-color: var(--primary-900);
+  color: var(--text-secondary);
+  padding: 15px;
+
+  .icon {
+    color: var(--neutral-secondary); 
+  }
+
+  &:hover {
+    background-color: var(--primary-600);
+  }
+}
+
+.icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  line-height: 1;
+}
