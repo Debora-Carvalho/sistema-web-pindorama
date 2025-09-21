@@ -13,7 +13,16 @@
 }
 
 .logoHeaderPrincipal {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
 	cursor: pointer;
+
+	.logo {
+		width: 180px;
+		height: auto;
+	}
 }
 
 .headerPrincipalItems {

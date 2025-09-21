@@ -1,6 +1,8 @@
 import styles from './Header.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import LogoPindorama from "../../assets/images/pindorama_logo5.png";
+
 function Header() {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -10,7 +12,7 @@ function Header() {
 			navigate("/inicio");
 		}
 		if (section === 'artigos') {
-			navigate('/criar-artigo');
+			navigate('/artigos');
 		}
 		if (section === 'eventos') {
 			navigate('/eventos');
@@ -29,8 +31,12 @@ function Header() {
 
 	return (
 		<header className={styles.containerHeaderPrincipal}>
-			<div className={styles.logoHeaderPrincipal} style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
-				Pindorama
+			<div 
+				className={styles.logoHeaderPrincipal} 
+				style={{ cursor: "pointer" }} 
+				onClick={() => navigate("/")}
+			>
+				<img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
 			</div>
 
 			<div className={styles.headerPrincipal}>
@@ -43,7 +49,7 @@ function Header() {
 					</button>
 
 					<button
-						className={`${styles['headerBtn']} ${location.pathname === '/criar-artigo' ? styles.active : ''}`}
+						className={`${styles['headerBtn']} ${location.pathname === '/artigos' ? styles.active : ''}`}
 						onClick={() => handleClick('artigos')}
 					>
 						Artigos
