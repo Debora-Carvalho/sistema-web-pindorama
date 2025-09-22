@@ -3,17 +3,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import styles from './EditorDeArtigo.module.scss';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-const EditorDeArtigo = () => {
+function EditorDeArtigo({ value, onContentChange }){
     const editorRef = useRef(null);
     const { globalTheme } = useContext(ThemeContext);
-
-    const handleSalvar = () => {
-        if (editorRef.current) {
-            const conteudo = editorRef.current.getContent();
-            console.log("Conteúdo do artigo:", conteudo);
-            alert("Artigo salvo!");
-        }
-    };
 
     return (
         <div className={styles.editorWrapper}>
@@ -21,12 +13,19 @@ const EditorDeArtigo = () => {
                 <Editor
                     apiKey="m4q23tgp22m5gvy98ggkq2t9apl11rflio4cz1bfnvujqbj6"
                     onInit={(evt, editor) => editorRef.current = editor}
+                    value={value}
+                    onEditorChange={(content, editor) => {
+                        if (onContentChange) {
+                            onContentChange(content);
+                        }
+                    }}
                     init={{
-                        height: 500,
+                        height: 450,
                         language: 'pt-BR',
                         menubar: false,
                         elementpath: false,
                         branding: false,
+                        placeholder: "Digite seu artigo aqui",
                         content_css: '/editor-styles.css',
                         body_class: globalTheme,
                         plugins: [
@@ -38,7 +37,7 @@ const EditorDeArtigo = () => {
                             'bold italic forecolor | alignleft aligncenter ' +
                             'alignright alignjustify | bullist numlist outdent indent | ' +
                             'removeformat | image | link | help',
-                           
+
                     }}
                 />
             </div>
