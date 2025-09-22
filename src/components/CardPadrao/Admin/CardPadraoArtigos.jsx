@@ -14,12 +14,12 @@ function CardPadrao() {
 
 	return (
 		<div className={styles.containerVisualizar}>
-			<div className={styles.cardInfos}>
 				<img
 					className={styles.imgCard}
-					//src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
-					//alt="Imagem do artigo"
+					src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
+					alt="Imagem do artigo"
 				/>
+			<div className={styles.cardInfos}>
 				<p className={styles.cardTitulo}>
 					A ancestralidade na dança
 				</p>
