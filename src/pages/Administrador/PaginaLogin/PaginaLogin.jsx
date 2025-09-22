@@ -51,7 +51,6 @@ function PaginaLogin() {
               required
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
-              placeholder='Senha'
             />
             <button
               type="button"

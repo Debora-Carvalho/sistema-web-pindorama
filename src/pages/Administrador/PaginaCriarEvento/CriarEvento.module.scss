@@ -1,10 +1,3 @@
-@use "../../../styles/abstracts/variables" as *;
-$bege-claro: #f0e4d4;
-$marrom-escuro: #663e26;
-$verde-escuro: #1f3d2b;
-$borda-cor: #d3bca8;
-$placeholder-text: #a89a8c;
-
 .base {
     padding: 1rem 5%;
     padding-top: 0%;
@@ -18,13 +11,13 @@ $placeholder-text: #a89a8c;
 
     .titulo {
         font-size: 3rem;
-        font-family: $font-family-subtitulo;
+        font-family: 'inter', sans-serif;
         font-weight: 300;
     }
 }
 
 .logo {
-    width: 15%;
+    width: 15%; // Ajuste o tamanho da logo conforme necessário
 }
 
 .formGrid {
@@ -33,6 +26,7 @@ $placeholder-text: #a89a8c;
     gap: 1.5rem 2rem; // 1.5rem de espaço vertical, 2rem horizontal
 }
 
+// Posicionando cada elemento na grade
 .campoTitulo {
     grid-column: 1 / 2;
 }
@@ -45,23 +39,18 @@ $placeholder-text: #a89a8c;
     align-items: center;
 }
 
-.campoEditor {
-    grid-column: 1 / 2;
-    grid-row: 2 / 4;
-}
-
 .campoMidia {
     grid-column: 2 / 3;
     grid-row: 2 / 4;
-    background-color: $bege-claro;
-    border: 2px dashed $borda-cor;
+    background-color: var(--primary-100);
+    border: 2px dashed var(--primary-900);
     border-radius: 20px;
     padding: 1rem;
     color: #a89a8c;
 }
 
 .campoMidia label {
-    display: block; 
+    display: block; // Faz a label se comportar como um bloco
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -75,18 +64,19 @@ $placeholder-text: #a89a8c;
     margin-top: 1rem;
 }
 
+// Estilos específicos dos inputs
 .campoTitulo input {
     width: 100%;
     padding: 15px;
-    border: 2px solid var(--primary-700);
+    border: 2px solid var(--primary-900);
     background-color: var(--primary-100);
     border-radius: 20px;
     font-size: 20px;
-    color: var(--primary-700);
+    color: var(--primary-900);
 
     &::placeholder {
-        color: var(--primary-700);
-        font-family: $font-family-subtitulo;
+        color: var(--primary-900);
+        font-family: 'Comfortaa', sans-serif;
     }
 }
 
