@@ -1,5 +1,5 @@
 import styles from "./BlocoEventosDestaque.module.scss";
-import ListaEventos from "../../ListaEventos/ListaEventos.jsx";
+import ListaEventosDestaque from "../../ListaEventosDestaque/ListaEventosDestaque.jsx";
 import { Link } from "react-router-dom";
 
 function BlocoEventosDestaque() {
@@ -11,7 +11,7 @@ function BlocoEventosDestaque() {
 
     return (
         <div className={styles.container}>
-            <ListaEventos eventos={mockEventosDestaque} />
+            <ListaEventosDestaque eventos={mockEventosDestaque} />
 
             <Link to='/todos-eventos' className={styles.btnTodosEventos}>
                 Ver agenda completa

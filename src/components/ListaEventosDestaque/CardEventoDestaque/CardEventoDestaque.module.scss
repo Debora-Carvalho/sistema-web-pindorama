@@ -1,0 +1,43 @@
+@use "../../../styles/abstracts/variables" as *;
+
+$date-bg: #1f3d2b;
+$card-text-color: #f0e4d4;
+$date-text-color: #ffffff;
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--primary-100);
+    padding: 12px;
+    border-radius: 15px;
+    color: var(--primary-500);
+    font-family: $font-family-texto;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-500);
+    color: $date-text-color;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 5rem;
+    height: 5rem;
+}
+
+.dia {
+    font-size: 20px;
+}
+
+.mes {
+    font-size: 14px;
+}
+
+.titulo {
+    font-size: 16px;
+    line-height: 1.2;
+}
