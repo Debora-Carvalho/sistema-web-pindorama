@@ -1,6 +1,13 @@
 @use "../../../styles/abstracts/variables.scss" as *;
 
-.containerVisualizar {
+.containerVisualizar{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px;
+  justify-items: center;
+}
+
+.cardGeral {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,8 +16,8 @@
   border-radius: 30px;
   width: 20em;
   height: 15em;
-  margin: 40px;
-  position: relative; 
+  margin: 10px 20px;
+  position: relative;
 }
 
 .cardInfos {
@@ -29,7 +36,7 @@
 }
 
 .btnCompleto {
- background-color: var(--primary-200);
+  background-color: var(--primary-200);
   color: var(--primary-400);
   border-radius: 10px;
   padding: 0.5em 1em;
@@ -44,7 +51,7 @@
 }
 
 .iconeMenu {
-  position: absolute; 
+  position: absolute;
   top: 10px;
   right: 10px;
   font-size: 1.5rem;
@@ -67,7 +74,9 @@
   z-index: 20;
 }
 
-.btnEditar, .btnDestacar, .btnExcluir {
+.btnEditar,
+.btnDestacar,
+.btnExcluir {
   width: 100%;
   background: var(--primary-200);
   border-radius: 30px;
@@ -81,18 +90,18 @@
   }
 }
 
-.iconOptions{
-	position: relative;
-    bottom: 20px;
-    left: 9px;
-    font-size: 1em;
+.iconOptions {
+  position: relative;
+  bottom: 20px;
+  left: 9px;
+  font-size: 1em;
 }
 
 .imgCard {
   width: 100%;
   aspect-ratio: 25 / 9;
   object-fit: cover;
-  border-radius: 20px 20px 0 0; 
+  border-radius: 20px 20px 0 0;
   filter: brightness(50%);
 }
 
@@ -100,8 +109,10 @@
 @media (max-width: 1080px) {
   .containerVisualizar {
     width: 18em;
-    height: 13em;
-    margin: 30px;
+    height: 14em;
+    margin: 10px 60px 50px 80px;
+    display: inline-grid;
+    justify-items: center;
   }
 
   .cardTitulo {
@@ -119,9 +130,11 @@
   .imgCard {
     border-radius: 18px 18px 0 0;
   }
+
   .iconeMenu {
-    font-size: 1.3rem;
+    font-size: 1.9rem;
   }
+
   .iconOptions {
     font-size: 0.9em;
     bottom: 18px;
@@ -149,12 +162,14 @@
     left: 14.5em;
   }
 
-   .imgCard {
+  .imgCard {
     border-radius: 16px 16px 0 0;
   }
+
   .iconeMenu {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
   }
+
   .iconOptions {
     font-size: 0.8em;
     bottom: 16px;
@@ -165,22 +180,23 @@
 @media (max-width: 480px) {
   .containerVisualizar {
     width: 17em;
-    height: 10em;
-    margin-left: 70px;
+    height: 12em;
+    margin: 10px 60px 50px 80px;
     align-items: stretch;
   }
 
   .cardTitulo {
-    font-size: 1em;
+    font-size: 1.4em;
   }
 
   .btnCompleto {
     padding: 0.25em 0.5em;
-    font-size: 0.8em;
+    margin-bottom: 40px;
+
   }
 
   .opcoesMenu {
-    left: 12.5em;
+    left: 15em;
     min-width: 10px;
     height: 105px;
   }
@@ -190,7 +206,7 @@
   }
 
   .iconeMenu {
-    font-size: 1rem;
+    font-size: 1.7rem;
   }
 
   .iconOptions {
@@ -199,9 +215,15 @@
     left: 6px;
   }
 
-  .btnEditar, .btnDestacar, .btnExcluir{
+  .btnEditar,
+  .btnDestacar,
+  .btnExcluir {
     width: 100px;
     height: 25px;
   }
-}
 
+  .cardInfos {
+    padding: 0.7em;
+    gap: 0.5em
+  }
+}

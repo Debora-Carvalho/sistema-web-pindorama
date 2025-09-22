@@ -1,22 +1,51 @@
 .containerPesquisa {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  width: 100%;
+  max-width: 50em;
+  margin: 0 auto;
+  position: relative;
 }
 
-.barraPesquisa {
-  width: 50%;
-  background-color: var(--neutral-secondary);
-  color: var(--neutral-primary);
-  
-  .MuiOutlinedInput-root {
-    fieldset {
-      border: none;
-    }
+.inputPesquisa {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+
+  &:focus {
+    border-color: #999; // opcional, muda cor ao focar
   }
 }
 
-.iconePesquisa {
-  font-size: 1.5rem; 
-  color: var(--neutral-primary);
+.listaResultados {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  background: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+.itemLista {
+  padding: 8px;
+  cursor: pointer;
+  background-color: #fff;
+
+  &.highlighted {
+    background-color: #eee;
+  }
+
+  &.selected {
+    font-weight: bold;
+  }
+
+ .iconePesquisa {
+    left: 10px;
+    top: 50%;
+    font-size: 2rem;
+  }
 }

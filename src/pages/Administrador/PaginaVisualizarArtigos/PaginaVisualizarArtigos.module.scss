@@ -1,12 +1,39 @@
-body{
-    background-color: var(--background-primary);
+@use "../../../styles/abstracts/variables.scss" as *;
+
+.logo {
+    width: 15%;
+    margin-bottom: 3rem;
 }
 
-.iconAdd{
-    width: 60px;
-    height: 60px;
-    position: relative;
-    bottom: 70px;
-    left: 15em;
+.containerVisualizar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-primary);
+    padding: 20px;
+}
+
+.topo {
+    align-items: center;
+}
+
+.iconAdd {
+    font-size: 4rem;
+    color: var(--primary);
     cursor: pointer;
+    transition: transform 0.2s ease;
+    bottom: 75px;
+    left: 100px;
+    position: relative;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.containerCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 30px;
+    gap: 20px;
 }

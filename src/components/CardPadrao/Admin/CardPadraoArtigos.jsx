@@ -14,6 +14,7 @@ function CardPadrao() {
 
 	return (
 		<div className={styles.containerVisualizar}>
+		<div className={styles.cardGeral}>
 				<img
 					className={styles.imgCard}
 					src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
@@ -53,6 +54,7 @@ function CardPadrao() {
 					</ul>
 				)}
 			</div>
+		</div>
 		</div>
 	);
 }
