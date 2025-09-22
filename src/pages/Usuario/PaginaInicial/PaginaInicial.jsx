@@ -4,6 +4,7 @@ import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import BannerPrincipal from '../../../components/BannerPrincipal/BannerPrincipal.jsx';
 import Agenda from '../../../components/Agenda/Agenda.jsx';
+import EventosDestaque from '../../../components/EventosDestaque/EventosDestaque.jsx';
 
 function PaginaInicial() {
 	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
@@ -24,8 +25,7 @@ function PaginaInicial() {
 						</div>
 
 						<div className={styles.containerEvento}>
-							<h2>Eventos Destaque</h2>
-							Colocar o componente de eventos aqui 
+							<EventosDestaque />
 						</div>
 					</section>
 

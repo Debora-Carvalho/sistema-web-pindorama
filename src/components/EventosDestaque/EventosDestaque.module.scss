@@ -1,0 +1,13 @@
+@use "../../styles/abstracts/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h2 {
+        font-family: $font-family-texto;
+        font-size: 3rem;
+        color: var(--text-primary);
+    }
+}
