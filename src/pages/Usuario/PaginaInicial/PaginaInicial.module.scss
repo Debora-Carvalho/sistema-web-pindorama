@@ -8,8 +8,10 @@
 	background: var(--background-primary);
 }
 
-.titulo {
-	font-family: $font-family-principal;
-	font-size: 40px;
-	color: var(--text);
+.containerInicioItems {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	padding: 10px;
 }
