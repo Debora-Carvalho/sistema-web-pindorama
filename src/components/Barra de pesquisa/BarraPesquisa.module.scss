@@ -1,26 +1,26 @@
 @use "../../styles/abstracts/variables.scss" as *;
 
 .containerPesquisa {
-  max-width:60em;
+  max-width: 60em;
   margin: 0 auto;
   position: relative;
-  bottom:35px;
-  margin-bottom: 70px;
+  bottom: 35px;
+  margin-bottom: 120px;
   left: 2em;
 }
 
 .inputPesquisa {
   width: 100%;
-  padding: 10px 40px 10px 15px; 
-  border: 2px solid transparent;  
+  padding: 10px 40px 10px 15px;
+  border: 2px solid transparent;
   border-radius: 10px;
   outline: none;
-  transition: all 0.3s ease;    
+  transition: all 0.3s ease;
 
   &:focus {
-    border-color: var(--primary-500); 
-    transform: scale(1.03);      
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    border-color: var(--primary-500);
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -29,21 +29,21 @@
   padding: 0;
   margin: 0;
   border-radius: 6px;
-  background: #d1cdcd;
+  background: var(--primary-200);
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
   width: 100%;
-  z-index: 10;
+  z-index: 30;
 }
 
 .itemLista {
   padding: 8px;
   cursor: pointer;
-  background-color: #c7c2c2;
+  background: var(--primary-200);
 
   &.highlighted {
-    background-color: #eee;
+    background-color: var(--neutral-secondary);
   }
 
   &.selected {
@@ -53,8 +53,8 @@
 
 .iconePesquisa {
   position: absolute;
-  right: 15px;
-  top: 50%;
+  right: 20px;
+  top: 25px;
   transform: translateY(-50%);
   font-size: 1.6em;
   color: var(--neutral-primary);
@@ -69,18 +69,20 @@
   .containerPesquisa {
     max-width: 40em;
     bottom: 60px;
+    margin: 0 auto;
   }
 
   .iconePesquisa {
     font-size: 1.5em;
+    top: 55px;
   }
 
   .inputPesquisa {
-   width: 80%;
-        left: 8em;
-        position: relative;
-        margin-bottom: 3em;
-        top: 2em;
+    width: 80%;
+    left: 8em;
+    position: relative;
+    margin-bottom: 3em;
+    top: 2em;
   }
 }
 
@@ -94,16 +96,21 @@
   .inputPesquisa {
     padding: 8px 36px 8px 12px;
     font-size: 0.95em;
-    top: 25px;
+    top: 60px;
     position: relative;
+    margin: 0;
+    width: 100%;
+    left: 20px;
   }
 
   .iconePesquisa {
     font-size: 1.4em;
-    right: 20px;
-    top: 2em;
+    right: 1px;
+    top:80px;
   }
 }
+
+
 
 @media (max-width: 480px) {
   .containerPesquisa {

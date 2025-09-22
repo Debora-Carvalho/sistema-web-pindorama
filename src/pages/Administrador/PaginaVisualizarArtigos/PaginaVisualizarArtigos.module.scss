@@ -16,25 +16,25 @@
 
 
 .topo {
-  position: relative;
-  width: 100%;
-  max-width: 50em;
-  margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 50em;
+    margin: 0 auto;
 }
 
 .iconAdd {
- position: absolute;
-    bottom: 50%;
+    position: absolute;
+    bottom: 68%;
     right: 12.5em;
-  transform: translateY(-50%);
-  font-size: 4rem;
-  color: var(--primary);
-  cursor: pointer;
-  transition: all 0.2s ease;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-  &:hover {
-    transform: translateY(-50%) scale(1.1);
-  }
+    &:hover {
+        transform: translateY(-50%) scale(1.1);
+    }
 }
 
 .containerCards {
@@ -69,7 +69,7 @@
     .containerCards {
         grid-template-columns: repeat(2, 1fr);
         margin-left: 1px;
-        bottom: 60px;
+        bottom: 1px;
     }
 
     .logo {
@@ -78,8 +78,8 @@
     }
 
     .iconAdd {
-       left: 0.6em;
-       top: 0;
+        left: 0.6em;
+       top: 35px;
     }
 }
 
@@ -87,8 +87,8 @@
 
     .containerCards {
         grid-template-columns: 1fr;
-        margin-left: 1.3em;
-        bottom: 40px;
+        margin-left: 4.5em;
+        bottom: 20px;
     }
 
     .logo {
@@ -97,9 +97,7 @@
     }
 
     .iconAdd {
-        left: 6em;
-        top: 0.2em;
-
-
+        left: 5.7em;
+        top: 0.1em;
     }
 }
