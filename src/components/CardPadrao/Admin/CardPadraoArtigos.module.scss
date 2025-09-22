@@ -1,10 +1,11 @@
 @use "../../../styles/abstracts/variables.scss" as *;
 
-.containerVisualizar{
+.containerVisualizar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: center;
+  padding: 20px;
 }
 
 .cardGeral {
@@ -16,8 +17,9 @@
   border-radius: 30px;
   width: 20em;
   height: 15em;
-  margin: 10px 20px;
+  margin: 5px;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .cardInfos {
@@ -43,6 +45,7 @@
   font-family: var(--font-family-subtitulo);
   cursor: pointer;
   border: none;
+  transition: all 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -105,14 +108,18 @@
   filter: brightness(50%);
 }
 
-/* RESPONSIVIDADE */
+/* --- RESPONSIVIDADE --- */
+
+/* Até 1080px */
 @media (max-width: 1080px) {
   .containerVisualizar {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .cardGeral {
     width: 18em;
     height: 14em;
-    margin: 10px 60px 50px 80px;
-    display: inline-grid;
-    justify-items: center;
   }
 
   .cardTitulo {
@@ -126,27 +133,19 @@
   .opcoesMenu {
     left: 16.5em;
   }
-
-  .imgCard {
-    border-radius: 18px 18px 0 0;
-  }
-
-  .iconeMenu {
-    font-size: 1.9rem;
-  }
-
-  .iconOptions {
-    font-size: 0.9em;
-    bottom: 18px;
-    left: 8px;
-  }
 }
 
+/* Até 720px: 2 colunas */
 @media (max-width: 720px) {
   .containerVisualizar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 100px;
+  }
+
+  .cardGeral {
     width: 16em;
     height: 12em;
-    margin: 20px;
   }
 
   .cardTitulo {
@@ -161,69 +160,43 @@
   .opcoesMenu {
     left: 14.5em;
   }
-
-  .imgCard {
-    border-radius: 16px 16px 0 0;
-  }
-
-  .iconeMenu {
-    font-size: 1.8rem;
-  }
-
-  .iconOptions {
-    font-size: 0.8em;
-    bottom: 16px;
-    left: 7px;
-  }
 }
 
+/* Até 480px: 1 coluna */
 @media (max-width: 480px) {
   .containerVisualizar {
-    width: 17em;
-    height: 12em;
-    margin: 10px 60px 50px 80px;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cardGeral {
+   max-width: 15em;
+    height: 10em;
   }
 
   .cardTitulo {
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 
   .btnCompleto {
     padding: 0.25em 0.5em;
-    margin-bottom: 40px;
-
   }
 
   .opcoesMenu {
-    left: 15em;
-    min-width: 10px;
-    height: 105px;
-  }
-
-  .imgCard {
-    border-radius: 14px 14px 0 0;
-  }
-
-  .iconeMenu {
-    font-size: 1.7rem;
-  }
-
-  .iconOptions {
-    font-size: 0.75em;
-    bottom: 18px;
-    left: 6px;
+    left: auto;
+    right: 0;
+    min-width: 120px;
   }
 
   .btnEditar,
   .btnDestacar,
   .btnExcluir {
-    width: 100px;
-    height: 25px;
+    width: 100%;
+    height: 28px;
   }
 
   .cardInfos {
     padding: 0.7em;
-    gap: 0.5em
+    gap: 0.5em;
   }
 }

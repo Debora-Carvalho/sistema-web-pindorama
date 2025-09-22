@@ -1,19 +1,26 @@
+@use "../../styles/abstracts/variables.scss" as *;
+
 .containerPesquisa {
-  width: 100%;
-  max-width: 50em;
+  max-width:60em;
   margin: 0 auto;
   position: relative;
+  bottom:35px;
+  margin-bottom: 70px;
+  left: 2em;
 }
 
 .inputPesquisa {
   width: 100%;
-  padding: 8px;
-  border: none;
+  padding: 10px 40px 10px 15px; 
+  border: 2px solid transparent;  
   border-radius: 10px;
   outline: none;
+  transition: all 0.3s ease;    
 
   &:focus {
-    border-color: #999; // opcional, muda cor ao focar
+    border-color: var(--primary-500); 
+    transform: scale(1.03);      
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
   }
 }
 
@@ -22,7 +29,7 @@
   padding: 0;
   margin: 0;
   border-radius: 6px;
-  background: #fff;
+  background: #d1cdcd;
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
@@ -33,7 +40,7 @@
 .itemLista {
   padding: 8px;
   cursor: pointer;
-  background-color: #fff;
+  background-color: #c7c2c2;
 
   &.highlighted {
     background-color: #eee;
@@ -42,10 +49,88 @@
   &.selected {
     font-weight: bold;
   }
+}
 
- .iconePesquisa {
-    left: 10px;
-    top: 50%;
-    font-size: 2rem;
+.iconePesquisa {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6em;
+  color: var(--neutral-primary);
+  z-index: 20;
+}
+
+
+/*RESPONSIVIDADE*/
+
+
+@media (max-width: 1080px) {
+  .containerPesquisa {
+    max-width: 40em;
+    bottom: 60px;
+  }
+
+  .iconePesquisa {
+    font-size: 1.5em;
+  }
+
+  .inputPesquisa {
+   width: 80%;
+        left: 8em;
+        position: relative;
+        margin-bottom: 3em;
+        top: 2em;
+  }
+}
+
+@media (max-width: 720px) {
+  .containerPesquisa {
+    max-width: 28em;
+    bottom: 50px;
+    padding: 0 10px;
+  }
+
+  .inputPesquisa {
+    padding: 8px 36px 8px 12px;
+    font-size: 0.95em;
+    top: 25px;
+    position: relative;
+  }
+
+  .iconePesquisa {
+    font-size: 1.4em;
+    right: 20px;
+    top: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .containerPesquisa {
+    max-width: 100%;
+    bottom: 40px;
+    padding: 0 8px;
+  }
+
+  .inputPesquisa {
+    padding: 8px 34px 8px 10px;
+    font-size: 0.9em;
+    width: 15em;
+    position: relative;
+    left: 50px;
+    top: 30px;
+  }
+
+  .iconePesquisa {
+    display: block;
+    font-size: 1.3em;
+    right: 100px;
+    top: 50px;
+    z-index: 20;
+  }
+
+  .itemLista {
+    padding: 6px;
+    font-size: 0.9em;
   }
 }

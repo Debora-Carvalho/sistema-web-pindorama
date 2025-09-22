@@ -2,7 +2,8 @@
 
 .logo {
     width: 15%;
-    margin-bottom: 3rem;
+    bottom: 2rem;
+    margin-bottom: 3em;
 }
 
 .containerVisualizar {
@@ -13,27 +14,92 @@
     padding: 20px;
 }
 
+
 .topo {
-    align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 50em;
+  margin: 0 auto;
 }
 
 .iconAdd {
-    font-size: 4rem;
-    color: var(--primary);
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    bottom: 75px;
-    left: 100px;
-    position: relative;
+ position: absolute;
+    bottom: 50%;
+    right: 12.5em;
+  transform: translateY(-50%);
+  font-size: 4rem;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-    &:hover {
-        transform: scale(1.1);
-    }
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
 }
 
 .containerCards {
+    position: relative;
     display: grid;
+    bottom: 100px;
     grid-template-columns: repeat(3, 1fr);
-    margin: 30px;
+    margin-left: 40px;
     gap: 20px;
+}
+
+/*RESPONSIVIDADE*/
+
+@media (max-width: 1080px) {
+    .containerCards {
+        margin-left: 30px;
+        gap: 15px;
+    }
+
+    .logo {
+        width: 20%;
+    }
+
+    .iconAdd {
+        font-size: 3.5rem;
+        left: 1.5em;
+        top: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .containerCards {
+        grid-template-columns: repeat(2, 1fr);
+        margin-left: 1px;
+        bottom: 60px;
+    }
+
+    .logo {
+        width: 25%;
+        margin-bottom: 2rem;
+    }
+
+    .iconAdd {
+       left: 0.6em;
+       top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .containerCards {
+        grid-template-columns: 1fr;
+        margin-left: 1.3em;
+        bottom: 40px;
+    }
+
+    .logo {
+        width: 35%;
+        margin-bottom: 1.5rem;
+    }
+
+    .iconAdd {
+        left: 6em;
+        top: 0.2em;
+
+
+    }
 }
