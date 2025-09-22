@@ -3,7 +3,6 @@ import { FaEllipsisV, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { PiHighlighterFill } from "react-icons/pi";
 import { MdOutlineHideImage } from "react-icons/md";
 import styles from './CardPadraoEventos.module.scss';
-
 import PopupConfirmar from "../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
@@ -12,6 +11,7 @@ function CardPadrao() {
   const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
   const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
   const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
+  const [popupDestaqueSucessoAberto, setPopupDestaqueSucessoAberto] = useState(false);
   const [destacado, setDestacado] = useState(false);
 
   const toggleMenu = () => {
@@ -21,11 +21,12 @@ function CardPadrao() {
   const handleConfirmarDestacar = () => {
     setDestacado(!destacado);
     setPopupDestacarAberto(false);
+    setPopupDestaqueSucessoAberto(true); 
   };
 
   const handleConfirmarExcluir = () => {
     setPopupExcluirAberto(false);
-    setPopupSucessoAberto(true);
+    setPopupSucessoAberto(true); 
   };
 
   return (
@@ -33,12 +34,12 @@ function CardPadrao() {
       <div className={styles.cardGeral}>
         <img
           className={styles.imgCard}
-          src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
+          src="https://i.pinimg.com/736x/bc/2f/be/bc2fbedc0cfe661c8552b8ce7f053d1d.jpg"
           alt="Imagem do evento"
         />
         <div className={styles.cardInfos}>
           <p className={styles.cardTitulo}>
-           Palestra na Expo Patrimônio
+            Palestra na Expo Patrimonio
           </p>
           <button className={styles.btnCompleto}>
             Ver evento completo
@@ -81,6 +82,13 @@ function CardPadrao() {
                   }
                   onCancelar={() => setPopupDestacarAberto(false)}
                   onConfirmar={handleConfirmarDestacar}
+                />
+
+                <PopupSucesso
+                  aberto={popupDestaqueSucessoAberto}
+                  mensagem={destacado ? "Evento destacado com sucesso!" : "Evento encoberto com sucesso!"}
+                  textoBotao="Fechar"
+                  onBotaoClick={() => setPopupDestaqueSucessoAberto(false)}
                 />
               </li>
 

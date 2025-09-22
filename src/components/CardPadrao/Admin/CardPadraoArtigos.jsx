@@ -12,6 +12,7 @@ function CardPadrao() {
   const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
   const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
   const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
+  const [popupDestaqueSucessoAberto, setPopupDestaqueSucessoAberto] = useState(false);
   const [destacado, setDestacado] = useState(false);
 
   const toggleMenu = () => {
@@ -21,11 +22,12 @@ function CardPadrao() {
   const handleConfirmarDestacar = () => {
     setDestacado(!destacado);
     setPopupDestacarAberto(false);
+    setPopupDestaqueSucessoAberto(true);
   };
 
   const handleConfirmarExcluir = () => {
     setPopupExcluirAberto(false);
-    setPopupSucessoAberto(true);
+    setPopupSucessoAberto(true); 
   };
 
   return (
@@ -81,6 +83,13 @@ function CardPadrao() {
                   }
                   onCancelar={() => setPopupDestacarAberto(false)}
                   onConfirmar={handleConfirmarDestacar}
+                />
+
+                <PopupSucesso
+                  aberto={popupDestaqueSucessoAberto}
+                  mensagem={destacado ? "Artigo destacado com sucesso!" : "Artigo encoberto com sucesso!"}
+                  textoBotao="Fechar"
+                  onBotaoClick={() => setPopupDestaqueSucessoAberto(false)}
                 />
               </li>
 
