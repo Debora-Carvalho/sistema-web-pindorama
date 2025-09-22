@@ -15,3 +15,23 @@
 	height: auto;
 	padding: 10px;
 }
+
+.sectionAgendaEventos {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 40px;
+
+	.containerAgenda, .containerEvento {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	h2 {
+		font-family: $font-family-texto;
+		font-size: 3rem;
+		color: var(--text-primary);
+	}
+}
