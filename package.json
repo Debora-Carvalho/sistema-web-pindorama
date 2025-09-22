@@ -12,6 +12,9 @@
     "watch:editor-css": "sass --watch src/styles/editor.scss public/editor-styles.css"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.2",
     "@tinymce/tinymce-react": "^6.3.0",
     "framer-motion": "^12.23.16",
     "react": "^19.1.1",

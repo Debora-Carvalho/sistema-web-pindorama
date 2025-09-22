@@ -36,6 +36,7 @@ function PaginaLogin() {
               name="senha"
               minLength="6"
               required
+              placeholder='Senha'
             />
             <button
               type="button"
@@ -54,8 +55,7 @@ function PaginaLogin() {
           </div>
 
           <div className={styles.resetSenha}>
-            <p >Esqueceu sua senha?</p>
-            <a className={styles.linkRedefinir} href="/redefinir-senha">Redefinir senha</a>
+            <a href="/redefinir-senha">Esqueceu sua senha?</a>
           </div>
         </div>
       </div>
