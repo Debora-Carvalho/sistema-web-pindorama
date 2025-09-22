@@ -41,6 +41,7 @@
   max-width: 80%;
   word-wrap: break-word;
   font-family: $font-family-principal;
+  margin-left: 50px;
 }
 
 .inputLogin {
@@ -124,8 +125,8 @@
   width: 60px;
   height: 60px;
   cursor: pointer;
+  color: black;
 }
-
 
 
 //RESPONSIVIDADE//
@@ -206,6 +207,7 @@
     height: 40px;
     cursor: pointer;
   }
+
 }
 
 /* até 480px */

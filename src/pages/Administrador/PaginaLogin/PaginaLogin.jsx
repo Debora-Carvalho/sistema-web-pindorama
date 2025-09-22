@@ -7,23 +7,30 @@ import { IoEyeSharp } from "react-icons/io5";
 import { BsEyeSlashFill } from "react-icons/bs";
 import { useState } from 'react';
 import { useLogin } from '../../../hooks/login/useLogin.js'
+import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 
 function PaginaLogin() {
   useTituloDocumento("Login | Pindorama");
 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [senha, setSenha] = useState('')
+  const [erroMensagem, setErroMensagem] = useState('');
+
 
   const { data, loading, error, login } = useLogin();
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    try{
-      await login(senha)
-      window.location.href = "/pagina-inicial-admin";
-    } catch (err){
-    }
+  event.preventDefault();
+  try {
+    setErroMensagem('');
+    await login(senha);
+    window.location.href = "/adm/inicio";
+  } catch (err) {
+    setErroMensagem(err.message || 'Senha incorreta. Tente novamente.');
+     setTimeout(() => setErroMensagem(''), 3000);
   }
+};
+
   return (
     <>
       <div className={styles.containerLogin}>
@@ -62,7 +69,7 @@ function PaginaLogin() {
 
             <button
               className={styles.btnLogin}
-              // onClick={() => window.location.href = "/pagina-inicial-admin"}
+              //onClick={() => window.location.href = "/adm/inicio"}
               type="submit"
               disabled={loading}
             >
@@ -73,8 +80,9 @@ function PaginaLogin() {
           {/* Adicionar o componente de carregamento aqui */}
           {loading && <p>Entrando...</p>}
 
-          {/* Adicionar componente ou pop-up de erro aqui */}
-          {error && <p> {error} </p>}
+        
+          {erroMensagem && <PopupErro aberto={!!erroMensagem} mensagem={erroMensagem} />}
+
           </form>
           <div className={styles.resetSenha}>
             <a href="/redefinir-senha">Esqueceu sua senha?</a>
