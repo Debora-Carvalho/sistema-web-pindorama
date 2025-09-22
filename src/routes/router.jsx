@@ -15,13 +15,12 @@ const AppRoutes = () => {
 				<Route path="/" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
-
+        <Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 					{/* Lembrar de colocar aqui as outras rotas de admin */}
 				</Route>
-				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 			</Routes>
 		</BrowserRouter>
 	);
