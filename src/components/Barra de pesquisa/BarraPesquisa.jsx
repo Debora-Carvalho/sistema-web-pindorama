@@ -1,7 +1,6 @@
 import styles from './BarraPesquisa.module.scss';
 import { useState } from "react";
 import { TextField, Autocomplete } from "@mui/material";
-import axios from "axios";
 import { CiSearch } from "react-icons/ci";
 
 function BarraDePesquisa() {
@@ -11,7 +10,7 @@ function BarraDePesquisa() {
   const buscar = async (query) => {
     if (query.length < 2) return;
     try {
-      const res = await axios.get(`/api/search?query=${query}`);
+      //const res = await axios.get(`/api/search?query=${query}`);
       setOpcoes(res.data);
     } catch (error) {
       console.error("Erro ao buscar:", error);
