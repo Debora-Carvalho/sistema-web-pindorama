@@ -1,0 +1,17 @@
+.containerBtnThemeToggle {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    gap: 10px;
+    border-radius: 20px;
+    border: 2px solid #000000;
+
+    .btnThemeToggle {
+        font-size: 1.5rem;
+        color: var(--text-primary);
+
+        &:hover {
+            color: var(--background-secondary);
+        }
+    }
+} 

@@ -3,7 +3,6 @@ import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 
-
 function PaginaInicial() {
 	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
 
