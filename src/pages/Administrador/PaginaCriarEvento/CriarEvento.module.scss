@@ -1,12 +1,3 @@
-// Em: src/pages/Administrador/PaginaCriarArtigo/CriarArtigo.module.scss
-
-// Suas variáveis de cor (ajuste se necessário)
-$bege-claro: #f0e4d4;
-$marrom-escuro: #663e26;
-$verde-escuro: #1f3d2b;
-$borda-cor: #d3bca8;
-$placeholder-text: #a89a8c;
-
 .base {
     padding: 1rem 5%;
     padding-top: 0%;
@@ -24,8 +15,6 @@ $placeholder-text: #a89a8c;
         font-weight: 300;
     }
 }
-
-
 
 .logo {
     width: 15%; // Ajuste o tamanho da logo conforme necessário
@@ -50,17 +39,11 @@ $placeholder-text: #a89a8c;
     align-items: center;
 }
 
-.campoEditor {
-    grid-column: 1 / 2;
-    // Ocupa o mesmo espaço vertical da mídia e dos dropdowns
-    grid-row: 2 / 4;
-}
-
 .campoMidia {
     grid-column: 2 / 3;
     grid-row: 2 / 4;
-    background-color: $bege-claro;
-    border: 2px dashed $borda-cor;
+    background-color: var(--primary-100);
+    border: 2px dashed var(--primary-900);
     border-radius: 20px;
     padding: 1rem;
     color: #a89a8c;

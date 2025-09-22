@@ -1,0 +1,22 @@
+.containerPesquisa {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.barraPesquisa {
+  width: 50%;
+  background-color: var(--neutral-secondary);
+  color: var(--neutral-primary);
+  
+  .MuiOutlinedInput-root {
+    fieldset {
+      border: none;
+    }
+  }
+}
+
+.iconePesquisa {
+  font-size: 1.5rem; 
+  color: var(--neutral-primary);
+}
