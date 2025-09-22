@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from './PaginaTeste.module.scss';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
-
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";

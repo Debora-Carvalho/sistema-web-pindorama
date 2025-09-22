@@ -1,0 +1,207 @@
+@use "../../../styles/abstracts/variables.scss" as *;
+
+.containerVisualizar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(210, 152, 102, 0.8);
+  border-radius: 30px;
+  width: 20em;
+  height: 15em;
+  margin: 40px;
+  position: relative; 
+}
+
+.cardInfos {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8em;
+}
+
+.cardTitulo {
+  font-family: $font-family-principal;
+  font-size: 1.6em;
+  color: var(--neutral-primary);
+  font-weight: 600;
+}
+
+.btnCompleto {
+ background-color: var(--primary-200);
+  color: var(--primary-400);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-family: var(--font-family-subtitulo);
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.iconeMenu {
+  position: absolute; 
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: white;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.opcoesMenu {
+  display: grid;
+  position: absolute;
+  background: rgba(245, 182, 47, 0.9);
+  list-style: none;
+  padding: 5px;
+  gap: 10px;
+  top: 2.5em;
+  left: 18.5em;
+  border-radius: 8px;
+  min-width: 130px;
+  z-index: 20;
+}
+
+.btnEditar, .btnDestacar, .btnExcluir {
+  width: 100%;
+  background: var(--primary-200);
+  border-radius: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background: var(--secondary-600);
+    color: var(--text-secondary);
+  }
+}
+
+.iconOptions{
+	position: relative;
+    bottom: 20px;
+    left: 9px;
+    font-size: 1em;
+}
+
+.imgCard {
+  width: 100%;
+  aspect-ratio: 25 / 9;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0; 
+  filter: brightness(50%);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1080px) {
+  .containerVisualizar {
+    width: 18em;
+    height: 13em;
+    margin: 30px;
+  }
+
+  .cardTitulo {
+    font-size: 1.4em;
+  }
+
+  .btnCompleto {
+    padding: 0.4em 0.8em;
+  }
+
+  .opcoesMenu {
+    left: 16.5em;
+  }
+
+  .imgCard {
+    border-radius: 18px 18px 0 0;
+  }
+  .iconeMenu {
+    font-size: 1.3rem;
+  }
+  .iconOptions {
+    font-size: 0.9em;
+    bottom: 18px;
+    left: 8px;
+  }
+}
+
+@media (max-width: 720px) {
+  .containerVisualizar {
+    width: 16em;
+    height: 12em;
+    margin: 20px;
+  }
+
+  .cardTitulo {
+    font-size: 1.2em;
+  }
+
+  .btnCompleto {
+    padding: 0.3em 0.6em;
+    font-size: 0.9em;
+  }
+
+  .opcoesMenu {
+    left: 14.5em;
+  }
+
+   .imgCard {
+    border-radius: 16px 16px 0 0;
+  }
+  .iconeMenu {
+    font-size: 1.1rem;
+  }
+  .iconOptions {
+    font-size: 0.8em;
+    bottom: 16px;
+    left: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .containerVisualizar {
+    width: 17em;
+    height: 10em;
+    margin-left: 70px;
+    align-items: stretch;
+  }
+
+  .cardTitulo {
+    font-size: 1em;
+  }
+
+  .btnCompleto {
+    padding: 0.25em 0.5em;
+    font-size: 0.8em;
+  }
+
+  .opcoesMenu {
+    left: 12.5em;
+    min-width: 10px;
+    height: 105px;
+  }
+
+  .imgCard {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .iconeMenu {
+    font-size: 1rem;
+  }
+
+  .iconOptions {
+    font-size: 0.75em;
+    bottom: 18px;
+    left: 6px;
+  }
+
+  .btnEditar, .btnDestacar, .btnExcluir{
+    width: 100px;
+    height: 25px;
+  }
+}
+

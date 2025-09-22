@@ -51,6 +51,7 @@ function PaginaLogin() {
               required
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
+              placeholder='Senha'
             />
             <button
               type="button"
@@ -77,8 +78,7 @@ function PaginaLogin() {
           {error && <p> {error} </p>}
           </form>
           <div className={styles.resetSenha}>
-            <p >Esqueceu sua senha?</p>
-            <a className={styles.linkRedefinir} href="/redefinir-senha">Redefinir senha</a>
+            <a href="/redefinir-senha">Esqueceu sua senha?</a>
           </div>
         </div>
       </div>

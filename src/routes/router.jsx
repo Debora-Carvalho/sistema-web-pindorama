@@ -6,6 +6,7 @@ import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArt
 import PaginaLogin from "../pages/Administrador/PaginaLogin/PaginaLogin.jsx";
 import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/PaginaInicialAdmin.jsx";
 import AdminLayout from '../layouts/AdminLayout.jsx';
+import PaginaVisualizarArtigos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 
 const AppRoutes = () => {
 	return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 					{/* Lembrar de colocar aqui as outras rotas de admin */}
 				</Route>
+				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 			</Routes>
 		</BrowserRouter>
 	);
