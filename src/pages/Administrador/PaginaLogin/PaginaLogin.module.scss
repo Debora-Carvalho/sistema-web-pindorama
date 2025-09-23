@@ -128,6 +128,18 @@
   color: black;
 }
 
+/*ERRO*/
+.inputErro {
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.mensagemErro {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
 
 //RESPONSIVIDADE//
 
