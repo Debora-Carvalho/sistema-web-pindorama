@@ -27,15 +27,16 @@ function Calendario() {
                 onChange={(novaData) => setData(novaData)}
                 sx={{
                     '& .Mui-selected': {
-                    backgroundColor: 'var(--background-secondary)', 
-                    color: '#fff',
+                        backgroundColor: 'var(--background-secondary)', 
+                        color: '#fff',
                     },
                     '& .MuiPickersDay-root.Mui-selected': {
-                    backgroundColor: 'var(--background-secondary)',
+                        backgroundColor: 'var(--background-secondary)',
+                        color: '#fff',
                     },
                     '& .MuiPickersYear-yearButton.Mui-selected': {
-                    backgroundColor: 'var(--background-secondary)',
-                    color: '#fff',
+                        backgroundColor: 'var(--background-secondary)',
+                        color: '#fff',
                     },
                 }}
             />
