@@ -13,10 +13,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(210, 152, 102, 0.8);
+  background-color: var(--secondary-500);
   border-radius: 30px;
   width: 20em;
-  height: 15em;
+  height: 14em;
   margin: 5px;
   position: relative;
   transition: all 0.3s ease;
@@ -32,8 +32,8 @@
 
 .cardTitulo {
   font-family: $font-family-principal;
-  font-size: 1.6em;
-  color: var(--neutral-primary);
+  font-size: 1.5em;
+  color: var(--text-secondary);
   font-weight: 600;
 }
 

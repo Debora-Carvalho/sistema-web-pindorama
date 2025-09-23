@@ -2,8 +2,7 @@ import { useState } from "react";
 import { FaEllipsisV, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { PiHighlighterFill } from "react-icons/pi";
 import { MdOutlineHideImage } from "react-icons/md";
-import styles from './CardPadraoArtigos.module.scss';
-
+import styles from './CardPadraoEventos.module.scss';
 import PopupConfirmar from "../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
@@ -22,7 +21,7 @@ function CardPadrao() {
   const handleConfirmarDestacar = () => {
     setDestacado(!destacado);
     setPopupDestacarAberto(false);
-    setPopupDestaqueSucessoAberto(true);
+    setPopupDestaqueSucessoAberto(true); 
   };
 
   const handleConfirmarExcluir = () => {
@@ -35,15 +34,15 @@ function CardPadrao() {
       <div className={styles.cardGeral}>
         <img
           className={styles.imgCard}
-          src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
-          alt="Imagem do artigo"
+          src="https://i.pinimg.com/736x/bc/2f/be/bc2fbedc0cfe661c8552b8ce7f053d1d.jpg"
+          alt="Imagem do evento"
         />
         <div className={styles.cardInfos}>
           <p className={styles.cardTitulo}>
-            A ancestralidade na dança
+            Palestra na Expo Patrimonio
           </p>
           <button className={styles.btnCompleto}>
-            Ver artigo completo
+            Ver evento completo
           </button>
         </div>
 
@@ -78,8 +77,8 @@ function CardPadrao() {
                   aberto={popupDestacarAberto}
                   mensagem={
                     destacado
-                      ? "Tem certeza que deseja encobrir este artigo?"
-                      : "Tem certeza que deseja destacar este artigo?"
+                      ? "Tem certeza que deseja encobrir este evento?"
+                      : "Tem certeza que deseja destacar este evento?"
                   }
                   onCancelar={() => setPopupDestacarAberto(false)}
                   onConfirmar={handleConfirmarDestacar}
@@ -87,7 +86,7 @@ function CardPadrao() {
 
                 <PopupSucesso
                   aberto={popupDestaqueSucessoAberto}
-                  mensagem={destacado ? "Artigo destacado com sucesso!" : "Artigo encoberto com sucesso!"}
+                  mensagem={destacado ? "Evento destacado com sucesso!" : "Evento encoberto com sucesso!"}
                   textoBotao="Fechar"
                   onBotaoClick={() => setPopupDestaqueSucessoAberto(false)}
                 />
@@ -104,14 +103,14 @@ function CardPadrao() {
 
                 <PopupConfirmar
                   aberto={popupExcluirAberto}
-                  mensagem="Tem certeza que deseja excluir este artigo?"
+                  mensagem="Tem certeza que deseja excluir este evento?"
                   onCancelar={() => setPopupExcluirAberto(false)}
                   onConfirmar={handleConfirmarExcluir}
                 />
 
                 <PopupSucesso
                   aberto={popupSucessoAberto}
-                  mensagem="Artigo excluído com sucesso!"
+                  mensagem="Evento excluído com sucesso!"
                   textoBotao="Fechar"
                   onBotaoClick={() => setPopupSucessoAberto(false)}
                 />
