@@ -1,0 +1,26 @@
+@use "../../styles/abstracts/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h2 {
+        font-family: $font-family-texto;
+        font-size: 3rem;
+        color: var(--text-primary);
+    }
+
+    .iconCactoApoio {
+        width: 350px;
+        height: 350px;
+        margin-top: -250px;
+        margin-left: -80px;
+    }
+
+    .lineIconCactoApoio {
+        border-top: 1px solid #000000;
+        width: 60%;
+        margin-left: -80px;
+    }
+}

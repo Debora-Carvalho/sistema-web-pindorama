@@ -148,7 +148,7 @@ function PaginaCriarArtigo() {
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
-            navigate('/visualizar-artigos');
+            navigate('/adm/visualizar-artigos');
         }
         setAcaoAposSucesso(null);
     };
