@@ -13,6 +13,12 @@ footer {
 	justify-content: space-between;
 	background: var(--background-secondary);
 	padding: 20px 20px 0 20px;
+
+	.nomeDestaque {
+		font-family: $font-family-texto;
+		font-size: 5rem;
+		color: var(--text-secondary);
+	}
 }
 
 .linksFooter {
@@ -20,7 +26,8 @@ footer {
 	flex-direction: column;
 
 	h2 {
-		font-family: $font-family-principal;
+		font-family: $font-family-texto;
+		font-weight: 800;
 		color: var(--text-secondary);
 	}
 
