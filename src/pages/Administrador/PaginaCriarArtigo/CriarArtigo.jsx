@@ -49,7 +49,6 @@ function PaginaCriarArtigo() {
 
     // --- Funções de Handler ---
     const handleEditorChange = (content) => { setConteudo(content); };
-
     const handleImagemChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -57,12 +56,10 @@ function PaginaCriarArtigo() {
             setPreviewCapa(URL.createObjectURL(file));
         }
     };
-
     const handleSelecionarLocal = (local) => {
         setLocalSelecionado(local);
         setLocalModalAberto(false);
     };
-
     const handleConfirmarTags = (tags) => {
         setTagsSelecionadas(tags);
         setPopupTagAberto(false);
@@ -70,13 +67,7 @@ function PaginaCriarArtigo() {
 
     // --- Lógica de Exclusão ---
     const handleExcluirClick = () => {
-        const formularioEstaVazio =
-            !titulo.trim() &&
-            (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') &&
-            !imagemCapa &&
-            tagsSelecionadas.length === 0 &&
-            !localSelecionado;
-
+        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !localSelecionado;
         if (formularioEstaVazio) {
             setPopupSucessoMensagem('Não há informações para excluir.');
             setAcaoAposSucesso('permanecer');
@@ -85,7 +76,6 @@ function PaginaCriarArtigo() {
             setMostrarConfirmacaoExcluir(true);
         }
     };
-
     const handleConfirmarExclusao = () => {
         setTitulo('');
         setConteudo('');
@@ -98,20 +88,15 @@ function PaginaCriarArtigo() {
         setAcaoAposSucesso('permanecer');
         setMostrarSucesso(true);
     };
-
-    const handleCancelarExclusao = () => {
-        setMostrarConfirmacaoExcluir(false);
-    };
+    const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };
 
     // --- Lógica de Envio ---
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const mostrarErro = (mensagem) => {
             setErroFormulario(mensagem);
             setPopupErroAberto(true);
         };
-
         const formularioEstaVazio =
             !titulo.trim() &&
             (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') &&
@@ -119,8 +104,9 @@ function PaginaCriarArtigo() {
             tagsSelecionadas.length === 0 &&
             !localSelecionado;
 
+        // Lógica de validação para enviar o treco
         if (formularioEstaVazio) {
-            mostrarErro('Todos os campos precisam ser preenchidos para postar um artigo.');
+            mostrarErro('Todos os campos precisam ser preenchidos para o envio de um novo artigo.');
             return;
         }
         if (!titulo.trim()) {
@@ -141,23 +127,13 @@ function PaginaCriarArtigo() {
         }
         if (!localSelecionado) {
             mostrarErro('Selecione um local.');
-            return;
+            ;
         }
-
         setMostrarConfirmacaoEnvio(true);
     };
 
     const executarEnvio = () => {
-        const artigoParaEnviar = {
-            titulo,
-            conteudo,
-            imagemCapa,
-            autora: nomeAutora,
-            dataPublicacao: new Date(),
-            local: localSelecionado,
-            tags: tagsSelecionadas
-        };
-
+        const artigoParaEnviar = { titulo, conteudo, imagemCapa, autora: nomeAutora, dataPublicacao: new Date(), local: localSelecionado, tags: tagsSelecionadas };
         console.log("Artigo pronto para ser enviado:", artigoParaEnviar);
         setMostrarConfirmacaoEnvio(false);
         setPopupSucessoMensagem('Artigo enviado com sucesso!');
@@ -165,18 +141,14 @@ function PaginaCriarArtigo() {
         setMostrarSucesso(true);
     };
 
-    const handleCancelarEnvio = () => {
-        setMostrarConfirmacaoEnvio(false);
-    };
+    const handleCancelarEnvio = () => { setMostrarConfirmacaoEnvio(false); };
 
     // --- Lógica dos Popups de Erro e Sucesso ---
-    const handleFecharPopupErro = () => {
-        setPopupErroAberto(false);
-    };
+    const handleFecharPopupErro = () => { setPopupErroAberto(false); };
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
-            navigate('/adm/inicio');
+            navigate('/visualizar-artigos');
         }
         setAcaoAposSucesso(null);
     };
@@ -184,6 +156,15 @@ function PaginaCriarArtigo() {
     useEffect(() => {
         return () => { if (previewCapa) { URL.revokeObjectURL(previewCapa); } };
     }, [previewCapa]);
+
+    useEffect(() => {
+        if (popupErroAberto) {
+            const timer = setTimeout(() => {
+                setPopupErroAberto(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [popupErroAberto]);
 
     return (
         <main className={styles.base}>
@@ -207,7 +188,10 @@ function PaginaCriarArtigo() {
                     />
                 </div>
                 <div className={styles.campoEditor}>
-                    <EditorDeArtigo value={conteudo} onContentChange={handleEditorChange} />
+                    <EditorDeArtigo
+                        value={conteudo}
+                        onContentChange={handleEditorChange}
+                    />
                 </div>
                 <div className={styles.campoDropdowns}>
                     <button
@@ -222,8 +206,7 @@ function PaginaCriarArtigo() {
                         className={styles.selectWrapper}
                         onClick={() => setLocalModalAberto(true)}
                     >
-                        <FaMapMarkerAlt />
-                        {localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : 'Local'}
+                        <FaMapMarkerAlt /> {localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : 'Local'}
                     </button>
                 </div>
                 <div className={styles.campoMidia}>
