@@ -10,15 +10,32 @@
 
     .calendarioInicialTopo {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
         margin-bottom: 1rem;
-        font-weight: 500;
-        font-size: 2rem;
+
+        .calendarioInicialMes {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--secondary-500);
+        }
 
         .calendarioInicialDataHora {
-            color: var(--primary-color);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 1.5rem;
+            background-color: var(--background-secondary);
+            border-radius: 10px;
+            color: var(--text-secondary);
         }
+    }
+
+    .calendario {
+        font-family: $font-family-texto;
     }
 }
   

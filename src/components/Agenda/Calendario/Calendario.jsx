@@ -11,12 +11,17 @@ function Calendario() {
   return (
     <div className={styles.containerCalendarioInicial}>
         <div className={styles.calendarioInicialTopo}>
+            <p className={styles.calendarioInicialMes}>
+                {new Intl.DateTimeFormat('pt-BR', {
+                    month: 'long',
+                }).format(new Date())}
+            </p>
             <div className={styles.calendarioInicialDataHora}>
                 {new Intl.DateTimeFormat('pt-BR', {
-                weekday: 'short',
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
+                    weekday: 'long',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
                 }).format(new Date())}
             </div>
         </div>
@@ -26,16 +31,39 @@ function Calendario() {
                 value={data}
                 onChange={(novaData) => setData(novaData)}
                 sx={{
+                    width: '100%',         
+                    maxWidth: 400,        
+                    minWidth: 280,          
+                    margin: '0 auto',
+
                     '& .Mui-selected': {
                         backgroundColor: 'var(--background-secondary)', 
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '2rem',
                         color: '#fff',
+                    },
+                    '& .MuiTypography-root': {
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '1.5rem',
+                    },
+                    '& .MuiPickersDay-root': {
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '1.5rem',
+                    },
+                    '& .MuiPickersYear-yearButton': {
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '1.5rem',
                     },
                     '& .MuiPickersDay-root.Mui-selected': {
                         backgroundColor: 'var(--background-secondary)',
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '1.5rem',
                         color: '#fff',
                     },
                     '& .MuiPickersYear-yearButton.Mui-selected': {
                         backgroundColor: 'var(--background-secondary)',
+                        fontFamily: 'Comfortaa, sans-serif',
+                        fontSize: '1.5rem',
                         color: '#fff',
                     },
                 }}
