@@ -41,21 +41,16 @@
       ;
       color: white;
     }
-
-    // escolhe oque vier no seu coração
     &.rede {
       background-color: var(--primary-300);
       ;
       color: white;
     }
 
-    // escolhe oque vier no seu coração
     &.padrao {
       background-color: var(--primary-100);
       color: var(--danger);
     }
-
-    // escolhe oque vier no seu coração
   }
 }
 
