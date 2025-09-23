@@ -1,45 +1,56 @@
-import styles from './BarraPesquisa.module.scss';
-import { useState } from "react";
-import { TextField, Autocomplete } from "@mui/material";
+import Downshift from "downshift";
+import style from "./BarraPesquisa.module.scss";
 import { CiSearch } from "react-icons/ci";
 
-function BarraDePesquisa() {
-  const [opcoes, setOpcoes] = useState([]);
-  const [valor, setValor] = useState("");
-
-  const buscar = async (query) => {
-    if (query.length < 2) return;
-    try {
-      //const res = await axios.get(`/api/search?query=${query}`);
-      setOpcoes(res.data);
-    } catch (error) {
-      console.error("Erro ao buscar:", error);
-    }
-  };
-
+function BarraPesquisa({ itens = [], onSelect }) {
   return (
-    <div className={styles.containerPesquisa}>
-      <Autocomplete
-        className={styles.barraPesquisa}
-        freeSolo
-        options={opcoes.map((artigo) => artigo.titulo)}
-        onInputChange={(e, newValue) => {
-          setValor(newValue);
-          buscar(newValue);
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Buscar"
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: <CiSearch className={styles.iconePesquisa} />,
-            }}
+    <Downshift
+      onChange={selection => {
+        if (selection && onSelect) onSelect(selection);
+      }}
+      itemToString={item => (item ? item.titulo : "")}
+    >
+      {({
+        getInputProps,
+        getItemProps,
+        getMenuProps,
+        isOpen,
+        inputValue,
+        highlightedIndex,
+        selectedItem,
+      }) => (
+        <div className={style.containerPesquisa}>
+          <CiSearch className={style.iconePesquisa} />
+          <input
+            {...getInputProps({
+              placeholder: "Digite para buscar...",
+            })}
+            className={style.inputPesquisa}
           />
-        )}
-      />
-    </div>
+          <ul className={style.listaResultados} {...getMenuProps()}>
+            {isOpen &&
+              itens
+                .filter(
+                  item =>
+                    !inputValue ||
+                    item.titulo.toLowerCase().includes(inputValue.toLowerCase())
+                )
+                .map((item, index) => (
+                  <li
+                    key={item.id || index}
+                    className={`${style.itemLista} ${
+                      highlightedIndex === index ? style.highlighted : ""
+                    } ${selectedItem === item ? style.selected : ""}`}
+                    {...getItemProps({ index, item })}
+                  >
+                    {item.titulo}
+                  </li>
+                ))}
+          </ul>
+        </div>
+      )}
+    </Downshift>
   );
 }
 
-export default BarraDePesquisa;
+export default BarraPesquisa;

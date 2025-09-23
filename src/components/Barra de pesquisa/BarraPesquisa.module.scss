@@ -1,22 +1,143 @@
+@use "../../styles/abstracts/variables.scss" as *;
+
 .containerPesquisa {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  max-width: 60em;
+  margin: 0 auto;
+  position: relative;
+  bottom: 35px;
+  margin-bottom: 120px;
+  left: 2em;
 }
 
-.barraPesquisa {
-  width: 50%;
-  background-color: var(--neutral-secondary);
-  color: var(--neutral-primary);
-  
-  .MuiOutlinedInput-root {
-    fieldset {
-      border: none;
-    }
+.inputPesquisa {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: var(--primary-500);
+    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.listaResultados {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  background: var(--primary-200);
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  z-index: 30;
+}
+
+.itemLista {
+  padding: 8px;
+  cursor: pointer;
+  background: var(--primary-200);
+
+  &.highlighted {
+    background-color: var(--neutral-secondary);
+  }
+
+  &.selected {
+    font-weight: bold;
   }
 }
 
 .iconePesquisa {
-  font-size: 1.5rem; 
+  position: absolute;
+  right: 20px;
+  top: 25px;
+  transform: translateY(-50%);
+  font-size: 1.6em;
   color: var(--neutral-primary);
+  z-index: 20;
+}
+
+
+/*RESPONSIVIDADE*/
+
+
+@media (max-width: 1080px) {
+  .containerPesquisa {
+    max-width: 40em;
+    bottom: 60px;
+    margin: 0 auto;
+  }
+
+  .iconePesquisa {
+    font-size: 1.5em;
+    top: 55px;
+  }
+
+  .inputPesquisa {
+    width: 80%;
+    left: 8em;
+    position: relative;
+    margin-bottom: 3em;
+    top: 2em;
+  }
+}
+
+@media (max-width: 720px) {
+  .containerPesquisa {
+    max-width: 28em;
+    bottom: 50px;
+    padding: 0 10px;
+  }
+
+  .inputPesquisa {
+    padding: 8px 36px 8px 12px;
+    font-size: 0.95em;
+    top: 60px;
+    position: relative;
+    margin: 0;
+    width: 100%;
+    left: 20px;
+  }
+
+  .iconePesquisa {
+    font-size: 1.4em;
+    right: 1px;
+    top:80px;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  .containerPesquisa {
+    max-width: 100%;
+    bottom: 40px;
+    padding: 0 8px;
+  }
+
+  .inputPesquisa {
+    padding: 8px 34px 8px 10px;
+    font-size: 0.9em;
+    width: 15em;
+    position: relative;
+    left: 50px;
+    top: 30px;
+  }
+
+  .iconePesquisa {
+    display: block;
+    font-size: 1.3em;
+    right: 100px;
+    top: 50px;
+    z-index: 20;
+  }
+
+  .itemLista {
+    padding: 6px;
+    font-size: 0.9em;
+  }
 }

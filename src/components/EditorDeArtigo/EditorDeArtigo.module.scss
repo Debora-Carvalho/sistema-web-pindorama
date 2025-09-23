@@ -1,94 +1,23 @@
 @use "../../styles/abstracts/variables" as font-texto;
 
-body{
+body {
   background-color: unset;
 }
 
 // --- Wrapper de Layout---
-.editorWrapper{
+.editorWrapper {
   width: 100%;
   max-width: 900px;
   margin: 2rem auto;
   margin-top: 0%;
   margin-bottom: 0%;
 }
- 
+
 // --- Contêiner de Estilo do Editor ---
-.editorContainer{
+.editorContainer {
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid var(--primary-700);
 }
-  
-// Estilos para a INTERFACE INTERNA do Editor
-:global(.tox-editor-container){
-  padding: 0 !important;
-}
-  
-:global(.tox .tox-edit-area__iframe){
-  background-color: transparent;
-  
-}
-  
-:global(.tox .tox-toolbar__primary){
-  background-color: var(--primary-200) !important;
-  border-bottom: none !important;
-}
-  
-:global(.tox .tox-editor-header){
-  border-bottom: 2px solid var(--primary-700) !important;
-  padding: 0 !important;
-}
-    
-:global(.tox .tox-statusbar){
-  background-color: var(--primary-200) !important;
-  border-top: 2px solid var(--primary-700) !important;
-}
-  
-// Estilos dos BOTÕES
-:global(.tox .tox-tbtn){
-  background-color: var(--primary-300) !important;
-}
-  
-:global(.tox .tox-tbtn svg){
-  fill: var(--neutral-primary) !important;
-}
-  
-:global(.tox .tox-tbtn:hover){
-  background-color: var(--primary-400) !important;
-}
 
-:global(.tox .tox-tbtn--enabled){
-  background-color: var(--secondary-500) !important;
-}
-  
-// --- ESTILOS PARA O MENU DROPDOWN 
-:global(.tox-tinymce-aux .tox-menu){
-  background-color: var(--primary-200) !important;
-  border: 2px solid var(--primary-900) !important;    
-  padding: 5px 0 !important;
-}
-    
-:global(.tox-tinymce-aux .tox-collection__item){
-  
-  color: #000000;
-}
-  
-:global(.tox-tinymce-aux .tox-collection__item--hover){
-  background-color: var(--primary-900) !important;   // << COR DO HOVER
-  color: #000000 !important;
-}
-  
-:global(.tox-tinymce-aux .tox-collection__item--active){
-  background-color: var(--primary-100) !important;
-  font-weight: bold;
-  color: var(--primary-900) !important;
-}
-
-:global(.tox .tox-collection--list .tox-collection__item--enabled:not(.tox-collection__item--state-disabled)) {
-  color: var(--primary-900) !important;
-}
-  
-:global(.tox-tinymce-aux .tox-collection__item .tox-collection__item-checkmark svg){
-  fill: var(--primary-900) !important;
-} 
+//ESTILOS GLOBAIS ESTÃO NO ARQUIVO GLOBAL main.scss, É NECESSÁRIO DEIXAR LÁ PQ O TINYMCE É CHATO PRA PORRAAAA!

@@ -1,0 +1,92 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.popupOverlayErro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(1px);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: $font-family-subtitulo;
+
+  .popupBoxErro {
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+
+    p {
+      font-size: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    // Tipos de erro
+    &.senha {
+      background-color: var(--primary-100);
+      color: rgb(185, 16, 16);
+    }
+
+    &.sessao {
+      background-color: var(--primary-300);
+      ;
+      color: white;
+    }
+
+    // escolhe oque vier no seu coração
+    &.rede {
+      background-color: var(--primary-300);
+      ;
+      color: white;
+    }
+
+    // escolhe oque vier no seu coração
+    &.padrao {
+      background-color: var(--primary-100);
+      color: var(--danger);
+    }
+
+    // escolhe oque vier no seu coração
+  }
+
+  .btnPopupErro {
+    background-color: var(--danger);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .popupOverlayErro {
+    .popupBoxErro {
+      width: 90%;
+      max-width: 300px;
+      padding: 1rem 1.5rem;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Animação de fade in
+@keyframes fadeIn {
+  to { opacity: 1; }
+}

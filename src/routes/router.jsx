@@ -7,6 +7,7 @@ import PaginaLogin from "../pages/Administrador/PaginaLogin/PaginaLogin.jsx";
 import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/PaginaInicialAdmin.jsx";
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import PaginaVisualizarArtigos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
+import PaginaVisualizarEventos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 
 const AppRoutes = () => {
 	return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
 				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
+				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
 
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
