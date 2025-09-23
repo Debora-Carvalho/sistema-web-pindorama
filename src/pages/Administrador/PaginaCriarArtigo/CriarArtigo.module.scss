@@ -1,11 +1,4 @@
-// Em: src/pages/Administrador/PaginaCriarArtigo/CriarArtigo.module.scss
-
-// Suas variáveis de cor (ajuste se necessário)
-$bege-claro: #f0e4d4;
-$marrom-escuro: #663e26;
-$verde-escuro: #1f3d2b;
-$borda-cor: #d3bca8;
-$placeholder-text: #a89a8c;
+@use "../../../styles/abstracts/variables" as *;
 
 .base {
     padding: 1rem 5%;
@@ -20,80 +13,90 @@ $placeholder-text: #a89a8c;
 
     .titulo {
         font-size: 3rem;
-        font-family: 'inter', sans-serif;
+        font-family: $font-family-subtitulo;
         font-weight: 300;
     }
 }
 
-
-
 .logo {
-    width: 15%; // Ajuste o tamanho da logo conforme necessário
+    width: 15%;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1.5rem 2rem; // 1.5rem de espaço vertical, 2rem horizontal
+    grid-template-areas:
+        "titulo     dropdowns"
+        "editor     midia"
+        "botoes     botoes";
 }
 
-// Posicionando cada elemento na grade
 .campoTitulo {
-    grid-column: 1 / 2;
+    grid-area: titulo;
 }
 
 .campoDropdowns {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-area: dropdowns;
     display: flex;
     gap: 1rem;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .campoEditor {
-    grid-column: 1 / 2;
-    // Ocupa o mesmo espaço vertical da mídia e dos dropdowns
-    grid-row: 2 / 4;
+    grid-area: editor;
 }
 
 .campoMidia {
-    grid-column: 2 / 3;
-    grid-row: 2 / 4;
-    background-color: $bege-claro;
-    border: 2px dashed $borda-cor;
+    grid-area: midia;
+    background-color: var(--primary-100);
+    border: 2px dashed var(--primary-500);
     border-radius: 20px;
     padding: 1rem;
     color: #a89a8c;
 }
 
 .campoMidia label {
-    display: block; // Faz a label se comportar como um bloco
+    display: block;
     width: 100%;
     height: 100%;
     cursor: pointer;
 }
 
+.mensagemErro {
+    grid-area: botoes;
+    justify-self: end;
+    align-self: center;
+    color: #842029;
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    padding: 0.8rem 1rem;
+    margin-left: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
 .campoBotoes {
-    grid-column: 1 / 3;
+    grid-area: botoes;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
 }
 
-// Estilos específicos dos inputs
 .campoTitulo input {
     width: 100%;
     padding: 15px;
-    border: 2px solid var(--primary-900);
+    border: 2px solid var(--primary-500);
     background-color: var(--primary-100);
     border-radius: 20px;
     font-size: 20px;
-    color: var(--primary-900);
+    color: var(--primary-500);
 
     &::placeholder {
-        color: var(--primary-900);
-        font-family: 'Comfortaa', sans-serif;
+        color: var(--primary-500);
+        font-family: $font-family-subtitulo;
     }
 }
 
@@ -128,11 +131,101 @@ $placeholder-text: #a89a8c;
     color: var(--text-secondary);
 }
 
-.botaoRascunho{
+.botaoRascunho {
     background-color: var(--secondary-600);
     color: var(--text-secondary);
 }
+
 .botaoEnviar {
     background-color: var(--secondary-900);
     color: var(--text-secondary);
+}
+
+
+//RESPONSIVIDADE
+
+//Para Tablets
+@media (max-width: 720px) {
+    .formGrid {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "titulo"
+            "midia"
+            "dropdowns"
+            "editor"
+            "botoes";
+
+
+        gap: 1rem;
+    }
+
+    .campoDropdowns {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .logo {
+        width: 30%;
+    }
+
+    .cabecalho {
+        gap: 0;
+    }
+
+    .botaoExcluir,
+    .botaoRascunho,
+    .botaoEnviar {
+        padding: 8px 10px;
+        border: none;
+        border-radius: 30px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .botoesDireita {
+        display: flex;
+        gap: 0.5rem;
+    }
+}
+
+//PARA MOBILE
+@media (max-width: 480px) {
+
+    .botaoExcluir,
+    .botaoRascunho,
+    .botaoEnviar {
+        padding: 8px 10px;
+        border: none;
+        border-radius: 15px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .botoesDireita {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .mensagemErro {
+        grid-area: botoes;
+        justify-self: end;
+        align-self: center;
+        color: #842029;
+        background-color: #f8d7da;
+        border: 1px solid #f5c2c7;
+        padding: 0.5rem 0.8rem;
+        margin-left: 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+    }
 }

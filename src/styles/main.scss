@@ -17,3 +17,82 @@
 [data-theme="nordestino"] {
 	--bg-image: url("/icons/icon-teste-tema-nordestino.png");
 }
+
+//ESTILOS DO EDITOR DE TEXTO
+.tox-editor-container{
+  padding: 0 !important;
+}
+
+.tox .tox-edit-area__iframe{
+  background-color: transparent;
+
+}
+
+.tox .tox-toolbar__primary{
+  background-color: var(--primary-200) !important;
+  border-bottom: none !important;
+}
+
+.tox .tox-editor-header{
+  background-color: var(--primary-200);
+  border-bottom: 2px solid var(--primary-700) !important;
+  padding: 0 !important;
+}
+
+.tox .tox-statusbar{
+  background-color: var(--primary-200) !important;
+  border-top: 2px solid var(--primary-700) !important;
+}
+
+// Estilos dos BOTÕES
+.tox .tox-tbtn{
+  background-color: var(--primary-300) !important;
+}
+
+.tox .tox-tbtn svg{
+  fill: var(--neutral-primary) !important;
+}
+
+.tox .tox-tbtn:hover{
+  background-color: var(--primary-400) !important;
+}
+
+.tox .tox-tbtn--enabled{
+  background-color: var(--secondary-500) !important;
+}
+
+// --- ESTILOS PARA O MENU DROPDOWN 
+.tox-tinymce-aux .tox-menu{
+  background-color: var(--primary-200) !important;
+  border: 2px solid var(--primary-700) !important;
+  padding: 5px 0 !important;
+}
+
+.tox-tinymce-aux .tox-collection__item{
+  color: #000000;
+}
+
+.tox-toolbar--scrolling{
+  // FORÇA a quebra de linha e DESATIVA a rolagem horizontal
+  flex-wrap: wrap !important;
+  overflow-x: hidden !important;
+}
+
+.tox-tinymce-aux .tox-collection__item--hover{
+  background-color: var(--primary-700) !important; // << COR DO HOVER
+  color: #000000 !important;
+}
+
+.tox-tinymce-aux .tox-collection__item--active{
+  background-color: var(--primary-100) !important;
+  font-weight: bold;
+  color: var(--primary-700) !important;
+}
+
+.tox .tox-collection--list .tox-collection__item--enabled:not(.tox-collection__item--state-disabled){
+  color: var(--primary-700) !important;
+}
+
+.tox-tinymce-aux .tox-collection__item .tox-collection__item-checkmark svg{
+  fill: var(--primary-700) !important;
+}
