@@ -1,11 +1,11 @@
-import styles from './PaginaVisualizarArtigos.module.scss';
-import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
+import styles from './PaginaVisualizarEventos.module.scss';
+import CardPadraoEventos from '../../../components/CardPadrao/Admin/CardPadraoEventos.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 
-function PaginaVisualizarArtigos() {
+function PaginaVisualizarEventos() {
   const artigosFake = [
     { id: 1, titulo: "Inteligência Artificial no Brasil" },
     { id: 2, titulo: "Agricultura Sustentável" },
@@ -27,20 +27,20 @@ function PaginaVisualizarArtigos() {
       </nav>
       <div className={styles.topo}>
         <BarraPesquisa itens={artigosFake} onSelect={handleSelect} />
-        <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-artigo"}>
+        <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
         <BiSolidAddToQueue className={styles.iconAdd} />
         </button>
       </div>
       <div className={styles.containerCards}>
-        <CardPadraoArtigos />
-        <CardPadraoArtigos />
-        <CardPadraoArtigos />
-        <CardPadraoArtigos />
-        <CardPadraoArtigos />
-        <CardPadraoArtigos />
+       <CardPadraoEventos />
+       <CardPadraoEventos />
+       <CardPadraoEventos />
+       <CardPadraoEventos />
+       <CardPadraoEventos />
+        <CardPadraoEventos />
       </div>
     </div>
   )
 }
 
-export default PaginaVisualizarArtigos;
+export default PaginaVisualizarEventos;

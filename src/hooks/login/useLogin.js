@@ -23,9 +23,15 @@ export const useLogin = () => {
             });
 
             if (!loginResposta.ok) {
-                const errorData = await loginResposta.json();
-                throw new Error(errorData.error || 'Login não sucedido');
+                let errorData;
+                try {
+                    errorData = await loginResposta.json();
+                } catch {
+                    errorData = { error: 'Senha incorreta, por favor tente novamente' };
+                }
+                throw new Error(errorData.error || 'Senha incorreta');
             }
+
 
             const sessionResposta = await fetch(API_URL, { method: 'GET', credentials: 'include' });
 

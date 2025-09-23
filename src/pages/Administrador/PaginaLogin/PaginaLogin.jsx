@@ -7,23 +7,35 @@ import { IoEyeSharp } from "react-icons/io5";
 import { BsEyeSlashFill } from "react-icons/bs";
 import { useState } from 'react';
 import { useLogin } from '../../../hooks/login/useLogin.js'
+import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
+import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
+
 
 function PaginaLogin() {
   useTituloDocumento("Login | Pindorama");
 
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [senha, setSenha] = useState('')
+  const [erroMensagem, setErroMensagem] = useState('');
+  const [erroSenha, setErroSenha] = useState('');
+
 
   const { data, loading, error, login } = useLogin();
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    try{
-      await login(senha)
-      window.location.href = "/pagina-inicial-admin";
-    } catch (err){
+    event.preventDefault();
+    try {
+      setErroMensagem(null);
+      await login(senha);
+      window.location.href = "/adm/inicio";
+    } catch (err) {
+      const erroTratado = tratarErro(err);
+      setErroMensagem(erroTratado);
+
+      setTimeout(() => setErroMensagem(null), 3000);
     }
-  }
+  };
+
   return (
     <>
       <div className={styles.containerLogin}>
@@ -37,44 +49,60 @@ function PaginaLogin() {
             </abbr>
           </button>
           <form onSubmit={handleSubmit}>
-          <p className={styles.tituloLogin}>Bem vinda ao Pindorama</p>
-          <p className={styles.word}>Digite sua senha para entrar</p>
+            <p className={styles.tituloLogin}>Bem vinda ao Pindorama</p>
+            <p className={styles.word}>Digite sua senha para entrar</p>
 
-          <div className={styles.sectionSenha}>
-            <label htmlFor="senha"></label>
-            <input
-              className={styles.inputLogin}
-              type={mostrarSenha ? "text" : "password"}
-              id="senha"
-              name="senha"
-              minLength="6"
-              required
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-            />
-            <button
-              type="button"
-              onClick={() => setMostrarSenha(!mostrarSenha)}
-              className={styles.btnMostrarSenha}
-            >
-              {mostrarSenha ? <IoEyeSharp /> : <BsEyeSlashFill />}
-            </button>
+            <div className={styles.sectionSenha}>
+              <label htmlFor="senha"></label>
+              <input
+                className={`${styles.inputLogin} ${erroSenha ? styles.inputErro : ''}`}
+                type={mostrarSenha ? "text" : "password"}
+                id="senha"
+                name="senha"
+                value={senha}
+                onChange={(e) => {
+                  setSenha(e.target.value);
+                  if (!/^.{6,}$/.test(e.target.value)) {
+                    setErroSenha('A senha precisa ter pelo menos 6 caracteres.');
+                  } else {
+                    setErroSenha('');
+                  }
+                }}
+              />
 
-            <button
-              className={styles.btnLogin}
-              // onClick={() => window.location.href = "/pagina-inicial-admin"}
-              type="submit"
-              disabled={loading}
-            >
-              <FaArrowCircleRight className={styles.btnEntrarLogin} />
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                className={styles.btnMostrarSenha}
+              >
+                {mostrarSenha ? <IoEyeSharp /> : <BsEyeSlashFill />}
+              </button>
 
-          {/* Adicionar o componente de carregamento aqui */}
-          {loading && <p>Entrando...</p>}
+              <button
+                className={styles.btnLogin}
+                //onClick={() => window.location.href = "/adm/inicio"}
+                type="submit"
+                disabled={loading}
+              >
+                <FaArrowCircleRight className={styles.btnEntrarLogin} />
+              </button>
+            </div>
 
-          {/* Adicionar componente ou pop-up de erro aqui */}
-          {error && <p> {error} </p>}
+            {/* Adicionar o componente de carregamento aqui */}
+            {loading && <p>Entrando...</p>}
+
+
+            {erroMensagem && (
+              <PopupErro
+                aberto={!!erroMensagem}
+                mensagem={erroMensagem.mensagem}
+                tipo={erroMensagem.tipo}
+              />
+            )}
+
+            {erroSenha && <p className={styles.mensagemErro}>{erroSenha}</p>}
+
+
           </form>
           <div className={styles.resetSenha}>
             <a href="/redefinir-senha">Esqueceu sua senha?</a>
