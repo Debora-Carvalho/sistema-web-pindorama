@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.6); 
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(1px);
   z-index: 99;
   display: flex;
@@ -18,7 +18,7 @@
   .popupBoxErro {
     border-radius: 20px;
     padding: 1rem 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     text-align: center;
     max-width: 400px;
     width: 90%;
@@ -31,10 +31,26 @@
     }
 
     // Tipos de erro
-    &.senha { background-color: var(--primary-100); color: rgb(185, 16, 16); }     
-    &.sessao { background-color: var(--primary-300);; color: white; }       // escolhe oque vier no seu coração
-    &.rede { background-color: var(--primary-300);; color: white; }        // escolhe oque vier no seu coração
-    &.padrao { background-color: var(--primary-100); color: var(--danger); } // escolhe oque vier no seu coração
+    &.senha {
+      background-color: var(--primary-100);
+      color: rgb(185, 16, 16);
+    }
+
+    &.sessao {
+      background-color: var(--primary-300);
+      ;
+      color: white;
+    }
+    &.rede {
+      background-color: var(--primary-300);
+      ;
+      color: white;
+    }
+
+    &.padrao {
+      background-color: var(--primary-100);
+      color: var(--danger);
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import styles from './EditorDeArtigo.module.scss';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-function EditorDeArtigo({ value, onContentChange }){
+function EditorDeArtigo({ value, onContentChange }) {
     const editorRef = useRef(null);
     const { globalTheme } = useContext(ThemeContext);
 
@@ -11,8 +11,17 @@ function EditorDeArtigo({ value, onContentChange }){
         <div className={styles.editorWrapper}>
             <div className={styles.editorContainer}>
                 <Editor
-                    apiKey="m4q23tgp22m5gvy98ggkq2t9apl11rflio4cz1bfnvujqbj6"
-                    onInit={(evt, editor) => editorRef.current = editor}
+                    apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+                    onInit={(evt, editor) => {
+                        // Sua lógica existente para a ref, se precisar dela
+                        editorRef.current = editor;
+
+                        // Adicionamos um pequeno delay para garantir que o CSS foi aplicado
+                        setTimeout(() => {
+                            // Disparamos um evento de 'resize' na janela
+                            window.dispatchEvent(new Event('resize'));
+                        }, 200); // 200ms é um valor geralmente seguro
+                    }}
                     value={value}
                     onEditorChange={(content, editor) => {
                         if (onContentChange) {
@@ -20,14 +29,14 @@ function EditorDeArtigo({ value, onContentChange }){
                         }
                     }}
                     init={{
-                        height: 450,
+                        height: 450, // Use 100% para ser flexível
                         language: 'pt-BR',
                         menubar: false,
                         elementpath: false,
                         branding: false,
                         placeholder: "Digite seu artigo aqui",
-                        content_css: '/editor-styles.css',
                         body_class: globalTheme,
+                        toolbar_mode: 'floating',
                         plugins: [
                             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -38,6 +47,11 @@ function EditorDeArtigo({ value, onContentChange }){
                             'alignright alignjustify | bullist numlist outdent indent | ' +
                             'removeformat | image | link | help',
 
+                        mobile: {
+                            // Força o modo de toolbar 'floating' (com os 3 pontinhos)
+                            // também no modo mobile.
+                            toolbar_mode: 'floating'
+                        }
                     }}
                 />
             </div>
