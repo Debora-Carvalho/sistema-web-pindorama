@@ -1,0 +1,89 @@
+@use "../../../../styles/abstracts/variables" as *;
+
+.card {
+    background: var(--primary-200);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 30rem;
+    height: 20.80rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.cardImagem {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        aspect-ratio: 25 / 9;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 20px 20px 0 0;
+        filter: brightness(60%);
+    }
+}
+
+.cardConteudo {
+    padding: 20px 40px;
+}
+
+.cardTitulo {
+    font-family: $font-family-principal;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-500);
+}
+
+.cardDescricao {
+    font-family: $font-family-texto;
+    font-size: 1rem;
+    color: var(--text-primary);
+    text-align: justify;
+    margin-bottom: 16px;
+}
+
+.btnArtigo, .btnEvento {
+    display: flex;
+    width: 16.125rem;
+    height: 3.375rem;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: $font-family-texto;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: background 0.3s;
+}
+
+.btnArtigo {
+    background: var(--primary-400);
+
+    &:hover {
+        background: var(--primary-300);
+    }
+}
+
+.btnEvento {
+    background: var(--secondary-600);
+
+    &:hover {
+        background: var(--secondary-500);
+    }
+}

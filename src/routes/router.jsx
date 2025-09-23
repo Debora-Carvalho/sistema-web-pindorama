@@ -22,7 +22,8 @@ const AppRoutes = () => {
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
-					{/* Lembrar de colocar aqui as outras rotas de admin */}
+					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
+					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventos />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
