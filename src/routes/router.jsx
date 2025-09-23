@@ -1,29 +1,38 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// ROTAS USUARIO
 import PaginaTeste from "../pages/PaginaTeste/PaginaTeste.jsx";
 import PaginaInicial from "../pages/Usuario/PaginaInicial/PaginaInicial.jsx";
-import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArtigo.jsx";
+import PaginaVisualizarArtigos from "../pages/Usuario/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
+import PaginaVisualizarEventos from "../pages/Usuario/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
+import PaginaVisualizarGaleria from "../pages/Usuario/PaginaVisualizarGaleria/PaginaVisualizarGaleria.jsx";
+
+// ROTAS ADMINISTRADOR
+import AdminLayout from '../layouts/AdminLayout.jsx';
 import PaginaLogin from "../pages/Administrador/PaginaLogin/PaginaLogin.jsx";
 import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/PaginaInicialAdmin.jsx";
-import AdminLayout from '../layouts/AdminLayout.jsx';
-import PaginaVisualizarArtigos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
-import PaginaVisualizarEventos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArtigo.jsx";
+import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
+import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 
 const AppRoutes = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
+				{/* ROTAS USUARIO */}
 				<Route path="/" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
 				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+				<Route path="/visualizar-galeria" element={<PaginaVisualizarGaleria />} />
 
+				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
-					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
-					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
+					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
