@@ -11,7 +11,7 @@ function EditorDeTexto({ value, onContentChange }) {
         <div className={styles.editorWrapper}>
             <div className={styles.editorContainer}>
                 <Editor
-                    apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+                    apiKey={import.meta.env.VITE_TINYMCE_API}
                     onInit={(evt, editor) => {
                         // Sua lógica existente para a ref, se precisar dela
                         editorRef.current = editor;

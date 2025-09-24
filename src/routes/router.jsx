@@ -12,6 +12,7 @@ import AdminLayout from '../layouts/AdminLayout.jsx';
 import PaginaLogin from "../pages/Administrador/PaginaLogin/PaginaLogin.jsx";
 import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/PaginaInicialAdmin.jsx";
 import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArtigo.jsx";
+import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEvento.jsx"
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 
@@ -31,9 +32,9 @@ const AppRoutes = () => {
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
-
 				</Route>
 			</Routes>
 		</BrowserRouter>
