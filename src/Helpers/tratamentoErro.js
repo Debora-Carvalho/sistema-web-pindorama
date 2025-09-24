@@ -1,4 +1,3 @@
-// src/utils/tratarErros.js
 export const tratamentoErro = (erro) => {
   const mensagem = typeof erro === 'string' ? erro : erro?.message || 'Ocorreu um erro. Tente novamente.';
 
