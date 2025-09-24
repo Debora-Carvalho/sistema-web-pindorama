@@ -10,7 +10,7 @@ function GaleriaFotos() {
                     Galeria
                 </h2>
 
-                <Link to="/visualizar-artigos" className={styles.btnVerMais}>
+                <Link to="/visualizar-galeria" className={styles.btnVerMais}>
                     Ver mais
                 </Link>
             </div>

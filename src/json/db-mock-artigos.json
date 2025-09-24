@@ -1,0 +1,50 @@
+[
+    {
+        "id": "1",
+        "tipo": "artigo",
+        "imagem": "https://static.todamateria.com.br/upload/li/te/literatura-de-cordel-og.jpg",
+        "titulo": "A literatura de cordel no dia a dia",
+        "descricao": "A importância de implementar o cordel na educação infantil nas escolas do Brasil",
+        "link": "/visualizar-artigos/1"
+    },
+    {
+        "id": "2",
+        "tipo": "artigo",
+        "imagem": "https://www.educacaoetransformacao.com.br/wp-content/uploads/2019/04/capoeira-BRASIL.jpg",
+        "titulo": "A importância da capoeira",
+        "descricao": "A capoeira une música, dança e luta em uma manifestação cultural afro-brasileira",
+        "link": "/visualizar-artigos/2"
+    },
+    {
+        "id": "3",
+        "tipo": "artigo",
+        "imagem": "https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/samba-drums_ver_1.jpeg",
+        "titulo": "Voz do povo brasileiro",
+        "descricao": "Conheça a história do samba, suas origens e seu papel como símbolo musical do Brasil",
+        "link": "/visualizar-artigos/3"
+    },
+    {
+        "id": "4",
+        "tipo": "artigo",
+        "imagem": "https://th.bing.com/th/id/R.54cfef1c421ee9b1506eae6971778fde?rik=CNoeyPKZzxyiFg&riu=http%3a%2f%2fwww.olharturistico.com.br%2fwp-content%2fuploads%2f2018%2f01%2fQueijos-Mineiros.jpg&ehk=oFXdRdm8DZBqYd0gOoonbFLL%2b%2bDFN%2bKX%2b7B0MmKatkw%3d&risl=&pid=ImgRaw&r=0",
+        "titulo": "Queijo Minas artesanal",
+        "descricao": "Saiba mais sobre o tradicional queijo minas artesanal, receita de gerações",
+        "link": "/visualizar-artigos/4"
+    },
+    {
+        "id": "5",
+        "tipo": "artigo",
+        "imagem": "https://i.pinimg.com/originals/ae/75/bb/ae75bb989466498589f4faa1e3e5b426.jpg",
+        "titulo": "A Língua Tupi",
+        "descricao": "Explore a influência da Língua Tupi no Brasil, preservação da memória dos povos originários",
+        "link": "/visualizar-artigos/5"
+    },
+    {
+        "id": "6",
+        "tipo": "artigo",
+        "imagem": "https://static.todamateria.com.br/upload/li/te/literatura-de-cordel-og.jpg",
+        "titulo": "A literatura de cordel no dia a dia",
+        "descricao": "A importância de implementar o cordel na educação infantil nas escolas do Brasil",
+        "link": "/visualizar-artigos/6"
+    }
+]

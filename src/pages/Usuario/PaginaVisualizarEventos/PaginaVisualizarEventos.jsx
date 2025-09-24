@@ -3,6 +3,9 @@ import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 
+import eventos from "../../../json/db-mock-eventos.json";
+import ListaCards from "../../../components/ListaCards/ListaCards.jsx";
+
 function PaginaVisualizarEventos() {
     useTituloDocumento("Eventos | Pindorama"); // mudando o Title da pagina
 
@@ -12,7 +15,9 @@ function PaginaVisualizarEventos() {
                 <Header />
 
                 <main className={styles.containerItems}>
-                    cards de Eventos
+                    <h2>Eventos</h2>
+                    
+                    <ListaCards cards={eventos} limite={null} />
                 </main>
 
                 <Footer />

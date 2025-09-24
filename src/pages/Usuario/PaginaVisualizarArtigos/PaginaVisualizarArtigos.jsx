@@ -3,6 +3,9 @@ import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 
+import artigos from "../../../json/db-mock-artigos.json";
+import ListaCards from "../../../components/ListaCards/ListaCards.jsx";
+
 function PaginaVisualizarArtigos() {
     useTituloDocumento("Artigos | Pindorama"); // mudando o Title da pagina
 
@@ -12,7 +15,9 @@ function PaginaVisualizarArtigos() {
                 <Header />
 
                 <main className={styles.containerItems}>
-                    cards de artigos
+                    <h2>Artigos</h2>
+                    
+                    <ListaCards cards={artigos} limite={null} />
                 </main>
 
                 <Footer />
