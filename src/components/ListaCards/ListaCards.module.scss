@@ -1,9 +1,36 @@
 .gridCards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);    
-    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
     justify-items: center;
-    justify-content: start;
     gap: 2rem;
     margin: 2rem;
+}
+
+
+// RESPONSIVIDADE --------------------
+/* --- Até 1080px --- */
+@media (max-width: 1080px) {
+    .gridCards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* --- Até 720px --- */
+@media (max-width: 720px) {
+    .gridCards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 1.5rem;
+    }
+}
+
+/* --- Até 480px --- */
+@media (max-width: 480px) {
+    .gridCards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem;
+    }
 }

@@ -10,8 +10,13 @@ function FooterCopy() {
 			</p>
 
 			<div className={styles.linksFooterCopy}>
-				<Link className={styles.itemLinkFooterCopy}>Políticas de privacidade</Link>
-				<Link className={styles.itemLinkFooterCopy}>Termos de uso</Link>
+				<Link className={styles.itemLinkFooterCopy}>
+					Políticas de privacidade
+				</Link>
+
+				<Link className={styles.itemLinkFooterCopy}>
+					Termos de uso
+				</Link>
 			</div>
 		</div>
 	);

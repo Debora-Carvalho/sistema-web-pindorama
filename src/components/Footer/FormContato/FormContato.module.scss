@@ -10,6 +10,8 @@
 	h2 {
 		font-family: $font-family-texto;
 		color: var(--text-secondary);
+		font-size: 2rem;
+		text-align: start;
 	}
 
 	.groupInput {
@@ -30,6 +32,7 @@
 
 		label {
 			color: var(--text-secondary);
+			margin-bottom: 5px;
 		}
 
 		input,
@@ -45,5 +48,67 @@
 		color: var(--text-secondary);
 		border-radius: 20px;
 		height: 40px;
+		font-family: $font-family-texto;
+		font-weight: 600;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background 0.3s;
+
+		&:hover {
+			background-color: var(--primary-400);
+		}
+	}
+
+	/* --- RESPONSIVIDADE --- */
+	/* --- Até 1080px --- */
+	@media (max-width: 1080px) {
+		.groupInput {
+			gap: 15px;
+		}
+
+		h2 {
+			font-size: 1.8rem;
+		}
+	}
+
+	/* --- Até 720px --- */
+	@media (max-width: 720px) {
+		.groupInput {
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		input,
+		textarea {
+			width: 100%;
+		}
+
+		.btnFormContato {
+			width: 100%;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+		}
+	}
+
+	/* --- Até 480px --- */
+	@media (max-width: 480px) {
+		padding: 10px 0;
+		gap: 8px;
+
+		h2 {
+			font-size: 1.3rem;
+		}
+
+		input,
+		textarea {
+			padding: 8px;
+		}
+
+		.btnFormContato {
+			height: 35px;
+			font-size: 0.9rem;
+		}
 	}
 }
