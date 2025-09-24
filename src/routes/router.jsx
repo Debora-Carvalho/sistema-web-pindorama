@@ -8,6 +8,7 @@ import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/Pagina
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import PaginaVisualizarArtigos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEvento.jsx";
 
 const AppRoutes = () => {
 	return (
@@ -16,14 +17,14 @@ const AppRoutes = () => {
 				<Route path="/" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
-				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
-				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
 
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+					{/* Lembrar de colocar aqui todas as rotas de admin, pelo menos as que vão usar a navbar */}
 				</Route>
 			</Routes>
 		</BrowserRouter>
