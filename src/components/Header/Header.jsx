@@ -98,7 +98,7 @@ function Header() {
 						</button>
 
 						<div>
-							<CgSearch className={styles.btnSearch} />
+							{/* <CgSearch className={styles.btnSearch} /> */}
 						</div>
 					</div>
 				</div>
