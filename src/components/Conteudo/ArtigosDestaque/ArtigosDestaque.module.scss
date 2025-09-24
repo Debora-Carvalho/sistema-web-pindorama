@@ -68,6 +68,10 @@
 
             .btnVerMais {
                 font-size: 1.2rem;
+                background-color: var(--secondary-500);
+                color: var(--text-secondary);
+                border-radius: 20px;
+                padding: 10px;
             }
         }
     }

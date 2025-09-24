@@ -8,7 +8,7 @@ function GaleriaFotos() {
         <div className={styles.container}>
             <div className={styles.containerTopo}>
                 <h2>
-                    Galeria
+                    Galeria de fotos
                 </h2>
 
                 <Link to="/galeria" className={styles.btnVerMais}>
