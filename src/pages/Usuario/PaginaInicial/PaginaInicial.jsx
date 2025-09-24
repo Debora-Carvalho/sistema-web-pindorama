@@ -4,9 +4,10 @@ import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import BannerPrincipal from '../../../components/BannerPrincipal/BannerPrincipal.jsx';
 import Agenda from '../../../components/Agenda/Agenda.jsx';
-import ArtigosDestaque from '../../../components/ArtigosDestaque/ArtigosDestaque.jsx';
+import ArtigosDestaque from '../../../components/Conteudo/ArtigosDestaque/ArtigosDestaque.jsx';
 import EventosDestaque from '../../../components/EventosDestaque/EventosDestaque.jsx';
-import ProximosEventos from '../../../components/ProximosEventos/ProximosEventos.jsx';
+import ProximosEventos from '../../../components/Conteudo/ProximosEventos/ProximosEventos.jsx';
+import GaleriaFotos from '../../../components/Conteudo/GaleriaFotos/GaleriaFotos.jsx';
 
 function PaginaInicial() {
 	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
@@ -35,6 +36,10 @@ function PaginaInicial() {
 
 					<section>
 						<ProximosEventos />
+					</section>
+
+					<section>
+						<GaleriaFotos />
 					</section>
 				</main>
 

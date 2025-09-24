@@ -1,6 +1,9 @@
 import styles from "./ArtigosDestaque.module.scss";
-import BlocoArtigosDestaque from "./BlocoArtigosDestaque/BlocoArtigosDestaque.jsx";
+
 import { Link } from "react-router-dom";
+
+import artigos from "../../../json/db-mock-artigos.json";
+import ListaCards from "../../ListaCards/ListaCards.jsx";
 
 function ArtigosDestaque() {
     return (
@@ -15,7 +18,7 @@ function ArtigosDestaque() {
                 </Link>
             </div>
 
-            <BlocoArtigosDestaque />
+            <ListaCards cards={artigos} limite={3} />
         </div>
     );
 };
