@@ -70,17 +70,17 @@ function Header() {
 						</button>
 
 						<button
-							className={`${styles['headerBtn']} ${location.pathname === '/mapa' ? styles.active : ''}`}
-							onClick={() => handleClick('mapa')}
-						>
-							Mapa
-						</button>
-
-						<button
 							className={`${styles['headerBtn']} ${location.pathname === '/galeria' ? styles.active : ''}`}
 							onClick={() => handleClick('galeria')}
 						>
 							Galeria
+						</button>
+
+						<button
+							className={`${styles['headerBtn']} ${location.pathname === '/mapa' ? styles.active : ''}`}
+							onClick={() => handleClick('mapa')}
+						>
+							Mapa
 						</button>
 
 						<button
