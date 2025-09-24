@@ -7,7 +7,7 @@ import Agenda from '../../../components/Agenda/Agenda.jsx';
 import ArtigosDestaque from '../../../components/Conteudo/ArtigosDestaque/ArtigosDestaque.jsx';
 import EventosDestaque from '../../../components/EventosDestaque/EventosDestaque.jsx';
 import ProximosEventos from '../../../components/Conteudo/ProximosEventos/ProximosEventos.jsx';
-import GaleriaFotos from '../../../components/GaleriaFotos/GaleriaFotos.jsx';
+import GaleriaFotos from '../../../components/Conteudo/GaleriaFotos/GaleriaFotos.jsx';
 
 function PaginaInicial() {
 	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina

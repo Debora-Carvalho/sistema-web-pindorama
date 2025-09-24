@@ -1,6 +1,7 @@
 import styles from "./GaleriaFotos.module.scss";
-import BlocoGaleriaFotos from "./BlocoGaleriaFotos/BlocoGaleriaFotos.jsx";
 import { Link } from "react-router-dom";
+
+import ListaImagens from "../../ListaImagens/ListaImagens.jsx";
 
 function GaleriaFotos() {
     return (
@@ -15,7 +16,8 @@ function GaleriaFotos() {
                 </Link>
             </div>
 
-            <BlocoGaleriaFotos />
+            <ListaImagens limite={4} />
+
         </div>
     );
 };
