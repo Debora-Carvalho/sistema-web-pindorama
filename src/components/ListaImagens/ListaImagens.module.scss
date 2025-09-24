@@ -1,0 +1,23 @@
+.gradeGaleria {
+  column-count: 4;
+  column-gap: 16px;
+  padding: 16px;
+}
+
+@media (max-width: 1200px) {
+  .gradeGaleria {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 800px) {
+  .gradeGaleria {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .gradeGaleria {
+    column-count: 1;
+  }
+}

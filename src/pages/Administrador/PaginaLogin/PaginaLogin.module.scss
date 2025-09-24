@@ -5,15 +5,15 @@
   grid-template-columns: 6fr 4fr;
   width: 100%;
   min-height: 100vh;
-  background-color: #DFD4B8;
+  background-color: var(--primary-100);
   overflow: hidden;
 }
 
 .doguinho {
   width: 100%;
   height: 100%;
-  max-height: 46.2em;
-  object-fit: inherit;
+  max-height: 40.4em;
+  object-fit: fill;
 }
 
 .columDoguinho,
@@ -35,12 +35,13 @@
 }
 
 .tituloLogin {
-  font-size: clamp(28px, 4vw, 50px);
-  color: #783d19;
+  font-size: 50px;
+  color: var(--primary-400);
   font-weight: bold;
   max-width: 80%;
   word-wrap: break-word;
   font-family: $font-family-principal;
+  margin-left: 50px;
 }
 
 .inputLogin {
@@ -52,7 +53,6 @@
   border-radius: 10px;
   height: 40px;
   margin-left: 30px;
-  min-width: 0;
 }
 
 .word {
@@ -82,7 +82,7 @@
   transform: translateY(-50%);
   align-items: center;
   justify-content: center;
-  color: var(secondary-500);
+  color: var(--neutral-primary);
   font-size: 18px;
   cursor: pointer;
 }
@@ -102,11 +102,20 @@
 }
 
 .resetSenha {
-  margin-top: 2em;
+  margin-top: 1em;
   font-size: 20px;
   font-family: $font-family-subtitulo;
   font-weight: 400;
-  font-style: inherit
+  font-style: inherit;
+  color: var(--text-principal);
+  transition: color 0.5s ease, background-color 0.5s ease;
+  text-decoration: none;
+}
+
+.resetSenha:hover {
+  color: #783d19;
+  background-color: var(--background-primary);
+  border-radius: 3px;
 }
 
 .btnVoltarInicial {
@@ -116,16 +125,122 @@
   width: 60px;
   height: 60px;
   cursor: pointer;
-}
-
-.linkRedefinir {
   color: black;
-  transition: color 0.5s ease, background-color 0.5s ease;
-  text-decoration: none;
 }
 
-.linkRedefinir:hover {
-  color: #783d19;
-  background-color: var(--background-primary);
-  border-radius: 3px;
+/*ERRO*/
+.inputErro {
+  border-color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.mensagemErro {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+
+//RESPONSIVIDADE//
+
+/* --- Até 1080px --- */
+@media (max-width: 1080px) {
+  .containerLogin {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .doguinho {
+    object-fit: cover;
+  }
+
+  .tituloLogin {
+    font-size: 40px;
+  }
+
+  .inputLogin {
+    max-width: 300px;
+  }
+
+  .resetSenha {
+    font-size: 18px;
+  }
+}
+
+/* até 720px */
+@media (max-width: 720px) {
+  .containerLogin {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+
+  .columDoguinho {
+    display: none;
+  }
+
+  .columForm {
+    width: 100%;
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+      url('../../../assets/images/CachorroPaginaLogin.png') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .tituloLogin,
+  .word,
+  .inputLogin,
+  .btnLogin,
+  .btnVoltarInicial,
+  .resetSenha {
+    position: relative;
+    z-index: 2;
+    color: white;
+  }
+
+  .tituloLogin {
+    color: var(--highlight);
+    font-size: 40px;
+  }
+
+  .btnMostrarSenha {
+    color: white;
+    z-index: 2;
+  }
+
+  .btnVoltarInicial {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+}
+
+/* até 480px */
+@media (max-width: 480px) {
+  .columForm {
+    padding: 1rem;
+    background-position: top;
+    background-size: fill;
+  }
+
+  .tituloLogin {
+    font-size: 40px;
+  }
+
+  .word,
+  .resetSenha {
+    font-size: 25px;
+  }
+
+  .inputLogin {
+    font-size: 20px;
+    height: 40px;
+  }
 }

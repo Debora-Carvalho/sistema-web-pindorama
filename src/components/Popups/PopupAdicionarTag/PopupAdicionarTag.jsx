@@ -147,6 +147,7 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
                     </button>
 
                     <button
+                        type="button"
                         className={styles.btnConfirmar}
                         onClick={handleConfirmar}
                     >

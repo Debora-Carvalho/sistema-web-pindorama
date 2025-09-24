@@ -14,7 +14,7 @@
     align-items: center;
     text-align: center;
     font-family: $font-family-subtitulo;
-
+    
     .popupBoxConfirmar {
         background-color: var(--primary-100);
         border-radius: 20px;
@@ -23,19 +23,19 @@
         text-align: center;
         max-width: 400px;
         width: 90%;
-
+        
         p {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
         }
-
+        
         .popupActions {
             margin-top: 15px;
             display: flex;
             justify-content: space-between;
             gap: 10px;
         }
-
+        
         .btnConfirmar, .btnCancelar {
             border: none;
             border-radius: 30px;
@@ -46,21 +46,21 @@
             transition: 0.3s;
             width: 100%;
         }
-
+        
         .btnConfirmar {
             background-color: var(--success);
             color: var(--text-secondary);
         }
-
+        
         .btnConfirmar:hover {
             background-color: var(--secondary-500);
         }
-
+        
         .btnCancelar {
-            background-color: var(--primary-900);
+            background-color: var(--danger);
             color: var(--text-secondary);
         }
-
+        
         .btnCancelar:hover {
             background-color: var(--primary-500);
         }

@@ -1,5 +1,11 @@
 @use "../../styles/abstracts/variables" as *;
 
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .containerHeaderPrincipal {
 	display: flex;
 	flex-direction: row;
@@ -39,7 +45,13 @@
 }
 
 .active {
-	background: var(--primary-200);
+	background: var(--primary-300);
 	border-radius: 20px;
 	padding: 10px 20px;
+}
+
+.btnSearch {
+	font-size: 2.5rem;
+	color: var(--text-secondary);
+	cursor: pointer;
 }

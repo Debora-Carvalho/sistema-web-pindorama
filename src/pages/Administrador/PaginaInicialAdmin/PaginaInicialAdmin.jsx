@@ -59,15 +59,6 @@ function PaginaInicialAdmin() {
                     </div>
 
                 </div>
-
-                <section className={styles.secaoArtigos}>
-                    <div className={styles.secaoHeader}>
-                        <h2>Seus últimos artigos</h2>
-                        <Link to="/todos-os-artigos" className={styles.verTodosBotao}>
-                            <FaArrowRight />
-                        </Link>
-                    </div>
-                </section>
             </main>
         </>
     )

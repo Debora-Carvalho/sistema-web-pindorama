@@ -1,0 +1,76 @@
+.popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.popupAberto{
+  background-color: var(--primary-100);
+  padding: 2rem;
+  border: 2px solid var(--primary-500);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.popupHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--primary-500);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+
+  h2{
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-500);
+  }
+}
+
+.btnFechar{
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary-500);
+}
+
+.popupBusca input{
+  background-color: var(--background-primary);
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary-500);
+  margin-bottom: 1rem;
+}
+
+.popupLista{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+
+  li{
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover{
+      background-color: var(--primary-300);
+    }
+  }
+}

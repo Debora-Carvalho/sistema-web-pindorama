@@ -1,0 +1,92 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.popupBox {
+  background: var(--background-primary);
+  padding: 2rem;
+  border: 2px solid var(--primary-500);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-500);
+
+  h2 {
+    color: var(--primary-700);
+    font-family: $font-family-subtitulo;
+    margin: 0;
+  }
+}
+
+.btnClose {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary-500);
+}
+
+.popupContent {
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-family: $font-family-subtitulo;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--primary-500);
+  }
+}
+
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.mensagemErro {
+  color: var(--danger);
+  font-family: $font-family-subtitulo;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btnCancelar {
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: var(--danger);
+  color: var(--text-secondary);
+}
+
+.btnConfirmar{
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: var(--success);
+  color: var(--text-secondary);
+}

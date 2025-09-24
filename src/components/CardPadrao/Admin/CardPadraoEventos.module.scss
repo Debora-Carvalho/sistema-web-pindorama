@@ -1,0 +1,203 @@
+@use "../../../styles/abstracts/variables.scss" as *;
+
+.containerVisualizar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+
+.cardGeral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-500);
+  border-radius: 30px;
+  width: 20em;
+  height: 14em;
+  margin: 5px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.cardInfos {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8em;
+}
+
+.cardTitulo {
+  font-family: $font-family-principal;
+  font-size: 1.5em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.btnCompleto {
+  background-color: var(--primary-200);
+  color: var(--primary-400);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-family: var(--font-family-subtitulo);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.iconeMenu {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: white;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.opcoesMenu {
+  display: grid;
+  position: absolute;
+  background: rgba(245, 182, 47, 0.9);
+  list-style: none;
+  padding: 5px;
+  gap: 10px;
+  top: 2.5em;
+  left: 17em;
+  border-radius: 8px;
+  min-width: 130px;
+  z-index: 20;
+}
+
+.btnEditar,
+.btnDestacar,
+.btnExcluir {
+  width: 100%;
+  background: var(--primary-200);
+  border-radius: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background: var(--secondary-600);
+    color: var(--text-secondary);
+  }
+}
+
+.iconOptions {
+  position: relative;
+  bottom: 20px;
+  left: 9px;
+  font-size: 1em;
+}
+
+.imgCard {
+  width: 100%;
+  aspect-ratio: 25 / 9;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+  filter: brightness(50%);
+}
+
+/* --- RESPONSIVIDADE --- */
+
+/* Até 1080px */
+@media (max-width: 1080px) {
+  .containerVisualizar {
+    width: 1px;
+    right: 20px;
+    position: relative;
+  }
+
+  .cardGeral {
+    width: 18em;
+    height: 13em;
+  }
+
+  .cardTitulo {
+    font-size: 1.4em;
+  }
+
+  .btnCompleto {
+    padding: 0.4em 0.8em;
+  }
+
+  .opcoesMenu {
+    left: 16.5em;
+  }
+}
+
+/* Até 720px: 2 colunas */
+@media (max-width: 720px) {
+  .containerVisualizar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 100px;
+  }
+
+  .cardGeral {
+    width: 16em;
+    height: 12em;
+  }
+
+  .cardTitulo {
+    font-size: 1.2em;
+  }
+
+  .btnCompleto {
+    padding: 0.3em 0.6em;
+    font-size: 0.9em;
+  }
+
+  .opcoesMenu {
+    left: 14.5em;
+  }
+}
+
+/* Até 480px: 1 coluna */
+@media (max-width: 480px) {
+  .containerVisualizar {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cardGeral {
+   max-width: 15em;
+    height: 10em;
+  }
+
+  .cardTitulo {
+    font-size: 1.2em;
+  }
+
+  .btnCompleto {
+    padding: 0.25em 0.5em;
+  }
+
+  .opcoesMenu {
+    left: auto;
+    right: 0;
+    min-width: 120px;
+  }
+
+  .btnEditar,
+  .btnDestacar,
+  .btnExcluir {
+    width: 100%;
+    height: 28px;
+  }
+
+  .cardInfos {
+    padding: 0.7em;
+    gap: 0.5em;
+  }
+}

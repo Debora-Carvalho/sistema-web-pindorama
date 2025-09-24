@@ -1,0 +1,36 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    gap: 1.5rem;
+
+    background-color: var(--primary-200);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    
+    .btnTodosEventos {
+        display: flex;
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 10px 0;
+
+        background-color: var(--secondary-600);
+        font-family: $font-family-texto;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--secondary-500);
+        }
+    }
+}
