@@ -20,6 +20,9 @@ function Header() {
 		if (section === 'eventos') {
 			navigate('/visualizar-eventos');
 		}
+		if (section === 'galeria') {
+			navigate('/galeria');
+		}
 		if (section === 'mapa') {
 			navigate('/mapa');
 		}
@@ -71,6 +74,13 @@ function Header() {
 							onClick={() => handleClick('mapa')}
 						>
 							Mapa
+						</button>
+
+						<button
+							className={`${styles['headerBtn']} ${location.pathname === '/galeria' ? styles.active : ''}`}
+							onClick={() => handleClick('galeria')}
+						>
+							Galeria
 						</button>
 
 						<button

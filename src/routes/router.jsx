@@ -25,7 +25,7 @@ const AppRoutes = () => {
 				<Route path="/login" element={<PaginaLogin />} />
 				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
-				<Route path="/visualizar-galeria" element={<PaginaVisualizarGaleria />} />
+				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 
 				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<AdminLayout />}>
