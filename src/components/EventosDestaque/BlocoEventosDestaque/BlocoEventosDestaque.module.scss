@@ -13,7 +13,6 @@
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
-    
     .btnTodosEventos {
         display: flex;
         width: 50%;
@@ -31,6 +30,49 @@
 
         &:hover {
             background-color: var(--secondary-500);
+        }
+    }
+}
+
+/* --- RESPONSIVIDADE --- */
+/* --- Até 1080px --- */
+@media (max-width: 1080px) {
+    .container {
+        padding: 1rem;
+        gap: 1rem;
+
+        .btnTodosEventos {
+            width: 60%;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+/* --- Até 720px --- */
+@media (max-width: 720px) {
+    .container {
+        padding: 0.8rem;
+        border-radius: 15px;
+
+        .btnTodosEventos {
+            width: 80%;
+            font-size: 1rem;
+            padding: 8px 0;
+        }
+    }
+}
+
+/* --- Até 480px --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.6rem;
+        gap: 0.8rem;
+        border-radius: 12px;
+
+        .btnTodosEventos {
+            width: 100%;
+            font-size: 0.95rem;
+            padding: 7px 0;
         }
     }
 }

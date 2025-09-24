@@ -3,24 +3,105 @@
 .container {
     display: flex;
     flex-direction: column;
+    align-items: start; 
     gap: 10px;
+    position: relative;
 
     h2 {
         font-family: $font-family-texto;
         font-size: 3rem;
         color: var(--text-primary);
+        text-align: start;
     }
 
     .iconCactoApoio {
         width: 350px;
         height: 350px;
         margin-top: -250px;
-        margin-left: -80px;
+        margin-left: -60px;
     }
 
     .lineIconCactoApoio {
         border-top: 1px solid #000000;
         width: 60%;
         margin-left: -80px;
+    }
+}
+
+/* --- Responsividade --- */
+/* Até 1300px */
+@media (max-width: 1080px) {
+    .container {
+        .iconCactoApoio {
+            width: 190px;
+            height: 190px;
+            margin-left: -60px;
+        }
+    }
+}
+
+/* Até 1080px */
+@media (max-width: 1080px) {
+    .container {
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        .iconCactoApoio {
+            width: 180px;
+            height: 180px;
+            margin-top: -200px;
+            margin-left: -40px;
+        }
+
+        .lineIconCactoApoio {
+            width: 70%;
+            margin-left: -40px;
+        }
+    }
+}
+
+/* Até 720px */
+@media (max-width: 720px) {
+    .container {
+        h2 {
+            font-size: 2rem;
+        }
+
+        .iconCactoApoio {
+            width: 200px;
+            height: 200px;
+            margin-top: -120px;
+            margin-left: 0;
+        }
+
+        .lineIconCactoApoio {
+            width: 80%;
+            margin-left: 0;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+/* Até 480px */
+@media (max-width: 480px) {
+    .container {
+        gap: 5px;
+
+        h2 {
+            font-size: 1.6rem;
+        }
+
+        .iconCactoApoio {
+            width: 150px;
+            height: 150px;
+            margin-top: -90px;
+            margin-left: 0;
+        }
+
+        .lineIconCactoApoio {
+            width: 90%;
+            margin-left: 0;
+        }
     }
 }

@@ -8,6 +8,42 @@
     h2 {
         font-family: $font-family-texto;
         font-size: 3rem;
+        font-weight: 700;
         color: var(--text-primary);
+        text-align: center;
+    }
+}
+
+/* --- RESPONSIVIDADE --- */
+/* --- Até 1080px --- */
+@media (max-width: 1080px) {
+    .container {
+        gap: 8px;
+
+        h2 {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+/* --- Até 720px --- */
+@media (max-width: 720px) {
+    .container {
+        gap: 6px;
+
+        h2 {
+            font-size: 2rem;
+        }
+    }
+}
+
+/* --- Até 480px --- */
+@media (max-width: 480px) {
+    .container {
+        gap: 5px;
+
+        h2 {
+            font-size: 1.6rem;
+        }
     }
 }
