@@ -31,8 +31,6 @@ function PaginaLogin() {
     } catch (err) {
       const erroTratado = tratarErro(err);
       setErroMensagem(erroTratado);
-
-      setTimeout(() => setErroMensagem(null), 3000);
     }
   };
 
@@ -97,6 +95,7 @@ function PaginaLogin() {
                 aberto={!!erroMensagem}
                 mensagem={erroMensagem.mensagem}
                 tipo={erroMensagem.tipo}
+                onClose={() => setErroMensagem(null)}
               />
             )}
 

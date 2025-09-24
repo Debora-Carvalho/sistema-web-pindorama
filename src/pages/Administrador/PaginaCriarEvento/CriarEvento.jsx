@@ -2,31 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import EditorDeTexto from '../../../components/EditorDeTexto/EditorDeTexto.jsx';
-import styles from './CriarArtigo.module.scss';
+import styles from './CriarEvento.module.scss';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCalendarAlt } from 'react-icons/fa';
 import PopupConfirmar from '../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx';
 import PopupSucesso from '../../../components/Popups/PopupSucesso/PopupSucesso.jsx';
 import PopupTagArtigo from "../../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
-import PopupLocal from '../../../components/Popups/PopupLocal/PopupLocal.jsx';
 import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
+import PopupCalendario from '../../../components/Popups/PopupCalendario/PopupCalendario';
+import PopupLocalLink from '../../../components/Popups/PopupLocalLink/PopupLocalLink';
 
-// --- Constantes ---
-const nomeAutora = "Kelly Cristina Marques";
-const mockLocais = [
-    { id: 1, cidade: 'Recife', estado: 'PE' },
-    { id: 2, cidade: 'Salvador', estado: 'BA' },
-    { id: 3, cidade: 'São Paulo', estado: 'SP' },
-    { id: 4, cidade: 'Rio de Janeiro', estado: 'RJ' },
-    { id: 5, cidade: 'Belo Horizonte', estado: 'MG' },
-    { id: 6, cidade: 'Vitória', estado: 'ES' },
-    { id: 7, cidade: 'Palmas', estado: 'TO' },
-];
 
-function PaginaCriarArtigo() {
-    useTituloDocumento("Criar Artigo | Pindorama");
+function PaginaCriarEvento() {
+    useTituloDocumento("Criar Evento | Pindorama");
     const navigate = useNavigate();
 
     // --- Estados do Formulário ---
@@ -34,12 +25,12 @@ function PaginaCriarArtigo() {
     const [conteudo, setConteudo] = useState('');
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
-    const [localSelecionado, setLocalSelecionado] = useState(null);
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
-    const [erroFormulario, setErroFormulario] = useState(null);
+    const [erroFormulario, setErroFormulario] = useState('');
+    const [dataEvento, setDataEvento] = useState(null);
+    const [linkLocal, setLinkLocal] = useState('');
 
     // --- Estados de Controle dos Popups ---
-    const [localModalAberto, setLocalModalAberto] = useState(false);
     const [popupTagAberto, setPopupTagAberto] = useState(false);
     const [popupErroAberto, setPopupErroAberto] = useState(false);
     const [mostrarConfirmacaoExcluir, setMostrarConfirmacaoExcluir] = useState(false);
@@ -47,6 +38,8 @@ function PaginaCriarArtigo() {
     const [mostrarSucesso, setMostrarSucesso] = useState(false);
     const [popupSucessoMensagem, setPopupSucessoMensagem] = useState('');
     const [acaoAposSucesso, setAcaoAposSucesso] = useState(null);
+    const [calendarioAberto, setCalendarioAberto] = useState(false);
+    const [localLinkModalAberto, setLocalLinkModalAberto] = useState(false);
 
     // --- Funções de Handler ---
     const handleEditorChange = (content) => { setConteudo(content); };
@@ -57,18 +50,25 @@ function PaginaCriarArtigo() {
             setPreviewCapa(URL.createObjectURL(file));
         }
     };
-    const handleSelecionarLocal = (local) => {
-        setLocalSelecionado(local);
-        setLocalModalAberto(false);
-    };
+
     const handleConfirmarTags = (tags) => {
         setTagsSelecionadas(tags);
         setPopupTagAberto(false);
     };
 
+    const handleConfirmarData = (data) => {
+        setDataEvento(data);
+        setCalendarioAberto(false);
+    };
+
+    const handleConfirmarLocalLink = (link) => {
+        setLinkLocal(link);
+        setLocalLinkModalAberto(false);
+    };
+
     // --- Lógica de Exclusão ---
     const handleExcluirClick = () => {
-        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !localSelecionado;
+        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0;
         if (formularioEstaVazio) {
             setPopupSucessoMensagem('Não há informações para excluir.');
             setAcaoAposSucesso('permanecer');
@@ -77,18 +77,21 @@ function PaginaCriarArtigo() {
             setMostrarConfirmacaoExcluir(true);
         }
     };
+
     const handleConfirmarExclusao = () => {
         setTitulo('');
         setConteudo('');
         setImagemCapa(null);
         setPreviewCapa('');
-        setLocalSelecionado(null);
         setTagsSelecionadas([]);
+        setDataEvento(null);
+        setLinkLocal('');
         setMostrarConfirmacaoExcluir(false);
         setPopupSucessoMensagem('Informações excluídas com sucesso!');
         setAcaoAposSucesso('permanecer');
         setMostrarSucesso(true);
     };
+
     const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };
 
     // --- Lógica de Envio ---
@@ -106,11 +109,12 @@ function PaginaCriarArtigo() {
             (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') &&
             !imagemCapa &&
             tagsSelecionadas.length === 0 &&
-            !localSelecionado;
+            !dataEvento &&
+            !linkLocal
 
         // Lógica de validação para enviar o treco
         if (formularioEstaVazio) {
-            mostrarErro('Todos os campos precisam ser preenchidos para o envio de um novo artigo.');
+            mostrarErro('Todos os campos precisam ser preenchidos para o envio de um novo evento.');
             return;
         }
         if (!titulo.trim()) {
@@ -118,7 +122,7 @@ function PaginaCriarArtigo() {
             return;
         }
         if (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') {
-            mostrarErro('O conteúdo do artigo não pode estar vazio.');
+            mostrarErro('O conteúdo do evento não pode estar vazio.');
             return;
         }
         if (!imagemCapa) {
@@ -129,38 +133,41 @@ function PaginaCriarArtigo() {
             mostrarErro('Selecione pelo menos uma tag.');
             return;
         }
-        if (!localSelecionado) {
-            mostrarErro('Selecione um local.');
+        if (!dataEvento) {
+            mostrarErro('Por favor, selecione uma data para o evento.');
+            return;
+        }
+        if (!linkLocal) {
+            mostrarErro('Por favor, adicione um link para o local do evento.');
             return;
         }
         setMostrarConfirmacaoEnvio(true);
     };
 
     const executarEnvio = () => {
-        const artigoParaEnviar = { 
-            titulo, 
-            conteudo, 
-            imagemCapa, 
-            autora: nomeAutora, 
-            dataPublicacao: new Date(), 
-            local: localSelecionado, 
-            tags: tagsSelecionadas 
+        const eventoParaEnviar = {
+            titulo,
+            conteudo,
+            imagemCapa,
+            tags: tagsSelecionadas,
+            data: dataEvento,
+            localLink: linkLocal
         };
-        
-        console.log("Artigo pronto para ser enviado:", artigoParaEnviar);
+        console.log("Evento pronto para ser enviado:", eventoParaEnviar);
         setMostrarConfirmacaoEnvio(false);
-        setPopupSucessoMensagem('Artigo enviado com sucesso!');
+        setPopupSucessoMensagem('Evento enviado com sucesso!');
         setAcaoAposSucesso('redirecionar');
         setMostrarSucesso(true);
     };
 
     const handleCancelarEnvio = () => { setMostrarConfirmacaoEnvio(false); };
 
-    // --- Lógica do Popup de Sucesso ---
+    // --- Lógica dos Popups de Erro e Sucesso ---
+    const handleFecharPopupErro = () => { setPopupErroAberto(false); };
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
-            navigate('/adm/visualizar-artigos');
+            navigate('/adm/visualizar-eventos');
         }
         setAcaoAposSucesso(null);
     };
@@ -175,7 +182,7 @@ function PaginaCriarArtigo() {
                 <Link to="/inicio" className={styles.logo}>
                     <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
                 </Link>
-                <h1 className={styles.titulo}>Artigos</h1>
+                <h1 className={styles.titulo}>Eventos</h1>
                 <HeaderAdmin />
             </header>
 
@@ -183,7 +190,7 @@ function PaginaCriarArtigo() {
                 <div className={styles.campoTitulo}>
                     <input
                         type="text"
-                        id="tituloArtigo"
+                        id="tituloEvento"
                         name="titulo"
                         placeholder="Adicione o título aqui"
                         value={titulo}
@@ -199,17 +206,26 @@ function PaginaCriarArtigo() {
                 <div className={styles.campoDropdowns}>
                     <button
                         type='button'
-                        className={styles.selectWrapper}
+                        className={styles.selectWrapperTags}
                         onClick={() => setPopupTagAberto(true)}
                     >
                         <FaTags /> Tags
                     </button>
                     <button
                         type='button'
-                        className={styles.selectWrapper}
-                        onClick={() => setLocalModalAberto(true)}
+                        className={styles.selectWrapperTags}
+                        onClick={() => setCalendarioAberto(true)}
                     >
-                        <FaMapMarkerAlt /> {localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : 'Local'}
+                        <FaCalendarAlt />
+                        {dataEvento ? dataEvento.toLocaleDateString('pt-BR') : 'Data do Evento'}
+                    </button>
+                    <button
+                        type='button'
+                        className={styles.selectWrapperTags}
+                        onClick={() => setLocalLinkModalAberto(true)}
+                    >
+                        <FaMapMarkerAlt />
+                        Local
                     </button>
                 </div>
                 <div className={styles.campoMidia}>
@@ -277,11 +293,18 @@ function PaginaCriarArtigo() {
                 onConfirmar={handleConfirmarTags}
             />
 
-            <PopupLocal
-                aberto={localModalAberto}
-                locais={mockLocais}
-                onClose={() => setLocalModalAberto(false)}
-                onSelect={handleSelecionarLocal}
+            <PopupCalendario
+                aberto={calendarioAberto}
+                onClose={() => setCalendarioAberto(false)}
+                onConfirmar={handleConfirmarData}
+                dataSelecionada={dataEvento}
+            />
+
+            <PopupLocalLink
+                aberto={localLinkModalAberto}
+                onClose={() => setLocalLinkModalAberto(false)}
+                onConfirmar={handleConfirmarLocalLink}
+                linkAtual={linkLocal}
             />
 
             {erroFormulario && (
@@ -296,4 +319,4 @@ function PaginaCriarArtigo() {
     );
 };
 
-export default PaginaCriarArtigo;
+export default PaginaCriarEvento;

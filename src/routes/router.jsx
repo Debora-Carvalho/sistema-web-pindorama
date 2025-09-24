@@ -33,6 +33,7 @@ const AppRoutes = () => {
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
+
 				</Route>
 			</Routes>
 		</BrowserRouter>

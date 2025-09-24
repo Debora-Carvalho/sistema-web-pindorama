@@ -1,0 +1,59 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.popupBox {
+  background: var(--background-primary);
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btnCancelar {
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: var(--danger);
+  color: var(--text-secondary);
+}
+
+.btnConfirmar {
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: var(--success);
+  color: var(--text-secondary);
+}
+
+:global(.react-datepicker) {
+  font-family: $font-family-subtitulo;
+  border: 2px solid var(--primary-500);
+  border-radius: 10px;
+}
+
+:global(.react-datepicker__header) {
+  background-color: var(--primary-200);
+}
+
+:global(.react-datepicker__day--selected) {
+  background-color: var(--secondary-500);
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+  border-color: var(--primary-500);
+}

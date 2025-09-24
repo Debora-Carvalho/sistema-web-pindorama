@@ -1,9 +1,9 @@
 import React, { useRef, useContext } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import styles from './EditorDeArtigo.module.scss';
+import styles from './EditorDeTexto.module.scss';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-function EditorDeArtigo({ value, onContentChange }) {
+function EditorDeTexto({ value, onContentChange }) {
     const editorRef = useRef(null);
     const { globalTheme } = useContext(ThemeContext);
 
@@ -34,7 +34,7 @@ function EditorDeArtigo({ value, onContentChange }) {
                         menubar: false,
                         elementpath: false,
                         branding: false,
-                        placeholder: "Digite seu artigo aqui",
+                        placeholder: "Digite seu texto aqui",
                         body_class: globalTheme,
                         toolbar_mode: 'floating',
                         plugins: [
@@ -48,8 +48,6 @@ function EditorDeArtigo({ value, onContentChange }) {
                             'removeformat | image | link | help',
 
                         mobile: {
-                            // Força o modo de toolbar 'floating' (com os 3 pontinhos)
-                            // também no modo mobile.
                             toolbar_mode: 'floating'
                         }
                     }}
@@ -59,4 +57,4 @@ function EditorDeArtigo({ value, onContentChange }) {
     );
 };
 
-export default EditorDeArtigo;
+export default EditorDeTexto;
