@@ -31,3 +31,64 @@
         }
     }
 }
+
+/* --- RESPONSIVIDADE --- */
+/* --- Até 1080px --- */
+@media (max-width: 1080px) {
+    .container {
+        padding: 30px 15px;
+
+        .containerTopo {
+            padding: 15px;
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .btnVerMais {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+/* --- Até 720px --- */
+@media (max-width: 720px) {
+    .container {
+        padding: 25px 10px;
+
+        .containerTopo {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .btnVerMais {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+/* --- Até 480px --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 10px;
+
+        .containerTopo {
+            align-items: center;
+            text-align: center;
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .btnVerMais {
+                font-size: 1rem;
+            }
+        }
+    }
+}
