@@ -8,16 +8,18 @@ import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/Pagina
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import PaginaVisualizarArtigos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventos from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaCarrossel from "../pages/Usuario/PaginaCarrossel/PaginaCarrossel.jsx";
 
 const AppRoutes = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<PaginaTeste />} />
+				<Route path="/pagina-teste" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
 				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
 				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+				<Route path="/" element={<PaginaCarrossel />} />
 
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />

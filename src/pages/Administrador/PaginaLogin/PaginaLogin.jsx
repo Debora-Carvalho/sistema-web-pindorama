@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useLogin } from '../../../hooks/login/useLogin.js'
 import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
+import Carregando from '../../../components/Carregando/Carregando.jsx';
 
 
 function PaginaLogin() {
@@ -86,8 +87,11 @@ function PaginaLogin() {
               </button>
             </div>
 
-            {/* Adicionar o componente de carregamento aqui */}
-            {loading && <p>Entrando...</p>}
+            {loading && (
+              <div className={styles.loaderOverlay}>
+                <Carregando />
+              </div>
+            )}
 
 
             {erroMensagem && (

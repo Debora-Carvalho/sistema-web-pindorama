@@ -50,7 +50,7 @@
 }
 
 .cardDescricao {
-    font-family: $font-family-texto;
+    font-family: $font-family-subtitulo;
     font-size: 1rem;
     color: var(--text-primary);
     text-align: justify;
@@ -65,7 +65,7 @@
     justify-content: center;
     padding: 8px 16px;
     border-radius: 20px;
-    font-family: $font-family-texto;
+    font-family: $font-family-subtitulo;
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-secondary);
