@@ -55,3 +55,26 @@
 	color: var(--text-secondary);
 	cursor: pointer;
 }
+
+.navbarLateral {
+	display: none;
+}
+
+
+/* --- Até 880px --- */
+@media (max-width: 880px) {
+	.logoHeaderPrincipal {
+		.logo {
+			width: 120px;
+			height: auto;
+		}
+	}
+
+	.headerPrincipalItems {
+		display: none;
+	}
+
+	.navbarLateral {
+		display: flex;
+	}
+}

@@ -96,10 +96,10 @@ function Header() {
 						>
 							Sobre mim
 						</button>
+					</div>
 
-						<div>
-							<Navbar />
-						</div>
+					<div className={styles.navbarLateral}>
+						<Navbar />
 					</div>
 				</div>
 			</div>
