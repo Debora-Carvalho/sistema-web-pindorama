@@ -41,8 +41,7 @@ const EmblaCarousel = ({ slides, options }) => {
         <div className={styles.embla__container}>
           {slides.map((slide, index) => (
             <div className={styles.embla__slide} key={index}>
-              <img src={slide.imagem} alt={slide.titulo} className={styles.slide__bg} />
-
+                <img src={slide.imagem} alt={slide.titulo} className={styles.slide__bg} />
               <div className={styles.slide__content}>
                 <motion.h2
                   key={`title-${index}-${selectedIndex}`}
@@ -75,7 +74,6 @@ const EmblaCarousel = ({ slides, options }) => {
         </div>
       </div>
 
-      {/* Controles */}
       <div className={styles.embla__controls}>
         <div className={styles.embla__buttons}>
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
