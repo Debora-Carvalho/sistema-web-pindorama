@@ -19,12 +19,12 @@ function PopupCriar({ aberto, onFechar }) {
 
                 <p>O que deseja criar?</p>
                 <div className={styles.popupActions}>
-                    <Link to="/artigos">
+                    <Link to="/adm/criar-artigo">
                         <button className={styles.btnLinkArtigos}>
                             Artigos
                         </button>
                     </Link>
-                    <Link to="/eventos">
+                    <Link to="/adm/criar-evento">
                         <button className={styles.btnLinkEventos}>
                             Eventos
                         </button>

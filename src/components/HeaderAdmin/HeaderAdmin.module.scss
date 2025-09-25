@@ -80,3 +80,15 @@
 .label {
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 8px 12px !important; 
+    
+    gap: 10px !important;
+  }
+
+  .navList {
+    gap: 10px !important;
+  }
+}
