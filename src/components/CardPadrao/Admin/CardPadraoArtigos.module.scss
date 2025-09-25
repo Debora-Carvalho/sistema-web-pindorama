@@ -1,11 +1,10 @@
 @use "../../../styles/abstracts/variables.scss" as *;
 
 .containerVisualizar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: center;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .cardGeral {
@@ -139,9 +138,10 @@
 /* Até 720px: 2 colunas */
 @media (max-width: 720px) {
   .containerVisualizar {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    max-width: 100px;
+    gap: 20px;
+    justify-items: baseline;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .cardGeral {
@@ -171,7 +171,7 @@
   }
 
   .cardGeral {
-   max-width: 15em;
+    max-width: 15em;
     height: 10em;
   }
 

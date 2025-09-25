@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion';
 
 // ROTAS USUARIO
 import PaginaTeste from "../pages/PaginaTeste/PaginaTeste.jsx";
@@ -16,9 +17,12 @@ import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEve
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 
-const AppRoutes = () => {
+const AnimatedRoutes = () => {
+	const location = useLocation();
+
 	return (
-		<BrowserRouter>
+
+		<AnimatePresence mode="wait">
 			<Routes>
 				{/* ROTAS USUARIO */}
 				<Route path="/" element={<PaginaTeste />} />
@@ -37,6 +41,15 @@ const AppRoutes = () => {
 					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
 				</Route>
 			</Routes>
+		</AnimatePresence>
+
+	);
+}
+
+const AppRoutes = () => {
+	return (
+		<BrowserRouter>
+			<AnimatedRoutes />
 		</BrowserRouter>
 	);
 }

@@ -1,5 +1,9 @@
 @use "../../../styles/abstracts/variables" as *;
 
+body{
+    background-color: var(--background-primary);
+}
+
 .base {
     padding: 1rem 5%;
     padding-top: 0%;

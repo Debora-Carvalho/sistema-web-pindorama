@@ -114,15 +114,15 @@ function PaginaCriarArtigo() {
             return;
         }
         if (!titulo.trim()) {
-            mostrarErro('Por favor, adicione um título.');
+            mostrarErro('Por favor, preencha o campo de título.');
             return;
         }
         if (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') {
-            mostrarErro('O conteúdo do artigo não pode estar vazio.');
+            mostrarErro('Por favor, preencha o campo de texto para o artigo.');
             return;
         }
         if (!imagemCapa) {
-            mostrarErro('Por favor, adicione uma imagem de capa.');
+            mostrarErro('Por favor, preencha o campo de mídia para adicionar uma capa.');
             return;
         }
         if (tagsSelecionadas.length === 0) {
@@ -172,7 +172,7 @@ function PaginaCriarArtigo() {
     return (
         <main className={styles.base}>
             <header className={styles.cabecalho}>
-                <Link to="/inicio" className={styles.logo}>
+                <Link to="/adm/inicio" className={styles.logo}>
                     <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
                 </Link>
                 <h1 className={styles.titulo}>Artigos</h1>

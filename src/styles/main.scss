@@ -18,6 +18,11 @@
 	--bg-image: url("/icons/icon-teste-tema-nordestino.png");
 }
 
+body {
+  // Use a variável de cor de fundo do seu tema
+  background-color: var(--background-primary); 
+}
+
 //ESTILOS DO EDITOR DE TEXTO
 .tox-editor-container{
   padding: 0 !important;
