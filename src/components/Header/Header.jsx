@@ -6,7 +6,7 @@ import LogoPindorama from "../../assets/images/pindorama_logo5.png";
 import { CgSearch } from "react-icons/cg";
 import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade';
 
-function Header() {
+function Header({ acessibilidadeOverride, overrideClass }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function Header() {
 
 	return (
 		<header className={styles.container}>
-			<div className={styles.containerHeaderPrincipal}>
+			<div className={`${styles.containerHeaderPrincipal} ${overrideClass || ''}`}>
 				<div
 					className={styles.logoHeaderPrincipal}
 					style={{ cursor: "pointer" }}
@@ -94,8 +94,10 @@ function Header() {
 				</div>
 			</div>
 
-			<GroupBtnAcessibilidade />
+			<GroupBtnAcessibilidade overrideClass={acessibilidadeOverride} />
 		</header>
+
+
 	);
 }
 
