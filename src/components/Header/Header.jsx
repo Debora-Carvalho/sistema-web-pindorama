@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import LogoPindorama from "../../assets/images/pindorama_logo5.png";
 
-import { CgSearch } from "react-icons/cg";
-import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade';
+import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
+import Navbar from '../Navbar/Navbar.jsx';
 
 function Header() {
 	const location = useLocation();
@@ -98,7 +98,7 @@ function Header() {
 						</button>
 
 						<div>
-							{/* <CgSearch className={styles.btnSearch} /> */}
+							<Navbar />
 						</div>
 					</div>
 				</div>

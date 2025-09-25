@@ -1,5 +1,57 @@
 @use "../../styles/abstracts/variables" as *;
 
-.container {
+.navbarContainer {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .navbarContainerIcon {
+        font-size: 2rem;
+        color: var(--text-secondary);
+    }
+}
+
+.navLogoContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    background-color: var(--background-secondary);
+}
+
+.logo {
+    width: 10rem;
+    height: auto;
+}
+
+.content {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.navbarItem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.navbarIcon {
+    font-size: 1.5rem;
+    color: var(--secondary-500);
+}
+
+.navbarText {
+    font-size: 1.5rem;
+    color: var(--secondary-900);
+}
+
+.active {
+    background-color: var(--primary-300);
+    color: #FFFFFF;
+    border-radius: 20px;
 }
