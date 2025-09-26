@@ -7,7 +7,7 @@ import styles from './CardPadraoArtigos.module.scss';
 import PopupConfirmar from "../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
-function CardPadrao() {
+function CardPadrao({ id, titulo, imagem, onExcluir, onEditar }) {
   const [aberto, setAberto] = useState(false);
   const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
   const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
@@ -25,22 +25,29 @@ function CardPadrao() {
     setPopupDestaqueSucessoAberto(true);
   };
 
-  const handleConfirmarExcluir = () => {
+  const handleConfirmarExcluir = async() => {
+    try{
+    await onExcluir(id);
+    console.log("Exclusão concluída, abrindo popup sucesso...");
     setPopupExcluirAberto(false);
-    setPopupSucessoAberto(true); 
+    setPopupSucessoAberto(true);
+  }catch(e){
+    alert("Erro ao excluir artigo: " + e.message);
+  }
   };
 
   return (
+    
     <div className={styles.containerVisualizar}>
       <div className={styles.cardGeral}>
         <img
           className={styles.imgCard}
-          src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
+          src={imagem || "https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"}
           alt="Imagem do artigo"
         />
         <div className={styles.cardInfos}>
           <p className={styles.cardTitulo}>
-            A ancestralidade na dança
+            {titulo}
           </p>
           <button className={styles.btnCompleto}>
             Ver artigo completo
@@ -55,7 +62,7 @@ function CardPadrao() {
           {aberto && (
             <ul className={styles.opcoesMenu}>
               <li>
-                <button className={styles.btnEditar}>
+                <button className={styles.btnEditar} onClick={() => onEditar(id)}>
                   Editar
                   <FaRegEdit className={styles.iconOptions} />
                 </button>

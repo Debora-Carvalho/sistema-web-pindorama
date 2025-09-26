@@ -1,18 +1,37 @@
+import { useEffect, useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
 import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 
 function PaginaVisualizarArtigosAdmin() {
-    const artigosFake = [
-        { id: 1, titulo: "Inteligência Artificial no Brasil" },
-        { id: 2, titulo: "Agricultura Sustentável" },
-        { id: 3, titulo: "Cultura Afro-Brasileira" },
-        { id: 4, titulo: "Eventos de Tecnologia 2025" },
-        { id: 5, titulo: "Artes Visuais Contemporâneas" }
-    ];
+    const { listarArtigos, deletarArtigo, loading, erro } = useArtigos();
+    const [artigos, setArtigos] = useState([]);
+
+    useEffect(() => {
+      async function carregar() {
+        try {
+          const data = await listarArtigos();
+          setArtigos(data);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      carregar();
+    }, []);
+
+    
+    const handleExcluir = async (id) => {
+      await deletarArtigo(id);
+      setArtigos((prev) => prev.filter((a) => a.id !== id));
+    };
+
+    const handleEditar = (id) => {
+      //window.location.href = `/adm/editar-artigo/${id}`;
+    };
 
     const handleSelect = (item) => {
         console.log("Selecionado:", item);
@@ -26,18 +45,24 @@ function PaginaVisualizarArtigosAdmin() {
                 <HeaderAdmin />
             </nav>
             <div className={styles.topo}>
-                <BarraPesquisa itens={artigosFake} onSelect={handleSelect} />
+                <BarraPesquisa itens={artigos} onSelect={handleSelect} />
                 <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-artigo"}>
                     <BiSolidAddToQueue className={styles.iconAdd} />
                 </button>
             </div>
             <div className={styles.containerCards}>
-                <CardPadraoArtigos />
-                <CardPadraoArtigos />
-                <CardPadraoArtigos />
-                <CardPadraoArtigos />
-                <CardPadraoArtigos />
-                <CardPadraoArtigos />
+            {loading && <p>Carregando artigos...</p>}
+            {erro && <p style={{ color: "red" }}>{erro}</p>}
+            {artigos.map((artigo) => (
+              <CardPadraoArtigos
+                key={artigo.id}
+                id={artigo.id}
+                titulo={artigo.titulo}
+                imagem={artigo.url_imagem}
+                onExcluir={handleExcluir}
+                onEditar={handleEditar}
+              />
+            ))}
             </div>
         </div>
     )

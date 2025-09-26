@@ -46,7 +46,64 @@ export function useArtigos() {
     }
   }
 
+    async function listarArtigos() {
+    setLoading(true);
+    setErro(null);
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error("Erro ao carregar artigos");
+      return await response.json();
+    } catch (err) {
+      setErro(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+    async function atualizarArtigo(id, dados) {
+    setLoading(true);
+    setErro(null);
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ artigo: dados }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao atualizar artigo");
+      return await response.json();
+    } catch (err) {
+      setErro(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deletarArtigo(id) {
+    setLoading(true);
+    setErro(null);
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Erro ao deletar artigo");
+      return true;
+    } catch (err) {
+      setErro(err.message);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return {
+    atualizarArtigo,
+    deletarArtigo,
+    listarArtigos,
     criarArtigo,
     loading,
     erro,
