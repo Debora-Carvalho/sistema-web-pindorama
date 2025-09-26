@@ -158,7 +158,6 @@
 
 //RESPONSIVIDADE//
 
-/* --- Até 1080px --- */
 @media (max-width: 1080px) {
   .containerLogin {
     grid-template-columns: 1fr 1fr;
@@ -181,7 +180,6 @@
   }
 }
 
-/* até 720px */
 @media (max-width: 720px) {
   .containerLogin {
     grid-template-columns: 1fr;
@@ -237,7 +235,6 @@
 
 }
 
-/* até 480px */
 @media (max-width: 480px) {
   .columForm {
     padding: 1rem;

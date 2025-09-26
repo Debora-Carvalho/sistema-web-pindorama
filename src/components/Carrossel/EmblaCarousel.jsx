@@ -1,89 +1,102 @@
-// EmblaCarousel.jsx
 import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrowButtons'
-import { motion } from 'framer-motion'
+import { NextButton, PrevButton } from './EmblaCarouselArrowButtons' // Removi o 'usePrevNextButtons' que não era usado
+import { motion, AnimatePresence } from 'framer-motion'
 import styles from './Embla.module.scss'
 
 const EmblaCarousel = ({ slides, options }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...options,
+    loop: true,
+    align: 'center',
+    containScroll: 'keepSnaps',
+  })
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
-    usePrevNextButtons(emblaApi)
-
-  const onScroll = useCallback((emblaApi) => {
-    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
-    setScrollProgress(progress * 100)
-  }, [])
-
-  const onSelect = useCallback((emblaApi) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    onScroll(emblaApi)
-    onSelect(emblaApi)
-    emblaApi
-      .on('reInit', () => {
-        onScroll(emblaApi)
-        onSelect(emblaApi)
-      })
-      .on('scroll', onScroll)
-      .on('select', onSelect)
-  }, [emblaApi, onScroll, onSelect])
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap())
+    }
+    emblaApi.on('select', onSelect)
+    onSelect()
+    return () => emblaApi.off('select', onSelect)
+  }, [emblaApi])
+
+  const handlePrevClick = useCallback(() => {
+    if (!emblaApi) return
+    const prevIndex = (selectedIndex - 1 + slides.length) % slides.length
+    emblaApi.scrollTo(prevIndex)
+    setSelectedIndex(prevIndex)
+  }, [emblaApi, selectedIndex, slides.length])
+
+  const handleNextClick = useCallback(() => {
+    if (!emblaApi) return
+    const nextIndex = (selectedIndex + 1) % slides.length
+    emblaApi.scrollTo(nextIndex)
+    setSelectedIndex(nextIndex)
+  }, [emblaApi, selectedIndex, slides.length])
+
+  const progress = slides.length > 1 ? (selectedIndex / (slides.length - 1)) * 100 : 0
 
   return (
     <div className={styles.embla}>
+      <AnimatePresence>
+        <motion.img
+          key={selectedIndex}
+          className={styles.embla__bg}
+          src={slides.length > 0 ? slides[selectedIndex].imagem : ''} 
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.7 }}
+        />
+      </AnimatePresence>
       <div className={styles.embla__viewport} ref={emblaRef}>
         <div className={styles.embla__container}>
-          {slides.map((slide, index) => (
-            <div className={styles.embla__slide} key={index}>
+          {slides.map((slide, index) => {
+            const position = (index - selectedIndex + slides.length) % slides.length
+            const isActive = position === 0
+
+            return (
+              <div
+                className={`${styles.embla__slide} ${isActive ? styles['slide--active'] : styles['slide--mini']}`}
+                key={index}
+                style={{ '--position': position }}
+              >
                 <img src={slide.imagem} alt={slide.titulo} className={styles.slide__bg} />
-              <div className={styles.slide__content}>
-                <motion.h2
-                  key={`title-${index}-${selectedIndex}`}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: index === selectedIndex ? 1 : 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  {slide.titulo}
-                </motion.h2>
-
-                <motion.p
-                  key={`subtitle-${index}-${selectedIndex}`}
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: index === selectedIndex ? 1 : 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  {slide.subtitulo}
-                </motion.p>
-
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={styles.slide__button}
-                >
-                  {slide.botao}
-                </motion.button>
+                <div className={styles.slide__content}>
+                  <h2>{slide.titulo}</h2>
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        className={styles.content__active}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <p>{slide.subtitulo}</p>
+                        <button className={styles.slide__btnCompleto}>{slide.botao}</button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
       <div className={styles.embla__controls}>
         <div className={styles.embla__buttons}>
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+          <PrevButton onClick={handlePrevClick} />
+          <NextButton onClick={handleNextClick} />
         </div>
 
         <div className={styles.embla__progress}>
           <div
             className={styles.embla__progress__bar}
-            style={{ transform: `translate3d(${scrollProgress}%,0,0)` }}
+            style={{ transform: `translateX(${progress}%)` }}
           />
         </div>
       </div>
