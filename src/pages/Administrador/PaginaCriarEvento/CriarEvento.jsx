@@ -14,11 +14,14 @@ import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
 import PopupCalendario from '../../../components/Popups/PopupCalendario/PopupCalendario';
 import PopupLocalLink from '../../../components/Popups/PopupLocalLink/PopupLocalLink';
+import { useEventos } from '../../../hooks/Eventos/useEventos';
 
 
 function PaginaCriarEvento() {
     useTituloDocumento("Criar Evento | Pindorama");
     const navigate = useNavigate();
+
+    const { criarEvento, loading, error } = useEventos();
 
     // --- Estados do Formulário ---
     const [titulo, setTitulo] = useState('');
@@ -26,7 +29,7 @@ function PaginaCriarEvento() {
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
-    const [erroFormulario, setErroFormulario] = useState('');
+    const [erroFormulario, setErroFormulario] = useState(''); // Mudar para Null para melhorar o controle
     const [dataEvento, setDataEvento] = useState(null);
     const [linkLocal, setLinkLocal] = useState('');
 
@@ -144,6 +147,7 @@ function PaginaCriarEvento() {
         setMostrarConfirmacaoEnvio(true);
     };
 
+    /*  Código antigo de execução de envio
     const executarEnvio = () => {
         const eventoParaEnviar = {
             titulo,
@@ -158,6 +162,29 @@ function PaginaCriarEvento() {
         setPopupSucessoMensagem('Evento enviado com sucesso!');
         setAcaoAposSucesso('redirecionar');
         setMostrarSucesso(true);
+    };
+    */
+    // Nova função 'executarEnvio' que utiliza o hook.
+    const executarEnvio = async () => {
+        setMostrarConfirmacaoEnvio(false);
+
+        const eventoParaEnviar = {
+            titulo,
+            conteudo,
+            imagemCapa,
+            tags: tagsSelecionadas,
+            data: dataEvento,
+            localLink: linkLocal
+        };
+
+        try {
+            await criarEvento(eventoParaEnviar);
+            setPopupSucessoMensagem('Evento enviado com sucesso!');
+            setAcaoAposSucesso('redirecionar');
+            setMostrarSucesso(true);
+        } catch (err) {
+            setErroFormulario({ mensagem: err.message, tipo: 'aviso' });
+        }
     };
 
     const handleCancelarEnvio = () => { setMostrarConfirmacaoEnvio(false); };
@@ -259,8 +286,11 @@ function PaginaCriarEvento() {
                             type="button"
                             className={styles.botaoEnviar}
                             onClick={handleSubmit}
+                            
+                            disabled={loading}
                         >
-                            Enviar
+                            
+                            {loading ? 'Enviando...' : 'Enviar'}
                         </button>
                     </div>
                 </div>
