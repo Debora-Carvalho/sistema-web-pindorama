@@ -29,7 +29,7 @@ function PaginaCriarEvento() {
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
-    const [erroFormulario, setErroFormulario] = useState(''); // Mudar para Null para melhorar o controle
+    const [erroFormulario, setErroFormulario] = useState(null); // Corrigido para null
     const [dataEvento, setDataEvento] = useState(null);
     const [linkLocal, setLinkLocal] = useState('');
 
@@ -102,12 +102,12 @@ function PaginaCriarEvento() {
         event.preventDefault();
         setErroFormulario(null);
 
-        /*
-        Rever, pois o hook já está responsavel pelo tratamento de erro a partir da função executarEnvio 
+        // A função mostrarErro precisa estar aqui para o handleSubmit funcionar.
         const mostrarErro = (mensagem) => {
             const erroTratado = tratarErro(mensagem);
-            setErroFormulario(erroTratado);
-        */};
+            setErroFormulario({ mensagem: erroTratado, tipo: 'aviso' });
+        };
+        // REMOVEMOS O '};' EXTRA QUE ESTAVA QUEBRANDO O CÓDIGO AQUI.
 
         const formularioEstaVazio =
             !titulo.trim() &&
@@ -149,23 +149,23 @@ function PaginaCriarEvento() {
         setMostrarConfirmacaoEnvio(true);
     };
 
-    /*  Código antigo de execução de envio
-    const executarEnvio = () => {
-        const eventoParaEnviar = {
-            titulo,
-            conteudo,
-            imagemCapa,
-            tags: tagsSelecionadas,
-            data: dataEvento,
-            localLink: linkLocal
-        };
-        console.log("Evento pronto para ser enviado:", eventoParaEnviar);
-        setMostrarConfirmacaoEnvio(false);
-        setPopupSucessoMensagem('Evento enviado com sucesso!');
-        setAcaoAposSucesso('redirecionar');
-        setMostrarSucesso(true);
-    };
-    */
+    /* Código antigo de execução de envio
+	const executarEnvio = () => {
+		const eventoParaEnviar = {
+			titulo,
+			conteudo,
+			imagemCapa,
+			tags: tagsSelecionadas,
+			data: dataEvento,
+			localLink: linkLocal
+		};
+		// console.log("Evento pronto para ser enviado:", eventoParaEnviar); // Removido console.log
+		setMostrarConfirmacaoEnvio(false);
+		setPopupSucessoMensagem('Evento enviado com sucesso!');
+		setAcaoAposSucesso('redirecionar');
+		setMostrarSucesso(true);
+	};
+	*/
     // Nova função 'executarEnvio' que utiliza o hook.
     const executarEnvio = async () => {
         setMostrarConfirmacaoEnvio(false);
