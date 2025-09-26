@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styles from './PaginaNaoEncontrado.module.scss';
 import { Link } from 'react-router-dom';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
@@ -22,7 +23,7 @@ function PaginaNaoEncontrado() {
                     <img src={IconApoio} className={styles.iconApoio} alt="Ícone de apoio - Tamanduá" />
 
                     <Link to="/inicio" className={styles.btnVoltar}>
-                        <AiFillHome className={styles.btnVoltarIcon} /> 
+                        <AiFillHome className={styles.btnVoltarIcon} />
                         Voltar para a página inicial
                     </Link>
                 </main>
