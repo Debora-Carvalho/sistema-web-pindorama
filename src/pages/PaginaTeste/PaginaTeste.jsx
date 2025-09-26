@@ -7,6 +7,7 @@ import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirma
 import PopupCriar from "../../components/Popups/PopupCriar/PopupCriar.jsx";
 
 import PopupAdicionarTag from "../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
+import CardPadraoAdmin from '../../components/CardPadrao/Admin/CardPadraoAdmin/CardPadraoAdmin.jsx';
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
@@ -42,6 +43,13 @@ function PaginaTeste() {
 				<p className={styles.paragrafo}>
 					Utilize os botões abaixo para navegar pelos temas.
 				</p>
+
+				<CardPadraoAdmin 
+					imagem="https://i.pinimg.com/originals/ae/75/bb/ae75bb989466498589f4faa1e3e5b426.jpg"
+					tipo="artigo"
+					titulo="A Língua Tupi"
+					link="/visualizar-artigos/4"
+				/>
 
 				<ThemeToggle />
 

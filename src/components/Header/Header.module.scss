@@ -42,12 +42,20 @@
 .headerBtn {
 	font-family: $font-family-principal;
 	color: var(--text-secondary);
+
+	&:hover {
+		color: var(--primary-300);
+	}
 }
 
 .active {
 	background: var(--primary-300);
 	border-radius: 20px;
 	padding: 10px 20px;
+
+	&:hover {
+		color: var(--text-secondary);
+	}
 }
 
 .btnSearch {
