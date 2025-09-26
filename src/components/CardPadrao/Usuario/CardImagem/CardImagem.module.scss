@@ -1,44 +1,165 @@
 .cardImagem {
-  break-inside: avoid;
-  margin-bottom: 16px;
-  background-color: #fff;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform 0.3s;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  display: block;
+    break-inside: avoid;
+    margin-bottom: 16px;
+    background-color: var(--background-primary);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: block;
 }
 
 .imagemWrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .imagemWrapper img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 20px;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
 }
 
 .imagemWrapper:hover img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-.legenda {
-  position: absolute;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  width: 100%;
-  padding: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  box-sizing: border-box;
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
-.imagemWrapper:hover .legenda {
-  opacity: 1;
+.modalContent {
+    background: var(--background-primary);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modalImage {
+    max-width: 100%;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.modalTitulo {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.groupBtnModal  {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.btnModalFechar, .btnModalLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 20px;
+    border-radius: 20px;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--primary-700);
+    }
+}
+
+.btnModalFechar {
+    background: transparent;
+    border: 2px solid var(--secondary-600);
+    justify-content: center;
+    color: var(--secondary-600);
+
+    &:hover {
+        background-color: var(--primary-200);
+    }
+}
+
+.btnModalLink {
+    background: var(--secondary-600);
+    color: var(--text-secondary);
+    justify-content: space-between;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: var(--secondary-500);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btnModalIcon {
+        font-size: 2rem;
+    }
+}
+
+/* --- RESPONSIVIDADE --- */
+
+/* Até 720px */
+@media (max-width: 720px) {
+    .modalContent {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .modalTitulo {
+        font-size: 1.6rem;
+    }
+
+    .groupBtnModal {
+        grid-template-columns: 1fr; 
+    }
+
+    .btnModalFechar,
+    .btnModalLink {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .btnModalLink .btnModalIcon {
+        font-size: 1.5rem;
+    }
+}
+
+/* Até 480px */
+@media (max-width: 480px) {
+    .modalContent {
+        width: 95%;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .modalTitulo {
+        font-size: 1.4rem;
+    }
+
+    .btnModalFechar,
+    .btnModalLink {
+        font-size: 0.9rem;
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .btnModalLink .btnModalIcon {
+        font-size: 1.2rem;
+    }
 }

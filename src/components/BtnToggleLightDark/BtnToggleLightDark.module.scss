@@ -21,3 +21,12 @@
     background-color: var(--primary-300); 
     border-radius: 50%;
 }
+
+/* --- Até 880px --- */
+@media (max-width: 880px) {
+    .containerBtnThemeToggle {
+        .btnThemeToggle {
+            font-size: 1.2rem;
+        }
+    } 
+}
