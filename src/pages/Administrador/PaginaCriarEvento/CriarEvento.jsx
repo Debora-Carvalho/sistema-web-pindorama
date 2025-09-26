@@ -102,10 +102,12 @@ function PaginaCriarEvento() {
         event.preventDefault();
         setErroFormulario(null);
 
+        /*
+        Rever, pois o hook já está responsavel pelo tratamento de erro a partir da função executarEnvio 
         const mostrarErro = (mensagem) => {
             const erroTratado = tratarErro(mensagem);
             setErroFormulario(erroTratado);
-        };
+        */};
 
         const formularioEstaVazio =
             !titulo.trim() &&
