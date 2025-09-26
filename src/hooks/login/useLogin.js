@@ -12,14 +12,12 @@ export const useLogin = () => {
         setLoading(true);
         setError(null);
         try {
-
             const loginResposta = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ administrador: { senha: password } }),
-                credentials: 'include',
             });
 
             if (!loginResposta.ok) {
@@ -32,10 +30,24 @@ export const useLogin = () => {
                 throw new Error(errorData.error || 'Senha incorreta');
             }
 
+            const loginData = await loginResposta.json();
+            const token = loginData.token;
 
-            const sessionResposta = await fetch(API_URL, { method: 'GET', credentials: 'include' });
+            if (token) {
+                localStorage.setItem('authToken', token);
+            } else {
+                throw new Error('Token não recebido na resposta.');
+            }
+
+            const sessionResposta = await fetch(API_URL, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
 
             if (!sessionResposta.ok) {
+                localStorage.removeItem('authToken');
                 throw new Error('Erro ao carregar dados da sessão');
             }
 
