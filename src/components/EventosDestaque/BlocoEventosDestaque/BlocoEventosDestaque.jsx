@@ -13,7 +13,7 @@ function BlocoEventosDestaque() {
         <div className={styles.container}>
             <ListaEventosDestaque eventos={mockEventosDestaque} />
 
-            <Link to='/visualizar-eventos' className={styles.btnTodosEventos}>
+            <Link to='/eventos' className={styles.btnTodosEventos}>
                 Ver agenda completa
             </Link>
         </div>

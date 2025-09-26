@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './PaginaInicialAdmin.module.scss';
 import { Link } from 'react-router-dom'
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import { MdLibraryAdd } from "react-icons/md";
 import ListaEventos from '../../../components/ListaEventos/ListaEventos.jsx';
 import { FaArrowRight } from 'react-icons/fa';
-
 import LogoPindorama from "../../../assets/images/pindorama_logo5.png";
+import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
+import PopupCriar from '../../../components/Popups/PopupCriar/PopupCriar.jsx'
+import { motion } from 'framer-motion';
 
 const getSaudacao = () => {
     const horaAtual = new Date().getHours();
@@ -27,39 +29,86 @@ const mockEventos = [
     { id: 4, dia: '04', mes: 'AGO', titulo: 'Palestra na FATEC...' },
 ];
 
+const artigosFake = [
+    { id: 1, titulo: 'Inteligência Artificial no Brasil', imagem: 'https://images.unsplash.com/photo-1662692735672-544412d65934?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', url: '/artigo/1' },
+    { id: 2, titulo: 'Agricultura Sustentável', imagem: 'https://images.unsplash.com/photo-1592079927431-3f8ced0dacc6?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', url: '/artigo/2' },
+    { id: 3, titulo: 'Cultura Afro-Brasileira', imagem: 'https://museuafrobrasileiro.com.br/wp-content/uploads/2011/11/heitor_dos_prazeres.jpg', url: '/artigo/3' },
+    { id: 4, titulo: 'Eventos de Tecnologia 2025', imagem: 'https://www.tiespecialistas.com.br/imagens/2022/09/evento-msp-summit-op3.jpeg', url: '/artigo/4' },
+    { id: 5, titulo: 'Artes Visuais Contemporâneas', imagem: 'https://usfx.info/wp-content/uploads/2023/12/Povos_nativos_dos_5_continentes-1400x933.jpg', url: '/artigo/5' },
+];
+
+const pageTransition = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+    transition: { duration: 0.5 }
+};
+
 function PaginaInicialAdmin() {
     const saudacaoTexto = getSaudacao();
+    const [popupCriarAberto, setPopupCriarAberto] = useState(false);
+    const artigosRecentes = artigosFake.slice(0, 3);
 
     return (
         <>
-            <main className={styles.base}>
-                <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
-                <HeaderAdmin />
+            <motion.div
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={pageTransition}
+                transition={pageTransition.transition}
+            >
+                <main className={styles.base}>
+                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
+                    <HeaderAdmin />
 
-                <div className={styles.gridContainer}>
+                    <div className={styles.gridContainer}>
 
-                    {/* Item 1 do Grid */}
-                    <h1 className={styles.saudacao}>{saudacaoTexto}, Admin!</h1>
+                        <h1 className={styles.saudacao}>{saudacaoTexto}, Admin!</h1>
 
-                    {/* Item 2 do Grid */}
-                    <Link to='/adm/criar-artigo' className={styles.botaoCriar}>
-                        <span className={styles.addIcon}><MdLibraryAdd /></span>
-                        <div className={styles.criarTitles}>
-                            <h2 className={styles.criarTitulo}>Crie sua nova história aqui!</h2>
-                            <h3 className={styles.criarSubt}>Criação de artigos e eventos</h3>
+                        <button type='button' className={styles.botaoCriar} onClick={() => setPopupCriarAberto(true)}>
+                            <span className={styles.addIcon}><MdLibraryAdd /></span>
+                            <div className={styles.criarTitles}>
+                                <h2 className={styles.criarTitulo}>Crie sua nova história aqui!</h2>
+                                <h3 className={styles.criarSubt}>Criação de artigos e eventos</h3>
+                            </div>
+                        </button>
+
+                        <h2 className={styles.tituloSecao}>Próximos eventos</h2>
+
+                        <div className={styles.listaEventosContainer}>
+                            <ListaEventos eventos={mockEventos} />
                         </div>
-                    </Link>
 
-                    {/* Item 3 do Grid */}
-                    <h2 className={styles.tituloSecao}>Próximos eventos</h2>
+                        <section className={styles.secaoArtigos}>
+                            <h2>Seus últimos artigos</h2>
 
-                    {/* Item 4 do Grid */}
-                    <div className={styles.listaEventosContainer}>
-                        <ListaEventos eventos={mockEventos} />
+                            <div className={styles.gridArtigos}>
+                                {artigosRecentes.map(artigo => (
+                                    <CardPadraoArtigos
+                                        key={artigo.id}
+                                        id={artigo.id}
+                                        imagem={artigo.imagem}
+                                        titulo={artigo.titulo}
+                                        url={artigo.url}
+                                    />
+                                ))}
+
+                                <Link to="/adm/artigos" className={styles.verTodosBotao}>
+                                    <span className={styles.verTodosTexto}>Ver todos</span>
+                                    <FaArrowRight />
+                                </Link>
+                            </div>
+                        </section>
+
                     </div>
 
-                </div>
-            </main>
+                    <PopupCriar
+                        aberto={popupCriarAberto}
+                        onFechar={() => setPopupCriarAberto(false)}
+                    />
+                </main>
+            </motion.div>
         </>
     )
 }

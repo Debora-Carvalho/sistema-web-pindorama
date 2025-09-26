@@ -3,8 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import LogoPindorama from "../../assets/images/pindorama_logo5.png";
 
-import { CgSearch } from "react-icons/cg";
-import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade';
+import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
+import Navbar from '../Navbar/Navbar.jsx';
 
 function Header() {
 	const location = useLocation();
@@ -15,10 +15,10 @@ function Header() {
 			navigate("/inicio");
 		}
 		if (section === 'artigos') {
-			navigate('/visualizar-artigos');
+			navigate('/artigos');
 		}
 		if (section === 'eventos') {
-			navigate('/visualizar-eventos');
+			navigate('/eventos');
 		}
 		if (section === 'galeria') {
 			navigate('/galeria');
@@ -56,14 +56,14 @@ function Header() {
 						</button>
 
 						<button
-							className={`${styles['headerBtn']} ${location.pathname === '/visualizar-artigos' ? styles.active : ''}`}
+							className={`${styles['headerBtn']} ${location.pathname === '/artigos' ? styles.active : ''}`}
 							onClick={() => handleClick('artigos')}
 						>
 							Artigos
 						</button>
 
 						<button
-							className={`${styles['headerBtn']} ${location.pathname === '/visualizar-eventos' ? styles.active : ''}`}
+							className={`${styles['headerBtn']} ${location.pathname === '/eventos' ? styles.active : ''}`}
 							onClick={() => handleClick('eventos')}
 						>
 							Eventos
@@ -96,10 +96,10 @@ function Header() {
 						>
 							Sobre mim
 						</button>
+					</div>
 
-						<div>
-							<CgSearch className={styles.btnSearch} />
-						</div>
+					<div className={styles.navbarLateral}>
+						<Navbar />
 					</div>
 				</div>
 			</div>

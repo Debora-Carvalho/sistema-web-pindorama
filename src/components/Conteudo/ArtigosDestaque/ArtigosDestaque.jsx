@@ -3,7 +3,7 @@ import styles from "./ArtigosDestaque.module.scss";
 import { Link } from "react-router-dom";
 
 import artigos from "../../../json/db-mock-artigos.json";
-import ListaCards from "../../ListaCards/ListaCards.jsx";
+import ListaCards from "../../ListaCards/Usuario/ListaCards.jsx";
 
 function ArtigosDestaque() {
     return (
@@ -13,7 +13,7 @@ function ArtigosDestaque() {
                     Destaques
                 </h2>
 
-                <Link to="/visualizar-artigos" className={styles.btnVerMais}>
+                <Link to="/artigos" className={styles.btnVerMais}>
                     Ver mais
                 </Link>
             </div>

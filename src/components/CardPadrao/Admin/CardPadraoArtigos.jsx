@@ -3,17 +3,20 @@ import { FaEllipsisV, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { PiHighlighterFill } from "react-icons/pi";
 import { MdOutlineHideImage } from "react-icons/md";
 import styles from './CardPadraoArtigos.module.scss';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import PopupConfirmar from "../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
-function CardPadrao() {
+function CardPadraoArtigos({ id, imagem, titulo, url }) {
   const [aberto, setAberto] = useState(false);
   const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
   const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
   const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
   const [popupDestaqueSucessoAberto, setPopupDestaqueSucessoAberto] = useState(false);
   const [destacado, setDestacado] = useState(false);
+  const cardLayoutId = `artigo-card-${id}`;
 
   const toggleMenu = () => {
     setAberto(!aberto);
@@ -31,20 +34,22 @@ function CardPadrao() {
   };
 
   return (
-    <div className={styles.containerVisualizar}>
+    <motion.div layoutId={cardLayoutId} className={styles.containerVisualizar}>
       <div className={styles.cardGeral}>
         <img
           className={styles.imgCard}
-          src="https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"
+          src={imagem}
           alt="Imagem do artigo"
         />
         <div className={styles.cardInfos}>
           <p className={styles.cardTitulo}>
-            A ancestralidade na dança
+            {titulo}
           </p>
-          <button className={styles.btnCompleto}>
-            Ver artigo completo
-          </button>
+          <Link to={url}>
+            <button className={styles.btnCompleto}>
+              Ver artigo completo
+            </button>
+          </Link>
         </div>
 
         <div className={styles.cardMenu}>
@@ -120,8 +125,8 @@ function CardPadrao() {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-export default CardPadrao;
+export default CardPadraoArtigos;

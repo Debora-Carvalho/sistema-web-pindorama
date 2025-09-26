@@ -6,13 +6,10 @@ export const tratamentoErro = (erro) => {
   if (mensagem.toLowerCase().includes('senha')) tipo = 'senha';
   else if (mensagem.toLowerCase().includes('session') || mensagem.toLowerCase().includes('sessão')) tipo = 'sessao';
   else if (mensagem.toLowerCase().includes('network')) tipo = 'rede';
-  else if (mensagem.toLowerCase().includes('título')) tipo = 'campo';
-  else if (mensagem.toLowerCase().includes('conteúdo')) tipo = 'campo';
-  else if (mensagem.toLowerCase().includes('imagem')) tipo = 'campo';
-  else if (mensagem.toLowerCase().includes('tag')) tipo = 'campo';
-  else if (mensagem.toLowerCase().includes('local')) tipo = 'campo';
-  else if (mensagem.toLowerCase().includes('todos os campos')) tipo = 'campo';
+  else if (mensagem.toLowerCase().includes('token') || mensagem.toLowerCase().includes('unauthorized')) tipo = 'token';
+  else if (mensagem.toLowerCase().includes('campo') || (mensagem.toLowerCase().includes('campos'))) tipo = 'campo';
+  else if (mensagem.toLowerCase().includes('tag') || (mensagem.toLowerCase().includes('local'))) tipo = 'campo';
   else if (mensagem.toLowerCase().includes('data')) tipo = 'campo';
-
+  
   return { mensagem, tipo };
 };

@@ -1,0 +1,138 @@
+@use "../../styles/abstracts/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-primary);
+    overflow-x: hidden;
+}
+
+.containerItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 2rem 1rem;
+    gap: 1rem;
+    min-height: calc(100vh - 13rem);
+    text-align: center;
+
+    h2 {
+        font-family: $font-family-texto;
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: var(--secondary-600);
+    }
+
+    p {
+        font-family: $font-family-texto;
+        font-size: 1.2rem;
+        color: var(--secondary-500);
+        max-width: 40rem;
+    }
+
+    .iconApoio {
+        width: 18rem;
+        height: auto;
+    }
+
+    .btnVoltar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--secondary-600);
+        padding: 0.8rem 1.5rem;
+        gap: 0.8rem;
+        border-radius: 10px;
+        color: var(--text-secondary);
+        font-family: $font-family-texto;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: background 0.3s;
+
+        .btnVoltarIcon {
+            font-size: 1.8rem;
+        }
+
+        &:hover {
+            background: var(--secondary-500);
+        }
+    }
+}
+
+/* --- RESPONSIVIDDE --- */
+
+/* Até 1080px */
+@media (max-width: 1080px) {
+    .containerItems {
+        padding: 1.5rem;
+        h2 {
+            font-size: 2rem;
+        }
+        .iconApoio {
+            width: 16rem;
+        }
+    }
+}
+
+/* Até 720px */
+@media (max-width: 720px) {
+    .containerItems {
+        padding: 1rem;
+        gap: 0.8rem;
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+
+        .iconApoio {
+            width: 14rem;
+        }
+
+        .btnVoltar {
+            font-size: 1rem;
+            padding: 0.7rem 1.2rem;
+
+            .btnVoltarIcon {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+/* Até 480px */
+@media (max-width: 480px) {
+    .containerItems {
+        padding: 0.8rem;
+        gap: 0.6rem;
+
+        h2 {
+            font-size: 1.6rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .iconApoio {
+            width: 12rem;
+        }
+
+        .btnVoltar {
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+
+            .btnVoltarIcon {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

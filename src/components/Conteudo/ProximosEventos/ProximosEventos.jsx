@@ -1,7 +1,7 @@
 import styles from "./ProximosEventos.module.scss";
 
 import eventos from "../../../json/db-mock-eventos.json";
-import ListaCards from "../../ListaCards/ListaCards.jsx";
+import ListaCards from "../../ListaCards/Usuario/ListaCards.jsx";
 
 function ProximosEventos() {
     return (

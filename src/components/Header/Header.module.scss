@@ -42,16 +42,47 @@
 .headerBtn {
 	font-family: $font-family-principal;
 	color: var(--text-secondary);
+
+	&:hover {
+		color: var(--primary-300);
+	}
 }
 
 .active {
 	background: var(--primary-300);
 	border-radius: 20px;
 	padding: 10px 20px;
+
+	&:hover {
+		color: var(--text-secondary);
+	}
 }
 
 .btnSearch {
 	font-size: 2.5rem;
 	color: var(--text-secondary);
 	cursor: pointer;
+}
+
+.navbarLateral {
+	display: none;
+}
+
+
+/* --- Até 880px --- */
+@media (max-width: 880px) {
+	.logoHeaderPrincipal {
+		.logo {
+			width: 120px;
+			height: auto;
+		}
+	}
+
+	.headerPrincipalItems {
+		display: none;
+	}
+
+	.navbarLateral {
+		display: flex;
+	}
 }

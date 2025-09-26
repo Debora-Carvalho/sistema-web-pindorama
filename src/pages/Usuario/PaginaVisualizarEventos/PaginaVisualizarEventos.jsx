@@ -4,7 +4,7 @@ import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 
 import eventos from "../../../json/db-mock-eventos.json";
-import ListaCards from "../../../components/ListaCards/ListaCards.jsx";
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 
 function PaginaVisualizarEventos() {
     useTituloDocumento("Eventos | Pindorama"); // mudando o Title da pagina

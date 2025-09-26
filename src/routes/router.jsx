@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion';
 
 // ROTAS USUARIO
 import PaginaTeste from "../pages/PaginaTeste/PaginaTeste.jsx";
@@ -16,16 +17,22 @@ import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEve
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 
-const AppRoutes = () => {
+// ROTA ERRO 404 - não encontrado
+import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrado.jsx";
+
+const AnimatedRoutes = () => {
+	const location = useLocation();
+
 	return (
-		<BrowserRouter>
+
+		<AnimatePresence mode="wait">
 			<Routes>
 				{/* ROTAS USUARIO */}
 				<Route path="/" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
-				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
-				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+				<Route path="/artigos" element={<PaginaVisualizarArtigos />} />
+				<Route path="/eventos" element={<PaginaVisualizarEventos />} />
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 
 				{/* ROTAS ADMINISTRADOR */}
@@ -33,10 +40,22 @@ const AppRoutes = () => {
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
-					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
+					<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
+					<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
 				</Route>
+
+				{/* ROTA 404 */}
+				<Route path="*" element={<PaginaNaoEncontrado />} />
 			</Routes>
+		</AnimatePresence>
+
+	);
+}
+
+const AppRoutes = () => {
+	return (
+		<BrowserRouter>
+			<AnimatedRoutes />
 		</BrowserRouter>
 	);
 }

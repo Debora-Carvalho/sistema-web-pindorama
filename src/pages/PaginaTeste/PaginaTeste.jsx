@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './PaginaTeste.module.scss';
 import useTituloDocumento from '../../hooks/useTituloDocumento.js';
+import Loading from "../../components/Loading/Loading.jsx";
+
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle.jsx';
 import PopupSucesso from "../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 import PopupConfirmar from "../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupCriar from "../../components/Popups/PopupCriar/PopupCriar.jsx";
 
 import PopupAdicionarTag from "../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
+import CardPadraoAdmin from '../../components/CardPadrao/Admin/CardPadraoAdmin/CardPadraoAdmin.jsx';
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
@@ -30,11 +33,24 @@ function PaginaTeste() {
 		setPopupTagAberto(false);
 	};
 
+	
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		// simula um carregamento (API, dados, etc.)
+		const timer = setTimeout(() => setLoading(false), 4500);
+		return () => clearTimeout(timer);
+	}, []);
+
+	if (loading) {
+		return <Loading />; // mostra a tela de carregamento
+	}
+
 	return (
 		<>
-			
+
 			<div className={styles.container}>
-				
+
 				<p className={styles.titulo}>
 					Olá, sou uma página teste
 				</p>
@@ -42,6 +58,13 @@ function PaginaTeste() {
 				<p className={styles.paragrafo}>
 					Utilize os botões abaixo para navegar pelos temas.
 				</p>
+
+				<CardPadraoAdmin
+					imagem="https://i.pinimg.com/originals/ae/75/bb/ae75bb989466498589f4faa1e3e5b426.jpg"
+					tipo="artigo"
+					titulo="A Língua Tupi"
+					link="/artigos/4"
+				/>
 
 				<ThemeToggle />
 

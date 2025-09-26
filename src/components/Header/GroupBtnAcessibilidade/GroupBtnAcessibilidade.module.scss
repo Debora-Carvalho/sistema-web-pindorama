@@ -21,3 +21,14 @@
         }
     }
 }
+
+/* --- Até 880px --- */
+@media (max-width: 880px) {
+    .container {
+
+        .btnAcessibilidadeIcon {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+    }
+}

@@ -1,18 +1,17 @@
-import styles from './ListaCards.module.scss';
-import CardPadrao from "../CardPadrao/Usuario/CardPadrao/CardPadrao.jsx";
+import styles from './ListaCardsAdmin.module.scss';
+import CardPadraoAdmin from "../../CardPadrao/Admin/CardPadraoAdmin/CardPadraoAdmin.jsx";
 
-function ListaCards({ cards, limite }) {
+function ListaCardsAdmin({ cards, limite }) {
     const cardsFiltrados = limite ? cards.slice(0, limite) : cards;
 
     return (
         <div className={styles.gridCards}>
             {cardsFiltrados.map((card, index) => (
-                <CardPadrao
+                <CardPadraoAdmin
                     key={index}
                     tipo={card.tipo}
                     imagem={card.imagem}
                     titulo={card.titulo}
-                    descricao={card.descricao}
                     link={card.link}
                 />
             ))}
@@ -20,4 +19,4 @@ function ListaCards({ cards, limite }) {
     );
 }
 
-export default ListaCards;
+export default ListaCardsAdmin;

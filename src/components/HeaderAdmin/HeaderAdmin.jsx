@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
+import useWindowSize from './useWindowSize';
 import styles from './HeaderAdmin.module.scss';
 
 // Importando ícones de exemplo da biblioteca react-icons
@@ -9,8 +10,8 @@ import { FaFileAlt, FaCalendarCheck, FaCog, FaSignOutAlt } from 'react-icons/fa'
 
 // Dados dos itens de navegação para facilitar a renderização
 const navItems = [
-    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/adm/visualizar-artigos' },
-    { id: 2, label: 'Eventos', icon: <FaCalendarCheck />, path: '/adm/visualizar-eventos' },
+    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/adm/artigos' },
+    { id: 2, label: 'Eventos', icon: <FaCalendarCheck />, path: '/adm/eventos' },
     { id: 3, label: 'Configurações', icon: <FaCog /> },
 ];
 
@@ -18,7 +19,10 @@ const logoutItem = { id: 4, label: 'Logout', icon: <FaSignOutAlt /> };
 
 export default function HeaderAdmin() {
     const location = useLocation();
-    const isCollapsed = location.pathname !== "/adm/inicio"
+    const { width } = useWindowSize();
+    const isMobile = width <= 760;
+    const isPaginaInicial = location.pathname === "/adm/inicio"
+    const isCollapsed = isMobile || !isPaginaInicial;
 
 
     // Variantes de animação para o contêiner principal

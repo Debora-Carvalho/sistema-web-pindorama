@@ -19,10 +19,12 @@ function Footer() {
 				<div className={styles.linksFooter}>
 					<h2>Links</h2>
 
-					<Link className={styles.itemLinkFooter}>Artigos</Link>
-					<Link className={styles.itemLinkFooter}>Eventos</Link>
-					<Link className={styles.itemLinkFooter}>Organizações</Link>
-					<Link className={styles.itemLinkFooter}>Sobre mim</Link>
+					<div>
+						<Link className={styles.itemLinkFooter}>Artigos</Link>
+						<Link className={styles.itemLinkFooter}>Eventos</Link>
+						<Link className={styles.itemLinkFooter}>Organizações</Link>
+						<Link className={styles.itemLinkFooter}>Sobre mim</Link>
+					</div>
 				</div>
 
 				<div>
