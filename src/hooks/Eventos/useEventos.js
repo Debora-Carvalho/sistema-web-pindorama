@@ -35,15 +35,15 @@ export const useEventos = () => {
             const formData = new FormData();
             
             
-            formData.append('evento[tituloEvento]', eventoData.titulo); 
-            formData.append('evento[conteudoEvento]', eventoData.conteudo); 
-            formData.append('evento[dataEvento]', eventoData.data); 
-            formData.append('evento[localEvento]', eventoData.localLink); 
+            formData.append('evento[titulo]', eventoData.titulo); 
+            formData.append('evento[conteudo]', eventoData.conteudo); 
+            formData.append('evento[data]', eventoData.data); 
+            formData.append('evento[local]', eventoData.localLink); 
 
-            // Se o autorId estiver em eventoData: formData.append('evento[autorEvento]', eventoData.autorId); 
+            // Se o autorId estiver em eventoData: formData.append('evento[autor_id]', eventoData.autorId); 
             // Envia cada tag 
             eventoData.tags.forEach(tag => {
-                formData.append('evento[tagsEvento][]', tag); 
+                formData.append('evento[tags][]', tag); 
             });
 
             // Adiciona imagem (mantido imagem_capa para uso no controller)
@@ -84,14 +84,14 @@ export const useEventos = () => {
             // FormData permite a atualização da imagem também
             const formData = new FormData();
             
-            formData.append('evento[tituloEvento]', eventoData.titulo); 
-            formData.append('evento[conteudoEvento]', eventoData.conteudo); 
-            formData.append('evento[dataEvento]', eventoData.data); 
-            formData.append('evento[localEvento]', eventoData.localLink); 
-            // Se o autorId estiver em eventoData: formData.append('evento[autorEvento]', eventoData.autorId)            
+            formData.append('evento[titulo]', eventoData.titulo); 
+            formData.append('evento[conteudo]', eventoData.conteudo); 
+            formData.append('evento[data]', eventoData.data); 
+            formData.append('evento[local]', eventoData.localLink); 
+            // Se o autorId estiver em eventoData: formData.append('evento[autor_id]', eventoData.autorId)
             // Envia cada tag 
             eventoData.tags.forEach(tag => {
-                formData.append('evento[tagsEvento][]', tag); 
+                formData.append('evento[tags][]', tag); 
             });
             
             
