@@ -37,14 +37,6 @@
     }
 }
 
-.containerCards {
-    position: relative;
-    display: grid;
-    bottom: 100px;
-    grid-template-columns: repeat(3, 1fr);
-    margin-left: 40px;
-}
-
 /*RESPONSIVIDADE*/
 
 @media (max-width: 1080px) {

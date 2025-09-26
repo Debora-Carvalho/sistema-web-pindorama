@@ -8,8 +8,14 @@ function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
+    const backgroundClasse =
+        tipo === "artigo" ? styles.backgroundArtigo : styles.backgroundEvento;
+
+    const tituloClasse =
+        tipo === "artigo" ? styles.tituloArtigo : styles.tituloEvento;
+
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card} ${backgroundClasse}`}>
             <div className={styles.cardImagem}>
                 <img src={imagem} alt={`Capa do ${tipo} ${titulo}`} />
             </div>
@@ -19,7 +25,7 @@ function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
             </div>
 
             <div className={styles.cardConteudo}>
-                <h3 className={styles.cardTitulo}>
+                <h3 className={`${styles.cardTitulo} ${tituloClasse}`}>
                     {titulo}
                 </h3>
 

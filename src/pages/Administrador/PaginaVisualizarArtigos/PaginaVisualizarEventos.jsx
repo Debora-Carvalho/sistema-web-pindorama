@@ -1,19 +1,13 @@
 import styles from './PaginaVisualizarEventos.module.scss';
-import CardPadraoEventos from '../../../components/CardPadrao/Admin/CardPadraoEventos.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 
-function PaginaVisualizarEventosAdmin() {
-    const artigosFake = [
-        { id: 1, titulo: "Inteligência Artificial no Brasil" },
-        { id: 2, titulo: "Agricultura Sustentável" },
-        { id: 3, titulo: "Cultura Afro-Brasileira" },
-        { id: 4, titulo: "Eventos de Tecnologia 2025" },
-        { id: 5, titulo: "Artes Visuais Contemporâneas" }
-    ];
+import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
+import eventos from '../../../json/db-mock-eventos.json';
 
+function PaginaVisualizarEventosAdmin() {
     const handleSelect = (item) => {
         console.log("Selecionado:", item);
         alert(`Você selecionou: ${item.titulo}`);
@@ -26,18 +20,13 @@ function PaginaVisualizarEventosAdmin() {
                 <HeaderAdmin />
             </nav>
             <div className={styles.topo}>
-                <BarraPesquisa itens={artigosFake} onSelect={handleSelect} />
+                <BarraPesquisa itens={eventos} onSelect={handleSelect} />
                 <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
                     <BiSolidAddToQueue className={styles.iconAdd} />
                 </button>
             </div>
             <div className={styles.containerCards}>
-                <CardPadraoEventos />
-                <CardPadraoEventos />
-                <CardPadraoEventos />
-                <CardPadraoEventos />
-                <CardPadraoEventos />
-                <CardPadraoEventos />
+                <ListaCardsAdmin cards={eventos} limite={null} />
             </div>
         </div>
     )

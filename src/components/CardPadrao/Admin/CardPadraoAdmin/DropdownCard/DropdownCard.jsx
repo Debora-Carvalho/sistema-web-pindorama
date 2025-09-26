@@ -56,15 +56,15 @@ export default function DropdownCard() {
             </button>
 
             {aberto && (
-                <ul className={styles.opcoesMenu}>
-                    <li>
+                <div className={styles.opcoesMenu}>
+                    <div>
                         <button className={styles.btnEditar}>
                             <FaRegEdit className={styles.iconOptions} />
                             Editar
                         </button>
-                    </li>
+                    </div>
 
-                    <li>
+                    <div>
                         <button
                             className={styles.btnDestacar}
                             onClick={() => setPopupDestacarAberto(true)}
@@ -98,9 +98,9 @@ export default function DropdownCard() {
                             textoBotao="Fechar"
                             onBotaoClick={() => setPopupDestaqueSucessoAberto(false)}
                         />
-                    </li>
+                    </div>
 
-                    <li>
+                    <div>
                         <button
                             className={styles.btnExcluir}
                             onClick={() => setPopupExcluirAberto(true)}
@@ -122,8 +122,8 @@ export default function DropdownCard() {
                             textoBotao="Fechar"
                             onBotaoClick={() => setPopupSucessoAberto(false)}
                         />
-                    </li>
-                </ul>
+                    </div>
+                </div>
             )}
         </div>
     );

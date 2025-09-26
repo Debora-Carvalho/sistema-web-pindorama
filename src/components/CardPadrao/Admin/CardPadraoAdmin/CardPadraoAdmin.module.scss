@@ -2,7 +2,6 @@
 
 .card {
     position: relative;
-    background: var(--primary-200);
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -19,6 +18,16 @@
     &:hover {
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
+}
+
+.backgroundArtigo  {
+    background: var(--primary-300);
+    color: var(--text-primary);
+}
+
+.backgroundEvento {
+    background-color: var(--secondary-500);
+    color: var(--text-secondary);
 }
 
 .dropdownOpcoesContainer {
@@ -61,13 +70,19 @@
     font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-weight: 600;
     margin-bottom: 0.5rem;
+}
+
+.tituloArtigo {
     color: var(--primary-500);
+}
+
+.tituloEvento {
+    color: var(--text-secondary);
 }
 
 .cardDescricao {
     font-family: $font-family-texto;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
-    color: var(--text-primary);
     text-align: justify;
     margin-bottom: 1rem;
 }
@@ -77,7 +92,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    background: var(--primary-200);
     width: 100%;
     max-width: 16rem;
     height: 3rem;
@@ -87,23 +102,11 @@
     font-family: $font-family-texto;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--primary-400);
     transition: background 0.3s;
-}
-
-.btnArtigo {
-    background: var(--primary-400);
 
     &:hover {
-        background: var(--primary-300);
-    }
-}
-
-.btnEvento {
-    background: var(--secondary-600);
-
-    &:hover {
-        background: var(--secondary-500);
+        background: var(--background-primary);
     }
 }
 
