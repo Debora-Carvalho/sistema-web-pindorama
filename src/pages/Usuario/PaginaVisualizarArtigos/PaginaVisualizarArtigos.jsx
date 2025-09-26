@@ -4,7 +4,7 @@ import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 
 import artigos from "../../../json/db-mock-artigos.json";
-import ListaCards from "../../../components/ListaCards/ListaCards.jsx";
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 
 function PaginaVisualizarArtigos() {
     useTituloDocumento("Artigos | Pindorama"); // mudando o Title da pagina

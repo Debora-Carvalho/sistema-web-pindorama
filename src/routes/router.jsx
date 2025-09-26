@@ -28,8 +28,8 @@ const AnimatedRoutes = () => {
 				<Route path="/" element={<PaginaTeste />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
-				<Route path="/visualizar-artigos" element={<PaginaVisualizarArtigos />} />
-				<Route path="/visualizar-eventos" element={<PaginaVisualizarEventos />} />
+				<Route path="/artigos" element={<PaginaVisualizarArtigos />} />
+				<Route path="/eventos" element={<PaginaVisualizarEventos />} />
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 
 				{/* ROTAS ADMINISTRADOR */}
@@ -37,8 +37,8 @@ const AnimatedRoutes = () => {
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
-					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
+					<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
+					<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
 				</Route>
 			</Routes>
 		</AnimatePresence>

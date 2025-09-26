@@ -15,10 +15,10 @@ function Header() {
 			navigate("/inicio");
 		}
 		if (section === 'artigos') {
-			navigate('/visualizar-artigos');
+			navigate('/artigos');
 		}
 		if (section === 'eventos') {
-			navigate('/visualizar-eventos');
+			navigate('/eventos');
 		}
 		if (section === 'galeria') {
 			navigate('/galeria');
@@ -56,14 +56,14 @@ function Header() {
 						</button>
 
 						<button
-							className={`${styles['headerBtn']} ${location.pathname === '/visualizar-artigos' ? styles.active : ''}`}
+							className={`${styles['headerBtn']} ${location.pathname === '/artigos' ? styles.active : ''}`}
 							onClick={() => handleClick('artigos')}
 						>
 							Artigos
 						</button>
 
 						<button
-							className={`${styles['headerBtn']} ${location.pathname === '/visualizar-eventos' ? styles.active : ''}`}
+							className={`${styles['headerBtn']} ${location.pathname === '/eventos' ? styles.active : ''}`}
 							onClick={() => handleClick('eventos')}
 						>
 							Eventos

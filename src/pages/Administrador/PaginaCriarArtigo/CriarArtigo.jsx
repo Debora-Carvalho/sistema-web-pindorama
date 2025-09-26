@@ -160,7 +160,7 @@ function PaginaCriarArtigo() {
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
-            navigate('/adm/visualizar-artigos');
+            navigate('/adm/artigos');
         }
         setAcaoAposSucesso(null);
     };

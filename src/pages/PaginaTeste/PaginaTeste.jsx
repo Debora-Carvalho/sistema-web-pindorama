@@ -48,7 +48,7 @@ function PaginaTeste() {
 					imagem="https://i.pinimg.com/originals/ae/75/bb/ae75bb989466498589f4faa1e3e5b426.jpg"
 					tipo="artigo"
 					titulo="A Língua Tupi"
-					link="/visualizar-artigos/4"
+					link="/artigos/4"
 				/>
 
 				<ThemeToggle />

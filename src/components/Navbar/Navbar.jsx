@@ -31,12 +31,12 @@ const Navbar = () => {
         {
             text: "Artigos",
             icon: <FaFileAlt />,
-            navigate: "/visualizar-artigos",
+            navigate: "/artigos",
         },
         {
             text: "Eventos",
             icon: <FaCalendarCheck />,
-            navigate: "/visualizar-eventos",
+            navigate: "/eventos",
         },
         {
             text: "Galeria",

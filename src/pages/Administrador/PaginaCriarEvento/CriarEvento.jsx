@@ -167,7 +167,7 @@ function PaginaCriarEvento() {
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
-            navigate('/adm/visualizar-eventos');
+            navigate('/adm/eventos');
         }
         setAcaoAposSucesso(null);
     };

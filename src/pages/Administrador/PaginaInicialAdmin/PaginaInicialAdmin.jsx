@@ -94,7 +94,7 @@ function PaginaInicialAdmin() {
                                     />
                                 ))}
 
-                                <Link to="/adm/visualizar-artigos" className={styles.verTodosBotao}>
+                                <Link to="/adm/artigos" className={styles.verTodosBotao}>
                                     <span className={styles.verTodosTexto}>Ver todos</span>
                                     <FaArrowRight />
                                 </Link>
