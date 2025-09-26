@@ -32,6 +32,7 @@ const AppRoutes = () => {
 				<Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+          <Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
 					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />

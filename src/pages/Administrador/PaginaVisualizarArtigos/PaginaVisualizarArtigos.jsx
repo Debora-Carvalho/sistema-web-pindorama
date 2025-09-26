@@ -6,8 +6,10 @@ import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+import { useNavigate } from "react-router-dom";
 
 function PaginaVisualizarArtigosAdmin() {
+    const navigate = useNavigate();
     const { listarArtigos, deletarArtigo, loading, erro } = useArtigos();
     const [artigos, setArtigos] = useState([]);
 
@@ -30,7 +32,7 @@ function PaginaVisualizarArtigosAdmin() {
     };
 
     const handleEditar = (id) => {
-      //window.location.href = `/adm/editar-artigo/${id}`;
+      navigate(`/adm/criar-artigo/${id}`);
     };
 
     const handleSelect = (item) => {
