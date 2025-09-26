@@ -14,6 +14,8 @@ function ListaImagens({ limite }) {
                     key={img.id}
                     imagem={img.imagem}
                     titulo={img.titulo}
+                    descricao={img.descricao}
+                    link={img.link}
                 />
             ))}
         </div>
