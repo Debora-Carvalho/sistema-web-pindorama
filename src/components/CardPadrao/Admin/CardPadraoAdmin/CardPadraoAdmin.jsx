@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CardPadraoAdmin.module.scss"; 
+import styles from "./CardPadraoAdmin.module.scss";
 import { Link } from "react-router-dom";
 
 import DropdownCard from "./DropdownCard/DropdownCard.jsx";
@@ -11,12 +11,11 @@ function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
     return (
         <div className={styles.card}>
             <div className={styles.cardImagem}>
-
-                <div className={styles.dropdownOpcoesContainer}>
-                    <DropdownCard />
-                </div>
-                
                 <img src={imagem} alt={`Capa do ${tipo} ${titulo}`} />
+            </div>
+
+            <div className={styles.dropdownOpcoesContainer}>
+                <DropdownCard />
             </div>
 
             <div className={styles.cardConteudo}>
