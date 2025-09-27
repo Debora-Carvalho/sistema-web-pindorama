@@ -48,11 +48,10 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar, tagsIniciais = [] 
         };
 
         document.addEventListener("mousedown", handleClickOutside);
+        setTagsSelecionadas(tagsIniciais);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-
-        setTagsSelecionadas(tagsIniciais);
     }, [tagsIniciais, aberto]);
 
     if (!aberto) return null;

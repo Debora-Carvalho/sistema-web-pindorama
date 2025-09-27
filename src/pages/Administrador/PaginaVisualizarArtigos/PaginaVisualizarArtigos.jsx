@@ -12,6 +12,7 @@ function PaginaVisualizarArtigosAdmin() {
     const navigate = useNavigate();
     const { listarArtigos, deletarArtigo, loading, erro } = useArtigos();
     const [artigos, setArtigos] = useState([]);
+    const [filtro, setFiltro] = useState("");
 
     useEffect(() => {
       async function carregar() {
@@ -40,6 +41,10 @@ function PaginaVisualizarArtigosAdmin() {
         alert(`Você selecionou: ${item.titulo}`);
     };
 
+    const artigosFiltrados = artigos.filter((a) =>
+      a.titulo.toLowerCase().includes(filtro.toLowerCase())
+    );
+
     return (
         <div className={styles.containerVisualizar}>
             <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
@@ -47,7 +52,11 @@ function PaginaVisualizarArtigosAdmin() {
                 <HeaderAdmin />
             </nav>
             <div className={styles.topo}>
-                <BarraPesquisa itens={artigos} onSelect={handleSelect} />
+                <BarraPesquisa
+                  itens={artigos}
+                  onSelect={(item) => console.log("Selecionado:", item)}
+                  onInputChange={(valor) => setFiltro(valor)}
+                />
                 <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-artigo"}>
                     <BiSolidAddToQueue className={styles.iconAdd} />
                 </button>
@@ -55,7 +64,7 @@ function PaginaVisualizarArtigosAdmin() {
             <div className={styles.containerCards}>
             {loading && <p>Carregando artigos...</p>}
             {erro && <p style={{ color: "red" }}>{erro}</p>}
-            {artigos.map((artigo) => (
+            {artigosFiltrados.map((artigo) => (
               <CardPadraoArtigos
                 key={artigo.id}
                 id={artigo.id}

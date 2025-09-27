@@ -191,11 +191,12 @@ function PaginaCriarArtigo() {
             setTitulo(artigo.titulo);
             setConteudo(artigo.conteudo);
             setTagsSelecionadas(artigo.tags || []);
-            setLocalSelecionado(
-              artigo.local
-                ? { cidade: artigo.local.split(" - ")[0], estado: artigo.local.split(" - ")[1] }
-                : null
-            );
+            if (artigo.local && artigo.local.includes(" - ")) {
+              const [cidade, estado] = artigo.local.split(" - ");
+              setLocalSelecionado({ cidade, estado });
+            } else {
+              setLocalSelecionado(null);
+            }
             setPreviewCapa(artigo.url_imagem || "");
             // imagemCapa não precisa ser setado agora, só quando trocar
           } catch (e) {
@@ -267,7 +268,7 @@ function PaginaCriarArtigo() {
                         className={styles.botaoExcluir}
                         onClick={handleExcluirClick}
                     >
-                        Excluir
+                        Limpar
                     </button>
                     <div className={styles.botoesDireita}>
                       <button
