@@ -2,11 +2,14 @@ import Downshift from "downshift";
 import style from "./BarraPesquisa.module.scss";
 import { CiSearch } from "react-icons/ci";
 
-function BarraPesquisa({ itens = [], onSelect }) {
+function BarraPesquisa({ itens = [], onSelect, onInputChange }) {
   return (
     <Downshift
       onChange={selection => {
         if (selection && onSelect) onSelect(selection);
+      }}
+      onInputValueChange={(inputValue) =>{
+        if (onInputChange) onInputChange(inputValue);
       }}
       itemToString={item => (item ? item.titulo : "")}
     >
@@ -27,7 +30,8 @@ function BarraPesquisa({ itens = [], onSelect }) {
             })}
             className={style.inputPesquisa}
           />
-          <ul className={style.listaResultados} {...getMenuProps()}>
+          {/* Lista abaico da barra de pesquisa, comentada */}
+          {/* <ul className={style.listaResultados} {...getMenuProps()}>
             {isOpen &&
               itens
                 .filter(
@@ -46,7 +50,7 @@ function BarraPesquisa({ itens = [], onSelect }) {
                     {item.titulo}
                   </li>
                 ))}
-          </ul>
+          </ul> */}
         </div>
       )}
     </Downshift>

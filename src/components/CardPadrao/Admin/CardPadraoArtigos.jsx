@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import PopupConfirmar from "../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../components/Popups/PopupSucesso/PopupSucesso.jsx";
 
-function CardPadraoArtigos({ id, imagem, titulo, url }) {
+function CardPadraoArtigos({ id, imagem, titulo, url, onExcluir, onEditar  }) {
   const [aberto, setAberto] = useState(false);
   const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
   const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
@@ -28,9 +28,15 @@ function CardPadraoArtigos({ id, imagem, titulo, url }) {
     setPopupDestaqueSucessoAberto(true);
   };
 
-  const handleConfirmarExcluir = () => {
+  const handleConfirmarExcluir = async() => {
+    try{
+    await onExcluir(id);
+    console.log("Exclusão concluída, abrindo popup sucesso...");
     setPopupExcluirAberto(false);
-    setPopupSucessoAberto(true); 
+    setPopupSucessoAberto(true);
+  }catch(e){
+    alert("Erro ao excluir artigo: " + e.message);
+  }
   };
 
   return (
@@ -38,7 +44,7 @@ function CardPadraoArtigos({ id, imagem, titulo, url }) {
       <div className={styles.cardGeral}>
         <img
           className={styles.imgCard}
-          src={imagem}
+          src={imagem || "https://i.pinimg.com/736x/59/5d/cf/595dcf5a6404fed875a1be2d36078375.jpg"}
           alt="Imagem do artigo"
         />
         <div className={styles.cardInfos}>
@@ -60,7 +66,7 @@ function CardPadraoArtigos({ id, imagem, titulo, url }) {
           {aberto && (
             <ul className={styles.opcoesMenu}>
               <li>
-                <button className={styles.btnEditar}>
+                <button className={styles.btnEditar} onClick={() => onEditar(id)}>
                   Editar
                   <FaRegEdit className={styles.iconOptions} />
                 </button>
