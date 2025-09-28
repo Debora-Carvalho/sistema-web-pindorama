@@ -12,7 +12,7 @@ import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmi
 import artigos from '../../../json/db-mock-artigos.json';
 import useWindowSize from '../../../components/HeaderAdmin/useWindowSize.js';
 import { useAuth } from '../../../contexts/AuthContext.jsx';
-
+import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js'
 import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
 
@@ -130,8 +130,8 @@ function PaginaInicialAdmin() {
                                     <ListaCardsAdmin cards={artigos} limite={limiteDeCards} />
                                 </div>
 
-                                {/* Lembrar de colocar o component de carregamento e erro */}
-                                {authLoading || artigosLoading ? (
+                                {/* EDITANDO Lembrar de colocar o component de carregamento e erro */}
+                                {/* {authLoading || artigosLoading ? (
                                     <p>Carregando...</p>
                                 ) : artigosError ? (
                                     <p>Ocorreu um erro ao carregar os artigos: {error}</p>
@@ -145,7 +145,7 @@ function PaginaInicialAdmin() {
                                             url={artigo.url}
                                         />
                                     ))
-                                )}
+                                )} */}
                                 <Link to="/adm/artigos" className={styles.verTodosBotao}>
                                     <span className={styles.verTodosTexto}>Ver todos</span>
                                     <FaArrowRight />

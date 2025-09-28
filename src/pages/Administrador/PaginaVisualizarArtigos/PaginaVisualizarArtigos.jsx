@@ -8,7 +8,7 @@ import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { useAuth } from '../../../contexts/AuthContext.jsx';
-
+import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
 // import artigos from '../../../json/db-mock-artigos.json';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js'
