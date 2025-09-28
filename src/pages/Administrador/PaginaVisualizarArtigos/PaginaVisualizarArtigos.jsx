@@ -4,9 +4,12 @@ import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 import { motion } from 'framer-motion';
+import { useAuth } from '../../../contexts/AuthContext.jsx';
 
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
-import artigos from '../../../json/db-mock-artigos.json';
+// import artigos from '../../../json/db-mock-artigos.json';
+import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js'
+
 
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
@@ -20,6 +23,9 @@ function PaginaVisualizarArtigosAdmin() {
         console.log("Selecionado:", item);
         alert(`Você selecionou: ${item.titulo}`);
     };
+
+    const { id, loading: authLoading } = useAuth();
+    const { artigos, loading: artigosLoading, error } = useGetArtigosAdmin(id);
 
     return (
         <motion.div
@@ -41,7 +47,14 @@ function PaginaVisualizarArtigosAdmin() {
                     </button>
                 </div>
                 <div className={styles.containerCards}>
-                    <ListaCardsAdmin cards={artigos} limite={null} />
+                    {/* Lembrar de colocar o component de carregamento e erro */}
+                    {authLoading || artigosLoading ? (
+                        <p>Carregando...</p>
+                    ) : error ? (
+                        <p>Ocorreu um erro ao carregar os artigos: {error}</p>
+                    ) : (
+                        <ListaCardsAdmin cards={artigos} limite={null} />
+                    )}
                 </div>
             </div>
         </motion.div>

@@ -2,20 +2,23 @@ import React from "react";
 import styles from "./ListaImagens.module.scss";
 
 import CardImagem from "../CardPadrao/Usuario/CardImagem/CardImagem.jsx";
-import imagens from "../../json/db-mock-imagens.json";
+// import imagens from "../../json/db-mock-imagens.json";
 
-function ListaImagens({ limite }) {
-    const imagensExibidas = limite ? imagens.slice(0, limite) : imagens;
+function ListaImagens({ imagens, limite }) {
+    const imagensExibidas = Array.isArray(imagens)
+        ? (limite ? imagens.slice(0, limite) : imagens)
+        : [];
 
+console.log(imagensExibidas)
     return (
         <div className={styles.gradeGaleria}>
-            {imagensExibidas.map((img) => (
+            {imagensExibidas.map((item) => (
                 <CardImagem
-                    key={img.id}
-                    imagem={img.imagem}
-                    titulo={img.titulo}
-                    descricao={img.descricao}
-                    link={img.link}
+                    key={item.id}
+                    imagem={item.imagem}
+                    titulo={item.titulo}
+                    descricao={item.descricao}
+                    link={item.link}
                 />
             ))}
         </div>

@@ -6,11 +6,11 @@ function ListaCardsAdmin({ cards, limite }) {
 
     return (
         <div className={styles.gridCards}>
-            {cardsFiltrados.map((card, index) => (
+            {cardsFiltrados.map((card) => (
                 <CardPadraoAdmin
-                    key={index}
+                    key={card.id}
                     tipo={card.tipo}
-                    imagem={card.imagem}
+                    imagem={card.url_imagem}
                     titulo={card.titulo}
                     link={card.link}
                 />
