@@ -78,7 +78,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1; 
-    filter: brightness(0.7);
+    filter: brightness(0.9);
   }
 
 }
@@ -90,7 +90,7 @@
   width: 90%;
 
   h2 {
-    font-size: 3rem; 
+    font-size: 2.5rem; 
     text-align: start;
  
   }
@@ -211,9 +211,16 @@
 @media (max-width: 1080px) {
   .embla__slide {
     &.slide--mini {
-      transform: translateX(calc(var(--position) * 200px - 50%))
+      top:35%;
+      height: 50%;
+      transform: translateX(calc(var(--position) * 300px - 30%))
         scale(calc(1 - var(--position) * 0.1));
     }
+
+    &.slide--mini .slide__content h2 {
+      font-size: 1.5rem;
+    }
+
   }
 
   .slide__content {
@@ -234,13 +241,9 @@
   .embla__slide {
     &.slide--mini {
       width: 25%;
-      height: 40%;
+      height: 30%;
       transform: translateX(calc(var(--position) * 150px - 50%))
         scale(calc(1 - var(--position) * 1));
-    }
-
-    &.slide--mini .slide__content h2 {
-      font-size: 1rem;
     }
   }
 
@@ -253,7 +256,7 @@
     text-align: center;
 
     h2 {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 
     p {
@@ -266,7 +269,7 @@
   }
 
   .embla__controls {
-    left: 50%;
+    left: 20%;
     bottom: 3rem;
     width: 100%;
 
@@ -278,10 +281,10 @@
   .embla__button {
     top: 50%;
     transform: translateY(-50%);
-    left: -10rem; 
+    left: 1rem; 
 
     &--next {
-      left: auto;
+      left: 1px;
       right: 1rem;
     }
   }
@@ -290,8 +293,9 @@
 @media (max-width: 480px) {
   .embla__slide {
     &.slide--mini {
+      top: 30%;
       width: 30%;
-      height: 45%;
+      height: 30%;
       transform: translateX(calc(var(--position) * 100px - 50%))
         scale(calc(1 - var(--position) * 0.2));
     }
@@ -299,20 +303,22 @@
 
   .slide__content {
     h2 {
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
   }
 
   .embla__controls {
-    bottom: 2rem;
-
+    bottom: 4rem;
+    left: 90%;
+    
     .embla__progress {
       display: none;
     }
-    .embla__buttons {
+    
+    .embla__button {
       position: absolute;
-      left: 70%;
-      transform: translateX(-50%);
+      transform: translateY(-50%);
+
     }
   }
 }
