@@ -20,6 +20,9 @@ import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualiza
 // ROTA ERRO 404 - não encontrado
 import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrado.jsx";
 
+// COMPONENTE QUE GERENCIA SE A ROTAS SERÃO PRIVADAS OU NÃO
+import ProtectedRoute from '../components/Rotas/ProtectedRoute.jsx'
+
 const AnimatedRoutes = () => {
 	const location = useLocation();
 
@@ -36,12 +39,14 @@ const AnimatedRoutes = () => {
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 
 				{/* ROTAS ADMINISTRADOR */}
-				<Route element={<AdminLayout />}>
-					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
-					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
-					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-					<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
-					<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
+				<Route element={<ProtectedRoute />}>
+					<Route element={<AdminLayout />}>
+						<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
+						<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
+						<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
+						<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
+					</Route>
 				</Route>
 
 				{/* ROTA 404 */}
