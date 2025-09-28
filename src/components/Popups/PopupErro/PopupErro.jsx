@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './PopupErro.module.scss';
 
-function PopupErro({ aberto, mensagem, tipo = 'padrao', onClose, duracao = 2000 }) {
+function PopupErro({ aberto, mensagem, tipo = 'padrao', onClose, duracao = 3000 }) {
   useEffect(() => {
     if (aberto) {
       const timer = setTimeout(() => {

@@ -107,9 +107,8 @@
   filter: brightness(50%);
 }
 
-/* --- RESPONSIVIDADE --- */
+/*RESPONSIVIDADE */
 
-/* Até 1080px */
 @media (max-width: 1080px) {
   .containerVisualizar {
     width: 1px;
@@ -135,7 +134,6 @@
   }
 }
 
-/* Até 720px: 2 colunas */
 @media (max-width: 720px) {
   .containerVisualizar {
     gap: 20px;
@@ -163,7 +161,6 @@
   }
 }
 
-/* Até 480px: 1 coluna */
 @media (max-width: 480px) {
   .containerVisualizar {
     grid-template-columns: 1fr;

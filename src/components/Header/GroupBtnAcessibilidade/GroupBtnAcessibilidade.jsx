@@ -5,11 +5,11 @@ import { LuFileVolume } from "react-icons/lu";
 import { IoAccessibilityOutline } from "react-icons/io5";
 import BtnToggleLightDark from '../../BtnToggleLightDark/BtnToggleLightDark';
 
-function GroupBtnAcessibilidade() {
+function GroupBtnAcessibilidade({ overrideClass }) {
 
     return (
         <>
-            <div className={styles.container}>
+              <div className={`${styles.containerAcessibilidade} ${overrideClass || ''}`}>
                 <div className={styles.containerBtnAcessibilidade}>
                     <button>
                         <LuFileVolume className={styles.btnAcessibilidadeIcon}/>
