@@ -46,8 +46,7 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
             <Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-						<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
-						<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
+						
 					</Route>
         </Route>
 				{/* <Route element={<AdminLayout />}>
