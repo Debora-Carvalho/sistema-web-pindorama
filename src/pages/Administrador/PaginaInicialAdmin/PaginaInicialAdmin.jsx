@@ -15,6 +15,9 @@ import { useAuth } from '../../../contexts/AuthContext.jsx';
 import CardPadraoArtigos from '../../../components/CardPadrao/Admin/CardPadraoArtigos.jsx';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js'
 import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+import { useNavigate } from "react-router-dom";
+
 
 const getSaudacao = () => {
     const horaAtual = new Date().getHours();
@@ -65,17 +68,38 @@ const pageTransition = {
 
 function PaginaInicialAdmin() {
     const saudacaoTexto = getSaudacao();
+    const navigate = useNavigate();
     const [popupCriarAberto, setPopupCriarAberto] = useState(false);
     const { width } = useWindowSize();
     const limiteDeCards = width <= 1080 ? 4 : 3;
     const { id, loading: authLoading } = useAuth();
     const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigosAdmin(id);
     const { eventos, loading: eventosLoading, error: eventosError } = useGetEventosAdmin(id);
+    const { deletarArtigo } = useArtigos();
     const artigosRecentes = artigos.slice(0, 3);
     const eventosFormatados = eventos.map(evento => ({
         ...evento,
         ...formatarDataEvento(evento.data)
     }));
+
+    const handleExcluir = async (id) => {
+      await deletarArtigo(id);
+      // setArtigos((prev) => prev.filter((a) => a.id !== id));
+    };
+
+    const handleEditar = (id) => {
+      navigate(`/adm/criar-artigo/${id}`);
+    };
+
+    const artigosAdaptados = artigos.map((a) => ({
+    id: a.id,
+    tipo: "artigo",
+    titulo: a.titulo,
+    url_imagem: a.url_imagem,
+    link: `/artigo/${a.id}`,
+    status: a.status
+    }));
+
 
     return (
         <>
@@ -87,7 +111,7 @@ function PaginaInicialAdmin() {
                 transition={pageTransition.transition}
             >
                 <main className={styles.base}>
-                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
+                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }}/>
                     <HeaderAdmin />
 
                     <div className={styles.gridContainer}>
@@ -127,7 +151,14 @@ function PaginaInicialAdmin() {
                             <div className={styles.gridArtigos}>
                               {/* MERGE itar depois */}
                                 <div className={styles.cardsWrapper}>
-                                    <ListaCardsAdmin cards={artigos} limite={limiteDeCards} />
+                                    <ListaCardsAdmin 
+                                      cards={artigosAdaptados} 
+                                      limite={limiteDeCards} 
+                                      actions={{
+                                          onEditar: handleEditar,
+                                          onExcluir: handleExcluir
+                                      }}
+                                    />
                                 </div>
 
                                 {/* EDITANDO Lembrar de colocar o component de carregamento e erro */}

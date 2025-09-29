@@ -58,6 +58,7 @@
 
 .cardDescricao {
     font-family: $font-family-texto;
+    -webkit-line-clamp: 3;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     color: var(--text-primary);
     text-align: justify;

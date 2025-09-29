@@ -7,7 +7,7 @@ import styles from './DropdownCard.module.scss';
 import PopupConfirmar from "../../../../Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../../Popups/PopupSucesso/PopupSucesso.jsx";
 
-export default function DropdownCard() {
+export default function DropdownCard({ id, actions }) {
     const [aberto, setAberto] = useState(false);
     const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
     const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
@@ -44,9 +44,14 @@ export default function DropdownCard() {
         setPopupDestaqueSucessoAberto(true);
     };
 
-    const handleConfirmarExcluir = () => {
-        setPopupExcluirAberto(false);
-        setPopupSucessoAberto(true);
+    const handleConfirmarExcluir = async () => {
+        try {
+            await actions.onExcluir(id);
+            setPopupExcluirAberto(false);
+            setPopupSucessoAberto(true);
+        } catch (e) {
+            alert("Erro ao excluir artigo: " + e.message);
+        }
     };
 
     return (
@@ -58,7 +63,10 @@ export default function DropdownCard() {
             {aberto && (
                 <div className={styles.opcoesMenu}>
                     <div>
-                        <button className={styles.btnEditar}>
+                        <button
+                            className={styles.btnEditar}
+                            onClick={() => actions.onEditar(id)}
+                        >
                             <FaRegEdit className={styles.iconOptions} />
                             Editar
                         </button>
