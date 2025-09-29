@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 import DropdownCard from "./DropdownCard/DropdownCard.jsx";
 
-function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
+function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions , status }) {
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
     const backgroundClasse =
-        tipo === "artigo" ? styles.backgroundArtigo : styles.backgroundEvento;
+        tipo === "artigo" ? status === "rascunho" ? styles.backgroundRascunho : styles.backgroundArtigo : styles.backgroundEvento;
 
     const tituloClasse =
         tipo === "artigo" ? styles.tituloArtigo : styles.tituloEvento;
@@ -21,7 +21,7 @@ function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
             </div>
 
             <div className={styles.dropdownOpcoesContainer}>
-                <DropdownCard />
+                <DropdownCard id={id} actions={actions} />
             </div>
 
             <div className={styles.cardConteudo}>
@@ -34,10 +34,8 @@ function CardPadraoAdmin({ imagem, tipo, titulo, link }) {
                 <p className={styles.cardDescricao}>
                     {descricao}
                 </p> */}
-
-                <Link to={link} className={botaoClasse}>
-                    {tipo === "artigo" ? "Ler artigo completo" : "Ver evento completo"}
-                </Link>
+                {/* Adicionando titulo do botão para rascunho */}
+              <Link to={link} className={botaoClasse}> {tipo === "artigo" ? status === "rascunho" ? "Ler artigo de rascunho" : "Ler artigo completo" : "Ver evento completo"} </Link>
             </div>
         </div>
     );
