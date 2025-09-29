@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const API_URL = `${API_BASE_URL}/login/api/administradores`;
 
 export const useLogin = () => {
-    const [data, setData] = useState(null);
+    const { login: setAuthData } = useAuth();
+    // const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -52,7 +54,10 @@ export const useLogin = () => {
             }
 
             const sessionData = await sessionResposta.json();
-            setData(sessionData);
+            const autorId = sessionData.autor_id;
+            const autorNome = sessionData.autor_nome; 
+
+            setAuthData(token, autorId, autorNome);
 
         } catch (err) {
             setError(err.message);
@@ -62,5 +67,5 @@ export const useLogin = () => {
         }
     };
 
-    return { data, loading, error, login };
+    return { loading, error, login };
 };

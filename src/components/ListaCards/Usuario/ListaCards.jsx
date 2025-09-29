@@ -6,13 +6,13 @@ function ListaCards({ cards, limite }) {
 
     return (
         <div className={styles.gridCards}>
-            {cardsFiltrados.map((card, index) => (
+            {cardsFiltrados.map((card) => (
                 <CardPadrao
-                    key={index}
+                    key={card.id} 
                     tipo={card.tipo}
-                    imagem={card.imagem}
+                    imagem={card.url_imagem}
                     titulo={card.titulo}
-                    descricao={card.descricao}
+                    descricao={card.conteudo.replace(/<[^>]+>/g, '')}
                     link={card.link}
                 />
             ))}

@@ -39,12 +39,12 @@
     &.sessao {
       background-color: var(--primary-300);
       ;
-      color: white;
+      color: black;
     }
     &.rede {
       background-color: var(--primary-300);
       ;
-      color: white;
+      color: black;
     }
 
     &.padrao {
@@ -79,7 +79,6 @@
   }
 }
 
-// Animação de fade in
 @keyframes fadeIn {
   to { opacity: 1; }
 }

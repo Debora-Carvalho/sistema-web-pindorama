@@ -16,9 +16,13 @@ import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArt
 import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEvento.jsx"
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaCarrossel from "../pages/Usuario/PaginaCarrossel/PaginaCarrossel.jsx";
 
 // ROTA ERRO 404 - não encontrado
 import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrado.jsx";
+
+// COMPONENTE QUE GERENCIA SE A ROTAS SERÃO PRIVADAS OU NÃO
+import ProtectedRoute from '../components/Rotas/ProtectedRoute.jsx'
 
 const AnimatedRoutes = () => {
 	const location = useLocation();
@@ -28,7 +32,7 @@ const AnimatedRoutes = () => {
 		<AnimatePresence mode="wait">
 			<Routes>
 				{/* ROTAS USUARIO */}
-				<Route path="/" element={<PaginaTeste />} />
+				<Route path="/" element={<PaginaCarrossel />} />
 				<Route path="/inicio" element={<PaginaInicial />} />
 				<Route path="/login" element={<PaginaLogin />} />
 				<Route path="/artigos" element={<PaginaVisualizarArtigos />} />
@@ -36,13 +40,24 @@ const AnimatedRoutes = () => {
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 
 				{/* ROTAS ADMINISTRADOR */}
-				<Route element={<AdminLayout />}>
+				<Route element={<ProtectedRoute />}>
+					<Route element={<AdminLayout />}>
+						<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
+						<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+            <Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
+						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
+						<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
+						<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
+					</Route>
+        </Route>
+				{/* <Route element={<AdminLayout />}>
 					<Route path="/adm/inicio" element={<PaginaInicialAdmin />} />
 					<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
+          <Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
 					<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-					<Route path="/adm/artigos" element={<PaginaVisualizarArtigosAdmin />} />
-					<Route path="/adm/eventos" element={<PaginaVisualizarEventosAdmin />} />
-				</Route>
+					<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
+					<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
+				</Route> */}
 
 				{/* ROTA 404 */}
 				<Route path="*" element={<PaginaNaoEncontrado />} />

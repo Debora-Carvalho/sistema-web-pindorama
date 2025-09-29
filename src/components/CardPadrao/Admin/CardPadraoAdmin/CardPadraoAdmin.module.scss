@@ -19,6 +19,10 @@
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 }
+.backgroundRascunho {
+  background: #dcc4a9; // amarelo claro mais suave
+  color: #5C3A21;      // texto marrom escuro para contraste
+}
 
 .backgroundArtigo  {
     background: var(--primary-300);

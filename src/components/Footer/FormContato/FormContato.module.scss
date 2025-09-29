@@ -8,7 +8,7 @@
 	gap: 10px;
 
 	h2 {
-		font-family: $font-family-texto;
+		font-family: $font-family-subtitulo;
 		color: var(--text-secondary);
 		font-size: 2rem;
 		text-align: start;
@@ -27,7 +27,7 @@
 		label,
 		input,
 		textarea {
-			font-family: $font-family-texto;
+			font-family: $font-family-subtitulo;
 		}
 
 		label {
