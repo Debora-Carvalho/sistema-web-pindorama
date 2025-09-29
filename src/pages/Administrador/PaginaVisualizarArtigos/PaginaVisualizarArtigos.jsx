@@ -67,7 +67,9 @@ function PaginaVisualizarArtigosAdmin() {
             transition={pageTransition.transition}
         >
         <div className={styles.containerVisualizar}>
+          <link to="/adm/inicio"> 
             <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
+            </link>
             <nav className={styles.navbar}>
                 <HeaderAdmin />
             </nav>
