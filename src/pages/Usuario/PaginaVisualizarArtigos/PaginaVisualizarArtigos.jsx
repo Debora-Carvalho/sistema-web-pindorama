@@ -43,7 +43,7 @@ function PaginaVisualizarArtigos() {
                     <ListaCards cards={artigosAdaptados} limite={null} />
                     
                     {/* Botão de voltar ou outros links podem ser adicionados */}
-                    <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link>
+                    {/* <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link> */}
                 </main>
 
                 <Footer />
