@@ -2,7 +2,7 @@ import styles from './PaginaVisualizarEventos.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
-
+import Loading from '../../../components/Loading/Loading.jsx';
 // import eventos from "../../../json/db-mock-eventos.json";
 import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
@@ -19,7 +19,7 @@ function PaginaVisualizarEventos() {
                 <main className={styles.containerItems}>
                     <h2>Eventos</h2>
                 {/* Lembrar de colocar o component de carregamento e erro */}
-                {loading && <p>Carregando eventos...</p>}
+                {loading && <Loading/>}
                 {error && <p>Ocorreu um erro ao carregar os eventos: {error}</p>}
                     <ListaCards cards={eventos} limite={null} />
                 </main>

@@ -11,6 +11,7 @@ import { useAuth } from '../../../contexts/AuthContext.jsx';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
 // import artigos from '../../../json/db-mock-artigos.json';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js';
+import Loading from "../../../components/Loading/Loading.jsx";
 
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
@@ -69,7 +70,7 @@ function PaginaVisualizarArtigosAdmin() {
             transition={pageTransition.transition}
         >
             <div className={styles.containerVisualizar}>
-                <img className={styles.logo} src={Logo} alt="Logo do Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }}/>
+                <img className={styles.logo} src={Logo} alt="Logo do Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }} />
                 <nav className={styles.navbar}>
                     <HeaderAdmin />
                 </nav>
@@ -87,14 +88,14 @@ function PaginaVisualizarArtigosAdmin() {
                     </button>
                 </div>
                 <div className={styles.containerCards}>
-                    {loading && <p>Carregando artigos...</p>}
+                    {loading && <Loading />}
                     {erro && <p style={{ color: "red" }}>{erro}</p>}
                     <ListaCardsAdmin
                         cards={artigosAdaptados}
                         limite={null}
                         actions={{
-                          onEditar: handleEditar,
-                          onExcluir: handleExcluir
+                            onEditar: handleEditar,
+                            onExcluir: handleExcluir
                         }}
                     />
                 </div>

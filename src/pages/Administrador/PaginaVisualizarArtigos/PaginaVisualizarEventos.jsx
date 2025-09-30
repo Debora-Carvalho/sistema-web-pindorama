@@ -8,6 +8,7 @@ import { useAuth } from '../../../contexts/AuthContext.jsx';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
 // import eventos from '../../../json/db-mock-eventos.json';
 import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
+import Loading from '../../../components/Loading/Loading.jsx';
 
 function PaginaVisualizarEventosAdmin() {
     const handleSelect = (item) => {
@@ -33,7 +34,7 @@ function PaginaVisualizarEventosAdmin() {
             <div className={styles.containerCards}>
                 {/* Lembrar de colocar o component de carregamento e erro */}
                     {authLoading || eventosLoading ? (
-                        <p>Carregando...</p>
+                        <Loading/>
                     ) : error ? (
                         <p>Ocorreu um erro ao carregar os eventos: {error}</p>
                     ) : (
