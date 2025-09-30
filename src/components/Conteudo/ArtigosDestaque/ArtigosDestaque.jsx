@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // import artigos from "../../../json/db-mock-artigos.json";
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import ListaCards from "../../ListaCards/Usuario/ListaCards.jsx";
+import Loading from "../../Loading/Loading.jsx";
 
 function decodeHtml(html) {
   const txt = document.createElement("textarea");
@@ -31,7 +32,7 @@ function ArtigosDestaque() {
         <div className={styles.container}>
             <div className={styles.containerTopo}>
                 <h2>Destaques</h2>
-                {loading && <p>Carregando artigos...</p>}
+                {loading && <Loading />}
                 {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
                 <Link to="/artigos" className={styles.btnVerMais}>Ver mais</Link>
             </div>

@@ -5,6 +5,7 @@ import Footer from '../../../components/Footer/Footer.jsx';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import { Link } from "react-router-dom";
+import Loading from '../../../components/Loading/Loading.jsx';
 
 // Função para decodificar HTML entities
 function decodeHtml(html) {
@@ -36,7 +37,7 @@ function PaginaVisualizarArtigos() {
 
                 <main className={styles.containerItems}>
                     <h2>Artigos</h2>
-                    {loading && <p>Carregando artigos...</p>}
+                    {loading && <Loading/>}
                     {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
 
                     <ListaCards cards={artigosAdaptados} limite={null} />

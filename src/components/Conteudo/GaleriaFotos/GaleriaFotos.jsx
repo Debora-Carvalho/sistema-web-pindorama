@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import ListaImagens from "../../ListaImagens/ListaImagens.jsx";
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
+import Loading from "../../Loading/Loading.jsx";
 
 function GaleriaFotos() {
         const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigos();
         const { eventos, loading: eventosLoading, error: eventosError } = useGetEventos();
     
         if (artigosLoading || eventosLoading) {
-            return <div>Carregando...</div>;
+            return <Loading />;
         }
     
         if (artigosError || eventosError) {
