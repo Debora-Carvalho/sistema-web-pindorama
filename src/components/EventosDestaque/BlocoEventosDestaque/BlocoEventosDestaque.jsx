@@ -2,6 +2,7 @@ import styles from "./BlocoEventosDestaque.module.scss";
 import ListaEventosDestaque from "../../ListaEventosDestaque/ListaEventosDestaque.jsx";
 import { Link } from "react-router-dom";
 import { useGetEventos } from "../../../hooks/usuario/useGetEventos.js";
+import Loading from "../../Loading/Loading.jsx";
 
 const formatarDataEvento = (dataString) => {
     const data = new Date(dataString);
@@ -31,7 +32,7 @@ function BlocoEventosDestaque() {
     return (
         <div className={styles.container}>
             {loading ? (
-                <p>Carregando eventos...</p>
+                <Loading/>
             ) : error ? (
                 <p>Erro ao carregar os eventos: {error}</p>
             ) : (

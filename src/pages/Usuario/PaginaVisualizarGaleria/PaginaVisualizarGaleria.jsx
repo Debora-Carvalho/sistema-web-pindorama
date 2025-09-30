@@ -7,6 +7,7 @@ import Footer from '../../../components/Footer/Footer.jsx';
 import ListaImagens from '../../../components/ListaImagens/ListaImagens.jsx';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
+import Loading from '../../../components/Loading/Loading.jsx';
 
 function PaginaVisualizarGaleria() {
     useTituloDocumento("Galeria | Pindorama"); // mudando o Title da pagina
@@ -14,7 +15,7 @@ function PaginaVisualizarGaleria() {
     const { eventos, loading: eventosLoading, error: eventosError } = useGetEventos();
 
     if (artigosLoading || eventosLoading) {
-        return <div>Carregando...</div>;
+        return <Loading/>;
     }
 
     if (artigosError || eventosError) {

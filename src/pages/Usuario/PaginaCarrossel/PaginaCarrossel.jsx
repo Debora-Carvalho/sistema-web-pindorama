@@ -2,6 +2,7 @@ import EmblaCarousel from '../../../components/Carrossel/EmblaCarousel'
 import Header from '../../../components/Header/Header'
 import carrosselStyles from './PaginaCarrossel.module.scss'
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
+import Loading from '../../../components/Loading/Loading.jsx'
 
 const PaginaCarrossel = () => {
     const OPTIONS = { dragFree: true, loop: true }
@@ -21,14 +22,16 @@ const PaginaCarrossel = () => {
     };
 
     const { artigos, loading, error } = useGetArtigos();
-    const slidesMapeados = artigos.map(artigo => ({
-        imagem: artigo.url_imagem,
-        titulo: artigo.titulo,
-        subtitulo: criarSumario(artigo.conteudo),
-        botao: 'Ver artigo completo'
-    }));
+    const slidesMapeados = artigos
+        .filter(artigo => artigo.status === "publicado" && artigo.url_imagem)
+        .map(artigo => ({
+            imagem: artigo.url_imagem,
+            titulo: artigo.titulo,
+            subtitulo: criarSumario(artigo.conteudo),
+            botao: 'Ver artigo completo'
+        }));
 
-    if (loading) return <p>Carregando artigos...</p>;
+    if (loading) return <Loading />
     if (error) return <p>Erro ao carregar artigos.</p>;
 
     return (

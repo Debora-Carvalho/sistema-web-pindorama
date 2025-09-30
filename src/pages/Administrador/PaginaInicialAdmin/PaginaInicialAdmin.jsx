@@ -17,6 +17,7 @@ import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigos
 import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useNavigate } from "react-router-dom";
+import Loading from '../../../components/Loading/Loading.jsx';
 
 
 const getSaudacao = () => {
@@ -83,21 +84,21 @@ function PaginaInicialAdmin() {
     }));
 
     const handleExcluir = async (id) => {
-      await deletarArtigo(id);
-      // setArtigos((prev) => prev.filter((a) => a.id !== id));
+        await deletarArtigo(id);
+        // setArtigos((prev) => prev.filter((a) => a.id !== id));
     };
 
     const handleEditar = (id) => {
-      navigate(`/adm/criar-artigo/${id}`);
+        navigate(`/adm/criar-artigo/${id}`);
     };
 
     const artigosAdaptados = artigos.map((a) => ({
-    id: a.id,
-    tipo: "artigo",
-    titulo: a.titulo,
-    url_imagem: a.url_imagem,
-    link: `/artigo/${a.id}`,
-    status: a.status
+        id: a.id,
+        tipo: "artigo",
+        titulo: a.titulo,
+        url_imagem: a.url_imagem,
+        link: `/artigo/${a.id}`,
+        status: a.status
     }));
 
 
@@ -111,7 +112,7 @@ function PaginaInicialAdmin() {
                 transition={pageTransition.transition}
             >
                 <main className={styles.base}>
-                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }}/>
+                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }} />
                     <HeaderAdmin />
 
                     <div className={styles.gridContainer}>
@@ -130,7 +131,7 @@ function PaginaInicialAdmin() {
 
                         <div className={styles.listaEventosContainer}>
                             {eventosLoading ? (
-                                <p>Carregando eventos...</p>
+                                <Loading />
                             ) : eventosError ? (
                                 <p>Erro ao carregar os eventos: {eventosError}</p>
                             ) : (
@@ -142,22 +143,22 @@ function PaginaInicialAdmin() {
                             <div className={styles.secaoHeader}>
                                 <h2>Seus últimos artigos</h2>
 
-                                <Link to="/adm/artigos" className={styles.verTodosBotaoMobile}>
+                                <Link to="/adm/visualizar-artigos" className={styles.verTodosBotaoMobile}>
                                     <span className={styles.verTodosTexto}>Ver todos</span>
                                     <FaArrowRight />
                                 </Link>
                             </div>
 
                             <div className={styles.gridArtigos}>
-                              {/* MERGE itar depois */}
+                                {/* MERGE itar depois */}
                                 <div className={styles.cardsWrapper}>
-                                    <ListaCardsAdmin 
-                                      cards={artigosAdaptados} 
-                                      limite={limiteDeCards} 
-                                      actions={{
-                                          onEditar: handleEditar,
-                                          onExcluir: handleExcluir
-                                      }}
+                                    <ListaCardsAdmin
+                                        cards={artigosAdaptados}
+                                        limite={limiteDeCards}
+                                        actions={{
+                                            onEditar: handleEditar,
+                                            onExcluir: handleExcluir
+                                        }}
                                     />
                                 </div>
 
@@ -177,7 +178,7 @@ function PaginaInicialAdmin() {
                                         />
                                     ))
                                 )} */}
-                                <Link to="/adm/artigos" className={styles.verTodosBotao}>
+                                <Link to="/adm/visualizar-artigos" className={styles.verTodosBotao}>
                                     <span className={styles.verTodosTexto}>Ver todos</span>
                                     <FaArrowRight />
                                 </Link>

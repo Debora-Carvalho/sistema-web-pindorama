@@ -12,8 +12,8 @@ import { useAuth } from '../../contexts/AuthContext';
 
 // Dados dos itens de navegação para facilitar a renderização
 const navItems = [
-    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/adm/artigos' },
-    { id: 2, label: 'Eventos', icon: <FaCalendarCheck />, path: '/adm/eventos' },
+    { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/adm/visualizar-artigos' },
+    { id: 2, label: 'Eventos', icon: <FaCalendarCheck />, path: '/adm/visualizar-eventos' },
     { id: 3, label: 'Configurações', icon: <FaCog /> },
 ];
 
