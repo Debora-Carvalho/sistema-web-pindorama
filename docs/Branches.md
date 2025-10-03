@@ -46,7 +46,7 @@ git checkout develop
 
 (Vamos trabalhar com essa branch, então temos que entrar nela antes de fazer nossa própria branch)
 
-### 👀 Ver em que branch você está
+### 👀 Ver em que branch você está (importante)
 
 ```bash
 git branch
