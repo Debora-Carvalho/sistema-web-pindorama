@@ -15,7 +15,7 @@ import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/Pagina
 import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArtigo.jsx";
 import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEvento.jsx"
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
-import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
 import PaginaCarrossel from "../pages/Usuario/PaginaCarrossel/PaginaCarrossel.jsx";
 
 // ROTA ERRO 404 - não encontrado

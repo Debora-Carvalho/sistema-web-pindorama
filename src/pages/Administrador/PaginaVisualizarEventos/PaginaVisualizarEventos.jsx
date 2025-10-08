@@ -1,49 +1,130 @@
-import styles from './PaginaVisualizarEventos.module.scss';
-import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
-import { BiSolidAddToQueue } from "react-icons/bi";
+// src/pages/Administrador/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx
+
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import styles from './PaginaVisualizarEventos.module.scss'; // Certifique-se de que este CSS existe
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
-import { useAuth } from '../../../contexts/AuthContext.jsx';
-
-import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
-// import eventos from '../../../json/db-mock-eventos.json';
-import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
+import Loading from '../../../components/Loading/Loading.jsx';
+import PopupConfirmar from '../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx';
+import PopupSucesso from '../../../components/Popups/PopupSucesso/PopupSucesso.jsx';
+import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
+import { useEventos } from '../../../hooks/Eventos/useEventos.js'; 
+import ListaCardsAdmin from "../../../components/ListaCards/Admin/ListaCardsAdmin.jsx"; 
 
 function PaginaVisualizarEventosAdmin() {
-    const handleSelect = (item) => {
-        console.log("Selecionado:", item);
-        alert(`Você selecionou: ${item.titulo}`);
+    useTituloDocumento("Gerenciar Eventos | Pindorama"); 
+
+    // O useEventos é usado para buscar e deletar
+    const { 
+        eventos: eventosCompletos, 
+        loading, 
+        erro: erroBusca, 
+        deletarEvento, 
+        buscarTodosEventos // Função para recarregar a lista
+    } = useEventos();
+
+    // --- Estados para Ações de Usuário ---
+    const [eventoParaExcluir, setEventoParaExcluir] = useState(null);
+    const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false);
+    const [popupSucessoMensagem, setPopupSucessoMensagem] = useState('');
+    const [popupErroMensagem, setPopupErroMensagem] = useState('');
+
+    // --- Lógica de Exclusão ---
+    const handleExcluirClick = (id) => {
+        setEventoParaExcluir(id);
+        setMostrarConfirmacao(true);
     };
 
-    const { id, loading: authLoading } = useAuth();
-    const { eventos, loading: eventosLoading, error } = useGetEventosAdmin(id);
+    const handleConfirmarExclusao = async () => {
+        setMostrarConfirmacao(false);
+        if (eventoParaExcluir) {
+            try {
+                await deletarEvento(eventoParaExcluir);
+                setPopupSucessoMensagem(`Evento ID ${eventoParaExcluir} excluído com sucesso!`);
+                setEventoParaExcluir(null);
+                // Recarrega a lista após a exclusão
+                buscarTodosEventos(); 
+            } catch (e) {
+                setPopupErroMensagem(`Erro ao excluir o evento: ${e.message}`);
+            }
+        }
+    };
+
+    const handleCancelarExclusao = () => {
+        setEventoParaExcluir(null);
+        setMostrarConfirmacao(false);
+    };
+
+    // --- Adaptação e Renderização dos Eventos ---
+    const eventosAdaptados = eventosCompletos.map(e => ({
+        ...e,
+        // Define o link de edição. Este link será usado no ListaCardsAdmin
+        linkEdicao: `/adm/criar-evento/${e.id}` 
+    }));
+
 
     return (
-        <div className={styles.containerVisualizar}>
-            <link to="/adm/inicio"> 
-              <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
-            </link>
-            <nav className={styles.navbar}>
+        <main className={styles.base}>
+            <header className={styles.cabecalho}>
+                <Link to="/adm/inicio" className={styles.logo}>
+                    <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
+                </Link>
+                <h1 className={styles.titulo}>Gerenciar Eventos</h1>
                 <HeaderAdmin />
-            </nav>
-            <div className={styles.topo}>
-                <BarraPesquisa itens={eventos} onSelect={handleSelect} />
-                <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
-                    <BiSolidAddToQueue className={styles.iconAdd} />
-                </button>
+            </header>
+
+            <div className={styles.containerItems}>
+                <div className={styles.containerBotoes}>
+                    <Link to="/adm/criar-evento" className={styles.btnCriar}>
+                        Criar Novo Evento
+                    </Link>
+                </div>
+                
+                {loading && <Loading />}
+                {erroBusca && <p className={styles.mensagemErro}>Ocorreu um erro ao carregar os eventos: {erroBusca}</p>}
+
+                {!loading && eventosCompletos.length === 0 && !erroBusca && (
+                    <p className={styles.mensagemVazio}>Nenhum evento encontrado.</p>
+                )}
+
+                {!loading && eventosCompletos.length > 0 && (
+                    <ListaCardsAdmin 
+                        cards={eventosAdaptados} 
+                        onDelete={handleExcluirClick} 
+                        tipo="evento"
+                    />
+                )}
             </div>
-            <div className={styles.containerCards}>
-                {/* Lembrar de colocar o component de carregamento e erro */}
-                    {authLoading || eventosLoading ? (
-                        <p>Carregando...</p>
-                    ) : error ? (
-                        <p>Ocorreu um erro ao carregar os eventos: {error}</p>
-                    ) : (
-                <ListaCardsAdmin cards={eventos} limite={null} />
-                    )}
-            </div>
-        </div>
-    )
+
+            {/* Popups de Ação */}
+            <PopupConfirmar
+                aberto={mostrarConfirmacao}
+                mensagem={`Tem certeza que deseja excluir o evento permanentemente? Esta ação é irreversível.`}
+                onCancelar={handleCancelarExclusao}
+                onConfirmar={handleConfirmarExclusao}
+            />
+
+            {popupSucessoMensagem && (
+                <PopupSucesso
+                    aberto={!!popupSucessoMensagem}
+                    mensagem={popupSucessoMensagem}
+                    textoBotao="Ok"
+                    onBotaoClick={() => setPopupSucessoMensagem('')}
+                />
+            )}
+
+            {popupErroMensagem && (
+                <PopupErro
+                    aberto={!!popupErroMensagem}
+                    mensagem={popupErroMensagem}
+                    tipo="erro"
+                    onClose={() => setPopupErroMensagem('')}
+                />
+            )}
+        </main>
+    );
 }
 
 export default PaginaVisualizarEventosAdmin;
