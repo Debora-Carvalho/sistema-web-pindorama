@@ -1,4 +1,5 @@
 ## 🌿 Branches
+-feature/detalhes-artigo
 
 ### 📌 Convenção de Nomes
 
