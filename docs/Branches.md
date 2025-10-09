@@ -1,4 +1,5 @@
 ## 🌿 Branches
+- Nova branch `feature/pagina-mapa`
 
 ### 📌 Convenção de Nomes
 
