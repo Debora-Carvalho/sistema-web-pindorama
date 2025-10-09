@@ -1,0 +1,65 @@
+@use "../../../styles/abstracts/variables" as *;
+
+
+.configuracoesContainer {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: $font-family-subtitulo;
+}
+
+.logo {
+    width: 15%;
+}
+
+.titleConfig {
+    color: var(--secondary-900);
+    position: relative;
+    top: 1rem;
+    right: 31rem;
+}
+
+.backgroundConfiguracoes {
+    position: relative;
+    background-color: var(--primary-300);
+    border-radius: 8px;
+   border: 3px solid var(--primary-500);
+    top: 2rem;
+    width: 90%;
+    height: 25em;
+}
+
+.infoAcessibilidade{
+    position: relative;
+    background-color: rgba(#FFFF ,0.21 );
+    width: 95%;
+    padding: 20px;
+    border-radius: 10px;
+    left: 30px;
+    margin-top: 30px;
+
+   .titleAcessibilidade{
+    font-size: 23px;
+    font-weight: 500;
+    padding-bottom: 15px;
+   }
+}
+
+.leituraVoz{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.noturnoConfig{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnHabilitar{
+    background-color: var(--secondary-900);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    width: 9%;
+}

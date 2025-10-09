@@ -1,0 +1,90 @@
+import { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import styles from "../PaginaConfiguracoes/Configuracoes.module.scss";
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import Loading from "../../../components/Loading/Loading.jsx";
+import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
+import Logo from '../../../assets/images/pindorama_logo5.png';
+
+function PaginaConfiguracoes() {
+  useTituloDocumento("Configurações | Pindorama");
+
+  const navigate = useNavigate();
+  const [leituraVozAtiva, setLeituraVozAtiva] = useState(false);
+  const [modoNoturnoAtivo, setModoNoturnoAtivo] = useState(false);
+
+  return (
+    <div className={styles.configuracoesContainer}>
+      <header className={styles.cabecalho}>
+        <Link to="/adm/inicio" className={styles.logo}>
+          <img
+            className={styles.logo}
+            src={Logo}
+            alt="Logo Pindorama - Voltar para a página inicial"
+          />
+        </Link>
+        <HeaderAdmin />
+      </header>
+
+      <h1 className={styles.titleConfig}>Configurações</h1>
+
+      <div className={styles.backgroundConfiguracoes}>
+        <div className={styles.infoAcessibilidade}>
+          <p className={styles.titleAcessibilidade}>Acessibilidade</p>
+
+          <div className={styles.leituraVoz}>
+            <p>Leitura em voz alta</p>
+            <button
+              className={styles.btnHabilitar}
+              aria-label={`${
+                leituraVozAtiva
+                  ? "Desabilitar leitura em voz alta"
+                  : "Habilitar leitura em voz alta"
+              }`}
+              onClick={() => setLeituraVozAtiva(!leituraVozAtiva)}
+            >
+              {leituraVozAtiva ? "Desabilitar" : "Habilitar"}
+            </button>
+          </div>
+
+          <div className={styles.noturnoConfig}>
+            <p>Modo Noturno</p>
+            <button
+              className={styles.btnHabilitar}
+              aria-label={`${
+                modoNoturnoAtivo
+                  ? "Desabilitar modo noturno"
+                  : "Habilitar modo noturno"
+              }`}
+              onClick={() => setModoNoturnoAtivo(!modoNoturnoAtivo)}
+            >
+              {modoNoturnoAtivo ? "Desabilitar" : "Habilitar"}
+            </button>
+          </div>
+        </div>
+
+        <div className={styles.infoSobreMim}>
+          <p>Sobre mim</p>
+          <button
+            className={styles.btnEditarConfig}
+            onClick={() => navigate("/adm/sobre-mim")}
+          >
+            Editar
+          </button>
+        </div>
+
+        <div className={styles.infoTema}>
+          <p>Mudar o tema</p>
+          <button
+            className={styles.btnAlterarTema}
+            onClick={() => navigate("/adm/")}
+          >
+            Alterar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default PaginaConfiguracoes;
