@@ -2,6 +2,8 @@ import styles from './PaginaMapa.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
+import Mapa from '../../../components/Mapa/Mapa.jsx';
+import 'leaflet/dist/leaflet.css'
 
 function PaginaMapa() {
     useTituloDocumento("Mapa | Pindorama"); // mudando o Title da pagina
@@ -12,6 +14,7 @@ function PaginaMapa() {
                 <Header />
 
                 <main className={styles.containerMapa}>
+                    <Mapa />
                 </main>
 
                 <Footer />
