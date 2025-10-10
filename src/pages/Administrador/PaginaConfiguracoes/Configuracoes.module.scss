@@ -16,7 +16,7 @@
 .titleConfig {
     color: var(--secondary-900);
     position: relative;
-    top: 1rem;
+    bottom: 1rem;
     right: 31rem;
 }
 
@@ -24,20 +24,21 @@
     position: relative;
     background-color: var(--primary-300);
     border-radius: 8px;
-   border: 3px solid var(--primary-500);
-    top: 2rem;
+    border: 3px solid var(--primary-500);
+    bottom: 0.1rem;
     width: 90%;
-    height: 25em;
+    height: 26.5em;
 }
 
-.infoAcessibilidade{
+.infoAcessibilidade, .infoSobreMim, .infoTema{
     position: relative;
-    background-color: rgba(#FFFF ,0.21 );
+    background-color: rgba(255, 255, 255,0.21 );
     width: 95%;
-    padding: 20px;
+    padding: 18px;
     border-radius: 10px;
     left: 30px;
     margin-top: 30px;
+    
 
    .titleAcessibilidade{
     font-size: 23px;
@@ -46,20 +47,32 @@
    }
 }
 
-.leituraVoz{
+.leituraVoz, .noturnoConfig {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 15px;
+    align-items: center;
+    height: 45px;
 }
 
-.noturnoConfig{
+.infoSobreMim, .infoTema{
     display: flex;
     justify-content: space-between;
 }
 
-.btnHabilitar{
+.leituraVoz:hover,
+.noturnoConfig:hover, 
+.infoSobreMim:hover, 
+.infoTema:hover{
+    transition: 0.5s;
+    background-color:rgba(#893A1A ,0.30);
+    border-radius: 8px;
+}
+
+.btnConfig{
     background-color: var(--secondary-900);
     color: var(--text-secondary);
     border-radius: 8px;
-    width: 9%;
+    min-width: 100px;
 }
+
+

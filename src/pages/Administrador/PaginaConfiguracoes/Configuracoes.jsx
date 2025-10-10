@@ -35,12 +35,8 @@ function PaginaConfiguracoes() {
           <div className={styles.leituraVoz}>
             <p>Leitura em voz alta</p>
             <button
-              className={styles.btnHabilitar}
-              aria-label={`${
-                leituraVozAtiva
-                  ? "Desabilitar leitura em voz alta"
-                  : "Habilitar leitura em voz alta"
-              }`}
+              className={styles.btnConfig}
+             aria-pressed={leituraVozAtiva}
               onClick={() => setLeituraVozAtiva(!leituraVozAtiva)}
             >
               {leituraVozAtiva ? "Desabilitar" : "Habilitar"}
@@ -50,12 +46,8 @@ function PaginaConfiguracoes() {
           <div className={styles.noturnoConfig}>
             <p>Modo Noturno</p>
             <button
-              className={styles.btnHabilitar}
-              aria-label={`${
-                modoNoturnoAtivo
-                  ? "Desabilitar modo noturno"
-                  : "Habilitar modo noturno"
-              }`}
+              className={styles.btnConfig}
+              aria-pressed={modoNoturnoAtivo}
               onClick={() => setModoNoturnoAtivo(!modoNoturnoAtivo)}
             >
               {modoNoturnoAtivo ? "Desabilitar" : "Habilitar"}
@@ -66,7 +58,7 @@ function PaginaConfiguracoes() {
         <div className={styles.infoSobreMim}>
           <p>Sobre mim</p>
           <button
-            className={styles.btnEditarConfig}
+            className={styles.btnConfig}
             onClick={() => navigate("/adm/sobre-mim")}
           >
             Editar
@@ -74,9 +66,9 @@ function PaginaConfiguracoes() {
         </div>
 
         <div className={styles.infoTema}>
-          <p>Mudar o tema</p>
+          <p>Mudar tema</p>
           <button
-            className={styles.btnAlterarTema}
+            className={styles.btnConfig}
             onClick={() => navigate("/adm/")}
           >
             Alterar
