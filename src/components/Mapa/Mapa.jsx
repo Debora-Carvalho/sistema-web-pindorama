@@ -5,19 +5,19 @@ import patrimonioData from "../../json/db-mock-pontos-mapa.json"; // geojson com
 
 // Ícones dos pontos culturais
 const icons = {
-    musica: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/727/727245.png", iconSize: [30, 30] }),
-    culinaria: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/1046/1046784.png", iconSize: [30, 30] }),
-    dança: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/263/263150.png", iconSize: [30, 30] }),
-    indigena: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/616/616408.png", iconSize: [30, 30] }),
-    afro: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/2098/2098565.png", iconSize: [30, 30] }),
-    monumento: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/3179/3179069.png", iconSize: [30, 30] }),
-    conto: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/197/197560.png", iconSize: [30, 30] }),
-    default: new L.Icon({ iconUrl: "https://cdn-icons-png.flaticon.com/512/565/565547.png", iconSize: [30, 30] }),
+    musica: new L.Icon({ iconUrl: "/icons/musica.svg", iconSize: [30, 30] }),
+    culinaria: new L.Icon({ iconUrl: "/icons/culinaria.svg", iconSize: [30, 30] }),
+    dança: new L.Icon({ iconUrl: "/icons/danca.svg", iconSize: [30, 30] }),
+    indigena: new L.Icon({ iconUrl: "/icons/indigena.svg", iconSize: [30, 30] }),
+    afro: new L.Icon({ iconUrl: "/icons/afro.svg", iconSize: [30, 30] }),
+    monumento: new L.Icon({ iconUrl: "/icons/monumento.svg", iconSize: [30, 30] }),
+    conto: new L.Icon({ iconUrl: "/icons/conto.svg", iconSize: [30, 30] }),
+    default: new L.Icon({ iconUrl: "/icons/default-pin.svg", iconSize: [30, 30] }),
 };
 
 const getIcon = (tipo) => icons[tipo] || icons.default;
 
-// Usa os estilos definidos no próprio GeoJSON
+// estilos definidos no GeoJSON
 const estiloEstado = (feature) => ({
     color: feature.properties["stroke"] || "#333",
     weight: feature.properties["stroke-width"] || 1,
@@ -25,7 +25,7 @@ const estiloEstado = (feature) => ({
     fillOpacity: feature.properties["fill-opacity"] || 0.7,
 });
 
-// Interações ao passar o mouse
+// interacoes ao passar o mouse
 const interacoesEstado = (feature, layer) => {
     layer.on({
         mouseover: (e) => e.target.setStyle({ weight: 2, color: "#000", fillOpacity: 0.9 }),
@@ -66,7 +66,7 @@ export default function Mapa() {
                         </Popup>
                     </Marker>
                 );
-            })}
+            })};
         </MapContainer>
     );
-}
+};
