@@ -1,0 +1,159 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "musica",
+                "nome": "Samba"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2096,
+                    -22.9035
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "musica",
+                "nome": "Forró"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -35.2040,
+                    -5.7945
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "dança",
+                "nome": "Capoeira"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -38.5014,
+                    -12.9714
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "dança",
+                "nome": "Frevo"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -34.8813,
+                    -8.0522
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "culinaria",
+                "nome": "Feijoada"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2090,
+                    -22.9110
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "culinaria",
+                "nome": "Acarajé"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -38.5010,
+                    -12.9730
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "indigena",
+                "nome": "Xingu"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -52.2560,
+                    -12.4200
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "monumento",
+                "nome": "Cristo Redentor"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2105,
+                    -22.9519
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "monumento",
+                "nome": "Elevador Lacerda"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -38.5122,
+                    -12.9716
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "conto",
+                "nome": "Iara"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -49.2644,
+                    -16.6866
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "tipo": "conto",
+                "nome": "Curupira"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -51.9253,
+                    -14.2350
+                ]
+            }
+        }
+    ]
+}
