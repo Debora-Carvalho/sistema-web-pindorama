@@ -1,7 +1,9 @@
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from "react-leaflet";
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, GeoJSON, Marker } from "react-leaflet";
 import L from "leaflet";
-import brasilEstados from "../../json/brasil_geo.json"; // geojson com os estados brasileiros
-import patrimonioData from "../../json/db-mock-pontos-mapa.json"; // geojson com os pontos culturais
+import brasilEstados from "../../json/brasil_geo.json";
+import patrimonioData from "../../json/db-mock-pontos-mapa.json";
+import PopupMapa from '../Popups/PopupMapa/PopupMapa.jsx';
 
 // Ícones dos pontos culturais
 const icons = {
@@ -25,7 +27,7 @@ const estiloEstado = (feature) => ({
     fillOpacity: feature.properties["fill-opacity"] || 0.7,
 });
 
-// interacoes ao passar o mouse
+// interações ao passar o mouse
 const interacoesEstado = (feature, layer) => {
     layer.on({
         mouseover: (e) => e.target.setStyle({ weight: 2, color: "#000", fillOpacity: 0.9 }),
@@ -39,34 +41,50 @@ const interacoesEstado = (feature, layer) => {
 };
 
 export default function Mapa() {
+    const [popupAberto, setPopupAberto] = useState(false);
+    const [featureSelecionada, setFeatureSelecionada] = useState(null);
+
     return (
-        <MapContainer
-            center={[-14.235, -51.9253]}
-            zoom={4}
-            style={{ height: "100%", width: "100%" }}
-        >
-            <TileLayer
-                attribution='&copy; OpenStreetMap contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        <>
+            <MapContainer center={[-14.235, -51.9253]} zoom={4} style={{ height: "100%", width: "100%" }}>
+                <TileLayer
+                    attribution='&copy; OpenStreetMap contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+
+                {/* GeoJSON dos estados */}
+                <GeoJSON data={brasilEstados} style={estiloEstado} onEachFeature={interacoesEstado} />
+
+                {/* Pontos culturais com ícones personalizados */}
+                {patrimonioData.features.map((feature, idx) => {
+                    if (!feature.geometry || feature.geometry.type !== "Point") return null;
+                    const [lng, lat] = feature.geometry.coordinates;
+                    const tipo = feature.properties?.tipo || "default";
+
+                    return (
+                        <Marker
+                            key={idx}
+                            position={[lat, lng]}
+                            icon={getIcon(tipo)}
+                            eventHandlers={{
+                                click: () => {
+                                    setFeatureSelecionada(feature);
+                                    setPopupAberto(true);
+                                }
+                            }}
+                        />
+                    );
+                })}
+            </MapContainer>
+
+            <PopupMapa
+                aberto={popupAberto}
+                titulo={featureSelecionada?.properties?.nome}
+                descricao={`Tipo: ${featureSelecionada?.properties?.tipo || 'Indefinido'}`}
+                textoBotao="Ver mais detalhes"
+                linkDestino={`/detalhes/${featureSelecionada?.properties?.id}`}
+                onFechar={() => setPopupAberto(false)}
             />
-
-            {/* GeoJSON dos estados com estilo embutido */}
-            <GeoJSON data={brasilEstados} style={estiloEstado} onEachFeature={interacoesEstado} />
-
-            {/* Pontos culturais com ícones */}
-            {patrimonioData.features.map((feature, idx) => {
-                if (!feature.geometry || feature.geometry.type !== "Point") return null;
-                const [lng, lat] = feature.geometry.coordinates;
-                const tipo = feature.properties?.tipo || "default";
-
-                return (
-                    <Marker key={idx} position={[lat, lng]} icon={getIcon(tipo)}>
-                        <Popup>
-                            <strong>{feature.properties?.nome}</strong><br />Tipo: {tipo}
-                        </Popup>
-                    </Marker>
-                );
-            })};
-        </MapContainer>
+        </>
     );
-};
+}
