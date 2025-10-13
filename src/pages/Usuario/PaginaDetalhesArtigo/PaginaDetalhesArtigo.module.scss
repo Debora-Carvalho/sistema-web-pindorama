@@ -1,0 +1,145 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: var(--background-primary);
+	overflow-x: hidden;
+}
+
+.conteudo {
+	padding: 2%;
+}
+
+.headerArtigo {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	padding-top: 0;
+	line-height: 1.2;
+	margin-bottom: 1.5rem;
+	gap: 1rem;
+}
+
+.tituloArtigo {
+	font-family: $font-family-principal;
+	font-size: 3.5rem;
+	font-weight: 500;
+}
+
+.autora {
+	font-family: $font-family-principal;
+	font-size: 1.8rem;
+	font-weight: bold;
+	color: var(--primary-400);
+	white-space: nowrap;
+}
+
+.conteudoPrincipal {
+	display: grid;
+    align-items: flex-start; // Alinha os itens no topo de suas respectivas colunas
+    column-gap: 2rem;
+    grid-template-columns: 1.5fr 1fr;
+    margin-bottom: 1.5rem;
+	grid-template-areas:
+        "texto imagem"
+        "share tags";
+}
+
+.corpoTexto {
+	grid-area: texto;
+	background-color: var(--primary-200);
+	padding: 1.5rem;
+	border-radius: 20px;
+	min-height: 23rem;
+	max-height: 23rem;
+	font-size: 18px;
+	font-family: $font-family-texto;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	// Estiliza o caminho do scroll
+	&::-webkit-scrollbar-track {
+		background: transparent;
+		margin: 1.5rem 0;
+	}
+
+	// Estiliza a barra
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--primary-400);
+		border-radius: 20px;
+		
+	}
+}
+
+.imagemCapa img {
+	grid-area: imagem;
+	border-radius: 20px;
+	height: 23rem;
+}
+
+.botaoShare {
+	grid-area: share;
+	background-color: var(--primary-400);
+	padding: 8px 25px;
+	font-size: 2rem;
+	color: var(--neutral-secondary);
+	border-radius: 30px;
+	width: fit-content;
+	margin-top: 1.5rem;
+}
+
+.tags{
+	grid-area: tags;
+	display: flex;
+	gap: 1.5rem;
+	flex: 1;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin-top: 1.5rem;
+}
+
+.tag{
+	background-color: var(--secondary-900);
+	padding: 8px 20px;
+	border-radius: 30px;
+	color: var(--neutral-secondary);
+	font-family: $font-family-principal;
+}
+
+@media (max-width: 720px) {
+    .conteudoPrincipal {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+			"titulo"
+			"autora"
+            "imagem"
+            "texto"
+            "tags"
+            "share";
+    }
+
+	.headerArtigo{
+		flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem; 
+	}
+
+	.tituloArtigo{
+		grid-area: titulo;
+		font-size: 2.5rem;
+	}
+
+	.autora{
+		grid-area: autora;
+	}
+
+    .tags {
+        justify-content: flex-start;
+    }
+
+}
