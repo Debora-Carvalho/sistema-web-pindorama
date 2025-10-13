@@ -17,6 +17,7 @@ import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEve
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
 import PaginaCarrossel from "../pages/Usuario/PaginaCarrossel/PaginaCarrossel.jsx";
+import PaginaConfiguracoesAdmin from "../pages/Administrador/PaginaConfiguracoes/Configuracoes.jsx";
 
 // ROTA ERRO 404 - não encontrado
 import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrado.jsx";
@@ -48,6 +49,8 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 						<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 						<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
+				       <Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
+						
 					</Route>
 				</Route>
 				{/* ROTA 404 */}

@@ -1,5 +1,5 @@
 ## 🌿 Branches
-
+- Feature/PaginaConfiguracoes
 ### 📌 Convenção de Nomes
 
 ```
