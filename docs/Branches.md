@@ -1,5 +1,6 @@
 ## 🌿 Branches
-- Feature/PaginaConfiguracoes
+- feature/ajustes-mapa
+  
 ### 📌 Convenção de Nomes
 
 ```
