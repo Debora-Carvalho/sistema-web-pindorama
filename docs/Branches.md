@@ -1,5 +1,4 @@
 ## 🌿 Branches
-- feature/ajustes-mapa
   
 ### 📌 Convenção de Nomes
 
