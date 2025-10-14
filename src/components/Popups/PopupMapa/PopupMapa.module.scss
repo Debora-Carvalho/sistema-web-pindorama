@@ -2,14 +2,10 @@
 
 .popupOverlayMapa {
     position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 5%;
+    left: 2%;
     z-index: 9999;
     display: flex;
-    justify-content: end;
-    align-items: center;
-    text-align: center;
     font-family: $font-family-subtitulo;
     color: var(--text-principal);
 
