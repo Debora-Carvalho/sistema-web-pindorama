@@ -4,6 +4,7 @@ import L from "leaflet";
 import brasilEstados from "../../json/brasil_geo.json";
 import patrimonioData from "../../json/db-mock-pontos-mapa.json";
 import PopupMapa from '../Popups/PopupMapa/PopupMapa.jsx';
+import LegendaMapa from './LegendaMapa/LegendaMapa.jsx';
 
 // Ícones dos pontos culturais
 const icons = {
@@ -77,6 +78,10 @@ export default function Mapa() {
                 })}
             </MapContainer>
 
+            {/* legenda do mapa - cores das regiões */}
+            <LegendaMapa />
+
+            {/* popup de resumo de patrimônio (abre ao clicar no ponto e é arrastável)*/}
             <PopupMapa
                 aberto={popupAberto}
                 titulo={featureSelecionada?.properties?.nome}
