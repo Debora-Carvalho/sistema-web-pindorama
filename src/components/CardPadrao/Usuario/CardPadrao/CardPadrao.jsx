@@ -18,7 +18,7 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                 </h3>
 
                 <p className={styles.cardDescricao}>
-                    {descricao}
+                    {descricao.length > 150 ? descricao.slice(0, 150) + "…ver mais" : descricao}
                 </p>
 
                 <Link to={link} className={botaoClasse}>

@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
+import useWindowSize from './useWindowSize';
 import styles from './HeaderAdmin.module.scss';
 
 // Importando ícones de exemplo da biblioteca react-icons
 import { FaFileAlt, FaCalendarCheck, FaCog, FaSignOutAlt } from 'react-icons/fa';
+
+import { useAuth } from '../../contexts/AuthContext';
 
 // Dados dos itens de navegação para facilitar a renderização
 const navItems = [
@@ -16,10 +19,16 @@ const navItems = [
 
 const logoutItem = { id: 4, label: 'Logout', icon: <FaSignOutAlt /> };
 
+
+
 export default function HeaderAdmin() {
     const location = useLocation();
-    const isCollapsed = location.pathname !== "/adm/inicio"
-
+    const navigate = useNavigate();
+    const { width } = useWindowSize();
+    const isMobile = width <= 760;
+    const isPaginaInicial = location.pathname === "/adm/inicio"
+    const isCollapsed = isMobile || !isPaginaInicial;
+    const { logout } = useAuth();
 
     // Variantes de animação para o contêiner principal
     const containerVariants = {
@@ -31,6 +40,11 @@ export default function HeaderAdmin() {
     const buttonVariants = {
         expanded: { borderRadius: '30px' },
         collapsed: { borderRadius: '80%' },
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/inicio');
     };
 
     return (
@@ -76,6 +90,7 @@ export default function HeaderAdmin() {
                 {/*botão de logout*/}
                 <motion.div className={styles.logoutNavGroup} layout>
                     <motion.button
+                        onClick={handleLogout}
                         className={`${styles.navButton} ${styles.logoutButton}`}
                         variants={buttonVariants}
                         animate={isCollapsed ? 'collapsed' : 'expanded'}

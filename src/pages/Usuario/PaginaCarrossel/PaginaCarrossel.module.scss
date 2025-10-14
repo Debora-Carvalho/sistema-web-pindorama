@@ -1,0 +1,32 @@
+
+.paginaCarrossel {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.overrideContainer {
+  position: absolute; 
+  top: 6rem;
+  right: 1rem;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.headerOverride {
+ position: relative; 
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.carrosselFundo {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; 
+}

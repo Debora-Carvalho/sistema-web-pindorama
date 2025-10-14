@@ -1,6 +1,8 @@
+@use "../../../styles/abstracts/variables" as *;
+
 .base {
     background-color: var(--background-primary);
-    padding: 2rem 5%;
+    padding: 0rem 5%;
 }
 
 .logo {
@@ -12,27 +14,27 @@
     display: grid;
     // Duas colunas de tamanho igual
     grid-template-columns: 1fr 1fr;
-    // Alinha o conteúdo de cada card no topo
     align-items: start;
-    // Define um espaço entre as linhas e colunas
-    gap: 1.5rem 2.5rem; // 1.5rem vertical, 2.5rem horizontal
+    gap: 1.5rem 2.5rem;
 
-    // Define o "mapa" do layout
     grid-template-areas:
-        "saudacao titulo-eventos"
-        "botao-criar lista-eventos";
+        "saudacao      titulo-eventos"
+        "botao-criar   lista-eventos"
+        "artigos       artigos";
 }
 
 .saudacao {
     grid-area: saudacao;
-    font-family: "Comfortaa", sans-serif;
-    font-size: 40px;
-    margin: 0; // Removemos margens para o grid controlar
+    font-family: $font-family-subtitulo;
+    font-weight: 400;
+    font-size: 50px;
+    margin: 0;
 }
 
 .tituloSecao {
     grid-area: titulo-eventos;
-    font-family: 'Comfortaa', sans-serif;
+    font-family: $font-family-subtitulo;
+    font-weight: 400;
     font-size: 30px;
     color: var(--text-principal);
     margin: 0;
@@ -43,7 +45,7 @@
     grid-area: botao-criar;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 25px;
     background-color: var(--primary-100);
     border-radius: 20px;
@@ -68,7 +70,6 @@
 .addIcon {
     font-size: 100px;
     padding: 10px;
-    display: flex;
 }
 
 .criarTitles {
@@ -77,16 +78,204 @@
 }
 
 .criarTitulo {
-    color: var(--primary-900);
+    color: var(--primary-500);
     font-size: 48px;
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: $font-family-principal;
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 0.5rem;
+    text-align: start;
+    width: 80%;
 }
 
 .criarSubt {
-    font-family: "Roboto Condensed", sans-serif;
+    font-family: $font-family-principal;
     font-weight: normal;
     font-size: 20px;
+    text-align: start;
+}
+
+.secaoArtigos {
+    grid-area: artigos;
+    margin-top: 2rem;
+}
+
+.secaoHeader {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+        font-family: $font-family-subtitulo;
+        font-weight: 400;
+        font-size: 2rem;
+    }
+}
+
+.verTodosBotao {
+    display: grid;
+    place-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid var(--neutral-primary);
+    color: var(--neutral-primary);
+    font-size: 24px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    justify-self: start;
+
+    &:hover {
+        background-color: var(--neutral-primary);
+        color: var(--neutral-secondary);
+    }
+}
+
+.verTodosBotaoMobile {
+    display: none;
+}
+
+.gridArtigos {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cardsWrapper {
+    flex-grow: 1;
+}
+
+.verTodosTexto {
+    display: none;
+}
+
+
+//RESPONSIVIDADE
+
+@media (max-width: 1080px) {
+    .base {
+        padding: 0, 2rem;
+    }
+
+    .logo {
+        width: 20%;
+    }
+
+    .botaoCriar {
+        height: 90px;
+    }
+
+    .criarTitulo {
+        font-size: 37px;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+        text-align: start;
+        width: 80%;
+    }
+
+    .secaoHeader {
+        h2 {
+            font-size: 2.3rem;
+        }
+    }
+
+    .tituloSecao{
+        font-size: 40px;
+    }
+
+    .gridArtigos {
+        display: grid;
+        justify-content: center;
+    }
+
+    .verTodosTexto {
+        display: unset;
+    }
+
+    .verTodosBotao {
+        display: none;
+    }
+
+    .verTodosBotaoMobile {
+        display: flex;
+        align-items: center;
+        width: 165px;
+        border-radius: 20px;
+        border: 3px solid var(--neutral-primary);
+        color: var(--neutral-primary);
+        font-size: 24px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        justify-content: center;
+        gap: 10px;
+        padding: 5px;
+
+        &:hover {
+            background-color: var(--neutral-primary);
+            color: var(--neutral-secondary);
+        }
+    }
+}
+
+
+@media (max-width: 720px) {
+    
+    .logo{
+        width: 25%;
+    }
+
+    .gridContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "saudacao"
+            "botao-criar"
+            "titulo-eventos"
+            "lista-eventos"
+            "artigos";
+    }
+
+    .gridArtigos {
+        display: block;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 500px){
+
+    .logo{
+        width: 35%;
+    }
+
+    .saudacao{
+        font-size: 2.5rem;
+    }
+    
+    .criarTitulo{
+        font-size: 35px;
+    }
+
+    .tituloSecao{
+        font-size: 30px;
+    }
+
+    .secaoHeader {
+        h2 {
+            font-size: 2rem;
+        }
+    }
+
+    .verTodosBotaoMobile {
+        display: flex;
+        align-items: center;
+        width: 165px;
+        border-radius: 20px;
+        font-size: 18px;
+        text-decoration: none;
+        gap: 8px;
+        padding: 5px;
+    }
+
 }

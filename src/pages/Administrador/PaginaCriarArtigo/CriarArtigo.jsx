@@ -13,6 +13,7 @@ import PopupLocal from '../../../components/Popups/PopupLocal/PopupLocal.jsx';
 import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+import { useParams } from 'react-router-dom';
 
 // --- Constantes ---
 const nomeAutora = "Kelly Cristina Marques";
@@ -28,10 +29,11 @@ const mockLocais = [
 
 function PaginaCriarArtigo() {
     useTituloDocumento("Criar Artigo | Pindorama");
+    const { id } = useParams();
     const navigate = useNavigate();
 
     // --- Hook personalizado para lidar com artigos ---
-    const { criarArtigo, loading, erro } = useArtigos();
+    const { atualizarArtigo, buscarArtigo, criarArtigo, loading, erro } = useArtigos();
 
     // --- Estados do Formulário ---
     const [titulo, setTitulo] = useState('');
@@ -122,7 +124,7 @@ function PaginaCriarArtigo() {
             // Publicação: todos os campos obrigatórios
             if (!titulo.trim()) return mostrarErro('Por favor, adicione um título.');
             if (conteudoVazio) return mostrarErro('O conteúdo do artigo não pode estar vazio.');
-            if (!imagemCapa) return mostrarErro('Por favor, adicione uma imagem de capa.');
+            if (!imagemCapa && !previewCapa) return mostrarErro('Por favor, adicione uma imagem de capa.');
             if (tagsSelecionadas.length === 0) return mostrarErro('Selecione pelo menos uma tag.');
             if (!localSelecionado) return mostrarErro('Selecione um local.');
         } else if (status === "rascunho") {
@@ -149,11 +151,19 @@ function PaginaCriarArtigo() {
                   tags: tagsSelecionadas,
               };
 
-              await criarArtigo(artigoParaEnviar, imagemCapa);
+              if (id) {
+                await atualizarArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
+              } else {
+                await criarArtigo(artigoParaEnviar, imagemCapa); // modo criação
+              }
 
               setMostrarConfirmacaoEnvio(false);
               setPopupSucessoMensagem(
-                  status === "rascunho" ? "Artigo salvo como rascunho!" : "Artigo enviado com sucesso!"
+                status === "rascunho"
+                  ? "Artigo salvo como rascunho!"
+                  : id
+                  ? "Artigo atualizado com sucesso!"
+                  : "Artigo enviado com sucesso!"
               );
               setMostrarSucesso(true);
           } catch (e) {
@@ -174,13 +184,33 @@ function PaginaCriarArtigo() {
     };
 
     useEffect(() => {
-        return () => { if (previewCapa) { URL.revokeObjectURL(previewCapa); } };
-    }, [previewCapa]);
+      if (id) {
+        async function carregar() {
+          try {
+            const artigo = await buscarArtigo(id);
+            setTitulo(artigo.titulo);
+            setConteudo(artigo.conteudo);
+            setTagsSelecionadas(artigo.tags || []);
+            if (artigo.local && artigo.local.includes(" - ")) {
+              const [cidade, estado] = artigo.local.split(" - ");
+              setLocalSelecionado({ cidade, estado });
+            } else {
+              setLocalSelecionado(null);
+            }
+            setPreviewCapa(artigo.url_imagem || "");
+            // imagemCapa não precisa ser setado agora, só quando trocar
+          } catch (e) {
+            console.error("Erro ao carregar artigo", e);
+          }
+        }
+        carregar();
+      }
+    }, [id]);
 
     return (
         <main className={styles.base}>
             <header className={styles.cabecalho}>
-                <Link to="/inicio" className={styles.logo}>
+                <Link to="/adm/inicio" className={styles.logo}>
                     <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
                 </Link>
                 <h1 className={styles.titulo}>Artigos</h1>
@@ -238,7 +268,7 @@ function PaginaCriarArtigo() {
                         className={styles.botaoExcluir}
                         onClick={handleExcluirClick}
                     >
-                        Excluir
+                        Limpar
                     </button>
                     <div className={styles.botoesDireita}>
                       <button
@@ -268,10 +298,14 @@ function PaginaCriarArtigo() {
             />
 
             <PopupConfirmar
-                aberto={mostrarConfirmacaoEnvio}
-                mensagem="Tudo pronto para enviar?"
-                onCancelar={handleCancelarEnvio}
-                onConfirmar={executarEnvio}
+              aberto={mostrarConfirmacaoEnvio}
+              mensagem={
+                statusEnvio === "rascunho"
+                  ? "Tudo pronto para enviar como rascunho?"
+                  : "Tudo pronto para publicar?"
+              }
+              onCancelar={handleCancelarEnvio}
+              onConfirmar={() => executarEnvio(statusEnvio)}
             />
 
             <PopupSucesso
@@ -283,6 +317,7 @@ function PaginaCriarArtigo() {
 
             <PopupTagArtigo
                 aberto={popupTagAberto}
+                tagsIniciais={tagsSelecionadas}
                 onCancelar={() => setPopupTagAberto(false)}
                 onConfirmar={handleConfirmarTags}
             />

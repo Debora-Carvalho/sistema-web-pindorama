@@ -28,9 +28,9 @@ const listaTags = [
     "dia-do-nordestino",
 ].sort();
 
-function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
+function PopupAdicionarTag({ aberto, onCancelar, onConfirmar, tagsIniciais = [] }) {
     const [busca, setBusca] = useState("");
-    const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
+    const [tagsSelecionadas, setTagsSelecionadas] = useState(tagsIniciais);
     const [erro, setErro] = useState("");
     const [dropdownAberto, setDropdownAberto] = useState(false);
 
@@ -48,10 +48,11 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
         };
 
         document.addEventListener("mousedown", handleClickOutside);
+        setTagsSelecionadas(tagsIniciais);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [tagsIniciais, aberto]);
 
     if (!aberto) return null;
 
@@ -112,7 +113,6 @@ function PopupAdicionarTag({ aberto, onCancelar, onConfirmar }) {
         } 
 
         onConfirmar(tagsSelecionadas);
-        setTagsSelecionadas([]);
         setBusca("");
     };
 

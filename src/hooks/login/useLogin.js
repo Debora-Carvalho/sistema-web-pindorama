@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const API_URL = `${API_BASE_URL}/login/api/administradores`;
 
 export const useLogin = () => {
-    const [data, setData] = useState(null);
+    const { login: setAuthData } = useAuth();
+    // const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -12,14 +14,12 @@ export const useLogin = () => {
         setLoading(true);
         setError(null);
         try {
-
             const loginResposta = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ administrador: { senha: password } }),
-                credentials: 'include',
             });
 
             if (!loginResposta.ok) {
@@ -32,15 +32,32 @@ export const useLogin = () => {
                 throw new Error(errorData.error || 'Senha incorreta');
             }
 
+            const loginData = await loginResposta.json();
+            const token = loginData.token;
 
-            const sessionResposta = await fetch(API_URL, { method: 'GET', credentials: 'include' });
+            if (token) {
+                localStorage.setItem('authToken', token);
+            } else {
+                throw new Error('Token não recebido na resposta.');
+            }
+
+            const sessionResposta = await fetch(API_URL, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+            });
 
             if (!sessionResposta.ok) {
+                localStorage.removeItem('authToken');
                 throw new Error('Erro ao carregar dados da sessão');
             }
 
             const sessionData = await sessionResposta.json();
-            setData(sessionData);
+            const autorId = sessionData.autor_id;
+            const autorNome = sessionData.autor_nome; 
+
+            setAuthData(token, autorId, autorNome);
 
         } catch (err) {
             setError(err.message);
@@ -50,5 +67,5 @@ export const useLogin = () => {
         }
     };
 
-    return { data, loading, error, login };
+    return { loading, error, login };
 };

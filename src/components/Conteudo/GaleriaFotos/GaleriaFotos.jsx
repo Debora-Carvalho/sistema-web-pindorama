@@ -2,8 +2,38 @@ import styles from "./GaleriaFotos.module.scss";
 import { Link } from "react-router-dom";
 
 import ListaImagens from "../../ListaImagens/ListaImagens.jsx";
+import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
+import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
+import Loading from "../../Loading/Loading.jsx";
 
 function GaleriaFotos() {
+        const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigos();
+        const { eventos, loading: eventosLoading, error: eventosError } = useGetEventos();
+    
+        if (artigosLoading || eventosLoading) {
+            return <Loading />;
+        }
+    
+        if (artigosError || eventosError) {
+            return <div>Ocorreu um erro ao carregar os dados.</div>;
+        }
+    
+        const imagens = [
+            ...(artigos || []).map((item) => ({
+                id: item.id,
+                titulo: item.titulo,
+                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
+                imagem: item.url_imagem,
+                link: `/artigos/${item.id}`
+            })),
+            ...(eventos || []).map((item) => ({
+                id: item.id,
+                titulo: item.titulo,
+                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
+                imagem: item.url_imagem,
+                link: `/eventos/${item.id}`
+            }))
+        ];
     return (
         <div className={styles.container}>
             <div className={styles.containerTopo}>
@@ -16,7 +46,7 @@ function GaleriaFotos() {
                 </Link>
             </div>
 
-            <ListaImagens limite={4} />
+            <ListaImagens imagens={imagens} limite={4} />
 
         </div>
     );

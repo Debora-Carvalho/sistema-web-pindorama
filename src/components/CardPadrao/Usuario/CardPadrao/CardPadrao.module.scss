@@ -58,6 +58,7 @@
 
 .cardDescricao {
     font-family: $font-family-texto;
+    -webkit-line-clamp: 3;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     color: var(--text-primary);
     text-align: justify;
@@ -76,7 +77,7 @@
 
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    font-family: $font-family-texto;
+    font-family: $font-family-subtitulo;
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-secondary);
