@@ -38,13 +38,13 @@
 
 .conteudoPrincipal {
 	display: grid;
-    align-items: flex-start; // Alinha os itens no topo de suas respectivas colunas
-    column-gap: 2rem;
-    grid-template-columns: 1.5fr 1fr;
-    margin-bottom: 1.5rem;
+	align-items: flex-start; // Alinha os itens no topo de suas respectivas colunas
+	column-gap: 2rem;
+	grid-template-columns: 1.5fr 1fr;
+	margin-bottom: 1.5rem;
 	grid-template-areas:
-        "texto imagem"
-        "share tags";
+		"texto imagem"
+		"share tags";
 }
 
 .corpoTexto {
@@ -72,7 +72,7 @@
 	&::-webkit-scrollbar-thumb {
 		background-color: var(--primary-400);
 		border-radius: 20px;
-		
+
 	}
 }
 
@@ -85,15 +85,41 @@
 .botaoShare {
 	grid-area: share;
 	background-color: var(--primary-400);
-	padding: 8px 25px;
-	font-size: 2rem;
 	color: var(--neutral-secondary);
 	border-radius: 30px;
-	width: fit-content;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 	margin-top: 1.5rem;
+
+	.faRegPaperPlane {
+		font-size: 2rem;
+		min-width: 2rem;
+		height: 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.shareText {
+		font-size: 1.2rem; // Tamanho da fonte do texto "Compartilhar"
+		white-space: nowrap;
+	}
+
+	@media (max-width: 720px) {
+		.shareText {
+			opacity: 1;
+			width: auto;
+			transform: translateX(0);
+			font-size: 1.4rem;
+		}
+	}
 }
 
-.tags{
+.tags {
 	grid-area: tags;
 	display: flex;
 	gap: 1.5rem;
@@ -103,7 +129,7 @@
 	margin-top: 1.5rem;
 }
 
-.tag{
+.tag {
 	background-color: var(--secondary-900);
 	padding: 8px 20px;
 	border-radius: 30px;
@@ -112,34 +138,83 @@
 }
 
 @media (max-width: 720px) {
-    .conteudoPrincipal {
-        grid-template-columns: 1fr;
-        grid-template-areas:
+	.conteudo {
+		padding: 5%;
+	}
+
+	.conteudoPrincipal {
+		grid-template-columns: 1fr;
+		grid-template-areas:
 			"titulo"
 			"autora"
-            "imagem"
-            "texto"
-            "tags"
-            "share";
-    }
+			"imagem"
+			"texto"
+			"tags"
+			"share";
+	}
 
-	.headerArtigo{
+	.headerArtigo {
 		flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem; 
+		align-items: flex-start;
+		gap: 0.5rem;
 	}
 
-	.tituloArtigo{
+	.tituloArtigo {
 		grid-area: titulo;
-		font-size: 2.5rem;
+		font-size: 3rem;
 	}
 
-	.autora{
+	.autora {
 		grid-area: autora;
 	}
 
-    .tags {
-        justify-content: flex-start;
-    }
+	.imagemCapa {
+		img {
+			width: 75%;
+			height: auto;
+			justify-self: center;
+			margin-bottom: 1.5rem;
+		}
+	}
 
+	.corpoTexto {
+		max-height: 30rem;
+		font-size: 22px;
+
+		&::-webkit-scrollbar {
+			width: 13px;
+		}
+	}
+
+	.botaoShare {
+		font-size: 3rem;
+		padding: 10px 30px;
+	}
+
+	.tags {
+		justify-content: flex-start;
+		gap: 0.8rem;
+	}
+
+	.tag {
+		font-size: 23px;
+
+	}
+
+}
+
+@media (max-width: 480px){
+	.imagemCapa{
+		img{
+			width: 100%;
+		}
+	}
+
+	.corpoTexto {
+		max-height: 35rem;
+
+		&::-webkit-scrollbar {
+			width: 15px;
+		}
+	}
 }
