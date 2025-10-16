@@ -38,17 +38,24 @@
 
 .conteudoPrincipal {
 	display: grid;
-	align-items: flex-start; // Alinha os itens no topo de suas respectivas colunas
+	align-items: flex-start;
 	column-gap: 2rem;
 	grid-template-columns: 1.5fr 1fr;
 	margin-bottom: 1.5rem;
-	grid-template-areas:
-		"texto imagem"
-		"share tags";
+}
+
+.colunaEsquerda,
+.colunaDireita {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.textoContainer {
+	position: relative;
 }
 
 .corpoTexto {
-	grid-area: texto;
 	background-color: var(--primary-200);
 	padding: 1.5rem;
 	border-radius: 20px;
@@ -57,6 +64,20 @@
 	font-size: 18px;
 	font-family: $font-family-texto;
 	overflow-y: auto;
+	line-height: 1.7;
+	transition: max-height 0.5s ease-in-out;
+
+	&.expanded {
+		max-height: 1000px;
+
+		&::-webkit-scrollbar-thumb {
+			background-color: transparent;
+		}
+	}
+
+	p {
+		margin-bottom: 1.25rem;
+	}
 
 	&::-webkit-scrollbar {
 		width: 10px;
@@ -64,8 +85,9 @@
 
 	// Estiliza o caminho do scroll
 	&::-webkit-scrollbar-track {
-		background: transparent;
+		background: rgba(0, 0, 0, 0.1);
 		margin: 1.5rem 0;
+		border-radius: 20px;
 	}
 
 	// Estiliza a barra
@@ -76,14 +98,34 @@
 	}
 }
 
+.expandButton {
+	position: absolute;
+	top: 1rem;
+	right: 1.5rem;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: none;
+	border-radius: 50%; 
+	width: 2.5rem;
+	height: 2.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.2);
+		transform: scale(1.1);
+	}
+}
+
 .imagemCapa img {
-	grid-area: imagem;
 	border-radius: 20px;
 	height: 23rem;
 }
 
 .botaoShare {
-	grid-area: share;
 	background-color: var(--primary-400);
 	color: var(--neutral-secondary);
 	border-radius: 30px;
@@ -102,11 +144,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		pointer-events: none;
 	}
 
 	.shareText {
-		font-size: 1.2rem; // Tamanho da fonte do texto "Compartilhar"
+		font-size: 1.2rem;
 		white-space: nowrap;
+		pointer-events: none;
 	}
 
 	@media (max-width: 720px) {
@@ -120,7 +164,6 @@
 }
 
 .tags {
-	grid-area: tags;
 	display: flex;
 	gap: 1.5rem;
 	flex: 1;
@@ -137,7 +180,87 @@
 	font-family: $font-family-principal;
 }
 
+.artigosRelacionadosContainer {
+	margin-top: 4rem;
+	padding-top: 2rem;
+	border-top: 2px solid var(--primary-400);
+}
+
+.relacionadosHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	margin-bottom: 2rem;
+}
+
+.tituloRelacionados {
+	font-family: $font-family-principal;
+	font-size: 2.5rem;
+	font-weight: 500;
+	margin-bottom: 2rem;
+}
+
+.cardsContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+
+.verMaisBotao {
+	display: inline-block;
+	background-color: var(--secondary-900);
+	color: var(--neutral-secondary);
+	padding: 0.6rem 1.8rem;
+	border-radius: 30px;
+	text-decoration: none;
+	font-weight: 600;
+	font-family: $font-family-subtitulo;
+	transition: all 0.3s ease;
+	margin-top: 0;
+
+	&:hover {
+		background-color: var(--primary-500);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	}
+}
+
+@media (max-width: 1080px) {
+	.corpoTexto{
+		font-size: 20px;
+	}
+	
+	.tag {
+		font-size: 1.2rem;
+	}
+
+	.tituloRelacionados {
+		font-size: 3.5rem;
+	}
+
+	.verMaisBotao {
+		font-size: 1.4rem;
+	}
+
+	.cardsContainer {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 4rem;
+		justify-self: center;
+	}
+}
+
+@media (max-width: 900px){
+	.cardsContainer {
+		gap: 1rem;
+	}
+}
+
 @media (max-width: 720px) {
+	.colunaEsquerda,
+    .colunaDireita {
+        display: contents;
+    }
+
 	.conteudo {
 		padding: 5%;
 	}
@@ -169,6 +292,7 @@
 	}
 
 	.imagemCapa {
+		grid-area: imagem;
 		img {
 			width: 75%;
 			height: auto;
@@ -177,7 +301,12 @@
 		}
 	}
 
+	.textoContainer{
+		grid-area: texto;
+	}
+
 	.corpoTexto {
+		
 		max-height: 30rem;
 		font-size: 22px;
 
@@ -187,11 +316,13 @@
 	}
 
 	.botaoShare {
+		grid-area: share;
 		font-size: 3rem;
 		padding: 10px 30px;
 	}
 
 	.tags {
+		grid-area: tags;
 		justify-content: flex-start;
 		gap: 0.8rem;
 	}
@@ -203,9 +334,13 @@
 
 }
 
-@media (max-width: 480px){
-	.imagemCapa{
-		img{
+@media (max-width: 480px) {
+	.tituloArtigo{
+		font-size: 2.5rem;
+	}
+
+	.imagemCapa {
+		img {
 			width: 100%;
 		}
 	}
@@ -216,5 +351,44 @@
 		&::-webkit-scrollbar {
 			width: 15px;
 		}
+	}
+
+	.relacionadosHeader{
+		display: block;
+	}
+
+	.tituloRelacionados{
+		font-size: 2.5rem;
+	}
+
+	.verMaisBotao{
+		font-size: 1.3rem;
+	}
+
+	.cardsContainer {
+		grid-template-columns: repeat(1, 1fr);
+		gap: 2rem;
+	}
+}
+
+@media (max-width: 400px){
+	.tituloArtigo {
+		font-size: 2.2rem;
+	}
+
+	.corpoTexto{
+		font-size: 18px;
+	}
+
+	.tag{
+		font-size: 14px;
+	}
+
+	.tituloRelacionados{
+		font-size: 2.2rem;
+	}
+
+	.verMaisBotao{
+		font-size: 1.1rem;
 	}
 }
