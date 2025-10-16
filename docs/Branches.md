@@ -1,5 +1,6 @@
 ## 🌿 Branches
 - Feature/PaginaConfiguracoes
+- Feature/politicas-termos
 ### 📌 Convenção de Nomes
 
 ```
