@@ -1,13 +1,13 @@
 // src/pages/Administrador/PaginaVisualizarEventos/PaginaVisualizarEventosAdmin.jsx
 
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import styles from './PaginaVisualizarEventos.module.scss';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logo from '../../../assets/images/pindorama_logo5.png';
 import { useAuth } from '../../../contexts/AuthContext.jsx';
-import { useEventos } from '../../../hooks/Eventos/useEventos.js'; 
+import { useEventos } from '../../../hooks/Eventos/useEventos.js';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
 
 function PaginaVisualizarEventosAdmin() {
@@ -98,12 +98,14 @@ function PaginaVisualizarEventosAdmin() {
                 ) : error ? (
                     <p>Ocorreu um erro ao carregar os eventos: {error}</p>
                 ) : (
-                    // Passando os handlers para o componente ListaCardsAdmin
+                    // CORRIGIDO Passando os handlers de ação agrupados no objeto 'actions'
                     <ListaCardsAdmin
                         cards={eventos}
                         limite={null}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
+                        actions={{
+                            onEdit: handleEdit,
+                            onDelete: handleDelete
+                        }}
                     />
                 )}
             </div>
