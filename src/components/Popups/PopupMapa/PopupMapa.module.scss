@@ -2,16 +2,10 @@
 
 .popupOverlayMapa {
     position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 5%;
+    left: 2%;
     z-index: 9999;
-    /* desfoque do fundo*/
-    backdrop-filter: blur(1px);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     font-family: $font-family-subtitulo;
     color: var(--text-principal);
 
@@ -23,14 +17,25 @@
         text-align: center;
         width: 450px;
 
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .tituloDraggable {
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
         }
 
         p {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
         .btnPopupMapa {
@@ -78,7 +83,7 @@
 
     .popupBoxMapa {
         width: 90%;
-        max-width: 350px;
+        max-width: 300px;
         margin: 0 auto;
         padding: 20px;
         border-radius: 20px;
