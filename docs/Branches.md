@@ -1,5 +1,5 @@
 ## 🌿 Branches
-
+- branch fix/ajustes-logo-temas
 
 ### 📌 Convenção de Nomes
 
