@@ -1,7 +1,7 @@
 ## 🌿 Branches
--feature/detalhes-artigo
+- feature/detalhes-artigo
 - Feature/PaginaConfiguracoes
-
+- Feature/artigos/detalhes
 ### 📌 Convenção de Nomes
 
 ```

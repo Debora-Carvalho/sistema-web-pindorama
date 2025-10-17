@@ -33,8 +33,8 @@ function PaginaCriarArtigo() {
     const navigate = useNavigate();
 
     // --- Hook personalizado para lidar com artigos ---
-    const { atualizarArtigo, buscarArtigo, criarArtigo, loading, erro } = useArtigos();
-
+    const { putArtigo, getArtigoById, postArtigo, loading, erro } = useArtigos();
+    
     // --- Estados do Formulário ---
     const [titulo, setTitulo] = useState('');
     const [conteudo, setConteudo] = useState('');
@@ -152,9 +152,9 @@ function PaginaCriarArtigo() {
               };
 
               if (id) {
-                await atualizarArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
+                await putArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
               } else {
-                await criarArtigo(artigoParaEnviar, imagemCapa); // modo criação
+                await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
               }
 
               setMostrarConfirmacaoEnvio(false);
@@ -187,7 +187,7 @@ function PaginaCriarArtigo() {
       if (id) {
         async function carregar() {
           try {
-            const artigo = await buscarArtigo(id);
+            const artigo = await getArtigoById(id);
             setTitulo(artigo.titulo);
             setConteudo(artigo.conteudo);
             setTagsSelecionadas(artigo.tags || []);
