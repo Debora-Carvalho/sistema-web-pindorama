@@ -7,6 +7,7 @@ import PaginaInicial from "../pages/Usuario/PaginaInicial/PaginaInicial.jsx";
 import PaginaVisualizarArtigos from "../pages/Usuario/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventos from "../pages/Usuario/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
 import PaginaVisualizarGaleria from "../pages/Usuario/PaginaVisualizarGaleria/PaginaVisualizarGaleria.jsx";
+import PaginaDetalhesArtigo from "../pages/Usuario/PaginaDetalhesArtigo/PaginaDetalhesArtigo.jsx";
 import PaginaMapa from "../pages/Usuario/PaginaMapa/PaginaMapa.jsx";
 
 // ROTAS ADMINISTRADOR
@@ -41,6 +42,9 @@ const AnimatedRoutes = () => {
 				<Route path="/eventos" element={<PaginaVisualizarEventos />} />
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 				<Route path="/mapa" element={<PaginaMapa />} />
+
+				{/*rota somente para teste e visualização da tela*/}
+				<Route path='/detalhes-artigo' element={<PaginaDetalhesArtigo />} />
 
 				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<ProtectedRoute />}>
