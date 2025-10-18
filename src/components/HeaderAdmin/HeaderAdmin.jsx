@@ -14,7 +14,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const navItems = [
     { id: 1, label: 'Artigos', icon: <FaFileAlt />, path: '/adm/visualizar-artigos' },
     { id: 2, label: 'Eventos', icon: <FaCalendarCheck />, path: '/adm/visualizar-eventos' },
-    { id: 3, label: 'Configurações', icon: <FaCog />, path: '/adm/configuracoes' },
+    { id: 3, label: 'Configurações', icon: <FaCog /> },
 ];
 
 const logoutItem = { id: 4, label: 'Logout', icon: <FaSignOutAlt /> };
@@ -27,8 +27,7 @@ export default function HeaderAdmin() {
     const { width } = useWindowSize();
     const isMobile = width <= 760;
     const isPaginaInicial = location.pathname === "/adm/inicio"
-    const isPaginaConfiguracoes = location.pathname === "/adm/configuracoes"
-    const isCollapsed = isMobile || !isPaginaInicial && !isPaginaConfiguracoes;
+    const isCollapsed = isMobile || !isPaginaInicial;
     const { logout } = useAuth();
 
     // Variantes de animação para o contêiner principal
