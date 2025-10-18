@@ -23,6 +23,7 @@ const mockArtigo = {
     titulo: "A Importância da Igreja Nossa Senhora do Bonfim",
     autora: "Feito por: Kelly",
     imagemCapa: capaImagem,
+    dataPublicacao: "2025-10-01T10:00:00",
     conteudoHTML: `
         <p>A Igreja Nossa Senhora do Bonfim, ou mais precisamente, a Basílica 
             Santuário Senhora do Bonfim, é um dos mais importantes centros de fé do 
@@ -93,6 +94,12 @@ const mockRelacionados = [
     }
 ];
 
+function formatarDataPorExtenso(dataString) {
+    const data = new Date(dataString);
+    const opcoes = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Intl.DateTimeFormat('pt-BR', opcoes).format(data);
+}
+
 function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
     useTituloDocumento(`${artigo.titulo} | Pindorama`)
 
@@ -124,7 +131,12 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
                 <Header />
                 <main className={styles.conteudo}>
                     <div className={styles.headerArtigo}>
-                        <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
+                        <div className={styles.infoTitulo}>
+                            <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
+                            <p className={styles.dataPublicacao}>
+                               Publicado em: {formatarDataPorExtenso(artigo.dataPublicacao)}
+                            </p>
+                        </div>
                         <p className={styles.autora}>{artigo.autora}</p>
                     </div>
 
@@ -212,10 +224,11 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
 
             <AnimatePresence>
                 {popupCompartilharAberto && (
-                    <PopupCompartilhar 
+                    <PopupCompartilhar
                         aoFechar={() => setPopupCompartilharAberto(false)}
                         link={artigoUrl}
                         imagem={artigo.imagemCapa}
+                        tipo="artigo"
                     />
                 )}
             </AnimatePresence>
