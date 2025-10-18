@@ -1,6 +1,5 @@
 ## 🌿 Branches
 
-
 ### 📌 Convenção de Nomes
 
 ```

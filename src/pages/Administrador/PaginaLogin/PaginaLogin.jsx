@@ -39,7 +39,7 @@ function PaginaLogin() {
     <>
       <div className={styles.containerLogin}>
         <div className={styles.columDoguinho}>
-          <img className={styles.imageLogin} src={cachorro} alt="Cachorro caramelo" />
+          <img className={styles.doguinho} src={cachorro} alt="Cachorro caramelo" />
         </div>
         <div className={styles.columForm}>
           <button onClick={() => window.location.href = "/pagina-inicial-usuario"}>
