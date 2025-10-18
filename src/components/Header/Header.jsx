@@ -1,10 +1,9 @@
 import styles from './Header.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import LogoPindorama from "../../assets/images/pindorama_logo5.png";
-
 import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
+import Logotipo from '../Logotipo/Logotipo.jsx';
 
 function Header({ acessibilidadeOverride, overrideClass }) {
 	const location = useLocation();
@@ -38,13 +37,7 @@ function Header({ acessibilidadeOverride, overrideClass }) {
 	return (
 		<header className={styles.container}>
 			<div className={`${styles.containerHeaderPrincipal} ${overrideClass || ''}`}>
-				<div
-					className={styles.logoHeaderPrincipal}
-					style={{ cursor: "pointer" }}
-					onClick={() => navigate("/")}
-				>
-					<img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
-				</div>
+				<Logotipo tipo='user' />
 
 				<div className={styles.headerPrincipal}>
 					<div className={styles.headerPrincipalItems}>
