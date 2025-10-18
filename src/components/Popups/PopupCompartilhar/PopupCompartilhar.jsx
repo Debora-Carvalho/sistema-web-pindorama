@@ -3,8 +3,10 @@ import styles from './PopupCompartilhar.module.scss';
 import { FaRegCopy } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-function PopupCompartilhar({ aoFechar, link, imagem }) {
+function PopupCompartilhar({ aoFechar, link, imagem, tipo = 'artigo' }) {
     const [foiCopiado, setFoiCopiado] = useState(false);
+
+    const textoTitulo = tipo === 'evento' ? 'Compartilhe este evento' : 'Compartilhe este artigo';
 
     const lidarComCopia = () => {
         navigator.clipboard.writeText(link).then(() => {
@@ -46,7 +48,7 @@ function PopupCompartilhar({ aoFechar, link, imagem }) {
                 variants={variantesPopup}
             >
                 <div className={styles.ladoEsquerdo}>
-                    <h3>Compartilhe este artigo</h3>
+                    <h3>{textoTitulo}</h3>
                     <p>Copie o link abaixo para compartilhar com seus amigos.</p>
                     <div className={styles.containerLink}>
                         <input type="text" value={link} readOnly />

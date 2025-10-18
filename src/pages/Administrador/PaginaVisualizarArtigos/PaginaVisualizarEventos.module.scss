@@ -20,6 +20,7 @@
     width: 100%;
     max-width: 50em;
     margin: 0 auto;
+    height: 10vh;
 }
 
 .iconAdd {
@@ -34,6 +35,14 @@
 
     &:hover {
         transform: translateY(-50%) scale(1.1);
+    }
+
+    @media(min-width: 1081px) {
+        transform: none;
+        
+        &:hover{
+            transform: translateY(0%) scale(1.1);
+        }
     }
 }
 
@@ -70,7 +79,7 @@
 
     .iconAdd {
         left: 0.6em;
-       top: 35px;
+        top: 35px;
     }
 }
 

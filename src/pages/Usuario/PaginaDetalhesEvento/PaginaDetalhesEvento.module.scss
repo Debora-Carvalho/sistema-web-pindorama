@@ -12,7 +12,7 @@
 	padding: 2%;
 }
 
-.headerArtigo {
+.headerEvento {
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -22,24 +22,10 @@
 	gap: 1rem;
 }
 
-.infoTitulo {
-    display: flex;
-    flex-direction: column;
-}
-
-.tituloArtigo {
+.tituloEvento {
 	font-family: $font-family-principal;
 	font-size: 3.5rem;
 	font-weight: 500;
-}
-
-.dataPublicacao {
-    font-family: $font-family-subtitulo;
-	font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--primary-400);
-    margin-top: 0.5rem;
-    font-style: italic;
 }
 
 .autora {
@@ -187,7 +173,7 @@
 	flex: 1;
 	flex-wrap: wrap;
 	justify-content: flex-start;
-	margin-top: 1.5rem;
+	
 }
 
 .tag {
@@ -198,7 +184,39 @@
 	font-family: $font-family-principal;
 }
 
-.artigosRelacionadosContainer {
+.infoLocalEvento {
+    background-color: var(--primary-200);
+    padding: 1.5rem;
+    border-radius: 20px;
+    font-family: $font-family-subtitulo;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    
+    p {
+        margin: 0;
+		color: var(--primary-700);
+        &:first-child {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+	a{
+		color: var(--secondary-900);
+		text-decoration: underline;
+
+		&:hover{
+			color: var(--secondary-600);
+		}
+	}
+}
+
+.botoesAcaoDireita {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.eventosRelacionadosContainer {
 	margin-top: 4rem;
 	padding-top: 2rem;
 	border-top: 2px solid var(--primary-400);
@@ -244,10 +262,6 @@
 }
 
 @media (max-width: 1080px) {
-	.tituloArtigo{
-		font-size: 3rem;
-	}
-
 	.corpoTexto{
 		font-size: 20px;
 	}
@@ -256,16 +270,12 @@
 		font-size: 1.2rem;
 	}
 
-	.relacionadosHeader{
-		display: block;
-	}
-
 	.tituloRelacionados {
 		font-size: 3rem;
 	}
 
 	.verMaisBotao {
-		font-size: 1rem;
+		font-size: 1.4rem;
 	}
 
 	.cardsContainer {
@@ -275,11 +285,30 @@
 	}
 }
 
+@media (max-width: 900px){
+	.cardsContainer {
+		gap: 1rem;
+	}
+}
+
 @media (max-width: 720px) {
 	.colunaEsquerda,
     .colunaDireita {
         display: contents;
     }
+
+	.relacionadosHeader{
+		display: block;
+	}
+
+	.tituloRelacionados {
+		font-size: 2.8rem;
+	}
+
+	.verMaisBotao{
+		font-size: 1rem;
+		padding: 8px 25px;
+	}
 
 	.conteudo {
 		padding: 5%;
@@ -288,28 +317,25 @@
 	.conteudoPrincipal {
 		grid-template-columns: 1fr;
 		grid-template-areas:
-			"titulo"
-			"autora"
-			"imagem"
-			"texto"
-			"tags"
-			"share";
+            "imagem"
+            "texto"
+            "local"
+			"botoesAcao";
 	}
 
-	.headerArtigo {
+	.headerEvento {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 0.5rem;
 	}
 
-	.tituloArtigo {
+	.tituloEvento {
 		grid-area: titulo;
-		font-size: 2.5rem;
+		font-size: 3rem;
 	}
 
 	.autora {
 		grid-area: autora;
-		font-size: 1.8rem;
 	}
 
 	.imagemCapa {
@@ -345,6 +371,7 @@
 	.tags {
 		grid-area: tags;
 		justify-content: flex-start;
+		margin-top: 1.5rem;
 		gap: 0.8rem;
 	}
 
@@ -352,16 +379,21 @@
 		font-size: 23px;
 
 	}
+	.botoesAcaoDireita {
+        grid-area: botoesAcao;
+    }
 
-	.cardsContainer {
-		gap: 1rem;
-	}
+    
+    .infoLocalEvento {
+        grid-area: local;
+		margin-top: 1.5rem;
+    }
 
 }
 
 @media (max-width: 480px) {
-	.tituloArtigo{
-		font-size: 2.5rem;
+	.tituloEvento{
+		font-size: 2.8rem;
 	}
 
 	.imagemCapa {
@@ -397,7 +429,7 @@
 }
 
 @media (max-width: 400px){
-	.tituloArtigo {
+	.tituloEvento {
 		font-size: 2.2rem;
 	}
 

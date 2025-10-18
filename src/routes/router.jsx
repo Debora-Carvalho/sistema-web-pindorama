@@ -8,6 +8,7 @@ import PaginaVisualizarArtigos from "../pages/Usuario/PaginaVisualizarArtigos/Pa
 import PaginaVisualizarEventos from "../pages/Usuario/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
 import PaginaVisualizarGaleria from "../pages/Usuario/PaginaVisualizarGaleria/PaginaVisualizarGaleria.jsx";
 import PaginaDetalhesArtigo from "../pages/Usuario/PaginaDetalhesArtigo/PaginaDetalhesArtigo.jsx";
+import PaginaDetalhesEvento from "../pages/Usuario/PaginaDetalhesEvento/PaginaDetalhesEvento.jsx";
 import PaginaMapa from "../pages/Usuario/PaginaMapa/PaginaMapa.jsx";
 
 // ROTAS ADMINISTRADOR
@@ -45,6 +46,7 @@ const AnimatedRoutes = () => {
 
 				{/*rota somente para teste e visualização da tela*/}
 				<Route path='/detalhes-artigo' element={<PaginaDetalhesArtigo />} />
+				<Route path='/detalhes-evento' element={<PaginaDetalhesEvento />} />
 
 				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<ProtectedRoute />}>
@@ -55,15 +57,15 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 						<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 						<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
-				       <Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
-						
+						<Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
+
 					</Route>
 				</Route>
 				{/* ROTA 404 */}
 				<Route path="*" element={<PaginaNaoEncontrado />} />
 			</Routes>
 		</AnimatePresence>
-		
+
 	);
 }
 
