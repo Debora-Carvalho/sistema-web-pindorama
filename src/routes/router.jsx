@@ -42,9 +42,7 @@ const AnimatedRoutes = () => {
 				<Route path="/eventos" element={<PaginaVisualizarEventos />} />
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 				<Route path="/mapa" element={<PaginaMapa />} />
-
-				{/*rota somente para teste e visualização da tela*/}
-				<Route path='/detalhes-artigo' element={<PaginaDetalhesArtigo />} />
+				<Route path='/detalhes-artigo/:id' element={<PaginaDetalhesArtigo />} />{/*rota somente para teste e visualização da tela (An: Rota sendo implementada)*/}
 
 				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<ProtectedRoute />}>
@@ -55,8 +53,7 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
 						<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 						<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
-				       <Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
-						
+            <Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
 					</Route>
 				</Route>
 				{/* ROTA 404 */}

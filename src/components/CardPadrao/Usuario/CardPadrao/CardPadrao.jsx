@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./CardPadrao.module.scss"; 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
+    const navigate = useNavigate(); 
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
+    const handleClick = () => {
+        navigate(link);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        //window.location.href = link; //Atualizando a tela assim que a url mudar OBS:  agora se eu comentar essa linha funciona, porem ão volta pra parte superor da tela
+    };
     return (
         <div className={styles.card}>
             <div className={styles.cardImagem}>
@@ -21,9 +27,10 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                     {descricao.length > 150 ? descricao.slice(0, 150) + "…ver mais" : descricao}
                 </p>
 
-                <Link to={link} className={botaoClasse}>
+                <button onClick={handleClick} className={botaoClasse}>
                     {tipo === "artigo" ? "Ler artigo completo" : "Ver evento completo"}
-                </Link>
+                </button>
+                
             </div>
         </div>
     );

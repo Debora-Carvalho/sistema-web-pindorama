@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState , useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styles from './PaginaDetalhesArtigo.module.scss'
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js'
 import windowSize from '../../../components/HeaderAdmin/useWindowSize.js'
@@ -17,89 +17,65 @@ import capaRelacionado1 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado2 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado3 from '../../../assets/images/igreja-artigo.png'
 
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 
-const mockArtigo = {
-    id: 1,
-    titulo: "A Importância da Igreja Nossa Senhora do Bonfim",
-    autora: "Feito por: Kelly",
-    imagemCapa: capaImagem,
-    conteudoHTML: `
-        <p>A Igreja Nossa Senhora do Bonfim, ou mais precisamente, a Basílica 
-            Santuário Senhora do Bonfim, é um dos mais importantes centros de fé do 
-            Brasil, localizado em Salvador, Bahia.
-        </p>
-        <p>Conhecida pela devoção ao <strong>Senhor do Bonfim</strong> e 
-            pelo sincretismo religioso, a basílica tem uma arquitetura neoclássica com 
-            uma notável fachada rococó e é um marco cultural e 
-            histórico para a Bahia e o Brasil.
-        </p>
-        <h2>História e Tradição</h2>
-        <ul>
-            <li>Fundada no século XVIII.</li>
-            <li>Famosa pela tradicional Lavagem do Bonfim.</li>
-            <li>As fitinhas do Bonfim são um símbolo de fé conhecido mundialmente.</li>
-        </ul>
-        <p>A Igreja Nossa Senhora do Bonfim, ou mais precisamente, a Basílica 
-            Santuário Senhora do Bonfim, é um dos mais importantes centros de fé do 
-            Brasil, localizado em Salvador, Bahia.
-        </p>
-        <p>Conhecida pela devoção ao <strong>Senhor do Bonfim</strong> e 
-            pelo sincretismo religioso, a basílica tem uma arquitetura neoclássica com 
-            uma notável fachada rococó e é um marco cultural e 
-            histórico para a Bahia e o Brasil.
-        </p>
-        <h2>História e Tradição</h2>
-        <ul>
-            <li>Fundada no século XVIII.</li>
-            <li>Famosa pela tradicional Lavagem do Bonfim.</li>
-            <li>As fitinhas do Bonfim são um símbolo de fé conhecido mundialmente.</li>
-        </ul>
-    `,
-    tags: ["Salvador", "Religião", "Tradições", "Bahia"]
-};
+function decodeHtml(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
 
-const mockRelacionados = [
-    {
-        id: 2,
-        imagem: capaRelacionado1,
-        tipo: 'artigo',
-        titulo: 'As Cores e Significados por Trás das Fitinhas do Bonfim',
-        descricao: 'Cada cor tem um desejo, uma prece. Descubra o que cada fitinha do Bonfim representa e como essa tradição se espalhou pelo mundo.',
-        link: '/artigo/2'
-    },
-    {
-        id: 3,
-        imagem: capaRelacionado2,
-        tipo: 'artigo',
-        titulo: 'Um Roteiro Histórico pelo Pelourinho em Salvador',
-        descricao: 'Caminhe pelas ruas de paralelepípedos e explore a rica história, arquitetura e cultura do coração de Salvador. Um guia completo para o seu passeio.',
-        link: '/artigo/3'
-    },
-    {
-        id: 4,
-        imagem: capaRelacionado3,
-        tipo: 'artigo',
-        titulo: 'A Culinária Baiana: Sabores que Contam Histórias',
-        descricao: 'Do acarajé ao vatapá, a culinária da Bahia é uma experiência única. Conheça os pratos principais e onde encontrar os melhores sabores.',
-        link: '/artigo/4'
-    },
-    {
-        id: 5,
-        imagem: capaRelacionado1,
-        tipo: 'artigo',
-        titulo: 'Festas Juninas: A Tradição que Aquece o Coração do Brasil',
-        descricao: 'Das quadrilhas coloridas às comidas típicas, explore a magia das festas de São João pelo país.',
-        link: '/artigo/5'
-    }
-];
+function PaginaDetalhesArtigo() {
+    const { id } = useParams();
+    const [artigocerto, setArtigocerto] = useState({});
+    const { getArtigoById } = useArtigos();
 
-function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
-    useTituloDocumento(`${artigo.titulo} | Pindorama`)
+    useEffect(() => {
+          if (id) {
+            async function carregar() {
+              try {
+                const artigocorreto = await getArtigoById(id);
+                console.log("Meu artigo",artigocorreto);
+                setArtigocerto(artigocorreto);
+              } catch (e) {
+                console.error("Erro ao carregar artigo", e);
+              }
+            }
+            carregar();
+          }
+        }, [id]);
+
+    const { artigos, loading, error } = useGetArtigos();
+    const artigosAdaptados = artigos
+    .filter(a => a.status === "publicado")
+    .filter(a => a.id !== Number(id)) // exclui o artigo que ta mostrando
+    .map(a => {
+        const adaptado = {
+            id: a.id,
+            tipo: "artigo",
+            titulo: decodeHtml(a.titulo),
+            url_imagem: a.url_imagem,
+            conteudo: decodeHtml(a.conteudo),
+            link: `/detalhes-artigo/${a.id}`,
+            tags: a.tags // adicionar as tags para analisar e filtrar depois
+        };
+        console.log(`Artigo ${adaptado.id} - tags:`, adaptado.tags);
+        return adaptado;
+    });
+    const artigosRelacionados = artigosAdaptados.filter(a => {
+      if (!a.tags || !artigocerto.tags) return false;// verifica se ambos tem tags
+      return a.tags.some(tag => artigocerto.tags.includes(tag));// aqui verifica se tem alguma tag em comum
+    });
+
+
+    useTituloDocumento(`${artigocerto.titulo} | Pindorama`)
 
     const { width } = windowSize();
     const limiteDeArtigos = width <= 1080 ? 4 : 3;
 
-    const conteudoSeguro = DOMPurify.sanitize(artigo.conteudoHTML);
+    const conteudoSeguro = DOMPurify.sanitize(artigocerto.conteudo); //Utilizar esta limpeza ou a funcao decodeHtml?
 
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const artigoUrl = window.location.href;
@@ -124,8 +100,8 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
                 <Header />
                 <main className={styles.conteudo}>
                     <div className={styles.headerArtigo}>
-                        <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
-                        <p className={styles.autora}>{artigo.autora}</p>
+                        <h1 className={styles.tituloArtigo}>{artigocerto.titulo}</h1>
+                        <p className={styles.autora}>{artigocerto.autor_id}</p>
                     </div>
 
                     <div className={styles.conteudoPrincipal}>
@@ -171,16 +147,19 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
 
                         <div className={styles.colunaDireita}>
                             <div className={styles.imagemCapa}>
-                                <img src={artigo.imagemCapa} alt={`Imagem de capa para o artigo: ${artigo.titulo}`} />
+                                <img src={artigocerto.url_imagem} alt={`Imagem de capa para o artigo: ${artigocerto.titulo}`} />
                             </div>
 
-                            <div className={styles.tags}>
-                                {artigo.tags.map((tag, index) => (
-                                    <span key={`${tag}-${index}`} className={styles.tag}>
-                                        #{tag}
-                                    </span>
+                            {artigocerto.tags && ( // necessario esperar carregar o artigo depois carrega as tags
+                              <div className={styles.tags}>
+                                {artigocerto.tags.map((tag, index) => (
+                                  <span key={`${tag}-${index}`} className={styles.tag}>
+                                    #{tag}
+                                  </span>
                                 ))}
-                            </div>
+                              </div>
+                            )}
+
                         </div>
 
                     </div>
@@ -193,17 +172,9 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
                             </Link>
                         </div>
                         <div className={styles.cardsContainer}>
-                            {mockRelacionados.slice(0, limiteDeArtigos).map((artigoRelacionado) => (
-                                <CardPadrao
-                                    key={artigoRelacionado.id}
-                                    imagem={artigoRelacionado.imagem}
-                                    tipo={artigoRelacionado.tipo}
-                                    titulo={artigoRelacionado.titulo}
-                                    descricao={artigoRelacionado.descricao}
-                                    link={artigoRelacionado.link}
-                                />
-                            ))}
+                          <ListaCards cards={artigosRelacionados} limite={limiteDeArtigos} /> 
                         </div>
+
                     </section>
 
                 </main>
@@ -215,7 +186,7 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
                     <PopupCompartilhar 
                         aoFechar={() => setPopupCompartilharAberto(false)}
                         link={artigoUrl}
-                        imagem={artigo.imagemCapa}
+                        imagem={artigocerto.url_imagem}
                     />
                 )}
             </AnimatePresence>
