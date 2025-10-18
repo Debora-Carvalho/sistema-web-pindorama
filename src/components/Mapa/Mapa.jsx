@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from "./Mapa.module.scss";
 import { MapContainer, TileLayer, GeoJSON, Marker } from "react-leaflet";
 import L from "leaflet";
 import brasilEstados from "../../json/brasil_geo.json";
@@ -47,7 +48,7 @@ export default function Mapa() {
 
     return (
         <>
-            <MapContainer center={[-14.235, -51.9253]} zoom={4} style={{ height: "100%", width: "100%" }}>
+            <MapContainer center={[-14.235, -51.9253]} zoom={4} style={{ height: '100%', width: '100%' }}>
                 <TileLayer
                     attribution='&copy; OpenStreetMap contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
