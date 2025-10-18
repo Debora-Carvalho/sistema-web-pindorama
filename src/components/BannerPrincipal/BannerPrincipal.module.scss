@@ -28,7 +28,7 @@
     }
 
     .imgBanner {
-        width: 674px;
+        width: 450px;
         height: 252px;
         object-fit: contain;
     }
@@ -40,11 +40,11 @@
 @media (max-width: 1080px) {
     .container {
         .title {
-            font-size: 4rem;
+            font-size: 4.5rem;
         }
 
         .imgBanner {
-            width: 550px;
+            width: 430px;
             height: 206px;
         }
     }
