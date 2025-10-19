@@ -6,7 +6,7 @@ import LogoPindorama from "../../assets/images/pindorama_logo5.png";
 import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 
-function Header({ acessibilidadeOverride, overrideClass }) {
+function Header({ acessibilidadeOverride, overrideClass, ttsProps, textToRead }) {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -104,7 +104,8 @@ function Header({ acessibilidadeOverride, overrideClass }) {
 				</div>
 			</div>
 
-			<GroupBtnAcessibilidade overrideClass={acessibilidadeOverride} />
+			<GroupBtnAcessibilidade overrideClass={acessibilidadeOverride} ttsProps={ttsProps}
+				textToRead={textToRead} />
 		</header>
 
 

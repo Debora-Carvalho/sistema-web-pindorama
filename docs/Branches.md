@@ -1,5 +1,6 @@
 ## 🌿 Branches
-- Adicionando branch hooks de configurações 
+
+
 ### 📌 Convenção de Nomes
 
 ```

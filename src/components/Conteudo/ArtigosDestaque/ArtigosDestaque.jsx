@@ -1,21 +1,21 @@
+import React, { useRef, useEffect } from 'react';
 import styles from "./ArtigosDestaque.module.scss";
 
 import { Link } from "react-router-dom";
 
-// import artigos from "../../../json/db-mock-artigos.json";
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import ListaCards from "../../ListaCards/Usuario/ListaCards.jsx";
 import Loading from "../../Loading/Loading.jsx";
 
 function decodeHtml(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
 }
 
-
-function ArtigosDestaque() {
+function ArtigosDestaque({ onTextReady }) { 
     const { artigos, loading, error } = useGetArtigos();
+    const containerRef = useRef(null);
 
     const artigosAdaptados = artigos
     .filter(a => a.status === "publicado")
@@ -28,8 +28,18 @@ function ArtigosDestaque() {
         link: `/artigo/${a.id}`
     }));
 
+    useEffect(() => {
+        if (!loading && artigosAdaptados.length > 0 && containerRef.current) { 
+            const extractedText = containerRef.current.innerText || containerRef.current.textContent;
+
+            if (extractedText && extractedText.length > 50 && onTextReady) {
+                onTextReady(extractedText.trim());
+            }
+        }
+    }, [loading, artigosAdaptados.length, onTextReady]); 
+
     return (
-        <div className={styles.container}>
+        <div ref={containerRef} className={styles.container}> 
             <div className={styles.containerTopo}>
                 <h2>Destaques</h2>
                 {loading && <Loading />}
@@ -41,6 +51,5 @@ function ArtigosDestaque() {
         </div>
     );
 };
-
 
 export default ArtigosDestaque;

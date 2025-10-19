@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import styles from './PaginaInicial.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
@@ -8,26 +9,34 @@ import ArtigosDestaque from '../../../components/Conteudo/ArtigosDestaque/Artigo
 import EventosDestaque from '../../../components/EventosDestaque/EventosDestaque.jsx';
 import ProximosEventos from '../../../components/Conteudo/ProximosEventos/ProximosEventos.jsx';
 import GaleriaFotos from '../../../components/Conteudo/GaleriaFotos/GaleriaFotos.jsx';
+import { useTts } from '../../../hooks/conf/useTts.js' 
 
 function PaginaInicial() {
-	useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina
+    useTituloDocumento("Início | Pindorama"); // mudando o Title da pagina 
+    const ttsProps = useTts();
+    const [pageText, setPageText] = useState("Carregando artigos em destaque..."); 
+    const handleArtigosTextReady = (extractedText) => {
+        setPageText(extractedText); 
+    };
 
-	return (
-		<>
-			<div className={styles.container}>
-				<Header />
+    const textToRead = pageText;
 
-				<main className={styles.containerInicioItems}>
-					<BannerPrincipal />
+    return (
+        <>
+            <div className={styles.container}>
+                <Header ttsProps={ttsProps} textToRead={textToRead} />
 
-					<section>
-						<ArtigosDestaque />
-					</section>
+                <main className={styles.containerInicioItems}>
+                    <BannerPrincipal />
 
-					<section className={styles.sectionAgendaEventos}>
-						<div className={styles.containerAgenda}>
-							<Agenda />
-						</div>
+                    <section>
+                        <ArtigosDestaque onTextReady={handleArtigosTextReady} />
+                    </section>
+
+                    <section className={styles.sectionAgendaEventos}>
+                        <div className={styles.containerAgenda}>
+                            <Agenda />
+                        </div>
 
 						<div className={styles.containerEvento}>
 							<EventosDestaque />

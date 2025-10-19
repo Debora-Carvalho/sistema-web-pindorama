@@ -1,0 +1,99 @@
+@use '../../../styles/abstracts/variables' as *;
+
+.popupOverlayMapa {
+    position: absolute;
+    bottom: 5%;
+    left: 2%;
+    z-index: 9999;
+    display: flex;
+    font-family: $font-family-subtitulo;
+    color: var(--text-principal);
+
+    .popupBoxMapa {
+        background-color: var(--primary-100);
+        border-radius: 20px;
+        padding: 1.5rem 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
+        text-align: center;
+        width: 450px;
+
+        .tituloDraggable {
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+                text-align: center;
+            }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .btnPopupMapa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background-color: var(--secondary-900);
+            color: var(--text-secondary);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .btnPopupMapa:hover {
+            background-color: var(--secondary-500);
+        }
+
+        .btnFecharPopup {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--secondary-900);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btnFecharPopup:hover {
+            color: var(--secondary-500);
+        }
+    }
+}
+
+
+/*Responsividade*/
+
+@media (max-width: 768px) {
+
+    .popupBoxMapa {
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 20px;
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        .btnPopupMapa {
+            padding: 0.6rem 1.5rem;
+        }
+    }
+}
