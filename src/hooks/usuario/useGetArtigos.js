@@ -1,21 +1,17 @@
 import { useState, useEffect } from 'react';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${API_BASE_URL}/artigos`;
+import { useArtigos } from '../artigos/useArtigos';
 
 export const useGetArtigos = () => {
     const [artigos, setArtigos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const { listarArtigos } = useArtigos(); 
+
     useEffect(() => {
-        const fetchArtigos = async () => {
+        const loadArtigos = async () => {
             try {
-                const response = await fetch(API_URL);
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar os artigos');
-                }
-                const data = await response.json();
+                const data = await listarArtigos(); 
                 setArtigos(data);
             } catch (err) {
                 setError(err.message);
@@ -23,9 +19,8 @@ export const useGetArtigos = () => {
                 setLoading(false);
             }
         };
+        loadArtigos();
+    }, [listarArtigos]); 
 
-        fetchArtigos();
-    }, []); 
-
-    return { artigos, loading, error };
+    return { artigos, loading, error }; 
 };
