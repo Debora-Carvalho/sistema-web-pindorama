@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import styles from './FooterCopy.module.scss';
+import PoliticasDePrivacidade from '../../Telas Estaticas/PoliticasDePrivacidade/PoliticasDePrivacidade';
+import TermosDeUso from '../../Telas Estaticas/TermosDeUso/TermosDeUso';
 
 function FooterCopy() {
+
+	 const [mostrarPoliticas, setMostrarPoliticas] = useState(false);
+     const [mostrarTermos, setMostrarTermos] = useState(false);
+
 	return (
 		<div className={styles.containerFooterCopy}>
 			<p className={styles.text}>
@@ -10,13 +16,26 @@ function FooterCopy() {
 			</p>
 
 			<div className={styles.linksFooterCopy}>
-				<Link className={styles.itemLinkFooterCopy}>
-					Políticas de privacidade
-				</Link>
+				<button
+          className={styles.itemLinkFooterCopy}
+          onClick={() => setMostrarPoliticas(true)}
+        >
+          Políticas de Privacidade
+        </button>
 
-				<Link className={styles.itemLinkFooterCopy}>
-					Termos de uso
-				</Link>
+        <button
+          className={styles.itemLinkFooterCopy}
+          onClick={() => setMostrarTermos(true)}
+        >
+           Termos de Uso
+        </button>
+			{mostrarPoliticas && (
+        <PoliticasDePrivacidade onClose={() => setMostrarPoliticas(false)} />
+      )}
+
+      {mostrarTermos && (
+        <TermosDeUso onClose={() => setMostrarTermos(false)} />
+      )}
 			</div>
 		</div>
 	);
