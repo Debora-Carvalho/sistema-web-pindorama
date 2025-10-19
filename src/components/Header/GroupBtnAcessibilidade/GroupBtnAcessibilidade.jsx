@@ -1,9 +1,10 @@
 import styles from './GroupBtnAcessibilidade.module.scss';
 import { Link } from 'react-router-dom';
 
+import BtnToggleLightDark from "../../BtnToggleLightDark/BtnToggleLightDark.jsx";
+
 import { LuFileVolume } from "react-icons/lu";
 import { IoAccessibilityOutline } from "react-icons/io5";
-import BtnToggleLightDark from '../../BtnToggleLightDark/BtnToggleLightDark';
 
 function GroupBtnAcessibilidade({ overrideClass }) {
 
