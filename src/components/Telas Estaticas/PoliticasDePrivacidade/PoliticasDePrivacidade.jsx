@@ -9,7 +9,7 @@ function PoliticasDePrivacidade({ onClose }) {
         <button className={styles.botaoFechar} onClick={onClose}>✕</button>
 
         <div className={styles.tituloPoliticas}>
-          <h1>Políticas de Privacidade</h1>
+          <h1>Politicas de Privacidade</h1>
           <img
             src={IconCactoApoio}
             alt="Ícone de cacto"
