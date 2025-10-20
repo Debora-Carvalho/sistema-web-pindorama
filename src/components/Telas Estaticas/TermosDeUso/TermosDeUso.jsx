@@ -1,89 +1,71 @@
 import IconCactoApoio from "../../../assets/icons/icon-cacto-apoio-agenda.png";
 import styles from './TermosDeUso.module.scss';
 
-function TermosDeUso({onClose}) {
+function TermosDeUso({ onClose }) {
   return (
     <div className={styles.overlay}>
-          <div className={styles.termosContainer}>
-            <button className={styles.botaoFechar} onClick={onClose}>✕</button>
-    
-            <div className={styles.tituloTermos}>
-              <h1>Termos de Uso</h1>
-              <img
-                src={IconCactoApoio}
-                alt="Ícone de cacto"
-                className={styles.iconCactoFooter}
-              />
-            </div>
-    
-            <div className={styles.conteudoTermos}>
-              <p>
-                Esta Política de Privacidade descreve como o site Pindorama, focado em
-                patrimônio imaterial, coleta, usa, armazena e protege as informações
-                dos usuários. Ao utilizar nosso site, você concorda com os termos
-                desta política.
-              </p>
-    
-              <h3>1. Coleta de informações</h3>
-              <p>
-                Coletamos informações para melhorar a sua experiência e fornecer
-                conteúdo relevante sobre patrimônio imaterial. As informações podem
-                ser coletadas das seguintes formas:
-              </p>
-              <ul>
-                <li>
-                  <strong>Informações fornecidas por você:</strong> quando você entra
-                  em contato conosco através do formulário, podemos coletar dados
-                  como seu nome e e-mail.
-                </li>
-                <li>
-                  <strong>Dados de navegação:</strong> coletamos informações sobre
-                  como você interage com nosso site, como seu endereço IP, tipo de
-                  navegador, páginas visitadas, tempo gasto em cada página e
-                  localização geográfica. Usamos essas informações para entender as
-                  preferências dos nossos leitores e otimizar a navegação.
-                </li>
-              </ul>
-    
-              <h3>2. Uso das informações</h3>
-              <p>As informações coletadas são usadas para:</p>
-              <ul>
-                <li>Responder às suas solicitações e mensagens enviadas pelo formulário de contato.</li>
-                <li>Melhorar a funcionalidade e o conteúdo do site, analisando o comportamento dos usuários.</li>
-                <li>Garantir a segurança e a integridade do site.</li>
-              </ul>
-    
-              <h3>3. Compartilhamento de informações</h3>
-              <p>
-                Não vendemos, alugamos ou compartilhamos suas informações pessoais com
-                terceiros, exceto nas seguintes situações:
-              </p>
-              <ul>
-                <li><strong>Para cumprimento legal:</strong> podemos divulgar informações se exigido por lei ou ordem judicial.</li>
-              </ul>
-    
-              <h3>4. Cookies</h3>
-              <p>
-                Utilizamos cookies para melhorar sua experiência de navegação. Os cookies são pequenos arquivos de texto armazenados no seu dispositivo que nos ajudam a lembrar suas preferências e otimizar o desempenho do site. Você pode desativar os cookies nas configurações do seu navegador, mas isso pode afetar a funcionalidade de algumas partes do site.
-              </p>
-    
-              <h3>5. Segurança</h3>
-              <p>
-                Tomamos medidas de segurança para proteger suas informações contra acesso não autorizado, alteração, divulgação ou destruição. No entanto, lembre-se que nenhum sistema na internet é 100% seguro.
-              </p>
-    
-              <h3>6. Seus direitos</h3>
-              <p>
-                Você tem o direito de acessar, corrigir ou excluir suas informações pessoais. Para exercer esses direitos, entre em contato conosco através do formulário.
-              </p>
-    
-              <h3>7. Alterações nesta Política</h3>
-              <p>
-                Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise sempre que possível para se manter informado sobre como protegemos suas informações.
-              </p>
-            </div>
-          </div>
+      <div className={styles.termosContainer}>
+        <button className={styles.botaoFechar} onClick={onClose}>✕</button>
+
+        <div className={styles.tituloTermos}>
+          <h1>Termos de Uso</h1>
+          <img
+            src={IconCactoApoio}
+            alt="Ícone de cacto"
+            className={styles.iconCactoFooter}
+          />
         </div>
+
+        <div className={styles.conteudoTermos}>
+          <p>
+            Estes Termos de Uso regem o acesso e a utilização do nosso site, que tem como objetivo difundir o patrimônio imaterial por meio de artigos, mapas interativos e informações sobre eventos culturais. Ao acessar ou usar nosso site, você concorda em cumprir estes termos.
+          </p>
+
+          <h3>1. Propriedade Intelectual</h3>
+          <p>
+            odo o conteúdo do site, incluindo textos, artigos, imagens, mapas interativos, logotipos e design, é de propriedade do Pindorama e de seus autores, e é protegido por leis de direitos autorais e propriedade intelectual.
+          </p>
+          <ul>
+            <li>
+              Você pode acessar e visualizar o conteúdo para uso pessoal e não comercial.
+            </li>
+            <li>
+              A reprodução, distribuição ou modificação de qualquer conteúdo sem autorização prévia por escrito é estritamente proibida.
+            </li>
+            <li>
+              É permitido compartilhar os artigos e o conteúdo do site através das redes sociais, desde que a fonte seja citada.
+            </li>
+          </ul>
+
+          <h3>2. Limitação de Responsabilidade</h3>
+          <p>O conteúdo do site, incluindo os artigos e o mapa interativo, é fornecido "como está" e tem fins informativos.</p>
+          <ul>
+            <li>RNão nos responsabilizamos por perdas ou danos decorrentes do uso do nosso site.</li>
+            <li>As informações sobre eventos culturais são fornecidas com base em dados de terceiros, e não garantimos sua veracidade ou ocorrência. Recomendamos que você confirme os detalhes com os organizadores dos eventos.</li>
+          </ul>
+
+          <h3>3. Links para Terceiros</h3>
+          <p>
+            Nosso site pode conter links para sites de terceiros. Esses links são fornecidos apenas para sua conveniência. Não somos responsáveis pelo conteúdo ou pelas políticas de privacidade desses sites.
+          </p>
+
+          <h3>4. Encerramento do Acesso</h3>
+          <p>
+            Podemos, a nosso critério, suspender ou encerrar seu acesso ao site a qualquer momento, por qualquer motivo, especialmente se você violar estes Termos de Uso.
+          </p>
+
+          <h3>5. Alterações nos Termos</h3>
+          <p>
+            Estes Termos de Uso podem ser alterados a qualquer momento. As alterações entrarão em vigor assim que forem publicadas no site. Seu uso contínuo do site após a publicação das alterações constitui sua aceitação dos novos termos.
+          </p>
+
+          <h3>6. Contato</h3>
+          <p>
+            Se tiver alguma dúvida sobre estes termos ou desejar entrar em contato, use o formulário disponível no site.
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }
 
