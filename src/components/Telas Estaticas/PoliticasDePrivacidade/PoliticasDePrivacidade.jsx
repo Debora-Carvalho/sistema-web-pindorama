@@ -1,4 +1,3 @@
-import React from 'react';
 import IconCactoApoio from "../../../assets/icons/icon-cacto-apoio-agenda.png";
 import styles from './PoliticasDePrivacidade.module.scss';
 
