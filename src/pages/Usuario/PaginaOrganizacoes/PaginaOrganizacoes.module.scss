@@ -1,0 +1,121 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.titleOrg {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-left: 2em;
+    font-family: $font-family-principal, sans-serif;
+}
+
+.organizacaoCard {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    margin-top: 10px;
+    margin-left: 3em;
+}
+
+.orgaosRow1 {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.orgaosRow2 {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-top: 30px;
+}
+.cardUnesco,
+.cardIphan,
+.cardCondephaat,
+.cardConpresp,
+.cardDPH {
+  position: relative;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow: hidden; 
+}
+
+.cardUnesco {
+    background-color: rgba(14, 66, 128, 0.68);
+    width: 40em;
+    height: 18em;
+}
+
+.cardIphan {
+    background-color: #661315;
+    width: 33em;
+    height: 18em;
+}
+
+.cardCondephaat {
+    background-color: #9B9C9F;
+    width: 40em;
+    height: 15em;
+}
+
+.cardConpresp {
+    background-color: #FEA727;
+    width: 15em;
+    height: 15em;
+}
+
+.cardDPH {
+    background-color: #FFFFFF;
+    width: 15em;
+    height: 15em;
+}
+
+.imgUnesco {
+    position: relative;
+    width: 25vw;
+    height: auto;
+    left: 7em;
+    bottom: 40px;
+}
+
+.imgIphan {
+    position: relative;
+    width: 35vw;
+    height: auto;
+    top:60px;
+    left: 10px;
+}
+
+.imgCondephaat {
+    position: relative;
+    width: 30vw;
+    height: auto;
+    top: 2px;
+    left: 90px;
+}
+
+.imgConpresp {
+    position: relative;
+    width: 60vw;
+    height: auto;
+}
+
+.imgDPH {
+    position: relative;
+    width: 10vw;
+    height: auto;
+    left: 35px;
+    top: 10px;
+}
+
+.btnOrg{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background-color: #E6E6E6;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  font-weight: 500;
+  z-index: 2;
+}
