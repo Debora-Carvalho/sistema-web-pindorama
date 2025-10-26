@@ -4,7 +4,7 @@ import styles from "../PaginaConfiguracoes/Configuracoes.module.scss";
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Loading from "../../../components/Loading/Loading.jsx";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
-import Logo from '../../../assets/images/pindorama_logo5.png';
+import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
 
 function PaginaConfiguracoes() {
   useTituloDocumento("Configurações | Pindorama");
@@ -14,68 +14,65 @@ function PaginaConfiguracoes() {
   const [modoNoturnoAtivo, setModoNoturnoAtivo] = useState(false);
 
   return (
-    <div className={styles.configuracoesContainer}>
-      <header className={styles.cabecalho}>
-        <Link to="/adm/inicio" className={styles.logo}>
-          <img
-            className={styles.logo}
-            src={Logo}
-            alt="Logo Pindorama - Voltar para a página inicial"
-          />
-        </Link>
+    <>
+      <header className={styles.header}>
+        <Logotipo tipo='admin' />
         <HeaderAdmin />
       </header>
 
-      <h1 className={styles.titleConfig}>Configurações</h1>
+      <div className={styles.configuracoesContainer}>
 
-      <div className={styles.backgroundConfiguracoes}>
-        <div className={styles.infoAcessibilidade}>
-          <p className={styles.titleAcessibilidade}>Acessibilidade</p>
+        <h1 className={styles.titleConfig}>Configurações</h1>
 
-          <div className={styles.leituraVoz}>
-            <p>Leitura em voz alta</p>
+        <div className={styles.backgroundConfiguracoes}>
+          <div className={styles.infoAcessibilidade}>
+            <p className={styles.titleAcessibilidade}>Acessibilidade</p>
+
+            <div className={styles.leituraVoz}>
+              <p>Leitura em voz alta</p>
+              <button
+                className={styles.btnConfig}
+                aria-pressed={leituraVozAtiva}
+                onClick={() => setLeituraVozAtiva(!leituraVozAtiva)}
+              >
+                {leituraVozAtiva ? "Desabilitar" : "Habilitar"}
+              </button>
+            </div>
+
+            <div className={styles.noturnoConfig}>
+              <p>Modo Noturno</p>
+              <button
+                className={styles.btnConfig}
+                aria-pressed={modoNoturnoAtivo}
+                onClick={() => setModoNoturnoAtivo(!modoNoturnoAtivo)}
+              >
+                {modoNoturnoAtivo ? "Desabilitar" : "Habilitar"}
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.infoSobreMim}>
+            <p>Sobre mim</p>
             <button
               className={styles.btnConfig}
-             aria-pressed={leituraVozAtiva}
-              onClick={() => setLeituraVozAtiva(!leituraVozAtiva)}
+              onClick={() => navigate("/adm/sobre-mim")}
             >
-              {leituraVozAtiva ? "Desabilitar" : "Habilitar"}
+              Editar
             </button>
           </div>
 
-          <div className={styles.noturnoConfig}>
-            <p>Modo Noturno</p>
+          <div className={styles.infoTema}>
+            <p>Mudar tema</p>
             <button
               className={styles.btnConfig}
-              aria-pressed={modoNoturnoAtivo}
-              onClick={() => setModoNoturnoAtivo(!modoNoturnoAtivo)}
+              onClick={() => navigate("/adm/")}
             >
-              {modoNoturnoAtivo ? "Desabilitar" : "Habilitar"}
+              Alterar
             </button>
           </div>
-        </div>
-
-        <div className={styles.infoSobreMim}>
-          <p>Sobre mim</p>
-          <button
-            className={styles.btnConfig}
-            onClick={() => navigate("/adm/sobre-mim")}
-          >
-            Editar
-          </button>
-        </div>
-
-        <div className={styles.infoTema}>
-          <p>Mudar tema</p>
-          <button
-            className={styles.btnConfig}
-            onClick={() => navigate("/adm/")}
-          >
-            Alterar
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

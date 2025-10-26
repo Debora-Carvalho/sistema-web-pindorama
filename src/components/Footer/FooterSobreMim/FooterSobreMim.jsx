@@ -1,20 +1,15 @@
 import { Link } from 'react-router-dom';
-import FooterCopy from './FooterCopy/FooterCopy.jsx';
-import FormContato from './FormContato/FormContato.jsx';
-import styles from './Footer.module.scss';
-import IconElementoApoio from '../../assets/icons/icon-cacto-apoio-footer.png';
+import FooterCopy from '../FooterCopy/FooterCopy.jsx';
+import styles from './FooterSobreMim.module.scss';
+import IconElementoApoio from '../../../assets/icons/icon-cacto-apoio-footer.png';
 
-function Footer() {
+function FooterSobreMim() {
 	return (
 		<footer>
 			<div className={styles.containerFooter}>
 				<p className={styles.nomeDestaque}>
 					Pindorama
 				</p>
-
-				<div>
-					<FormContato />
-				</div>
 
 				<div className={styles.linksFooter}>
 					<h2>Links</h2>
@@ -37,4 +32,4 @@ function Footer() {
 	);
 };
 
-export default Footer;
+export default FooterSobreMim;

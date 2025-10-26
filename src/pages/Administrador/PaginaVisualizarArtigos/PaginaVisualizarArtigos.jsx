@@ -12,6 +12,7 @@ import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmi
 // import artigos from '../../../json/db-mock-artigos.json';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js';
 import Loading from "../../../components/Loading/Loading.jsx";
+import Logotipo from "../../../components/Logotipo/Logotipo.jsx";
 
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
@@ -70,10 +71,10 @@ function PaginaVisualizarArtigosAdmin() {
             transition={pageTransition.transition}
         >
             <div className={styles.containerVisualizar}>
-                <img className={styles.logo} src={Logo} alt="Logo do Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }} />
-                <nav className={styles.navbar}>
+                <div className={styles.header}>
+                    <Logotipo tipo='admin' />
                     <HeaderAdmin />
-                </nav>
+                </div>
                 <div className={styles.topo}>
                     <BarraPesquisa
                         itens={artigos}

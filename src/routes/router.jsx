@@ -10,6 +10,7 @@ import PaginaVisualizarGaleria from "../pages/Usuario/PaginaVisualizarGaleria/Pa
 import PaginaDetalhesArtigo from "../pages/Usuario/PaginaDetalhesArtigo/PaginaDetalhesArtigo.jsx";
 import PaginaDetalhesEvento from "../pages/Usuario/PaginaDetalhesEvento/PaginaDetalhesEvento.jsx";
 import PaginaMapa from "../pages/Usuario/PaginaMapa/PaginaMapa.jsx";
+import PaginaSobreMim from "../pages/Usuario/PaginaSobreMim/PaginaSobreMim.jsx";
 
 // ROTAS ADMINISTRADOR
 import AdminLayout from '../layouts/AdminLayout.jsx';
@@ -28,6 +29,7 @@ import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrad
 // COMPONENTE QUE GERENCIA SE A ROTAS SERÃO PRIVADAS OU NÃO
 import ProtectedRoute from '../components/Rotas/ProtectedRoute.jsx'
 
+
 const AnimatedRoutes = () => {
 	const location = useLocation();
 
@@ -43,6 +45,7 @@ const AnimatedRoutes = () => {
 				<Route path="/eventos" element={<PaginaVisualizarEventos />} />
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 				<Route path="/mapa" element={<PaginaMapa />} />
+				<Route path="/sobre" element={<PaginaSobreMim />} />
 
 				{/*rota somente para teste e visualização da tela*/}
 				<Route path='/detalhes-artigo' element={<PaginaDetalhesArtigo />} />
