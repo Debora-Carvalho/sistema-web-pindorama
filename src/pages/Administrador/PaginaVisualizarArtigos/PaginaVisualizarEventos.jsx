@@ -9,6 +9,7 @@ import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmi
 // import eventos from '../../../json/db-mock-eventos.json';
 import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
 import Loading from '../../../components/Loading/Loading.jsx';
+import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
 
 function PaginaVisualizarEventosAdmin() {
     const handleSelect = (item) => {
@@ -21,10 +22,10 @@ function PaginaVisualizarEventosAdmin() {
 
     return (
         <div className={styles.containerVisualizar}>
-            <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
-            <nav className={styles.navbar}>
+            <div className={styles.header}>
+                <Logotipo tipo='admin' />
                 <HeaderAdmin />
-            </nav>
+            </div>
             <div className={styles.topo}>
                 <BarraPesquisa itens={eventos} onSelect={handleSelect} />
                 <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
@@ -33,13 +34,13 @@ function PaginaVisualizarEventosAdmin() {
             </div>
             <div className={styles.containerCards}>
                 {/* Lembrar de colocar o component de carregamento e erro */}
-                    {authLoading || eventosLoading ? (
-                        <Loading/>
-                    ) : error ? (
-                        <p>Ocorreu um erro ao carregar os eventos: {error}</p>
-                    ) : (
-                <ListaCardsAdmin cards={eventos} limite={null} />
-                    )}
+                {authLoading || eventosLoading ? (
+                    <Loading />
+                ) : error ? (
+                    <p>Ocorreu um erro ao carregar os eventos: {error}</p>
+                ) : (
+                    <ListaCardsAdmin cards={eventos} limite={null} />
+                )}
             </div>
         </div>
     )

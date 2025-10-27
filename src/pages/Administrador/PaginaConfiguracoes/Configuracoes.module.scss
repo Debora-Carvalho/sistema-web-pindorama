@@ -2,16 +2,23 @@
 
 
 .configuracoesContainer {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: $font-family-subtitulo;
-    transition: all 0.3s ease;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $font-family-subtitulo;
+  transition: all 0.3s ease;
 }
 
-.logo {
-    width: 15%;
+.header {
+  display: flex;
+  margin-bottom: 2.5rem;
+  margin-left: 2.5rem;
+  
+  img {
+    margin-top: 1rem;
+    
+  }
 }
 
 .titleConfig {
@@ -19,70 +26,74 @@
   font-size: 2rem;
   position: static;
   right: auto;
-  align-self: flex-start; 
-  margin: 0 0 1rem 6%; 
+  align-self: flex-start;
+  margin: 0 0 1rem 6%;
   text-align: left;
 }
 
 .backgroundConfiguracoes {
-    position: relative;
-    background-color: var(--primary-300);
-    border-radius: 8px;
-    border: 3px solid var(--primary-500);
-    width: 90%;
-    height: auto;
-    transition: all 0.3s ease;
-    padding: 1rem 0;
+  position: relative;
+  background-color: var(--primary-300);
+  border-radius: 8px;
+  border: 3px solid var(--primary-500);
+  width: 90%;
+  height: auto;
+  transition: all 0.3s ease;
+  padding: 1rem 0;
 }
 
-.infoAcessibilidade, .infoSobreMim, .infoTema{
-    position: relative;
-    background-color: rgba(255, 255, 255,0.21 );
-    width: 95%;
-    padding: 20px;
-    border-radius: 10px;
-    margin-left: 2.5%;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-    
+.infoAcessibilidade,
+.infoSobreMim,
+.infoTema {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.21);
+  width: 95%;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 2.5%;
+  margin-top: 15px;
+  transition: all 0.3s ease;
 
-   .titleAcessibilidade{
+
+  .titleAcessibilidade {
     font-size: 23px;
     font-weight: 500;
     padding-bottom: 15px;
     transition: all 0.3s ease;
-   }
+  }
 }
 
-.leituraVoz, .noturnoConfig {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 45px;
-    transition: all 0.3s ease;
+.leituraVoz,
+.noturnoConfig {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  transition: all 0.3s ease;
 }
 
-.infoSobreMim, .infoTema{
-    display: flex;
-    justify-content: space-between;
+.infoSobreMim,
+.infoTema {
+  display: flex;
+  justify-content: space-between;
 }
 
 .leituraVoz:hover,
-.noturnoConfig:hover, 
-.infoSobreMim:hover, 
-.infoTema:hover{
-    transition: 0.5s;
-    background-color:rgba(#893A1A ,0.30);
-    border-radius: 8px;
+.noturnoConfig:hover,
+.infoSobreMim:hover,
+.infoTema:hover {
+  transition: 0.5s;
+  background-color: rgba(#893A1A, 0.30);
+  border-radius: 8px;
 }
 
-.btnConfig{
-    background-color: var(--secondary-900);
-    color: var(--text-secondary);
-    border-radius: 8px;
-    min-width: 100px;
-    transition: all 0.3s ease;
-    height: 2rem;
+.btnConfig {
+  background-color: var(--secondary-900);
+  color: var(--text-secondary);
+  border-radius: 8px;
+  min-width: 100px;
+  transition: all 0.3s ease;
+  height: 2rem;
 }
 
 //RESPONSIVIDADE//
@@ -98,12 +109,12 @@
   .backgroundConfiguracoes {
     height: 25em;
     margin-top: 20px;
-}
+  }
 
-.infoAcessibilidade,
-.infoSobreMim,
-.infoTema {
-      padding: 1rem;
+  .infoAcessibilidade,
+  .infoSobreMim,
+  .infoTema {
+    padding: 1rem;
     width: 95%;
   }
 
@@ -148,7 +159,7 @@
   }
 
   .btnConfig {
-    width:20%;
+    width: 20%;
     max-width: 200px;
     align-self: center;
   }
@@ -161,9 +172,9 @@
 
   .titleConfig {
     font-size: 2rem;
-     text-align: center;
+    text-align: center;
     align-self: center;
-    margin: 8rem 0 1rem 0; 
+    margin: 8rem 0 1rem 0;
   }
 
   .backgroundConfiguracoes {
@@ -200,5 +211,3 @@
     padding: 5px;
   }
 }
-
-

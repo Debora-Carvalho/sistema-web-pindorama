@@ -23,7 +23,7 @@ function TermosDeUso({ onClose }) {
 
           <h3>1. Propriedade Intelectual</h3>
           <p>
-            odo o conteúdo do site, incluindo textos, artigos, imagens, mapas interativos, logotipos e design, é de propriedade do Pindorama e de seus autores, e é protegido por leis de direitos autorais e propriedade intelectual.
+            Todo o conteúdo do site, incluindo textos, artigos, imagens, mapas interativos, logotipos e design, é de propriedade do Pindorama e de seus autores, e é protegido por leis de direitos autorais e propriedade intelectual.
           </p>
           <ul>
             <li>
