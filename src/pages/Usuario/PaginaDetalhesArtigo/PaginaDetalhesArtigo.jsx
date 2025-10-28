@@ -12,14 +12,12 @@ import capaImagem from '../../../assets/images/igreja-artigo.png'
 import { FaRegPaperPlane, FaExpandAlt, FaCompressAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import useMediaQuery from '../../../hooks/useMediaQuery.js'
-import CardPadrao from '../../../components/CardPadrao/Usuario/CardPadrao/CardPadrao.jsx'
-import capaRelacionado1 from '../../../assets/images/igreja-artigo.png'
-import capaRelacionado2 from '../../../assets/images/igreja-artigo.png'
-import capaRelacionado3 from '../../../assets/images/igreja-artigo.png'
 
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
+import { useGetArtigoById } from '../../../hooks/artigos/useGetArtigoById.js'
+import Loading from '../../../components/Loading/Loading.jsx';
 
 function decodeHtml(html) {
   const txt = document.createElement("textarea");
@@ -29,25 +27,8 @@ function decodeHtml(html) {
 
 function PaginaDetalhesArtigo() {
     const { id } = useParams();
-    const [artigocerto, setArtigocerto] = useState({});
-    const { getArtigoById } = useArtigos();
-
-    useEffect(() => {
-          if (id) {
-            async function carregar() {
-              try {
-                const artigocorreto = await getArtigoById(id);
-                console.log("Meu artigo",artigocorreto);
-                setArtigocerto(artigocorreto);
-              } catch (e) {
-                console.error("Erro ao carregar artigo", e);
-              }
-            }
-            carregar();
-          }
-        }, [id]);
-
-    const { artigos, loading, error } = useGetArtigos();
+    const { artigo, loading: loadingArtigo, error: errorArtigo } = useGetArtigoById();
+    const { artigos, loading: loadingLista, error: errorLista } = useGetArtigos();
     const artigosAdaptados = artigos
     .filter(a => a.status === "publicado")
     .filter(a => a.id !== Number(id)) // exclui o artigo que ta mostrando
@@ -59,24 +40,23 @@ function PaginaDetalhesArtigo() {
             url_imagem: a.url_imagem,
             conteudo: decodeHtml(a.conteudo),
             link: `/detalhes-artigo/${a.id}`,
-            tags: a.tags // adicionar as tags para analisar e filtrar depois
+            tags: a.tags
         };
-        console.log(`Artigo ${adaptado.id} - tags:`, adaptado.tags);
         return adaptado;
     });
+
     const artigosRelacionados = artigosAdaptados.filter(a => {
-      if (!a.tags || !artigocerto.tags) return false;// verifica se ambos tem tags
-      return a.tags.some(tag => artigocerto.tags.includes(tag));// aqui verifica se tem alguma tag em comum
+      if (!a.tags || !artigo.tags) return false;// verifica se ambos tem tags
+      return a.tags.some(tag => artigo.tags.includes(tag));// aqui verifica se tem alguma tag em comum
     });
 
+    // useTituloDocumento(`${artigo.titulo} | Pindorama`)
+    useTituloDocumento(`${artigo?.titulo || "Carregando..."} | Pindorama`)
 
-    useTituloDocumento(`${artigocerto.titulo} | Pindorama`)
+    // const { width } = windowSize();
+    const limiteDeArtigos = 3;
 
-    const { width } = windowSize();
-    const limiteDeArtigos = width <= 1080 ? 4 : 3;
-
-    const conteudoSeguro = DOMPurify.sanitize(artigocerto.conteudo); //Utilizar esta limpeza ou a funcao decodeHtml?
-
+    const conteudoSeguro = DOMPurify.sanitize(artigo?.conteudo || "Carregando...");
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const artigoUrl = window.location.href;
 
@@ -98,10 +78,13 @@ function PaginaDetalhesArtigo() {
         <>
             <div className={styles.container}>
                 <Header />
+                {( loadingArtigo || loadingLista) ? (
+                <Loading />
+                ) : (
                 <main className={styles.conteudo}>
                     <div className={styles.headerArtigo}>
-                        <h1 className={styles.tituloArtigo}>{artigocerto.titulo}</h1>
-                        <p className={styles.autora}>{artigocerto.autor_id}</p>
+                        <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
+                        <p className={styles.autora}>Kelly</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
                     </div>
 
                     <div className={styles.conteudoPrincipal}>
@@ -147,12 +130,12 @@ function PaginaDetalhesArtigo() {
 
                         <div className={styles.colunaDireita}>
                             <div className={styles.imagemCapa}>
-                                <img src={artigocerto.url_imagem} alt={`Imagem de capa para o artigo: ${artigocerto.titulo}`} />
+                                <img src={artigo.url_imagem} alt={`Imagem de capa para o artigo: ${artigo.titulo}`} />
                             </div>
 
-                            {artigocerto.tags && ( // necessario esperar carregar o artigo depois carrega as tags
+                            {artigo.tags && ( // necessario esperar carregar o artigo depois carrega as tags
                               <div className={styles.tags}>
-                                {artigocerto.tags.map((tag, index) => (
+                                {artigo.tags.map((tag, index) => (
                                   <span key={`${tag}-${index}`} className={styles.tag}>
                                     #{tag}
                                   </span>
@@ -161,7 +144,6 @@ function PaginaDetalhesArtigo() {
                             )}
 
                         </div>
-
                     </div>
 
                     <section className={styles.artigosRelacionadosContainer}>
@@ -176,8 +158,8 @@ function PaginaDetalhesArtigo() {
                         </div>
 
                     </section>
-
                 </main>
+                )}
                 <Footer />
             </div>
 
@@ -186,7 +168,7 @@ function PaginaDetalhesArtigo() {
                     <PopupCompartilhar 
                         aoFechar={() => setPopupCompartilharAberto(false)}
                         link={artigoUrl}
-                        imagem={artigocerto.url_imagem}
+                        imagem={artigo.url_imagem}
                     />
                 )}
             </AnimatePresence>

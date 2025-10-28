@@ -8,9 +8,7 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
     const handleClick = () => {
-        navigate(link);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        //window.location.href = link; //Atualizando a tela assim que a url mudar OBS:  agora se eu comentar essa linha funciona, porem ão volta pra parte superor da tela
+      navigate(link);
     };
     return (
         <div className={styles.card}>
