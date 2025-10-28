@@ -48,7 +48,7 @@ const AnimatedRoutes = () => {
 				<Route path="/sobre" element={<PaginaSobreMim />} />
 
 				{/*rota somente para teste e visualização da tela*/}
-				<Route path='/detalhes-artigo' element={<PaginaDetalhesArtigo />} />
+				<Route path='/detalhes-artigo/:id' element={<PaginaDetalhesArtigo />} />
 				<Route path='/detalhes-evento' element={<PaginaDetalhesEvento />} />
 
 				{/* ROTAS ADMINISTRADOR */}

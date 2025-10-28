@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState , useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import styles from './PaginaDetalhesArtigo.module.scss'
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js'
 import windowSize from '../../../components/HeaderAdmin/useWindowSize.js'
@@ -12,102 +12,51 @@ import capaImagem from '../../../assets/images/igreja-artigo.png'
 import { FaRegPaperPlane, FaExpandAlt, FaCompressAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import useMediaQuery from '../../../hooks/useMediaQuery.js'
-import CardPadrao from '../../../components/CardPadrao/Usuario/CardPadrao/CardPadrao.jsx'
-import capaRelacionado1 from '../../../assets/images/igreja-artigo.png'
-import capaRelacionado2 from '../../../assets/images/igreja-artigo.png'
-import capaRelacionado3 from '../../../assets/images/igreja-artigo.png'
 
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
+import { useGetArtigoById } from '../../../hooks/artigos/useGetArtigoById.js'
+import Loading from '../../../components/Loading/Loading.jsx';
 
-const mockArtigo = {
-    id: 1,
-    titulo: "A Importância da Igreja Nossa Senhora do Bonfim",
-    autora: "Feito por: Kelly",
-    imagemCapa: capaImagem,
-    dataPublicacao: "2025-10-01T10:00:00",
-    conteudoHTML: `
-        <p>A Igreja Nossa Senhora do Bonfim, ou mais precisamente, a Basílica 
-            Santuário Senhora do Bonfim, é um dos mais importantes centros de fé do 
-            Brasil, localizado em Salvador, Bahia.
-        </p>
-        <p>Conhecida pela devoção ao <strong>Senhor do Bonfim</strong> e 
-            pelo sincretismo religioso, a basílica tem uma arquitetura neoclássica com 
-            uma notável fachada rococó e é um marco cultural e 
-            histórico para a Bahia e o Brasil.
-        </p>
-        <h2>História e Tradição</h2>
-        <ul>
-            <li>Fundada no século XVIII.</li>
-            <li>Famosa pela tradicional Lavagem do Bonfim.</li>
-            <li>As fitinhas do Bonfim são um símbolo de fé conhecido mundialmente.</li>
-        </ul>
-        <p>A Igreja Nossa Senhora do Bonfim, ou mais precisamente, a Basílica 
-            Santuário Senhora do Bonfim, é um dos mais importantes centros de fé do 
-            Brasil, localizado em Salvador, Bahia.
-        </p>
-        <p>Conhecida pela devoção ao <strong>Senhor do Bonfim</strong> e 
-            pelo sincretismo religioso, a basílica tem uma arquitetura neoclássica com 
-            uma notável fachada rococó e é um marco cultural e 
-            histórico para a Bahia e o Brasil.
-        </p>
-        <h2>História e Tradição</h2>
-        <ul>
-            <li>Fundada no século XVIII.</li>
-            <li>Famosa pela tradicional Lavagem do Bonfim.</li>
-            <li>As fitinhas do Bonfim são um símbolo de fé conhecido mundialmente.</li>
-        </ul>
-    `,
-    tags: ["Salvador", "Religião", "Tradições", "Bahia"]
-};
-
-const mockRelacionados = [
-    {
-        id: 2,
-        imagem: capaRelacionado1,
-        tipo: 'artigo',
-        titulo: 'As Cores e Significados por Trás das Fitinhas do Bonfim',
-        descricao: 'Cada cor tem um desejo, uma prece. Descubra o que cada fitinha do Bonfim representa e como essa tradição se espalhou pelo mundo.',
-        link: '/artigo/2'
-    },
-    {
-        id: 3,
-        imagem: capaRelacionado2,
-        tipo: 'artigo',
-        titulo: 'Um Roteiro Histórico pelo Pelourinho em Salvador',
-        descricao: 'Caminhe pelas ruas de paralelepípedos e explore a rica história, arquitetura e cultura do coração de Salvador. Um guia completo para o seu passeio.',
-        link: '/artigo/3'
-    },
-    {
-        id: 4,
-        imagem: capaRelacionado3,
-        tipo: 'artigo',
-        titulo: 'A Culinária Baiana: Sabores que Contam Histórias',
-        descricao: 'Do acarajé ao vatapá, a culinária da Bahia é uma experiência única. Conheça os pratos principais e onde encontrar os melhores sabores.',
-        link: '/artigo/4'
-    },
-    {
-        id: 5,
-        imagem: capaRelacionado1,
-        tipo: 'artigo',
-        titulo: 'Festas Juninas: A Tradição que Aquece o Coração do Brasil',
-        descricao: 'Das quadrilhas coloridas às comidas típicas, explore a magia das festas de São João pelo país.',
-        link: '/artigo/5'
-    }
-];
-
-function formatarDataPorExtenso(dataString) {
-    const data = new Date(dataString);
-    const opcoes = { day: 'numeric', month: 'long', year: 'numeric' };
-    return new Intl.DateTimeFormat('pt-BR', opcoes).format(data);
+function decodeHtml(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
 }
 
-function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
-    useTituloDocumento(`${artigo.titulo} | Pindorama`)
+function PaginaDetalhesArtigo() {
+    const { id } = useParams();
+    const { artigo, loading: loadingArtigo, error: errorArtigo } = useGetArtigoById();
+    const { artigos, loading: loadingLista, error: errorLista } = useGetArtigos();
+    const artigosAdaptados = artigos
+    .filter(a => a.status === "publicado")
+    .filter(a => a.id !== Number(id)) // exclui o artigo que ta mostrando
+    .map(a => {
+        const adaptado = {
+            id: a.id,
+            tipo: "artigo",
+            titulo: decodeHtml(a.titulo),
+            url_imagem: a.url_imagem,
+            conteudo: decodeHtml(a.conteudo),
+            link: `/detalhes-artigo/${a.id}`,
+            tags: a.tags
+        };
+        return adaptado;
+    });
 
-    const { width } = windowSize();
-    const limiteDeArtigos = width <= 1080 ? 4 : 3;
+    const artigosRelacionados = artigosAdaptados.filter(a => {
+      if (!a.tags || !artigo.tags) return false;// verifica se ambos tem tags
+      return a.tags.some(tag => artigo.tags.includes(tag));// aqui verifica se tem alguma tag em comum
+    });
 
-    const conteudoSeguro = DOMPurify.sanitize(artigo.conteudoHTML);
+    // useTituloDocumento(`${artigo.titulo} | Pindorama`)
+    useTituloDocumento(`${artigo?.titulo || "Carregando..."} | Pindorama`)
 
+    // const { width } = windowSize();
+    const limiteDeArtigos = 3;
+
+    const conteudoSeguro = DOMPurify.sanitize(artigo?.conteudo || "Carregando...");
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const artigoUrl = window.location.href;
 
@@ -129,15 +78,18 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
         <>
             <div className={styles.container}>
                 <Header />
+                {( loadingArtigo || loadingLista) ? (
+                <Loading />
+                ) : (
                 <main className={styles.conteudo}>
                     <div className={styles.headerArtigo}>
                         <div className={styles.infoTitulo}>
                             <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
-                            <p className={styles.dataPublicacao}>
-                               Publicado em: {formatarDataPorExtenso(artigo.dataPublicacao)}
-                            </p>
+                            {/* <p className={styles.dataPublicacao}>
+                              Publicado em: {formatarDataPorExtenso(artigo.dataPublicacao)}
+                            </p> Comentado pela anahi*/} 
                         </div>
-                        <p className={styles.autora}>{artigo.autora}</p>
+                        <p className={styles.autora}>Kelly</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
                     </div>
 
                     <div className={styles.conteudoPrincipal}>
@@ -183,18 +135,20 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
 
                         <div className={styles.colunaDireita}>
                             <div className={styles.imagemCapa}>
-                                <img src={artigo.imagemCapa} alt={`Imagem de capa para o artigo: ${artigo.titulo}`} />
+                                <img src={artigo.url_imagem} alt={`Imagem de capa para o artigo: ${artigo.titulo}`} />
                             </div>
 
-                            <div className={styles.tags}>
+                            {artigo.tags && ( // necessario esperar carregar o artigo depois carrega as tags
+                              <div className={styles.tags}>
                                 {artigo.tags.map((tag, index) => (
-                                    <span key={`${tag}-${index}`} className={styles.tag}>
-                                        #{tag}
-                                    </span>
+                                  <span key={`${tag}-${index}`} className={styles.tag}>
+                                    #{tag}
+                                  </span>
                                 ))}
-                            </div>
-                        </div>
+                              </div>
+                            )}
 
+                        </div>
                     </div>
 
                     <section className={styles.artigosRelacionadosContainer}>
@@ -205,20 +159,12 @@ function PaginaDetalhesArtigo({ artigo = mockArtigo }) {
                             </Link>
                         </div>
                         <div className={styles.cardsContainer}>
-                            {mockRelacionados.slice(0, limiteDeArtigos).map((artigoRelacionado) => (
-                                <CardPadrao
-                                    key={artigoRelacionado.id}
-                                    imagem={artigoRelacionado.imagem}
-                                    tipo={artigoRelacionado.tipo}
-                                    titulo={artigoRelacionado.titulo}
-                                    descricao={artigoRelacionado.descricao}
-                                    link={artigoRelacionado.link}
-                                />
-                            ))}
+                          <ListaCards cards={artigosRelacionados} limite={limiteDeArtigos} /> 
                         </div>
-                    </section>
 
+                    </section>
                 </main>
+                )}
                 <Footer />
             </div>
 
