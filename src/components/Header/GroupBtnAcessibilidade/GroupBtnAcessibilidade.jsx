@@ -11,11 +11,12 @@ function GroupBtnAcessibilidade({ overrideClass }) {
     return (
         <>
               <div className={`${styles.containerAcessibilidade} ${overrideClass || ''}`}>
-                <div className={styles.containerBtnAcessibilidade}>
+                {/* o botão de leitura de tela está ocultado abaixo */}
+                {/* <div className={styles.containerBtnAcessibilidade}>
                     <button>
                         <LuFileVolume className={styles.btnAcessibilidadeIcon}/>
                     </button>
-                </div>
+                </div> */}
 
                 <div className={styles.containerBtnAcessibilidade}>
                     <BtnToggleLightDark />

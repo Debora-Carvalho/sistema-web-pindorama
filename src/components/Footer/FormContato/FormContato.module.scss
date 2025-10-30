@@ -9,7 +9,7 @@
 
 	h2 {
 		font-family: $font-family-subtitulo;
-		color: var(--text-secondary);
+		color: var(--text-header-footer-user);
 		font-size: 2rem;
 		text-align: start;
 	}
@@ -31,7 +31,7 @@
 		}
 
 		label {
-			color: var(--text-secondary);
+			color: var(--text-header-footer-user);
 			margin-bottom: 5px;
 		}
 
@@ -45,7 +45,7 @@
 
 	.btnFormContato {
 		background-color: var(--primary-500);
-		color: var(--text-secondary);
+		color: var(--text-header-footer-user);
 		border-radius: 20px;
 		height: 40px;
 		font-family: $font-family-texto;

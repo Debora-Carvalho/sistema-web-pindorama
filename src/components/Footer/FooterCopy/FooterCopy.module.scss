@@ -7,13 +7,13 @@
     align-items: center;
     justify-content: space-between;
     background: var(--background-secondary);
-    border-top: 1px solid var(--text-secondary);
+    border-top: 1px solid var(--text-header-footer-user);
     padding: 20px;
 
     .text,
     .itemLinkFooterCopy {
         font-family: $font-family-principal;
-        color: var(--text-secondary);
+        color: var(--text-header-footer-user);
         font-size: 1rem;
     }
 
