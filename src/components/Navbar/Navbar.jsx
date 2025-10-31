@@ -55,7 +55,7 @@ const Navbar = () => {
             navigate: "/organizacoes",
         },
         {
-            text: "Sobre mim",
+            text: "Sobre a autora",
             icon: <FaHeart />,
             navigate: "/sobre",
         },

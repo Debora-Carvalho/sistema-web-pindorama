@@ -87,7 +87,7 @@ function Header({ acessibilidadeOverride, overrideClass }) {
 							className={`${styles['headerBtn']} ${location.pathname === '/sobre' ? styles.active : ''}`}
 							onClick={() => handleClick('sobre')}
 						>
-							Sobre mim
+							Sobre a autora
 						</button>
 					</div>
 
