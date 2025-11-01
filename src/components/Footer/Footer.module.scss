@@ -3,6 +3,7 @@
 footer {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
 .containerFooter {
@@ -18,7 +19,7 @@ footer {
 	.nomeDestaque {
 		font-family: $font-family-subtitulo;
 		font-size: 5rem;
-		color: var(--text-secondary);
+		color: var(--text-header-footer-user);
 	}
 
 	.linksFooter {
@@ -28,7 +29,7 @@ footer {
 		h2 {
 			font-family: $font-family-texto;
 			font-weight: 800;
-			color: var(--text-secondary);
+			color: var(--text-header-footer-user);
 			font-size: 2rem;
 		}
 
@@ -39,7 +40,7 @@ footer {
 
 		.itemLinkFooter {
 			font-family: $font-family-principal;
-			color: var(--text-secondary);
+			color: var(--text-header-footer-user);
 			font-size: 1.2rem;
 
 			&:hover {

@@ -14,7 +14,7 @@
 
     .btnAcessibilidadeIcon {
         font-size: 1.8rem;
-        color: var(--text-primary);
+        color: var(--neutral-primary);
 
         &:hover {
             color: var(--background-secondary);
@@ -28,7 +28,7 @@
 
         .btnAcessibilidadeIcon {
             font-size: 1.5rem;
-            color: var(--text-primary);
+            color: var(--neutral-primary);
         }
     }
 }

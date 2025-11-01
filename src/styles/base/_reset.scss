@@ -13,8 +13,8 @@ body {
 	width: 100%;
 	font-family: sans-serif;
 	line-height: 1.5;
-	background-color: #fff;
-	color: #000;
+	background-color: var(--background-secondary);
+	color: var(--text-principal);
 }
 
 img,

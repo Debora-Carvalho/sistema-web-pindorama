@@ -14,6 +14,7 @@ import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useParams } from 'react-router-dom';
+import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
 
 // --- Constantes ---
 const nomeAutora = "Kelly Cristina Marques";
@@ -33,8 +34,8 @@ function PaginaCriarArtigo() {
     const navigate = useNavigate();
 
     // --- Hook personalizado para lidar com artigos ---
-    const { atualizarArtigo, buscarArtigo, criarArtigo, loading, erro } = useArtigos();
-
+    const { putArtigo, getArtigoById, postArtigo, loading, erro } = useArtigos();
+    
     // --- Estados do Formulário ---
     const [titulo, setTitulo] = useState('');
     const [conteudo, setConteudo] = useState('');
@@ -152,9 +153,9 @@ function PaginaCriarArtigo() {
               };
 
               if (id) {
-                await atualizarArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
+                await putArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
               } else {
-                await criarArtigo(artigoParaEnviar, imagemCapa); // modo criação
+                await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
               }
 
               setMostrarConfirmacaoEnvio(false);
@@ -187,7 +188,7 @@ function PaginaCriarArtigo() {
       if (id) {
         async function carregar() {
           try {
-            const artigo = await buscarArtigo(id);
+            const artigo = await getArtigoById(id);
             setTitulo(artigo.titulo);
             setConteudo(artigo.conteudo);
             setTagsSelecionadas(artigo.tags || []);
@@ -210,9 +211,7 @@ function PaginaCriarArtigo() {
     return (
         <main className={styles.base}>
             <header className={styles.cabecalho}>
-                <Link to="/adm/inicio" className={styles.logo}>
-                    <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
-                </Link>
+                <Logotipo tipo='admin' />
                 <h1 className={styles.titulo}>Artigos</h1>
                 <HeaderAdmin />
             </header>
