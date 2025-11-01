@@ -18,7 +18,6 @@ import { FaFileAlt, FaCalendarCheck, FaMap, FaHeart } from 'react-icons/fa';
 import { FaImage, FaBuilding } from "react-icons/fa6";
 import { MdInfo, MdOutlineSecurity } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
-import Logotipo from "../Logotipo/Logotipo";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -55,7 +54,7 @@ const Navbar = () => {
             navigate: "/organizacoes",
         },
         {
-            text: "Sobre a autora",
+            text: "Sobre mim",
             icon: <FaHeart />,
             navigate: "/sobre",
         },
@@ -102,8 +101,11 @@ const Navbar = () => {
                     onKeyDown={() => setOpenMenu(false)}
                 >
                     <List>
-                        <div style={{padding: "10% 0"}}>
-                            <Logotipo tipo="user" />
+                        <div
+                            className={styles.navLogoContainer}
+                            onClick={() => navigate("/")}
+                        >
+                            <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" />
                         </div>
 
                         {menuOptions.map((item) => (

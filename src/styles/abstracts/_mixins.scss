@@ -2,14 +2,12 @@
 @use "../themes/default" as theme_default;
 @use "../themes/dark" as theme_dark;
 @use "../themes/nordestino" as theme_nord;
-@use "../themes/indigena" as theme_indi;
 
 // combinar os mapas de tema num só mapa
 $themes: (
 	default: theme_default.$default,
 	dark: theme_dark.$dark,
-	nordestino: theme_nord.$nordestino,
-	indigena: theme_indi.$indigena
+	nordestino: theme_nord.$nordestino
 );
 
 @mixin generate-theme-css-vars() {

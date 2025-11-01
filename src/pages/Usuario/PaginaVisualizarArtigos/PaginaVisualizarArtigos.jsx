@@ -18,7 +18,6 @@ function PaginaVisualizarArtigos() {
     useTituloDocumento("Artigos | Pindorama"); // mudando o Title da pagina
     const { artigos, loading, error } = useGetArtigos();
 
-
     // Adaptando os artigos: filtrando apenas publicados e decodificando HTML
     const artigosAdaptados = artigos
         .filter(a => a.status === "publicado")
@@ -28,7 +27,7 @@ function PaginaVisualizarArtigos() {
             titulo: decodeHtml(a.titulo),
             url_imagem: a.url_imagem,
             conteudo: decodeHtml(a.conteudo),
-            link: `/detalhes-artigo/${a.id}`
+            link: `/artigo/${a.id}`
         }));
 
     return (

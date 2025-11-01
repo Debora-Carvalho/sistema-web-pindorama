@@ -7,8 +7,7 @@ export function useArtigos() {
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState(null);
 
-  // POST /artigos
-  async function postArtigo(dados, imagemFile) {
+  async function criarArtigo(dados, imagemFile) {
     setLoading(true);
     setErro(null);
     try {
@@ -47,8 +46,7 @@ export function useArtigos() {
     }
   }
 
-  // GET /artigos all
-  async function getArtigos() {
+  async function listarArtigos() {
     setLoading(true);
     setErro(null);
     try {
@@ -63,8 +61,7 @@ export function useArtigos() {
     }
   }
 
-  // GET /artigos/:id
-  async function getArtigoById(id) {
+  async function buscarArtigo(id) {
     setLoading(true);
     setErro(null);
     try {
@@ -79,8 +76,7 @@ export function useArtigos() {
     }
   }
 
-  // PUT /artigos/:id
-  async function putArtigo(id, dados, imagemFile) {
+  async function atualizarArtigo(id, dados, imagemFile) {
       setLoading(true);
       setErro(null);
       try {
@@ -114,8 +110,7 @@ export function useArtigos() {
       }
   }
 
-  // DELETE /artigos/:id
-  async function deleteArtigo(id) {
+  async function deletarArtigo(id) {
     setLoading(true);
     setErro(null);
     try {
@@ -133,11 +128,11 @@ export function useArtigos() {
   }
 
   return {
-    postArtigo,
-    getArtigoById,
-    putArtigo,
-    deleteArtigo,
-    getArtigos,
+    atualizarArtigo,
+    buscarArtigo,
+    deletarArtigo,
+    listarArtigos,
+    criarArtigo,
     loading,
     erro,
   };

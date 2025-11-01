@@ -13,18 +13,12 @@ body{
 .cabecalho {
     display: flex;
     align-items: center;
-    gap: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 0%;
 
     .titulo {
         font-size: 3rem;
         font-family: $font-family-subtitulo;
         font-weight: 300;
-        margin-top: 1rem;
-    }
-
-    img{
-        margin-top: 1rem;
     }
 }
 

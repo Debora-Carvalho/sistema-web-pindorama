@@ -1,195 +1,23 @@
-@use '../../styles/abstracts/variables' as *;
-
-.modalOverlayTheme {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background: rgba(0, 0, 0, 0.6);
-	backdrop-filter: blur(1px);
-	z-index: 99;
+.containerButton {
 	display: flex;
-	justify-content: center;
+	flex-direction: row;
 	align-items: center;
-	font-family: $font-family-subtitulo;
+	justify-content: center;
+	gap: 20px;
+}
 
-	.containerModalTheme {
-		display: flex;
-		flex-direction: column;
-		background-color: var(--primary-100);
-		border-radius: 20px;
-		padding: 1.5rem 2rem;
-		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-		width: 90%;
-		max-width: 600px;
-		text-align: center;
-		transition: all 0.3s ease-in-out;
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10rem;
+	height: min-content;
+	padding: 10px;
+	border-radius: 20px;
+	border: 2px solid var(--neutral-primary);
+	color: var(--text-primary);
 
-		.containerInfos {
-			display: flex;
-			flex-direction: column;
-			text-align: justify;
-
-			h3 {
-				font-size: 1.5rem;
-				margin-bottom: 1rem;
-				font-weight: 500;
-			}
-
-			p {
-				font-size: 1rem;
-				margin-bottom: 1rem;
-				font-weight: 500;
-			}
-		}
-
-		.containerButtons {
-			display: flex;
-			flex-direction: column;
-			padding: 10px;
-			gap: 8px;
-
-			.btnTheme {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: flex-start;
-				gap: 10px;
-				text-align: start;
-				background-color: var(--neutral-secondary);
-				width: 100%;
-				padding: 0.8rem 1rem;
-				border-radius: 10px;
-				border: 3px solid var(--primary-300);
-				font-size: 1.1rem;
-				transition: all 0.2s ease-in-out;
-
-				.btnThemeIcon {
-					font-size: 2rem;
-				}
-
-				&:hover {
-					border-color: var(--secondary-500);
-					box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-					color: var(--secondary-500);
-				}
-			}
-
-			.btnSelecionado {
-				color: var(--primary-300);
-				border-color: var(--primary-500);
-				box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-				font-weight: 600;
-			}
-		}
-
-		.modalActions {
-			margin-top: 1.5rem;
-			display: flex;
-			justify-content: space-between;
-			gap: 10px;
-
-			.btnCancelar,
-			.btnConfirmar {
-				border: none;
-				border-radius: 30px;
-				padding: 0.8rem 2rem;
-				cursor: pointer;
-				font-size: 1rem;
-				font-weight: 500;
-				transition: 0.3s;
-				width: 100%;
-			}
-
-			.btnConfirmar {
-				background-color: var(--success);
-				color: var(--text-secondary);
-
-				&:hover {
-					background-color: var(--secondary-500);
-				}
-			}
-
-			.btnCancelar {
-				background-color: var(--primary-700);
-				color: var(--text-secondary);
-
-				&:hover {
-					background-color: var(--primary-500);
-				}
-			}
-		}
-	}
-
-	/* Responsividade */
-	@media (max-width: 768px) {
-		.containerModalTheme {
-			width: 80%;
-			padding: 1.2rem 1.5rem;
-
-			.containerInfos {
-				h3 {
-					font-size: 1.3rem;
-				}
-				p {
-					font-size: 0.95rem;
-				}
-			}
-
-			.containerButtons {
-				gap: 6px;
-
-				.btnTheme {
-					font-size: 1rem;
-					padding: 0.7rem 0.8rem;
-				}
-			}
-
-			.modalActions {
-				flex-direction: column;
-
-				.btnCancelar,
-				.btnConfirmar {
-					width: 100%;
-					padding: 0.7rem;
-					font-size: 0.95rem;
-				}
-			}
-		}
-	}
-
-	@media (max-width: 480px) {
-		.containerModalTheme {
-			padding: 1rem;
-			max-width: 95%;
-
-			.containerInfos {
-				h3 {
-					font-size: 1.1rem;
-				}
-				p {
-					font-size: 0.9rem;
-				}
-			}
-
-			.containerButtons {
-				.btnTheme {
-					font-size: 0.95rem;
-					gap: 8px;
-					padding: 0.6rem 0.8rem;
-				}
-			}
-
-			.modalActions {
-				gap: 8px;
-
-				.btnCancelar,
-				.btnConfirmar {
-					font-size: 0.9rem;
-					padding: 0.6rem;
-				}
-			}
-		}
+	&:hover {
+		background-color: var(--background-secondary);
 	}
 }

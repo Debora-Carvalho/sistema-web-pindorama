@@ -14,7 +14,6 @@ import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
 import PopupCalendario from '../../../components/Popups/PopupCalendario/PopupCalendario';
 import PopupLocalLink from '../../../components/Popups/PopupLocalLink/PopupLocalLink';
-import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
 
 
 function PaginaCriarEvento() {
@@ -180,7 +179,9 @@ function PaginaCriarEvento() {
     return (
         <main className={styles.base}>
             <header className={styles.cabecalho}>
-                <Logotipo tipo='admin' />
+                <Link to="/adm/inicio" className={styles.logo}>
+                    <img className={styles.logoImage} src={Logo} alt="Logo Pindorama - Voltar para a página inicial" />
+                </Link>
                 <h1 className={styles.titulo}>Eventos</h1>
                 <HeaderAdmin />
             </header>

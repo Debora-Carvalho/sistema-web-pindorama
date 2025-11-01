@@ -1,13 +1,9 @@
 @use "../../../styles/abstracts/variables.scss" as *;
 
-.header{
-    display: flex;
-    margin-bottom: 5.5rem;
-    margin-left: 2.4rem;
-
-    img{
-        margin-top: 0.4rem;
-    }
+.logo {
+    width: 15%;
+    bottom: 2rem;
+    margin-bottom: 3em;
 }
 
 .containerVisualizar {

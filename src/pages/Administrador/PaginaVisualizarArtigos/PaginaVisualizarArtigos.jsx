@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { useAuth } from '../../../contexts/AuthContext.jsx';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
+// import artigos from '../../../json/db-mock-artigos.json';
 import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js';
 import Loading from "../../../components/Loading/Loading.jsx";
-import Logotipo from "../../../components/Logotipo/Logotipo.jsx";
 
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
@@ -22,15 +22,14 @@ const pageTransition = {
 
 function PaginaVisualizarArtigosAdmin() {
     const navigate = useNavigate();
-    //const { listarArtigos, deletarArtigo, loading, erro } = useArtigos();
-    const { getArtigos, deleteArtigo, loading, erro } = useArtigos();
+    const { listarArtigos, deletarArtigo, loading, erro } = useArtigos();
     const [artigos, setArtigos] = useState([]);
     const [filtro, setFiltro] = useState("");
 
     useEffect(() => {
         async function carregar() {
             try {
-                const data = await getArtigos();
+                const data = await listarArtigos();
                 setArtigos(data);
             } catch (e) {
                 console.error(e);
@@ -40,7 +39,7 @@ function PaginaVisualizarArtigosAdmin() {
     }, []);
 
     const handleExcluir = async (id) => {
-        await deleteArtigo(id);
+        await deletarArtigo(id);
         setArtigos((prev) => prev.filter((a) => a.id !== id));
     };
 
@@ -71,10 +70,10 @@ function PaginaVisualizarArtigosAdmin() {
             transition={pageTransition.transition}
         >
             <div className={styles.containerVisualizar}>
-                <div className={styles.header}>
-                    <Logotipo tipo='admin' />
+                <img className={styles.logo} src={Logo} alt="Logo do Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }} />
+                <nav className={styles.navbar}>
                     <HeaderAdmin />
-                </div>
+                </nav>
                 <div className={styles.topo}>
                     <BarraPesquisa
                         itens={artigos}

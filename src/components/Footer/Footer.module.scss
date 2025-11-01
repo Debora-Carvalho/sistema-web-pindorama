@@ -18,7 +18,7 @@ footer {
 	.nomeDestaque {
 		font-family: $font-family-subtitulo;
 		font-size: 5rem;
-		color: var(--text-header-footer-user);
+		color: var(--text-secondary);
 	}
 
 	.linksFooter {
@@ -28,7 +28,7 @@ footer {
 		h2 {
 			font-family: $font-family-texto;
 			font-weight: 800;
-			color: var(--text-header-footer-user);
+			color: var(--text-secondary);
 			font-size: 2rem;
 		}
 
@@ -39,7 +39,7 @@ footer {
 
 		.itemLinkFooter {
 			font-family: $font-family-principal;
-			color: var(--text-header-footer-user);
+			color: var(--text-secondary);
 			font-size: 1.2rem;
 
 			&:hover {

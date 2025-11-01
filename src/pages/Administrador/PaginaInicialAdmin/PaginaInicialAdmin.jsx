@@ -18,7 +18,7 @@ import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventos
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useNavigate } from "react-router-dom";
 import Loading from '../../../components/Loading/Loading.jsx';
-import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
+
 
 const getSaudacao = () => {
     const horaAtual = new Date().getHours();
@@ -112,10 +112,8 @@ function PaginaInicialAdmin() {
                 transition={pageTransition.transition}
             >
                 <main className={styles.base}>
-                    <header className={styles.header}>
-                        <Logotipo tipo='admin' />
-                        <HeaderAdmin />
-                    </header>
+                    <img className={styles.logo} src={LogoPindorama} alt="Logo do site Pindorama" onClick={() => navigate("/adm/inicio")} style={{ cursor: "pointer" }} />
+                    <HeaderAdmin />
 
                     <div className={styles.gridContainer}>
 
