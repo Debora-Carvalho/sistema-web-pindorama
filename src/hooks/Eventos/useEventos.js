@@ -1,4 +1,3 @@
-// useEventos.js (CORRIGIDO)
 import { useState } from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -7,6 +6,7 @@ const API_URL = `${API_BASE_URL}/eventos`;
 export function useEventos() {
     const [loading, setLoading] = useState(false);
     const [erro, setErro] = useState(null);
+    const [eventos, setEventos] = useState([]); // ✅ ADICIONADO
 
     // Função similar a 'criarArtigo'
     async function criarEvento(dados, imagemFile) {
@@ -14,11 +14,11 @@ export function useEventos() {
         setErro(null);
         try {
             const formData = new FormData();
-            // Utiliza 'evento' como chave principal e os parâmetros da sua controller
+            // Utiliza 'evento' como chave principal e os parâmetros da controller
             formData.append("evento[titulo]", dados.titulo);
             formData.append("evento[conteudo]", dados.conteudo);
             formData.append("evento[local]", dados.local);
-            formData.append("evento[data]", dados.data); // Novo campo
+            formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
 
             if (imagemFile) {
@@ -54,12 +54,14 @@ export function useEventos() {
         setLoading(true);
         setErro(null);
         try {
-            // Adiciona suporte a params[:autor_id] conforme sua controller
+            // Adiciona suporte a params[:autor_id] conforme a controller
             const url = autorId ? `${API_URL}?autor_id=${autorId}` : API_URL;
             const response = await fetch(url);
 
             if (!response.ok) throw new Error("Erro ao carregar eventos");
-            return await response.json();
+            const data = await response.json();
+            setEventos(data); // ✅ AGORA SALVA OS EVENTOS NO ESTADO
+            return data;
         } catch (err) {
             setErro(err.message);
             throw err;
@@ -92,7 +94,7 @@ export function useEventos() {
             formData.append("evento[titulo]", dados.titulo);
             formData.append("evento[conteudo]", dados.conteudo);
             formData.append("evento[local]", dados.local);
-            formData.append("evento[data]", dados.data); // Novo campo
+            formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
 
             // Tags
@@ -101,7 +103,7 @@ export function useEventos() {
                     formData.append("evento[tags][]", tag);
                 });
             }
-
+            
             // Imagem
             if (imagemFile) {
                 formData.append("imagem", imagemFile);
@@ -147,5 +149,6 @@ export function useEventos() {
         criarEvento,
         loading,
         erro,
+        eventos, //AGORA RETORNA OS EVENTOS DO ESTADO
     };
 }

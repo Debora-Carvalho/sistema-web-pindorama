@@ -1,6 +1,5 @@
-// src/pages/Administrador/PaginaVisualizarEventos/PaginaVisualizarEventosAdmin.jsx
-
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import styles from './PaginaVisualizarEventos.module.scss';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
@@ -11,6 +10,8 @@ import { useEventos } from '../../../hooks/Eventos/useEventos.js';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
 
 function PaginaVisualizarEventosAdmin() {
+    const navigate = useNavigate(); // usando navigate para vincular ListCards a pag detalhes eventos
+    
     // 1. Estados e Hooks
     const { id: autorId, loading: authLoading } = useAuth();
     // Pega as funções de ação e o loading/erro do hook unificado
@@ -41,18 +42,22 @@ function PaginaVisualizarEventosAdmin() {
         if (!authLoading) {
             carregarEventos(autorId);
         }
-        // Dependências essenciais: autorId, authLoading (para reagir ao login) e listarEventos
-    }, [autorId, authLoading, listarEventos]);
+    }, [autorId, authLoading]);
 
-    // 3. Handlers de Ação (CRUD: Selecionar, Editar, Deletar)
+    // 3. Handlers de Ação (CRUD: Selecionar, Editar, Deletar, Visualizar)
     const handleSelect = (item) => {
         console.log("Selecionado:", item);
         alert(`Você selecionou: ${item.titulo}`);
     };
 
+    const handleView = (eventoId) => {
+        // navega para detalhes do evento
+        navigate(`/detalhes-evento/${eventoId}`);
+    };
+
     const handleEdit = (eventoId) => {
-        // Redireciona para a tela de criação, passando o ID para edição
-        window.location.href = `/adm/criar-evento?id=${eventoId}`;
+        // navega para editar evento
+        navigate(`/adm/criar-evento?id=${eventoId}`);
     };
 
     const handleDelete = async (eventoId) => {
@@ -74,12 +79,15 @@ function PaginaVisualizarEventosAdmin() {
         }
     };
 
-    const overallLoading = loading || authLoading || crudLoading;
+    const handleAddEvento = () => {
+        // navega para criar evento
+        navigate("/adm/criar-evento");
+    };
 
+    const overallLoading = loading || authLoading || crudLoading;
 
     return (
         <div className={styles.containerVisualizar}>
-            {/**/}
             <link to="/adm/inicio">
                 <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
             </link>
@@ -88,7 +96,7 @@ function PaginaVisualizarEventosAdmin() {
             </nav>
             <div className={styles.topo}>
                 <BarraPesquisa itens={eventos} onSelect={handleSelect} />
-                <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
+                <button className={styles.btnAdicionar} onClick={handleAddEvento}>
                     <BiSolidAddToQueue className={styles.iconAdd} />
                 </button>
             </div>
@@ -98,11 +106,11 @@ function PaginaVisualizarEventosAdmin() {
                 ) : error ? (
                     <p>Ocorreu um erro ao carregar os eventos: {error}</p>
                 ) : (
-                    // CORRIGIDO Passando os handlers de ação agrupados no objeto 'actions'
                     <ListaCardsAdmin
                         cards={eventos}
                         limite={null}
                         actions={{
+                            onView: handleView,    //para ver detalhes
                             onEdit: handleEdit,
                             onDelete: handleDelete
                         }}
