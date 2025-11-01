@@ -1,9 +1,13 @@
 @use "../../../styles/abstracts/variables.scss" as *;
 
-.logo {
-    width: 15%;
-    bottom: 2rem;
-    margin-bottom: 3em;
+.header{
+    display: flex;
+    margin-bottom: 5.5rem;
+    margin-left: 2.4rem;
+
+    img{
+        margin-top: 0.4rem;
+    }
 }
 
 .containerVisualizar {
@@ -20,6 +24,7 @@
     width: 100%;
     max-width: 50em;
     margin: 0 auto;
+    height: 10vh;
 }
 
 .iconAdd {
@@ -34,6 +39,14 @@
 
     &:hover {
         transform: translateY(-50%) scale(1.1);
+    }
+
+    @media(min-width: 1081px) {
+        transform: none;
+        
+        &:hover{
+            transform: translateY(0%) scale(1.1);
+        }
     }
 }
 
@@ -70,7 +83,7 @@
 
     .iconAdd {
         left: 0.6em;
-       top: 35px;
+        top: 35px;
     }
 }
 
