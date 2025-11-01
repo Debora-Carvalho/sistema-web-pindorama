@@ -1,4 +1,8 @@
 ## 🌿 Branches
+- feature/detalhes-artigo
+- Feature/PaginaConfiguracoes
+- Feature/artigos/detalhes
+- feature/sobre-mim
 
 ### 📌 Convenção de Nomes
 

@@ -20,10 +20,10 @@ function Footer() {
 					<h2>Links</h2>
 
 					<div>
-						<Link className={styles.itemLinkFooter}>Artigos</Link>
-						<Link className={styles.itemLinkFooter}>Eventos</Link>
-						<Link className={styles.itemLinkFooter}>Organizações</Link>
-						<Link className={styles.itemLinkFooter}>Sobre mim</Link>
+						<Link to='/artigos' className={styles.itemLinkFooter}>Artigos</Link>
+						<Link to='/eventos' className={styles.itemLinkFooter}>Eventos</Link>
+						<Link to='/organizacoes' className={styles.itemLinkFooter}>Organizações</Link>
+						<Link to='/sobre' className={styles.itemLinkFooter}>Sobre mim</Link>
 					</div>
 				</div>
 

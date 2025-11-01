@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ThemeContext, DEFAULT_THEME, DARK_THEME, NORDESTINO_THEME } from './ThemeContext';
+import { ThemeContext, DEFAULT_THEME, DARK_THEME, NORDESTINO_THEME, INDIGENA_THEME } from './ThemeContext';
 
 const ThemeProvider = ({ children }) => {
 	const [theme, setTheme] = useState(() => {
@@ -7,7 +7,7 @@ const ThemeProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		document.body.classList.remove(DEFAULT_THEME, DARK_THEME, NORDESTINO_THEME);
+		document.body.classList.remove(DEFAULT_THEME, DARK_THEME, NORDESTINO_THEME, INDIGENA_THEME);
 		document.body.classList.add(theme);
 		localStorage.setItem('theme', theme);
 	}, [theme]);

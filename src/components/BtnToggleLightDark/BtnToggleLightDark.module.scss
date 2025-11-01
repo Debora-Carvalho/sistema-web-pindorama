@@ -4,11 +4,11 @@
     padding: 5px;
     gap: 10px;
     border-radius: 30px;
-    border: 2px solid #000000;
+    border: 2px solid var(--neutral-primary);
 
     .btnThemeToggle {
         font-size: 1.5rem;
-        color: var(--text-primary);
+        color: var(--neutral-primary);
         padding: 5px;
 
         &:hover {

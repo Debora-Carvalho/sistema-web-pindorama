@@ -1,0 +1,62 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.container{
+    background-color: var(--background-primary);
+    padding: 2%;
+    padding-top: 0%;
+    align-items: center;
+}
+
+.sobre{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.perfil{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-family: $font-family-subtitulo;
+    font-size: 2rem;
+    color: var(--text-principal);
+
+    img{
+        width: 10rem;
+        border-radius: 50%;
+    }
+}
+
+.texto{
+    background-color: var(--primary-200);
+    padding: 2%;
+    border-radius: 20px;
+    min-height: 40vh;
+    box-shadow: 0 6px 15px rgba(134, 82, 0, 0.45);
+    color: var(--text-principal);
+    font-family: $font-family-texto;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 720px){
+    .container{
+        padding: 5%;
+    }
+
+    .sobre{
+        display: block;
+    }
+
+    .texto{
+        margin-bottom: 2rem;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px){
+    .texto{
+        font-size: 1.2rem;
+    }
+}
