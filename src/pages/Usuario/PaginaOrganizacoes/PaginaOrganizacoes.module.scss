@@ -1,121 +1,386 @@
 @use "../../../styles/abstracts/variables" as *;
 
+.containerOrg {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--background-primary); 
+}
+
 .titleOrg {
     font-size: 2.5rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-left: 2em;
     font-family: $font-family-principal, sans-serif;
 }
 
+.subtitleOrg1,
+.subtitleOrg2 {
+    position: absolute;
+    font-size: 1.5rem;
+    z-index: 3;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-family: $font-family-subtitulo, sans-serif;
+}
+
+.subtitleOrg1 {
+    top: 11.5em;
+}
+
+.subtitleOrg2 {
+    top: 8.5em;
+}
+
 .organizacaoCard {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    padding: 30px;
-    margin-top: 10px;
-    margin-left: 3em;
+    gap: 3rem;
+    padding: 2rem 3rem;
 }
 
-.orgaosRow1 {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-}
-
+.orgaosRow1,
 .orgaosRow2 {
     display: flex;
-    flex-direction: row;
-    gap: 50px;
-    margin-top: 30px;
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    gap: 2.5rem;
 }
+
 .cardUnesco,
 .cardIphan,
 .cardCondephaat,
 .cardConpresp,
 .cardDPH {
-  position: relative;
-  border-radius: 10px;
-  padding: 1rem;
-  overflow: hidden; 
+    position: relative;
+    border-radius: 10px;
+    padding: 1rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .cardUnesco {
     background-color: rgba(14, 66, 128, 0.68);
     width: 40em;
-    height: 18em;
+    height: 20em;
 }
 
 .cardIphan {
     background-color: #661315;
-    width: 33em;
-    height: 18em;
+    width: 35em;
+    height: 20em;
 }
 
 .cardCondephaat {
-    background-color: #9B9C9F;
+    background-color: #9b9c9f;
     width: 40em;
     height: 15em;
 }
 
 .cardConpresp {
-    background-color: #FEA727;
-    width: 15em;
+    background-color: #fea727;
+    width: 16em;
     height: 15em;
 }
 
 .cardDPH {
-    background-color: #FFFFFF;
-    width: 15em;
+    background-color: #d3cecef5;
+    width: 16em;
     height: 15em;
 }
 
-.imgUnesco {
+.imgUnesco,
+.imgIphan,
+.imgCondephaat,
+.imgConpresp,
+.imgDPH {
     position: relative;
-    width: 25vw;
     height: auto;
-    left: 7em;
-    bottom: 40px;
+    object-fit: contain;
+}
+
+.imgUnesco {
+    width: 25vw;
+    left: 8em;
+    bottom: 10px;
 }
 
 .imgIphan {
-    position: relative;
     width: 35vw;
-    height: auto;
-    top:60px;
-    left: 10px;
+    top: 70px;
+    left: 2em;
 }
 
 .imgCondephaat {
-    position: relative;
     width: 30vw;
-    height: auto;
     top: 2px;
     left: 90px;
 }
 
 .imgConpresp {
-    position: relative;
-    width: 60vw;
-    height: auto;
+    width: 810em;
 }
 
 .imgDPH {
     position: relative;
     width: 10vw;
     height: auto;
-    left: 35px;
-    top: 10px;
+    left: 45px;
+    top: 20px;
 }
 
-.btnOrg{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  background-color: #E6E6E6;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  width: 100px;
-  height: 40px;
-  font-weight: 500;
-  z-index: 2;
+.btnOrg {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background-color: #e6e6e6;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    font-weight: 500;
+    z-index: 2;
+    color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.btnOrg:hover {
+    background-color: #d0d0d0;
+}
+
+//RESPONSIVIDADE//
+@media (max-width: 1080px) {
+    .titleOrg {
+        font-size: 2.2rem;
+        margin-left: 1.5em;
+    }
+    .subtitleOrg1,
+    .subtitleOrg2 {
+        font-size: 1.3rem;
+    }
+  
+.orgaosRow1,
+.orgaosRow2{
+    justify-content: center;
+}
+    .cardUnesco {
+        max-width: 25em;
+        height: 18em;
+    }
+    .cardIphan {
+        max-width: 25em;
+        height: 18em;
+    }
+    .cardCondephaat {
+        max-width: 25em;
+        height: 13em;
+    }
+    .cardConpresp {
+        max-width: 12em;
+        height: 13em;
+    }
+    .cardDPH {
+        max-width: 12em;
+        height: 13em;
+    }
+
+    .imgUnesco {
+        width: 70%;
+        left: 3.5em;
+    }
+    .imgIphan {
+        width: 90%;
+       left: 20px;
+    }
+    .imgCondephaat {
+        width: 80%;
+        left: 40px;
+    }
+    .imgConpresp {
+        width: 100%; 
+    }
+    .imgDPH {
+        width: 80%;
+        left: 18px;
+        
+    }
+}
+
+@media (max-width: 720px) {
+    .titleOrg {
+        font-size: 2rem;
+        margin-left: 1em;
+    }
+
+    .subtitleOrg1,
+    .subtitleOrg2 {
+        position: static; 
+        font-size: 1.2rem;
+        margin-left: 1em; 
+        margin-bottom: 0.5em;
+        width: 100%; 
+    }
+    .subtitleOrg1 {
+        margin-top: 1em; 
+    }
+
+    .organizacaoCard {
+        flex-direction: column; 
+        align-items: center; 
+        padding: 1rem 1rem;
+        gap: 2rem;
+    }
+
+    .orgaosRow1,
+    .orgaosRow2 {
+        flex-direction: column; 
+        align-items: center;
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .cardUnesco,
+    .cardIphan,
+    .cardCondephaat,
+    .cardConpresp,
+    .cardDPH {
+        width: 90vw; 
+        max-width: 450px; 
+        height: auto; 
+        min-height: 15em; 
+        padding: 1rem;
+    }
+
+    .cardConpresp,
+    .cardDPH {
+        min-height: 12em; 
+    }
+
+    .imgUnesco,
+    .imgIphan,
+    .imgCondephaat,
+    .imgConpresp,
+    .imgDPH {
+        left: 0;
+        right: 0;
+        margin: 1em auto;
+        display: block;
+        top: initial;
+        bottom: initial;
+    }
+
+    .imgUnesco {
+       bottom: 15px;
+    }
+
+    .imgIphan {
+        width: 100%;
+        max-width: 24em;
+    }
+
+    .imgCondephaat {
+     top: 10px;
+    }
+
+    .imgConpresp {
+        width: 50%;
+        max-width: 150px;
+    }
+
+    .imgDPH {
+        width: 100%;
+        max-width: 140px;
+    }
+
+
+    .btnOrg {
+        width: 90px;
+        height: 35px;
+        font-size: 0.9rem;
+        right: 5px;
+        bottom: 5px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .titleOrg {
+        font-size: 1.8rem;
+        margin-left: 0.5em;
+    }
+
+    .subtitleOrg1,
+    .subtitleOrg2 {
+        font-size: 1rem;
+        margin-left: 0.5em;
+        margin-bottom: 0.3em;
+    }
+
+    .organizacaoCard {
+        padding: 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .orgaosRow1,
+    .orgaosRow2 {
+        gap: 1.5rem;
+    }
+
+    .cardUnesco,
+    .cardIphan,
+    .cardCondephaat,
+    .cardConpresp,
+    .cardDPH {
+        width: 95vw;
+        min-height: 10em; 
+    }
+
+    .cardConpresp,
+    .cardDPH {
+        min-height: 8em;
+    }
+
+    .imgUnesco,
+    .imgIphan,
+    .imgCondephaat,
+    .imgConpresp,
+    .imgDPH {
+        width: 70%; 
+        margin: 0.5em auto;
+        max-width: 180px;
+    }
+    .imgUnesco {
+        width: 55%;
+        max-width: 160px;
+    }
+
+    .imgIphan {
+        width: 65%;
+        max-width: 220px;
+    }
+
+    .imgCondephaat {
+        width: 60%;
+        max-width: 200px;
+    }
+
+    .imgConpresp {
+        width: 45%;
+        max-width: 120px;
+    }
+
+    .imgDPH {
+        width: 35%;
+        max-width: 100px;
+    }
+
+    .btnOrg {
+        width: 80px;
+        height: 30px;
+        font-size: 0.8rem;
+        right: 3px;
+        bottom: 3px;
+    }
 }
