@@ -78,7 +78,10 @@ function PaginaInicialAdmin() {
     const { eventos, loading: eventosLoading, error: eventosError } = useGetEventosAdmin(id);
     const { deletarArtigo } = useArtigos();
     const artigosRecentes = artigos.slice(0, 3);
-    const eventosFormatados = eventos.map(evento => ({
+
+    const eventosLimitados = eventos ? eventos.slice(0, 4) : [];
+
+    const eventosFormatados = eventosLimitados.map(evento => ({
         ...evento,
         ...formatarDataEvento(evento.data)
     }));

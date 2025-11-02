@@ -24,7 +24,10 @@ function BlocoEventosDestaque() {
     // 	{ id: 3, dia: '04', mes: 'AGO', titulo: 'Apresentação na ETEC Itaquera' },
     // ];
     const { eventos, loading, error } = useGetEventos();
-    const eventosFormatados = eventos.map(evento => ({
+
+    const eventosLimitados = eventos ? eventos.slice(0, 3) : [];
+
+    const eventosFormatados = eventosLimitados.map(evento => ({
         ...evento,
         ...formatarDataEvento(evento.data)
     }));

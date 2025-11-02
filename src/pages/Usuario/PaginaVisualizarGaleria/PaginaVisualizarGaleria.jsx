@@ -23,20 +23,25 @@ function PaginaVisualizarGaleria() {
     }
 
     const imagens = [
-        ...(artigos || []).map((item) => ({
-            id: item.id,
-            titulo: item.titulo,
-            descricao: item.conteudo.replace(/<[^>]+>/g, ''),
-            imagem: item.url_imagem,
-            link: `/artigos/${item.id}`
-        })),
-        ...(eventos || []).map((item) => ({
-            id: item.id,
-            titulo: item.titulo,
-            descricao: item.conteudo.replace(/<[^>]+>/g, ''),
-            imagem: item.url_imagem,
-            link: `/eventos/${item.id}`
-        }))
+        ...(artigos || [])
+            .filter(item => item.status === "publicado" && item.url_imagem) 
+            .map((item) => ({
+                id: item.id,
+                titulo: item.titulo,
+                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
+                imagem: item.url_imagem,
+                link: `/artigos/${item.id}`
+            })),
+
+        ...(eventos || [])
+            .filter(item => item.status === "publicado" && item.url_imagem) 
+            .map((item) => ({
+                id: item.id,
+                titulo: item.titulo,
+                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
+                imagem: item.url_imagem,
+                link: `/eventos/${item.id}`
+            }))
     ];
 
     return (
