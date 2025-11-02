@@ -13,7 +13,6 @@ function decodeHtml(html) {
   return txt.value;
 }
 
-
 function ArtigosDestaque() {
     const { artigos, loading, error } = useGetArtigos();
 
@@ -25,7 +24,7 @@ function ArtigosDestaque() {
         titulo: decodeHtml(a.titulo),
         url_imagem: a.url_imagem,
         conteudo: decodeHtml(a.conteudo),
-        link: `/artigo/${a.id}`
+        link: `/detalhes-artigo/${a.id}`
     }));
 
     return (

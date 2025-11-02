@@ -45,21 +45,6 @@ const formatarDataEvento = (dataString) => {
     return { dia, mes };
 };
 
-// const mockEventos = [
-//     { id: 1, dia: '04', mes: 'AGO', titulo: 'Palestra na FATEC...' },
-//     { id: 2, dia: '04', mes: 'AGO', titulo: 'Palestra na FATEC...' },
-//     { id: 3, dia: '04', mes: 'AGO', titulo: 'Palestra na FATEC...' },
-//     { id: 4, dia: '04', mes: 'AGO', titulo: 'Palestra na FATEC...' },
-// ];
-
-// const artigosFake = [
-//     { id: 1, titulo: 'Inteligência Artificial no Brasil', imagem: 'https://images.unsplash.com/photo-1662692735672-544412d65934?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', url: '/artigo/1' },
-//     { id: 2, titulo: 'Agricultura Sustentável', imagem: 'https://images.unsplash.com/photo-1592079927431-3f8ced0dacc6?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', url: '/artigo/2' },
-//     { id: 3, titulo: 'Cultura Afro-Brasileira', imagem: 'https://museuafrobrasileiro.com.br/wp-content/uploads/2011/11/heitor_dos_prazeres.jpg', url: '/artigo/3' },
-//     { id: 4, titulo: 'Eventos de Tecnologia 2025', imagem: 'https://www.tiespecialistas.com.br/imagens/2022/09/evento-msp-summit-op3.jpeg', url: '/artigo/4' },
-//     { id: 5, titulo: 'Artes Visuais Contemporâneas', imagem: 'https://usfx.info/wp-content/uploads/2023/12/Povos_nativos_dos_5_continentes-1400x933.jpg', url: '/artigo/5' },
-// ];
-
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -85,7 +70,6 @@ function PaginaInicialAdmin() {
 
     const handleExcluir = async (id) => {
         await deletarArtigo(id);
-        // setArtigos((prev) => prev.filter((a) => a.id !== id));
     };
 
     const handleEditar = (id) => {
@@ -97,10 +81,9 @@ function PaginaInicialAdmin() {
         tipo: "artigo",
         titulo: a.titulo,
         url_imagem: a.url_imagem,
-        link: `/artigo/${a.id}`,
+        link: `/detalhes-artigo/${a.id}`,
         status: a.status
     }));
-
 
     return (
         <>
