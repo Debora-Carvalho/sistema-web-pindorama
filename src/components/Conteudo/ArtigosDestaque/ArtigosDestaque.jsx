@@ -6,13 +6,7 @@ import { Link } from "react-router-dom";
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import ListaCards from "../../ListaCards/Usuario/ListaCards.jsx";
 import Loading from "../../Loading/Loading.jsx";
-
-function decodeHtml(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-}
-
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function ArtigosDestaque() {
     const { artigos, loading, error } = useGetArtigos();
@@ -22,10 +16,10 @@ function ArtigosDestaque() {
     .map(a => ({
         id: a.id,
         tipo: "artigo", // mandando o tipo pra pegar o titulo correto
-        titulo: decodeHtml(a.titulo),
+        titulo: a.titulo, //titulo não vem em html
         url_imagem: a.url_imagem,
         conteudo: decodeHtml(a.conteudo),
-        link: `/artigo/${a.id}`
+        link: `/detalhes-artigo/${a.id}`
     }));
 
     return (

@@ -6,18 +6,11 @@ import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import { Link } from "react-router-dom";
 import Loading from '../../../components/Loading/Loading.jsx';
-
-// Função para decodificar HTML entities
-function decodeHtml(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-}
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaVisualizarArtigos() {
     useTituloDocumento("Artigos | Pindorama"); // mudando o Title da pagina
     const { artigos, loading, error } = useGetArtigos();
-
 
     // Adaptando os artigos: filtrando apenas publicados e decodificando HTML
     const artigosAdaptados = artigos
@@ -25,7 +18,7 @@ function PaginaVisualizarArtigos() {
         .map(a => ({
             id: a.id,
             tipo: "artigo",
-            titulo: decodeHtml(a.titulo),
+            titulo: a.titulo,
             url_imagem: a.url_imagem,
             conteudo: decodeHtml(a.conteudo),
             link: `/detalhes-artigo/${a.id}`

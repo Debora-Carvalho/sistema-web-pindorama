@@ -24,7 +24,7 @@ function GaleriaFotos() {
                 titulo: item.titulo,
                 descricao: item.conteudo.replace(/<[^>]+>/g, ''),
                 imagem: item.url_imagem,
-                link: `/artigos/${item.id}`
+                link: `/detalhes-artigo/${item.id}`
             })),
             ...(eventos || []).map((item) => ({
                 id: item.id,
