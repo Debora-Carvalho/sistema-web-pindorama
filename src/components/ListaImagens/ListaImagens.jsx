@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ListaImagens.module.scss";
 
 import CardImagem from "../CardPadrao/Usuario/CardImagem/CardImagem.jsx";
-import { decodeHtml } from "../../../Helpers/decodeHtml.js";
+import { decodeHtml } from "../../Helpers/decodeHtml.js";
 
 function ListaImagens({ imagens, limite }) {
     const imagensExibidas = Array.isArray(imagens)

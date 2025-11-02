@@ -12,13 +12,13 @@ import capaImagem from '../../../assets/images/igreja-artigo.png'
 import { FaRegPaperPlane, FaExpandAlt, FaCompressAlt } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import useMediaQuery from '../../../hooks/useMediaQuery.js'
-
 import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import { useGetArtigoById } from '../../../hooks/artigos/useGetArtigoById.js'
 import Loading from '../../../components/Loading/Loading.jsx';
 import { decodeHtml } from "../../../Helpers/decodeHtml.js";
+import { formatarData } from "../../../Helpers/formatarDataHora.js"
 
 function PaginaDetalhesArtigo() {
     const { id } = useParams();
@@ -78,9 +78,9 @@ function PaginaDetalhesArtigo() {
                     <div className={styles.headerArtigo}>
                         <div className={styles.infoTitulo}>
                             <h1 className={styles.tituloArtigo}>{artigo.titulo}</h1>
-                            {/* <p className={styles.dataPublicacao}>
-                              Publicado em: {formatarDataPorExtenso(artigo.dataPublicacao)}
-                            </p> Comentado pela anahi*/} 
+                            <p className={styles.dataPublicacao}>
+                              Publicado em: {formatarData(artigo.data , "data")}
+                            </p>
                         </div>
                         <p className={styles.autora}>Kelly Cristina Marques</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
                     </div>
