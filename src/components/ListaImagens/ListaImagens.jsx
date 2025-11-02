@@ -2,13 +2,7 @@ import React from "react";
 import styles from "./ListaImagens.module.scss";
 
 import CardImagem from "../CardPadrao/Usuario/CardImagem/CardImagem.jsx";
-// import imagens from "../../json/db-mock-imagens.json";
-
-function decodeHtml(html) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-}
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function ListaImagens({ imagens, limite }) {
     const imagensExibidas = Array.isArray(imagens)

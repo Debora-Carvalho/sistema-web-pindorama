@@ -18,12 +18,7 @@ import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import { useGetArtigoById } from '../../../hooks/artigos/useGetArtigoById.js'
 import Loading from '../../../components/Loading/Loading.jsx';
-
-function decodeHtml(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-}
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaDetalhesArtigo() {
     const { id } = useParams();
@@ -36,7 +31,7 @@ function PaginaDetalhesArtigo() {
         const adaptado = {
             id: a.id,
             tipo: "artigo",
-            titulo: decodeHtml(a.titulo),
+            titulo: a.titulo,
             url_imagem: a.url_imagem,
             conteudo: decodeHtml(a.conteudo),
             link: `/detalhes-artigo/${a.id}`,
@@ -50,16 +45,14 @@ function PaginaDetalhesArtigo() {
       return a.tags.some(tag => artigo.tags.includes(tag));// aqui verifica se tem alguma tag em comum
     });
 
-    // useTituloDocumento(`${artigo.titulo} | Pindorama`)
     useTituloDocumento(`${artigo?.titulo || "Carregando..."} | Pindorama`)
 
-    // const { width } = windowSize();
     const limiteDeArtigos = 3;
 
     const conteudoSeguro = DOMPurify.sanitize(artigo?.conteudo || "Carregando...");
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const artigoUrl = window.location.href;
-
+    
     const [isHovered, setIsHovered] = useState(false);
     const isMobile = useMediaQuery('(max-width: 1080px)');
     const [isTextoExpanded, setIsTextoExpanded] = useState(false);
@@ -89,7 +82,7 @@ function PaginaDetalhesArtigo() {
                               Publicado em: {formatarDataPorExtenso(artigo.dataPublicacao)}
                             </p> Comentado pela anahi*/} 
                         </div>
-                        <p className={styles.autora}>Kelly</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
+                        <p className={styles.autora}>Kelly Cristina Marques</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
                     </div>
 
                     <div className={styles.conteudoPrincipal}>
