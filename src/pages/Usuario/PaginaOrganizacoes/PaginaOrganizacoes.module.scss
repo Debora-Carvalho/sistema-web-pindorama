@@ -16,7 +16,7 @@
 .subtitleOrg1,
 .subtitleOrg2 {
     position: absolute;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     z-index: 3;
     color: var(--text-primary);
     font-weight: 500;
@@ -24,17 +24,18 @@
 }
 
 .subtitleOrg1 {
-    top: 11.5em;
+    top: 12.4em;
 }
 
-.subtitleOrg2 {
-    top: 8.5em;
+.subtitleOrg2{
+    top: 8.7em;
 }
 
 .organizacaoCard {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     gap: 3rem;
     padding: 2rem 3rem;
 }
@@ -42,8 +43,6 @@
 .orgaosRow1,
 .orgaosRow2 {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: flex-start;
     gap: 2.5rem;
 }
 
@@ -58,6 +57,16 @@
     overflow: hidden;
     flex-shrink: 0;
     box-sizing: border-box;
+}
+
+.cardUnesco:hover,
+.cardIphan:hover,
+.cardCondephaat:hover,
+.cardConpresp:hover,
+.cardDPH:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
 }
 
 .cardUnesco {
@@ -102,39 +111,39 @@
 
 .imgUnesco {
     width: 25vw;
-    left: 8em;
-    bottom: 10px;
+    left: 7em;
+    bottom: 1.5em;
 }
 
 .imgIphan {
-    width: 35vw;
-    top: 70px;
-    left: 2em;
+    width: 32vw;
+    top: 5em;
+    left: 1.5em;
 }
 
 .imgCondephaat {
-    width: 30vw;
-    top: 2px;
-    left: 90px;
+    width: 25vw;
+    top: 1em;
+    left: 6em;
 }
 
 .imgConpresp {
-    width: 810em;
+    width: 10vw;
+    left: 2.3em;
+    top: 1em;
 }
 
 .imgDPH {
-    position: relative;
-    width: 10vw;
-    height: auto;
-    left: 45px;
-    top: 20px;
+    width: 12vw;
+    left: 1.5em;
+    top: 1em;
 }
 
 .btnOrg {
     position: absolute;
     right: 10px;
     bottom: 10px;
-    background-color: #e6e6e6;
+    background-color: #fff;
     border-radius: 20px;
     border: none;
     cursor: pointer;
@@ -142,12 +151,13 @@
     height: 40px;
     font-weight: 500;
     z-index: 2;
-    color: #000;
+    color: var(--text-primary);
     transition: background-color 0.3s ease;
 }
 
 .btnOrg:hover {
-    background-color: #d0d0d0;
+    background-color: #777575;
+    color: vay(--text-secondary);
 }
 
 //RESPONSIVIDADE//
@@ -157,53 +167,56 @@
         margin-left: 1.5em;
     }
     .subtitleOrg1,
-    .subtitleOrg2 {
+    .subtitleOrg2, .subtitleConpres {
         font-size: 1.3rem;
     }
-  
-.orgaosRow1,
-.orgaosRow2{
-    justify-content: center;
-}
-    .cardUnesco {
-        max-width: 25em;
-        height: 18em;
+
+     .subtitleOrg1{
+       top: 12em;
+     }
+
+     .subtitleOrg2{
+        top: 8em;
+     }
+
+    .organizacaoCard, .orgaosRow1, .orgaosRow2{
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    .cardIphan {
-        max-width: 25em;
+
+    .cardUnesco, .cardIphan {
+        max-width: 36em;
         height: 18em;
     }
     .cardCondephaat {
+        max-width: 36em;
+        height: 13em;
+    }
+    .cardConpresp, .cardDPH {
         max-width: 25em;
         height: 13em;
     }
-    .cardConpresp {
-        max-width: 12em;
-        height: 13em;
-    }
-    .cardDPH {
-        max-width: 12em;
-        height: 13em;
-    }
-
+  
     .imgUnesco {
-        width: 70%;
-        left: 3.5em;
+        width: 60%;
+        left: 6em;
     }
     .imgIphan {
-        width: 90%;
-       left: 20px;
+        width: 80%;
+       left: 3.5em;
     }
     .imgCondephaat {
-        width: 80%;
-        left: 40px;
+        width: 60%;
+        left: 6em;
     }
     .imgConpresp {
-        width: 100%; 
+        width: 50%; 
+        left: 3.5em;
+        top:10px;
     }
     .imgDPH {
-        width: 80%;
-        left: 18px;
+        width: 60%;
+        left: 2.8em;
         
     }
 }
@@ -216,14 +229,14 @@
 
     .subtitleOrg1,
     .subtitleOrg2 {
-        position: static; 
+        position: static;
         font-size: 1.2rem;
         margin-left: 1em; 
         margin-bottom: 0.5em;
         width: 100%; 
     }
     .subtitleOrg1 {
-        margin-top: 1em; 
+        margin-top: 0.5em; 
     }
 
     .organizacaoCard {
@@ -281,17 +294,18 @@
     }
 
     .imgCondephaat {
-     top: 10px;
+    width: 70%;
     }
 
     .imgConpresp {
         width: 50%;
-        max-width: 150px;
+        max-width: 130px;
     }
 
     .imgDPH {
         width: 100%;
-        max-width: 140px;
+        max-width: 180px;
+        bottom: 1em;
     }
 
 

@@ -4,9 +4,9 @@ import Header from '../../../components/Header/Header';
 import Footer from '../../../components/Footer/Footer';
 import Unesco from '../../../assets/images/logoUnesco.png';
 import Iphan from '../../../assets/images/logoIphan.png';
-import Condephaat from '../../../assets/images/logoCondephaat.jpg';
-import Conpresp from '../../../assets/images/logoConpresp.png';
-import DPH from '../../../assets/images/logoDph.png';
+import Condephaat from '../../../assets/images/logoCondephaat.jpeg';
+import Conpresp from '../../../assets/images/logoConpresp.jpeg';
+import DPH from '../../../assets/images/logoDPH.jpeg';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 
 const PaginaOrganizacoes = () => {
