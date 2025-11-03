@@ -1,4 +1,4 @@
-## 🌿 Branches
+## 🌿 Branches 
 - feature/detalhes-artigo
 - Feature/PaginaConfiguracoes
 - Feature/artigos/detalhes

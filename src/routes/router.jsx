@@ -11,6 +11,7 @@ import PaginaDetalhesArtigo from "../pages/Usuario/PaginaDetalhesArtigo/PaginaDe
 import PaginaDetalhesEvento from "../pages/Usuario/PaginaDetalhesEvento/PaginaDetalhesEvento.jsx";
 import PaginaMapa from "../pages/Usuario/PaginaMapa/PaginaMapa.jsx";
 import PaginaSobreMim from "../pages/Usuario/PaginaSobreMim/PaginaSobreMim.jsx";
+import PaginaOrganizacoes from "../pages/Usuario/PaginaOrganizacoes/PaginaOrganizacoes.jsx";
 
 // ROTAS ADMINISTRADOR
 import AdminLayout from '../layouts/AdminLayout.jsx';
@@ -46,6 +47,7 @@ const AnimatedRoutes = () => {
 				<Route path="/galeria" element={<PaginaVisualizarGaleria />} />
 				<Route path="/mapa" element={<PaginaMapa />} />
 				<Route path="/sobre" element={<PaginaSobreMim />} />
+				<Route path="/organizacoes" element={<PaginaOrganizacoes />} />
 
 				{/*rota somente para teste e visualização da tela*/}
 				<Route path='/detalhes-artigo/:id' element={<PaginaDetalhesArtigo />} />
