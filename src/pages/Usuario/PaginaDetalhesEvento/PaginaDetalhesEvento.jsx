@@ -34,40 +34,40 @@ const mockEvento = {
     tags: ["Dança", "Festa", "Forró", "Nordeste"]
 };
 
-const mockRelacionados = [
-    {
-        id: 2,
-        imagem: capaRelacionado1,
-        tipo: 'evento',
-        titulo: 'As Cores e Significados por Trás das Fitinhas do Bonfim',
-        descricao: 'Cada cor tem um desejo, uma prece. Descubra o que cada fitinha do Bonfim representa e como essa tradição se espalhou pelo mundo.',
-        link: '/artigo/2'
-    },
-    {
-        id: 3,
-        imagem: capaRelacionado2,
-        tipo: 'evento',
-        titulo: 'Um Roteiro Histórico pelo Pelourinho em Salvador',
-        descricao: 'Caminhe pelas ruas de paralelepípedos e explore a rica história, arquitetura e cultura do coração de Salvador. Um guia completo para o seu passeio.',
-        link: '/artigo/3'
-    },
-    {
-        id: 4,
-        imagem: capaRelacionado3,
-        tipo: 'evento',
-        titulo: 'A Culinária Baiana: Sabores que Contam Histórias',
-        descricao: 'Do acarajé ao vatapá, a culinária da Bahia é uma experiência única. Conheça os pratos principais e onde encontrar os melhores sabores.',
-        link: '/artigo/4'
-    },
-    {
-        id: 5,
-        imagem: capaRelacionado1,
-        tipo: 'evento',
-        titulo: 'Festas Juninas: A Tradição que Aquece o Coração do Brasil',
-        descricao: 'Das quadrilhas coloridas às comidas típicas, explore a magia das festas de São João pelo país.',
-        link: '/artigo/5'
-    }
-];
+// const mockRelacionados = [
+//     {
+//         id: 2,
+//         imagem: capaRelacionado1,
+//         tipo: 'evento',
+//         titulo: 'As Cores e Significados por Trás das Fitinhas do Bonfim',
+//         descricao: 'Cada cor tem um desejo, uma prece. Descubra o que cada fitinha do Bonfim representa e como essa tradição se espalhou pelo mundo.',
+//         link: '/artigo/2'
+//     },
+//     {
+//         id: 3,
+//         imagem: capaRelacionado2,
+//         tipo: 'evento',
+//         titulo: 'Um Roteiro Histórico pelo Pelourinho em Salvador',
+//         descricao: 'Caminhe pelas ruas de paralelepípedos e explore a rica história, arquitetura e cultura do coração de Salvador. Um guia completo para o seu passeio.',
+//         link: '/artigo/3'
+//     },
+//     {
+//         id: 4,
+//         imagem: capaRelacionado3,
+//         tipo: 'evento',
+//         titulo: 'A Culinária Baiana: Sabores que Contam Histórias',
+//         descricao: 'Do acarajé ao vatapá, a culinária da Bahia é uma experiência única. Conheça os pratos principais e onde encontrar os melhores sabores.',
+//         link: '/artigo/4'
+//     },
+//     {
+//         id: 5,
+//         imagem: capaRelacionado1,
+//         tipo: 'evento',
+//         titulo: 'Festas Juninas: A Tradição que Aquece o Coração do Brasil',
+//         descricao: 'Das quadrilhas coloridas às comidas típicas, explore a magia das festas de São João pelo país.',
+//         link: '/artigo/5'
+//     }
+// ];
 
 function formatarLinkLocal(link) {
     try {

@@ -19,14 +19,18 @@ function GaleriaFotos() {
         }
     
         const imagens = [
-            ...(artigos || []).map((item) => ({
+            ...(artigos || [])
+            .filter(item => item.status === "publicado" && item.url_imagem) 
+            .map((item) => ({
                 id: item.id,
                 titulo: item.titulo,
                 descricao: item.conteudo.replace(/<[^>]+>/g, ''),
                 imagem: item.url_imagem,
                 link: `/detalhes-artigo/${item.id}`
             })),
-            ...(eventos || []).map((item) => ({
+            ...(eventos || [])
+            .filter(item => item.status === "publicado" && item.url_imagem) 
+            .map((item) => ({
                 id: item.id,
                 titulo: item.titulo,
                 descricao: item.conteudo.replace(/<[^>]+>/g, ''),
