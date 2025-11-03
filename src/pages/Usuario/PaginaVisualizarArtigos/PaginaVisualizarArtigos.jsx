@@ -31,11 +31,11 @@ function PaginaVisualizarArtigos() {
 
                 <main className={styles.containerItems}>
                     <h2>Artigos</h2>
-                    {loading && <Loading/>}
+                    {loading && <Loading />}
                     {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
 
                     <ListaCards cards={artigosAdaptados} limite={null} />
-                    
+
                     {/* Botão de voltar ou outros links podem ser adicionados */}
                     {/* <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link> */}
                 </main>

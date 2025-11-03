@@ -19,7 +19,7 @@ import PaginaInicialAdmin from "../pages/Administrador/PaginaInicialAdmin/Pagina
 import PaginaCriarArtigo from "../pages/Administrador/PaginaCriarArtigo/CriarArtigo.jsx";
 import PaginaCriarEvento from "../pages/Administrador/PaginaCriarEvento/CriarEvento.jsx"
 import PaginaVisualizarArtigosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
-import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarArtigos/PaginaVisualizarEventos.jsx";
+import PaginaVisualizarEventosAdmin from "../pages/Administrador/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
 import PaginaCarrossel from "../pages/Usuario/PaginaCarrossel/PaginaCarrossel.jsx";
 import PaginaConfiguracoesAdmin from "../pages/Administrador/PaginaConfiguracoes/Configuracoes.jsx";
 
@@ -49,7 +49,7 @@ const AnimatedRoutes = () => {
 
 				{/*rota somente para teste e visualização da tela*/}
 				<Route path='/detalhes-artigo/:id' element={<PaginaDetalhesArtigo />} />
-				<Route path='/detalhes-evento' element={<PaginaDetalhesEvento />} />
+				<Route path='/detalhes-evento/:id' element={<PaginaDetalhesEvento />} />
 
 				{/* ROTAS ADMINISTRADOR */}
 				<Route element={<ProtectedRoute />}>

@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import styles from './PaginaVisualizarEventos.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import Loading from '../../../components/Loading/Loading.jsx';
-// import eventos from "../../../json/db-mock-eventos.json";
 import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 
@@ -42,7 +42,6 @@ function PaginaVisualizarEventos() {
                 </main>
 
                 <Footer />
-
             </div>
         </>
     )

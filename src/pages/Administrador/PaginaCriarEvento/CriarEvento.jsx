@@ -1,5 +1,7 @@
+// src/pages/Administrador/PaginaCriarEvento/PaginaCriarEvento.jsx
+
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import EditorDeTexto from '../../../components/EditorDeTexto/EditorDeTexto.jsx';
 import styles from './CriarEvento.module.scss';
@@ -15,25 +17,34 @@ import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js
 import PopupCalendario from '../../../components/Popups/PopupCalendario/PopupCalendario';
 import PopupLocalLink from '../../../components/Popups/PopupLocalLink/PopupLocalLink';
 import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
-
+import { useEventos } from '../../../hooks/Eventos/useEventos.js';
 
 function PaginaCriarEvento() {
-    useTituloDocumento("Criar Evento | Pindorama");
+    const { id } = useParams();
+    const isEdicao = !!id;
+
+    useTituloDocumento(isEdicao ? "Editar Evento | Pindorama" : "Criar Evento | Pindorama");
     const navigate = useNavigate();
 
-    // --- Estados do Formulário ---
+    const {
+        criarEvento,
+        atualizarEvento,
+        buscarEvento, // AJUSTE: Renomeado de 'buscarEventoPorId' para 'buscarEvento'
+        loading,
+        erro
+    } = useEventos();
+
     const [titulo, setTitulo] = useState('');
     const [conteudo, setConteudo] = useState('');
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
-    const [erroFormulario, setErroFormulario] = useState('');
+    const [erroFormulario, setErroFormulario] = useState(null);
     const [dataEvento, setDataEvento] = useState(null);
     const [linkLocal, setLinkLocal] = useState('');
+    const [statusInicial, setStatusInicial] = useState('rascunho');
 
-    // --- Estados de Controle dos Popups ---
     const [popupTagAberto, setPopupTagAberto] = useState(false);
-    const [popupErroAberto, setPopupErroAberto] = useState(false);
     const [mostrarConfirmacaoExcluir, setMostrarConfirmacaoExcluir] = useState(false);
     const [mostrarConfirmacaoEnvio, setMostrarConfirmacaoEnvio] = useState(false);
     const [mostrarSucesso, setMostrarSucesso] = useState(false);
@@ -41,8 +52,49 @@ function PaginaCriarEvento() {
     const [acaoAposSucesso, setAcaoAposSucesso] = useState(null);
     const [calendarioAberto, setCalendarioAberto] = useState(false);
     const [localLinkModalAberto, setLocalLinkModalAberto] = useState(false);
+    const [statusEnvio, setStatusEnvio] = useState("publicado");
 
-    // --- Funções de Handler ---
+    const [loadingBusca, setLoadingBusca] = useState(isEdicao);
+
+
+    // Efeito para carregar dados do evento em modo de edição
+    useEffect(() => {
+        if (isEdicao && id) {
+            const carregarEvento = async () => {
+                setLoadingBusca(true);
+                try {
+                    // AJUSTE: A chamada da função também foi corrigida
+                    const evento = await buscarEvento(id);
+                    if (evento) {
+                        setTitulo(evento.titulo || '');
+                        setConteudo(evento.conteudo || '');
+                        setTagsSelecionadas(evento.tags || []);
+                        setLinkLocal(evento.local || '');
+                        setStatusInicial(evento.status || 'rascunho');
+
+                        if (evento.data) {
+                            // TRATAMENTO DE DATA para o DatePicker funcionar corretamente
+                            setDataEvento(new Date(evento.data.replace(/-/g, '/')));
+                        }
+
+                        if (evento.url_imagem) {
+                            setPreviewCapa(evento.url_imagem);
+                        }
+                    } else {
+                        throw new Error("Evento não encontrado.");
+                    }
+                } catch (e) {
+                    setErroFormulario({ mensagem: `Erro ao carregar o evento: ${e.message}`, tipo: "erro" });
+                    navigate('/adm/visualizar-eventos');
+                } finally {
+                    setLoadingBusca(false);
+                }
+            };
+            carregarEvento();
+        }
+        // AJUSTE: Dependência atualizada para 'buscarEvento'
+    }, [id, isEdicao, navigate, buscarEvento]);
+
     const handleEditorChange = (content) => { setConteudo(content); };
     const handleImagemChange = (e) => {
         const file = e.target.files[0];
@@ -67,9 +119,8 @@ function PaginaCriarEvento() {
         setLocalLinkModalAberto(false);
     };
 
-    // --- Lógica de Exclusão ---
     const handleExcluirClick = () => {
-        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0;
+        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !dataEvento && !linkLocal;
         if (formularioEstaVazio) {
             setPopupSucessoMensagem('Não há informações para excluir.');
             setAcaoAposSucesso('permanecer');
@@ -95,76 +146,77 @@ function PaginaCriarEvento() {
 
     const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };
 
-    // --- Lógica de Envio ---
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, status = "publicado") => {
         event.preventDefault();
         setErroFormulario(null);
+        setStatusEnvio(status);
 
         const mostrarErro = (mensagem) => {
             const erroTratado = tratarErro(mensagem);
             setErroFormulario(erroTratado);
         };
 
-        const formularioEstaVazio =
+        const conteudoVazio = !conteudo || conteudo === '<p><br data-mce-bogus="1"></p>';
+        const formularioVazio =
             !titulo.trim() &&
-            (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') &&
+            conteudoVazio &&
             !imagemCapa &&
             tagsSelecionadas.length === 0 &&
             !dataEvento &&
-            !linkLocal
+            !linkLocal;
 
-        // Lógica de validação para enviar o treco
-        if (formularioEstaVazio) {
-            mostrarErro('Todos os campos precisam ser preenchidos para o envio de um novo evento.');
-            return;
+        const imagemNecessaria = isEdicao ? (!imagemCapa && !previewCapa) : !imagemCapa;
+
+
+        if (status === "publicado") {
+            if (!titulo.trim()) return mostrarErro('Por favor, preencha o campo de título.');
+            if (conteudoVazio) return mostrarErro('Por favor, preencha o campo de texto para o evento.');
+            if (imagemNecessaria) return mostrarErro('Por favor, adicione uma capa ou mantenha a existente.');
+            if (tagsSelecionadas.length === 0) return mostrarErro('Selecione pelo menos uma tag.');
+            if (!dataEvento) return mostrarErro('Por favor, selecione uma data para o evento.');
+            if (!linkLocal) return mostrarErro('Por favor, adicione um link para o local do evento.');
+        } else if (status === "rascunho") {
+            if (formularioVazio) return mostrarErro('Preencha pelo menos um campo para salvar como rascunho.');
         }
-        if (!titulo.trim()) {
-            mostrarErro('Por favor, preencha o campo de título.');
-            return;
-        }
-        if (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') {
-            mostrarErro('Por favor, preencha o campo de texto para o evento.');
-            return;
-        }
-        if (!imagemCapa) {
-            mostrarErro('Por favor, preencha o campo de mídia para adicionar uma capa.');
-            return;
-        }
-        if (tagsSelecionadas.length === 0) {
-            mostrarErro('Selecione pelo menos uma tag.');
-            return;
-        }
-        if (!dataEvento) {
-            mostrarErro('Por favor, selecione uma data para o evento.');
-            return;
-        }
-        if (!linkLocal) {
-            mostrarErro('Por favor, adicione um link para o local do evento.');
-            return;
-        }
+
         setMostrarConfirmacaoEnvio(true);
     };
 
-    const executarEnvio = () => {
-        const eventoParaEnviar = {
-            titulo,
-            conteudo,
-            imagemCapa,
-            tags: tagsSelecionadas,
-            data: dataEvento,
-            localLink: linkLocal
-        };
-        console.log("Evento pronto para ser enviado:", eventoParaEnviar);
-        setMostrarConfirmacaoEnvio(false);
-        setPopupSucessoMensagem('Evento enviado com sucesso!');
-        setAcaoAposSucesso('redirecionar');
-        setMostrarSucesso(true);
+    const executarEnvio = async () => {
+        try {
+            const eventoParaEnviar = {
+                titulo,
+                conteudo,
+                autor_id: 7,
+                status: statusEnvio,
+                data: dataEvento ? dataEvento.toISOString().split('T')[0] : null,
+                local: linkLocal,
+                tags: tagsSelecionadas,
+            };
+
+            setMostrarConfirmacaoEnvio(false);
+            setAcaoAposSucesso('redirecionar');
+
+            if (isEdicao) {
+                await atualizarEvento(id, eventoParaEnviar, imagemCapa);
+            } else {
+                await criarEvento(eventoParaEnviar, imagemCapa);
+            }
+
+            setPopupSucessoMensagem(
+                isEdicao
+                    ? `Evento atualizado como ${statusEnvio}!`
+                    : (statusEnvio === "rascunho" ? "Evento salvo como rascunho!" : "Evento enviado com sucesso!")
+            );
+            setMostrarSucesso(true);
+        } catch (e) {
+            setErroFormulario({ mensagem: e.message, tipo: "erro" });
+            setMostrarConfirmacaoEnvio(false);
+        }
     };
 
     const handleCancelarEnvio = () => { setMostrarConfirmacaoEnvio(false); };
 
-    // --- Lógica dos Popups de Erro e Sucesso ---
-    const handleFecharPopupErro = () => { setPopupErroAberto(false); };
     const handleFecharPopupSucesso = () => {
         setMostrarSucesso(false);
         if (acaoAposSucesso === 'redirecionar') {
@@ -173,8 +225,16 @@ function PaginaCriarEvento() {
         setAcaoAposSucesso(null);
     };
 
+    if (loadingBusca || loading) {
+        return (
+            <main className={styles.base}>
+                <p>{loadingBusca ? 'Carregando Evento...' : 'Enviando Evento...'}</p>
+            </main>
+        );
+    }
+
     useEffect(() => {
-        return () => { if (previewCapa) { URL.revokeObjectURL(previewCapa); } };
+        return () => { if (previewCapa && previewCapa.startsWith('blob:')) { URL.revokeObjectURL(previewCapa); } };
     }, [previewCapa]);
 
     return (
@@ -216,7 +276,7 @@ function PaginaCriarEvento() {
                         onClick={() => setCalendarioAberto(true)}
                     >
                         <FaCalendarAlt />
-                        {dataEvento ? dataEvento.toLocaleDateString('pt-BR') : 'Data do Evento'}
+                        {dataEvento ? new Date(dataEvento).toLocaleDateString('pt-BR') : 'Data do Evento'}
                     </button>
                     <button
                         type='button'
@@ -224,7 +284,7 @@ function PaginaCriarEvento() {
                         onClick={() => setLocalLinkModalAberto(true)}
                     >
                         <FaMapMarkerAlt />
-                        Local
+                        {linkLocal ? 'Link/Local Adicionado' : 'Local'}
                     </button>
                 </div>
                 <div className={styles.campoMidia}>
@@ -245,21 +305,22 @@ function PaginaCriarEvento() {
                         className={styles.botaoExcluir}
                         onClick={handleExcluirClick}
                     >
-                        Excluir
+                        Limpar
                     </button>
                     <div className={styles.botoesDireita}>
                         <button
                             type="button"
                             className={styles.botaoRascunho}
+                            onClick={(e) => handleSubmit(e, "rascunho")}
                         >
                             Salvar como rascunho
                         </button>
                         <button
                             type="button"
                             className={styles.botaoEnviar}
-                            onClick={handleSubmit}
+                            onClick={(e) => handleSubmit(e, "publicado")}
                         >
-                            Enviar
+                            {isEdicao ? "Salvar Alterações" : "Enviar"}
                         </button>
                     </div>
                 </div>
@@ -274,7 +335,7 @@ function PaginaCriarEvento() {
 
             <PopupConfirmar
                 aberto={mostrarConfirmacaoEnvio}
-                mensagem="Tudo pronto para enviar?"
+                mensagem={statusEnvio === "rascunho" ? "Tudo pronto para salvar como rascunho?" : (isEdicao ? "Tudo pronto para salvar as alterações?" : "Tudo pronto para enviar?")}
                 onCancelar={handleCancelarEnvio}
                 onConfirmar={executarEnvio}
             />
@@ -288,6 +349,7 @@ function PaginaCriarEvento() {
 
             <PopupTagArtigo
                 aberto={popupTagAberto}
+                tagsIniciais={tagsSelecionadas}
                 onCancelar={() => setPopupTagAberto(false)}
                 onConfirmar={handleConfirmarTags}
             />
