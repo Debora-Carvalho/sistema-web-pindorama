@@ -58,10 +58,10 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 						<Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
+            <Route path="/adm/criar-evento/:id" element={<PaginaCriarEvento />} />
 						<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 						<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
 						<Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
-
 					</Route>
 				</Route>
 				{/* ROTA 404 */}
