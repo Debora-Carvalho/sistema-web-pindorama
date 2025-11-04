@@ -1,7 +1,9 @@
+import { useState } from "react";
 import styles from './PaginaVisualizarGaleria.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
+import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 
 // import imagens from '../../../json/db-mock-imagens.json';
 import ListaImagens from '../../../components/ListaImagens/ListaImagens.jsx';
@@ -13,6 +15,8 @@ function PaginaVisualizarGaleria() {
     useTituloDocumento("Galeria | Pindorama"); // mudando o Title da pagina
     const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigos();
     const { eventos, loading: eventosLoading, error: eventosError } = useGetEventos();
+
+    const [textoBusca, setTextoBusca] = useState("");
 
     if (artigosLoading || eventosLoading) {
         return <Loading/>;
@@ -44,6 +48,11 @@ function PaginaVisualizarGaleria() {
             }))
     ];
 
+    // imagens filtradas pelo texto digitado (título da imagem)
+    const imagensFiltradas = imagens.filter(img =>
+        img.titulo.toLowerCase().includes(textoBusca.toLowerCase())
+    );
+
     return (
         <>
             <div className={styles.container}>
@@ -52,7 +61,15 @@ function PaginaVisualizarGaleria() {
                 <main className={styles.containerItems}>
                     <h2>Galeria de fotos</h2>
 
-                    <ListaImagens imagens={imagens} limite={null} />
+                    <div className={styles.barraPesquisa}>
+                        <BarraPesquisa
+                            itens={imagens}
+                            onInputChange={setTextoBusca}
+                            onSelect={(item) => setTextoBusca(item.titulo)}
+                        />
+                    </div>
+
+                    <ListaImagens imagens={imagensFiltradas} limite={null} />
                 </main>
 
                 <Footer />

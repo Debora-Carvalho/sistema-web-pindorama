@@ -22,4 +22,11 @@
 		font-weight: 600;
 		color: var(--text-primary);
 	}
+
+	.barraPesquisa {
+		width: 100%;
+		max-width: 50em;
+		margin: 20px auto 0 auto;
+		height: 10vh;
+	}
 }
