@@ -1,9 +1,5 @@
 ## 🌿 Branches 
-- feature/detalhes-artigo
-- Feature/PaginaConfiguracoes
-- Feature/artigos/detalhes
-- feature/sobre-mim
-- bugfix/arrumando-carrossel
+- fix/pagina-inicial-galeria
 
 ### 📌 Convenção de Nomes
 
