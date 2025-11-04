@@ -39,7 +39,9 @@ const PaginaCarrossel = () => {
             <div className={carrosselStyles.paginaCarrossel}>
                 <Header
                     acessibilidadeOverride={carrosselStyles.overrideContainer}
-                    overrideClass={carrosselStyles.headerOverride} />
+                    overrideClass={carrosselStyles.headerOverride} 
+                    ocultarAcessibilidade
+                />
             </div>
             <div className={carrosselStyles.carrosselFundo}>
                 <EmblaCarousel slides={slidesMapeados} options={OPTIONS} />
