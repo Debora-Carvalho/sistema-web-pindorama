@@ -1,0 +1,71 @@
+name: Main Branch Validation
+
+# Pipeline executada quando houver um push ou merge na branch "main".
+on:
+  push:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+    fail-fast: true
+
+jobs:
+  build-production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Initial
+        run: |
+          echo "---------------------------------------------"
+          echo "🚀 Iniciando processo de validação da branch main..."
+          echo "Data e hora de início: $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "---------------------------------------------"
+
+      # baixa o código do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # configura Node.js  (versão 18)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # instala dependências
+      - name: Install dependencies
+        run: npm ci
+
+      # verifica se o código segue os padrões
+      - name: Lint check
+        run: npm run lint
+
+      # faz o build do projeto, garantindo que compila sem erros
+      - name: Build production
+        run: npm run build
+
+      # checando conexão com o backend (API)
+      - name: Check backend connection
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: |
+          echo "Verificando disponibilidade da API em $VITE_API_URL..."
+          curl -f "$VITE_API_URL" && echo "✅ API disponível!" || (echo "❌ API não disponível" && exit 1)
+
+      - name: Validation Summary
+        if: success()
+        run: |
+          echo "---------------------------------------------"
+          echo "✅ Branch main validada com sucesso! Build de produção pronto para deploy."
+          echo "Atualizada em $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "---------------------------------------------"
+
+      - name: Error handler
+        if: failure()
+        run: |
+          echo "---------------------------------------------"
+          echo "❌ Falha na validação da branch main!"
+          echo "Data e hora: $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "---------------------------------------------"
