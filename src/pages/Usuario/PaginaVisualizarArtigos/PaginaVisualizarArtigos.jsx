@@ -1,23 +1,19 @@
+import { useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
+import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import { Link } from "react-router-dom";
 import Loading from '../../../components/Loading/Loading.jsx';
-
-// Função para decodificar HTML entities
-function decodeHtml(html) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
-}
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaVisualizarArtigos() {
     useTituloDocumento("Artigos | Pindorama"); // mudando o Title da pagina
     const { artigos, loading, error } = useGetArtigos();
-
+    const [textoBusca, setTextoBusca] = useState("");
 
     // Adaptando os artigos: filtrando apenas publicados e decodificando HTML
     const artigosAdaptados = artigos
@@ -25,11 +21,18 @@ function PaginaVisualizarArtigos() {
         .map(a => ({
             id: a.id,
             tipo: "artigo",
-            titulo: decodeHtml(a.titulo),
+            titulo: a.titulo,
             url_imagem: a.url_imagem,
             conteudo: decodeHtml(a.conteudo),
             link: `/detalhes-artigo/${a.id}`
         }));
+
+
+        
+    // filtro do texto da barra de pesquisa
+    const artigosFiltrados = artigosAdaptados.filter(a =>
+        a.titulo.toLowerCase().includes(textoBusca.toLowerCase())
+    );
 
     return (
         <>
@@ -38,10 +41,19 @@ function PaginaVisualizarArtigos() {
 
                 <main className={styles.containerItems}>
                     <h2>Artigos</h2>
+
+                    <div className={styles.barraPesquisa}>
+                        <BarraPesquisa
+                            itens={artigosAdaptados}
+                            onInputChange={setTextoBusca}
+                            onSelect={(item) => setTextoBusca(item.titulo)}
+                        />
+                    </div>
+
                     {loading && <Loading/>}
                     {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
 
-                    <ListaCards cards={artigosAdaptados} limite={null} />
+                    <ListaCards cards={artigosFiltrados} limite={null} />
                     
                     {/* Botão de voltar ou outros links podem ser adicionados */}
                     {/* <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link> */}

@@ -7,7 +7,7 @@ import FormSobreMim from '../../../components/Footer/FormSobreMim/FormSobreMim.j
 import KellyPerfil from '../../../assets/images/Kelly.jpg'
 
 function PaginaSobreMim() {
-    useTituloDocumento('Sobre Mim | Pindorama')
+    useTituloDocumento('Sobre a autora | Pindorama')
 
     return (
         <>

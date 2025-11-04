@@ -16,7 +16,7 @@ import CardPadrao from '../../../components/CardPadrao/Usuario/CardPadrao/CardPa
 import capaRelacionado1 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado2 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado3 from '../../../assets/images/igreja-artigo.png'
-
+import { formatarData } from "../../../Helpers/formatarDataHora.js"
 
 const mockEvento = {
     id: 1,
@@ -75,19 +75,6 @@ const mockRelacionados = [
         link: '/artigo/5'
     }
 ];
-
-function formatarDataHoraEvento(dataString) {
-    const data = new Date(dataString);
-    const opcoes = {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-
-    return new Intl.DateTimeFormat('pt-BR', opcoes).format(data).replace(',', ' às');
-}
 
 function formatarLinkLocal(link) {
     try {
@@ -171,7 +158,7 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
                                     </a>
                                 </p>
                                 <p>
-                                    <strong>Data e Hora:</strong> {formatarDataHoraEvento(evento.dataEvento)}
+                                    <strong>Data e Hora:</strong> {formatarData(evento.dataEvento, "datahora")}
                                 </p>
                             </div>
                         </div>
