@@ -51,7 +51,7 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
         run: |
           echo "Verificando disponibilidade da API em $VITE_API_URL..."
-          curl -f "$VITE_API_URL" && echo "✅ API disponível!" || (echo "❌ API não disponível" && exit 1)
+          curl -f "$VITE_API_URL" && echo "✅ API disponível!" || (echo "❌ API não disponível no momento" && exit 1)
 
       - name: Validation Summary
         if: success()
