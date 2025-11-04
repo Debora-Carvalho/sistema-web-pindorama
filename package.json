@@ -24,6 +24,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.19",
     "leaflet": "^1.9.4",
+    "lucide-react": "^0.552.0",
     "motion": "^12.23.19",
     "react": "^19.1.1",
     "react-datepicker": "^8.7.0",
