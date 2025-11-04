@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.sobre{
+.sobre {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
@@ -38,6 +38,10 @@
     color: var(--text-principal);
     font-family: $font-family-texto;
     font-size: 1.1rem;
+}
+
+footer {
+    overflow-x: hidden;
 }
 
 @media (max-width: 720px){

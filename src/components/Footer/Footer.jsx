@@ -23,7 +23,7 @@ function Footer() {
 						<Link to='/artigos' className={styles.itemLinkFooter}>Artigos</Link>
 						<Link to='/eventos' className={styles.itemLinkFooter}>Eventos</Link>
 						<Link to='/organizacoes' className={styles.itemLinkFooter}>Organizações</Link>
-						<Link to='/sobre' className={styles.itemLinkFooter}>Sobre mim</Link>
+						<Link to='/sobre' className={styles.itemLinkFooter}>Sobre a autora</Link>
 					</div>
 				</div>
 
