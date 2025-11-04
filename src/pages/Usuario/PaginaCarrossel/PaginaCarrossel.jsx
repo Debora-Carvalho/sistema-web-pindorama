@@ -7,7 +7,7 @@ import Loading from '../../../components/Loading/Loading.jsx'
 const PaginaCarrossel = () => {
     const OPTIONS = { dragFree: true, loop: true }
 
-    const criarSumario = (htmlContent, maxLength = 200) => {
+    const criarSumario = (htmlContent, maxLength = 100) => {
         const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
         const decodedTexto = doc.documentElement.textContent;
 

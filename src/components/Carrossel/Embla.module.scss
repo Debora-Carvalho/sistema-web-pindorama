@@ -37,32 +37,31 @@
 
 .embla__slide {
   position: absolute;
-  color: #ffffff;
+  color: var(--neutral-secondary);
   overflow: hidden;
-  transition: 2s cubic-bezier(0.32, 0.72, 0, 1);
+  transition: 3s cubic-bezier(0.30, 0.72, 0, 1);
 
   &.slide--active {
-  width: 100%;
+    width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 8; 
- 
   }
 
   &.slide--active .slide__bg{
-     filter: brightness(0.5);
+     filter: brightness(0.3);
   }
 
  
    &.slide--mini {
-    top: 20%; 
-    left: 35%; 
-    width: 20%;
-    height: 60%;
+    top: 40%; 
+    left: 35%;
+    width: 13%;
+    height: 40vh;
     border-radius: 20px;
     pointer-events: none;
-    transform: translateX(calc(var(--position) * 300px - 50%)) 
+    transform: translateX(calc(var(--position) * 200px - 10%)) 
       scale(calc(1 - var(--position) * 0.1)); 
     z-index: calc(10 - var(--position));
   }
@@ -90,7 +89,7 @@
   width: 90%;
 
   h2 {
-    font-size: 2.5rem; 
+    font-size: 2rem; 
     text-align: start;
  
   }
@@ -109,7 +108,7 @@
   text-align: center;
 
   h2 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bold;
     font-family: $font-family-principal;
      text-transform: uppercase;
@@ -123,7 +122,7 @@
   }
 
   .slide__btnCompleto {
-    margin-top: 4rem;
+    margin-top: 2rem;
     padding: 0.8rem 1.5rem;
     background: var(--primary-500); 
     color: #fff;
@@ -142,7 +141,7 @@
 .embla__controls {
   position: absolute;
   bottom: 5rem;   
-  left: 80%;
+  left: 68%;
   transform: translateX(-50%); 
   display: grid;
   flex-direction: column;
@@ -156,7 +155,7 @@
 .embla__button {
   position: absolute;
   top: 50%;
-  left:40%;
+  left:25%;
   transform: translate(-400%, -50%);
   width: 3rem;
   height: 3rem;
@@ -191,7 +190,7 @@
   background: #AAAAAA ; 
   position: relative;
   height: 0.6rem;
-  width: 15rem;
+  width: 25rem;
   max-width: 100%;
   overflow: hidden;
 }
@@ -202,8 +201,8 @@
   width: 100%;
   top: 0;
   bottom: 0;
-  left: -100%;
-  transition: transform 0.5s ease;
+  right: 100%;
+  transition: transform 0.8s ease;
 }
 
 //RESPONSIVIDADE//
@@ -211,14 +210,16 @@
 @media (max-width: 1080px) {
   .embla__slide {
     &.slide--mini {
-      top:35%;
-      height: 50%;
-      transform: translateX(calc(var(--position) * 300px - 30%))
-        scale(calc(1 - var(--position) * 0.1));
+      top:45%;
+      height: 35%;
+      width: 20%;
+      left: 43%;
+      transform: translateX(calc(var(--position) * 150px - 10%))
+        scale(calc(1 - var(--position) * 0.2));
     }
 
-    &.slide--mini .slide__content h2 {
-      font-size: 1.5rem;
+    .slide--mini h2 {
+      font-size: 1rem;
     }
 
   }
@@ -232,8 +233,13 @@
     }
   }
 
+    .embla__slide.slide--mini .slide__content h2 {
+      font-size: 1.3rem;
+
+    }
+
   .embla__controls {
-    left: 70%;
+    left: 85%;
   }
 }
 
