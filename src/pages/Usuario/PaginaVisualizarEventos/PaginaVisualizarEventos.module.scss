@@ -21,12 +21,55 @@
 		font-size: 3rem;
 		font-weight: 600;
 		color: var(--text-primary);
+		margin-bottom: 2rem;
 	}
 
 	.barraPesquisa {
 		width: 100%;
 		max-width: 50em;
-		margin: 20px auto 0 auto;
 		height: 10vh;
+		align-self: center;
+		justify-self: center;
+	}
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 1024px) {
+	.containerItems {
+		padding: 1.5rem;
+
+		h2 {
+			font-size: 2.5rem;
+		}
+
+		.barraPesquisa {
+			width: 100%;
+			height: auto;
+			margin-bottom: 2rem;
+			margin-right: 15%;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.containerItems {
+		margin-bottom: 2rem;
+
+		h2 {
+			font-size: 2.2rem;
+		}
+
+		.barraPesquisa {
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.containerItems {
+		.barraPesquisa {
+			width: 100%;
+		}
 	}
 }

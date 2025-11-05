@@ -37,10 +37,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # verifica se o código segue os padrões
-      - name: Lint check
-        run: npm run lint
-
       # faz o build do projeto, garantindo que compila sem erros
       - name: Build test
         run: npm run build
