@@ -1,0 +1,70 @@
+name: Pull Request Validation
+
+# Pipeline executada quando um Pull Request for aberto ou atualizado com destino à branch "develop".
+on:
+  pull_request:
+    branches:
+      - develop
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Initial
+        run: |
+          echo "---------------------------------------------"
+          echo "🚀 Iniciando processo de validação do pull request com destino à develop..."
+          echo "Data e hora de início: $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "---------------------------------------------"
+
+      # baixa o código do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # configura o Node.js (versão 18)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # instala as dependências
+      - name: Install dependencies
+        run: npm ci
+
+      # faz o build do projeto, garantindo que compila sem erros
+      - name: Build test
+        run: npm run build
+
+      # checando conexão com o backend (API)
+      - name: Check backend connection
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+        run: |
+          echo "Checking backend availability at $VITE_API_URL"
+          curl -f "$VITE_API_URL" || (echo "❌ API não disponível no momento" && exit 1)
+
+      - name: Validation Summary
+        if: success()
+        run: |
+          echo "---------------------------------------------"
+          echo "✅ Pull Request validado com sucesso!"
+          echo "Branch: develop"
+          echo "Data e hora: $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "🚀 Pronto para merge na main!"
+          echo "---------------------------------------------"
+
+      # resumo final de erro
+      - name: Error handler
+        if: failure()
+        run: |
+          echo "---------------------------------------------"
+          echo "❌ Falha na validação do Pull Request!"
+          echo "Branch: develop"
+          echo "Data e hora: $(date +"%d/%m/%Y às %Hh%Mmin%Ss")"
+          echo "---------------------------------------------"

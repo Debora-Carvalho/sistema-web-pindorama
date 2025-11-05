@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import styles from './Navbar.module.scss';
 
-import LogoPindorama from "../../assets/images/pindorama_logo5.png";
+import PoliticasDePrivacidade from '../../components/Telas Estaticas/PoliticasDePrivacidade/PoliticasDePrivacidade.jsx';
+import TermosDeUso from '../../components/Telas Estaticas/TermosDeUso/TermosDeUso.jsx';
 
 import { HiOutlineBars3 } from "react-icons/hi2"
 import Drawer from "@mui/material/Drawer";
@@ -23,6 +24,9 @@ import Logotipo from "../Logotipo/Logotipo";
 const Navbar = () => {
     const navigate = useNavigate();
     const [openMenu, setOpenMenu] = useState(false);
+    const [mostrarPoliticas, setMostrarPoliticas] = useState(false);
+    const [mostrarTermos, setMostrarTermos] = useState(false);
+
     const menuOptions = [
         {
             text: "Início",
@@ -62,12 +66,12 @@ const Navbar = () => {
         {
             text: "Políticas de privacidade",
             icon: <MdOutlineSecurity />,
-            navigate: "/sobre",
+            onClick: () => setMostrarPoliticas(true),
         },
         {
             text: "Termos e condições",
             icon: <MdInfo />,
-            navigate: "/sobre",
+            onClick: () => setMostrarTermos(true),
         },
     ];
 
@@ -102,32 +106,54 @@ const Navbar = () => {
                     onKeyDown={() => setOpenMenu(false)}
                 >
                     <List>
-                        <div style={{padding: "10% 0"}}>
+                        <div style={{ padding: "10% 0" }}>
                             <Logotipo tipo="user" />
                         </div>
 
                         {menuOptions.map((item) => (
                             <ListItem key={item.text} disablePadding className={styles.content}>
-                                <NavLink
-                                    to={item.navigate}
-                                    className={({ isActive }) =>
-                                        isActive
-                                            ? `${styles.navbarItem} ${styles.active}`
-                                            : styles.navbarItem
-                                    }
-                                >
-                                    <ListItemButton className={styles.navbarItem}>
+                                {item.onClick ? (
+                                    <ListItemButton
+                                        className={styles.navbarItem}
+                                        onClick={() => {
+                                            item.onClick();
+                                            setOpenMenu(false);
+                                        }}
+                                    >
                                         <ListItemIcon className={styles.navbarIcon}>
                                             {item.icon}
                                         </ListItemIcon>
                                         <ListItemText primary={item.text} className={styles.navbarText} />
                                     </ListItemButton>
-                                </NavLink>
+                                ) : (
+                                    <NavLink
+                                        to={item.navigate}
+                                        className={({ isActive }) =>
+                                            isActive
+                                                ? `${styles.navbarItem} ${styles.active}`
+                                                : styles.navbarItem
+                                        }
+                                    >
+                                        <ListItemButton className={styles.navbarItem}>
+                                            <ListItemIcon className={styles.navbarIcon}>
+                                                {item.icon}
+                                            </ListItemIcon>
+                                            <ListItemText primary={item.text} className={styles.navbarText} />
+                                        </ListItemButton>
+                                    </NavLink>
+                                )}
                             </ListItem>
                         ))}
                     </List>
                 </Box>
             </Drawer>
+
+            {mostrarPoliticas && (
+                <PoliticasDePrivacidade onClose={() => setMostrarPoliticas(false)} />
+            )}
+            {mostrarTermos && (
+                <TermosDeUso onClose={() => setMostrarTermos(false)} />
+            )}
         </nav>
     );
 };

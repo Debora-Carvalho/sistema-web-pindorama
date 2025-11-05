@@ -22,11 +22,12 @@ function GroupBtnAcessibilidade({ overrideClass }) {
                     <BtnToggleLightDark />
                 </div>
 
-                <div className={styles.containerBtnAcessibilidade}>
+                {/* o botão de configurações de acessibilidade está ocultado abaixo */}
+                {/* <div className={styles.containerBtnAcessibilidade}>
                     <Link to='/adm/inicio'>
                         <IoAccessibilityOutline className={styles.btnAcessibilidadeIcon}/>
                     </Link>
-                </div>
+                </div> */}
             </div>
         </>
     )
