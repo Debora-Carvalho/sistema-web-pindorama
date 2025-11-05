@@ -15,7 +15,7 @@ function CardImagem({ imagem, titulo, descricao, link }) {
                 onClick={() => setOpen(true)}
                 >
                 <div className={styles.imagemWrapper}>
-                    <img src={imagem} alt={titulo} />
+                    <img src={imagem} alt={titulo} title={`Clique para ver mais sobre ${titulo}`} />
                 </div>
             </div>
 
@@ -27,7 +27,10 @@ function CardImagem({ imagem, titulo, descricao, link }) {
                         <p className={styles.modalTitulo}>
                             {titulo}
                         </p>
-                        {descricao && <p>{descricao}</p>}
+
+                        <div className={styles.modalText}>    
+                            {descricao && <p>{descricao}</p>}
+                        </div>
 
                         <div className={styles.groupBtnModal}>
                             <button onClick={() => setOpen(false)} className={styles.btnModalFechar}>

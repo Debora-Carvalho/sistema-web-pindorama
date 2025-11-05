@@ -1,5 +1,4 @@
 ## 🌿 Branches 
-- fix/pagina-inicial-galeria
 
 ### 📌 Convenção de Nomes
 
