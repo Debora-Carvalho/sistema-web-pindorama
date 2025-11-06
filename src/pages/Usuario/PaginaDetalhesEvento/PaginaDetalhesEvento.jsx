@@ -180,7 +180,7 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
 
                                 <div className={styles.infoInferior}>
                                     <BtnCompartilhar
-                                        className={styles.botaoShareLayout} // Passa a classe de layout
+                                        className={styles.botaoShareLayout} 
                                         onClick={() => setPopupCompartilharAberto(true)}
                                     />
 

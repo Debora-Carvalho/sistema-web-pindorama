@@ -1,10 +1,6 @@
 @use "../../styles/abstracts/variables" as *;
 
 :global {
-
-    /* ============================================
-    CONTAINER GERAL E TEMA
-    ============================================ */
     .rhap_container {
         --rhap-theme-color: var(--primary-400) !important;
         box-shadow: none !important;
@@ -12,9 +8,6 @@
         padding: 0;
     }
 
-    /* ============================================
-    BARRA DE PROGRESSO (EM CIMA)
-    ============================================ */
     .rhap_total-time {
         color: var(--secondary-900) !important;
         font-family: $font-family-texto !important;
@@ -54,7 +47,6 @@
         display: none !important;
     }
 
-    // Cor dos botões
     .rhap_button-clear {
         color: var(--secondary-900) !important;
         width: 1.8rem;

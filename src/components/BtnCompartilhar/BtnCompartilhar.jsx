@@ -4,12 +4,9 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import useMediaQuery from '../../hooks/useMediaQuery'
 import styles from './BtnCompartilhar.module.scss';
 
-// O componente recebe a classe do layout (grid-area) e a função de clique
 function BtnCompartilhar({ onClick, className }) {
 
-    // 1. Toda a lógica de animação foi movida para cá
     const [isHovered, setIsHovered] = useState(false);
-    // Usamos 720px para o mobile, que é onde o estilo do botão muda no seu SCSS
     const isMobile = useMediaQuery('(max-width: 720px)'); 
 
     const buttonVariants = {
@@ -24,15 +21,14 @@ function BtnCompartilhar({ onClick, className }) {
 
     return (
         <motion.button
-            // Combinamos a classe de layout da página com a classe de estilo do componente
             className={`${styles.botaoShare} ${className || ''}`}
-            onMouseEnter={() => !isMobile && setIsHovered(true)} // Corrigido para não rodar hover em mobile
+            onMouseEnter={() => !isMobile && setIsHovered(true)} 
             onMouseLeave={() => !isMobile && setIsHovered(false)}
             variants={buttonVariants}
             initial="initial"
             animate={isMobile || isHovered ? "hover" : "initial"}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            onClick={onClick} // 2. Passa a função de clique recebida
+            onClick={onClick}
         >
             <FaRegPaperPlane className={styles.faRegPaperPlane} />
             <motion.span
