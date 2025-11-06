@@ -8,15 +8,16 @@ import Footer from '../../../components/Footer/Footer.jsx'
 import PopupCompartilhar from '../../../components/Popups/PopupCompartilhar/PopupCompartilhar.jsx'
 import { AnimatePresence } from 'framer-motion';
 import DOMPurify from 'dompurify'
-import capaImagem from '../../../assets/images/forro-evento.jpg'
-import { FaRegPaperPlane, FaExpandAlt, FaCompressAlt } from 'react-icons/fa'
-import { motion } from 'framer-motion'
-import useMediaQuery from '../../../hooks/useMediaQuery.js'
+import capaImagem from '../../../assets/images/igreja-artigo.png'
+import BtnCompartilhar from '../../../components/BtnCompartilhar/BtnCompartilhar.jsx'
 import CardPadrao from '../../../components/CardPadrao/Usuario/CardPadrao/CardPadrao.jsx'
 import capaRelacionado1 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado2 from '../../../assets/images/igreja-artigo.png'
 import capaRelacionado3 from '../../../assets/images/igreja-artigo.png'
 import { formatarData } from "../../../Helpers/formatarDataHora.js"
+import MiniPlayer from '../../../components/MiniPlayer/MiniPlayer.jsx'
+import { FaPlay } from 'react-icons/fa'
+import audioTeste from '../../../assets/audio/Final.mp3'
 
 const mockEvento = {
     id: 1,
@@ -98,6 +99,8 @@ function formatarLinkLocal(link) {
 function PaginaDetalhesEvento({ evento = mockEvento }) {
     useTituloDocumento(`${evento.titulo} | Pindorama`)
 
+    const [playerAtivado, setPlayerAtivado] = useState(false);
+
     const { width } = windowSize();
     const limiteDeEventos = width <= 1080 ? 4 : 3;
 
@@ -105,20 +108,6 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
 
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const eventoUrl = window.location.href;
-
-    const [isHovered, setIsHovered] = useState(false);
-    const isMobile = useMediaQuery('(max-width: 1080px)');
-    const [isTextoExpanded, setIsTextoExpanded] = useState(false);
-
-    const buttonVariants = {
-        initial: { width: '3.5rem', padding: '8px 40px', gap: '0rem' },
-        hover: { width: '12rem', padding: '8px 20px', gap: '0.8rem' },
-    };
-
-    const textVariants = {
-        initial: { opacity: 0, width: 0, x: -10 },
-        hover: { opacity: 1, width: 'auto', x: 0 },
-    };
 
     return (
         <>
@@ -134,16 +123,9 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
                         <div className={styles.colunaEsquerda}>
                             <div className={styles.textoContainer}>
                                 <div
-                                    className={`${styles.corpoTexto} ${isTextoExpanded ? styles.expanded : ''}`}
+                                    className={styles.corpoTexto}
                                     dangerouslySetInnerHTML={{ __html: conteudoSeguro }}
                                 />
-                                <button
-                                    className={styles.expandButton}
-                                    onClick={() => setIsTextoExpanded(!isTextoExpanded)}
-                                    aria-label={isTextoExpanded ? "Recolher texto" : "Expandir texto"}
-                                >
-                                    {isTextoExpanded ? <FaCompressAlt /> : <FaExpandAlt />}
-                                </button>
                             </div>
 
                             <div className={styles.infoLocalEvento}>
@@ -161,6 +143,25 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
                                     <strong>Data e Hora:</strong> {formatarData(evento.dataEvento, "datahora")}
                                 </p>
                             </div>
+
+                            <div className={styles.playerContainerWrapper}>
+                                {playerAtivado ? (
+                                    // SE ATIVADO: Mostra o player completo e toca
+                                    <MiniPlayer
+                                        src={audioTeste}
+                                        autoPlay={true}
+                                    />
+                                ) : (
+                                    // SE NÃO ATIVADO: Mostra o botão compacto
+                                    <button
+                                        className={styles.playerCompacto}
+                                        onClick={() => setPlayerAtivado(true)}
+                                    >
+                                        <h4>Ouça este artigo</h4>
+                                        <FaPlay className={styles.playIconCompacto} />
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                         <div className={styles.colunaDireita}>
@@ -177,27 +178,14 @@ function PaginaDetalhesEvento({ evento = mockEvento }) {
                                     ))}
                                 </div>
 
-                                <motion.button
-                                    className={styles.botaoShare}
-                                    onMouseEnter={() => setIsHovered(true)}
-                                    onMouseLeave={() => setIsHovered(false)}
-                                    variants={buttonVariants}
-                                    initial="initial"
-                                    animate={isMobile || isHovered ? "hover" : "initial"}
-                                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    onClick={() => setPopupCompartilharAberto(true)}
-                                >
-                                    <FaRegPaperPlane className={styles.faRegPaperPlane} />
-                                    <motion.span
-                                        className={styles.shareText}
-                                        variants={textVariants}
-                                        initial="initial"
-                                        animate={isMobile || isHovered ? "hover" : "initial"}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    >
-                                        Compartilhar
-                                    </motion.span>
-                                </motion.button>
+                                <div className={styles.infoInferior}>
+                                    <BtnCompartilhar
+                                        className={styles.botaoShareLayout} // Passa a classe de layout
+                                        onClick={() => setPopupCompartilharAberto(true)}
+                                    />
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
