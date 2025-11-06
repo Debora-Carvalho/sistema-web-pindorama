@@ -166,7 +166,7 @@ function PaginaDetalhesArtigo() {
                     <PopupCompartilhar
                         aoFechar={() => setPopupCompartilharAberto(false)}
                         link={artigoUrl}
-                        imagem={artigo.imagemCapa}
+                        imagem={artigo.url_imagem}
                         tipo="artigo"
                     />
                 )}
