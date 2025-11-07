@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 
 // ROTAS USUARIO
-import PaginaTeste from "../pages/PaginaTeste/PaginaTeste.jsx";
+
 import PaginaInicial from "../pages/Usuario/PaginaInicial/PaginaInicial.jsx";
 import PaginaVisualizarArtigos from "../pages/Usuario/PaginaVisualizarArtigos/PaginaVisualizarArtigos.jsx";
 import PaginaVisualizarEventos from "../pages/Usuario/PaginaVisualizarEventos/PaginaVisualizarEventos.jsx";
@@ -29,6 +29,7 @@ import PaginaNaoEncontrado from "../pages/PaginaNaoEncontrado/PaginaNaoEncontrad
 
 // COMPONENTE QUE GERENCIA SE A ROTAS SERÃO PRIVADAS OU NÃO
 import ProtectedRoute from '../components/Rotas/ProtectedRoute.jsx'
+import Teste from "../Teste/Teste.jsx";
 
 
 const AnimatedRoutes = () => {
@@ -48,6 +49,7 @@ const AnimatedRoutes = () => {
 				<Route path="/mapa" element={<PaginaMapa />} />
 				<Route path="/sobre" element={<PaginaSobreMim />} />
 				<Route path="/organizacoes" element={<PaginaOrganizacoes />} />
+				<Route path='/teste' element={<Teste />} />
 
 				{/*rota somente para teste e visualização da tela*/}
 				<Route path='/detalhes-artigo/:id' element={<PaginaDetalhesArtigo />} />
