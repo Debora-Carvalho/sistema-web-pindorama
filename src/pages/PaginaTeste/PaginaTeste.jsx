@@ -10,6 +10,8 @@ import PopupCriar from "../../components/Popups/PopupCriar/PopupCriar.jsx";
 
 import PopupAdicionarTag from "../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
 import CardPadraoAdmin from '../../components/CardPadrao/Admin/CardPadraoAdmin/CardPadraoAdmin.jsx';
+import PlayerCustomizado from '../../components/PlayerCustomizado/PlayerCustomizado.jsx'
+import audioTeste from '../../assets/audio/Final.mp3'
 
 function PaginaTeste() {
 	useTituloDocumento("Teste | Pindorama"); // mudando o Title da pagina
@@ -58,6 +60,8 @@ function PaginaTeste() {
 				<p className={styles.paragrafo}>
 					Utilize os botões abaixo para navegar pelos temas.
 				</p>
+
+				<PlayerCustomizado src={audioTeste} />
 
 				<CardPadraoAdmin
 					imagem="https://i.pinimg.com/originals/ae/75/bb/ae75bb989466498589f4faa1e3e5b426.jpg"
