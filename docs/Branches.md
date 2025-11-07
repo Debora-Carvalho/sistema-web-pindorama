@@ -1,4 +1,5 @@
 ## 🌿 Branches 
+- bugfix/ajeitando-MiniPlayer
 
 ### 📌 Convenção de Nomes
 
