@@ -9,7 +9,7 @@
 }
 
 .conteudo {
-	padding: 0 2%;
+	padding: 2%;
 }
 
 .headerArtigo {
@@ -34,9 +34,6 @@
 }
 
 .dataPublicacao {
-	display: flex;
-	white-space: nowrap;
-	
     font-family: $font-family-subtitulo;
 	font-weight: 600;
     font-size: 1.2rem;
@@ -201,48 +198,6 @@
 	font-family: $font-family-principal;
 }
 
-.infoInferior{
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-}
-
-.playerContainerWrapper {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.playerCompacto {
-    display: flex;
-    align-items: center;
-	
-    gap: 1rem;
-	width: 100%;
-    
-    h4 {
-        font-family: $font-family-principal;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--primary-400);
-    }
-}
-
-.playIconCompacto {
-    font-size: 1.7rem;
-    color: var(--neutral-secondary);
-    background-color: var(--neutral-primary);
-    border-radius: 50%;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
-
-    &:hover {
-        transform: scale(1.1);
-    }
-}
-
 .artigosRelacionadosContainer {
 	margin-top: 4rem;
 	padding-top: 2rem;
@@ -322,8 +277,7 @@
 
 @media (max-width: 720px) {
 	.colunaEsquerda,
-    .colunaDireita,
-	.infoInferior {
+    .colunaDireita {
         display: contents;
     }
 
@@ -334,7 +288,8 @@
 	.conteudoPrincipal {
 		grid-template-columns: 1fr;
 		grid-template-areas:
-			"audio"
+			"titulo"
+			"autora"
 			"imagem"
 			"texto"
 			"tags"
@@ -355,14 +310,6 @@
 	.autora {
 		grid-area: autora;
 		font-size: 1.8rem;
-	}
-
-	.playerContainerWrapper{
-		margin-bottom: 2rem;
-	}
-
-	.audio{
-		grid-area: audio;
 	}
 
 	.imagemCapa {
@@ -389,6 +336,12 @@
 		}
 	}
 
+	.botaoShare {
+		grid-area: share;
+		font-size: 3rem;
+		padding: 10px 30px;
+	}
+
 	.tags {
 		grid-area: tags;
 		justify-content: flex-start;
@@ -400,14 +353,6 @@
 
 	}
 
-	.botaoShareLayout{
-		grid-area: share;
-	}
-
-	.audio{
-		margin-bottom: 2rem;
-	}
-
 	.cardsContainer {
 		gap: 1rem;
 	}
@@ -416,11 +361,7 @@
 
 @media (max-width: 480px) {
 	.tituloArtigo{
-		font-size: 2.6rem;
-	}
-
-	.autora{
-		font-size: 1.5rem;
+		font-size: 2.5rem;
 	}
 
 	.imagemCapa {
@@ -452,6 +393,12 @@
 	.cardsContainer {
 		grid-template-columns: repeat(1, 1fr);
 		gap: 2rem;
+	}
+}
+
+@media (max-width: 400px){
+	.tituloArtigo {
+		font-size: 2.2rem;
 	}
 
 	.corpoTexto{
