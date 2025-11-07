@@ -1,5 +1,4 @@
 ## 🌿 Branches 
-- feature/ajuda
 
 ### 📌 Convenção de Nomes
 
