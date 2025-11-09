@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useArtigos } from '../artigos/useArtigos';
+import { useArtigos } from '../artigos/useArtigos.js';
 
 export const useGetArtigosAdmin = (autorId) => {
     const [artigos, setArtigos] = useState([]);

@@ -7,7 +7,7 @@ import { MdOutlineArrowForward } from "react-icons/md";
 function CardImagem({ imagem, titulo, descricao, link }) {
     const [open, setOpen] = useState(false);
     
-    console.log("CardImagem props:", { imagem, titulo, descricao, link });
+    //console.log("CardImagem props:", { imagem, titulo, descricao, link });
     return (
         <>
             <div
