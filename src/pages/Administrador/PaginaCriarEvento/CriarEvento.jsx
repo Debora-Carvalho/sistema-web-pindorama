@@ -135,9 +135,12 @@ function PaginaCriarEvento() {
             if (!linkLocal) return mostrarErro('Por favor, adicione um link para o local do evento.');
         } else if (status === "rascunho") {
             if (formularioVazio) return mostrarErro('Preencha pelo menos um campo para salvar como rascunho.');
-
+            // GAMBIARRA! Correto é editar tabela e modal de eventos validado apenas se o status for "publicado"
+            // Solução pra not null
             if (!titulo.trim()) setTitulo("Rascunho sem título");
             if (conteudoVazio) setConteudo("<p>Conteúdo do rascunho</p>");
+            if (!dataEvento) setDataEvento(new Date()); // data atual
+            if (!linkLocal) setLinkLocal("https://...Link não definido");
         }
 
         setMostrarConfirmacaoEnvio(true);
