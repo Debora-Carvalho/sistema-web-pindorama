@@ -8,8 +8,14 @@ function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions , status }) {
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
-    const backgroundClasse =
-        tipo === "artigo" ? status === "rascunho" ? styles.backgroundRascunho : styles.backgroundArtigo : styles.backgroundEvento;
+const backgroundClasse =
+    tipo === "artigo"
+        ? status === "rascunho"
+            ? styles.backgroundRascunho
+            : styles.backgroundArtigo
+        : status === "rascunho"
+            ? styles.backgroundEventoRascunho
+            : styles.backgroundEvento;
 
     const tituloClasse =
         tipo === "artigo" ? styles.tituloArtigo : styles.tituloEvento;

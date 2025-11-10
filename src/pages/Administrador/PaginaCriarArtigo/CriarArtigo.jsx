@@ -1,20 +1,23 @@
+// Style e React
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams} from 'react-router-dom';
+import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
+import styles from './CriarArtigo.module.scss';
+// Components
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import EditorDeTexto from '../../../components/EditorDeTexto/EditorDeTexto.jsx';
-import styles from './CriarArtigo.module.scss';
-import Logo from '../../../assets/images/pindorama_logo5.png';
-import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
 import PopupConfirmar from '../../../components/Popups/PopupConfirmar/PopupConfirmar.jsx';
 import PopupSucesso from '../../../components/Popups/PopupSucesso/PopupSucesso.jsx';
 import PopupTagArtigo from "../../../components/Popups/PopupAdicionarTag/PopupAdicionarTag.jsx";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import PopupLocal from '../../../components/Popups/PopupLocal/PopupLocal.jsx';
 import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
-import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
-import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
-import { useParams } from 'react-router-dom';
 import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
+// hooks and helpers
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
+
+import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
+import { validarFormulario } from '../../../Helpers/validarFormulario.js';
 
 // --- Constantes ---
 const nomeAutora = "Kelly Cristina Marques";
@@ -67,13 +70,15 @@ function PaginaCriarArtigo() {
             setPreviewCapa(URL.createObjectURL(file));
         }
     };
-    const handleSelecionarLocal = (local) => {
-        setLocalSelecionado(local);
-        setLocalModalAberto(false);
-    };
+
     const handleConfirmarTags = (tags) => {
         setTagsSelecionadas(tags);
         setPopupTagAberto(false);
+    };
+
+    const handleSelecionarLocal = (local) => {
+        setLocalSelecionado(local);
+        setLocalModalAberto(false);
     };
 
     // --- Lógica de Exclusão ---
@@ -87,6 +92,7 @@ function PaginaCriarArtigo() {
             setMostrarConfirmacaoExcluir(true);
         }
     };
+    
     const handleConfirmarExclusao = () => {
         setTitulo('');
         setConteudo('');
@@ -141,37 +147,37 @@ function PaginaCriarArtigo() {
         setAcaoAposSucesso("redirecionar");
     };
 
-      const executarEnvio = async (status = "publicado") => {
-          try {
-              const artigoParaEnviar = {
-                  titulo,
-                  conteudo,
-                  autor_id: 7,
-                  status: statusEnvio, // "rascunho" ou "publicado"
-                  local: localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : null,
-                  tags: tagsSelecionadas,
-              };
+    const executarEnvio = async (status = "publicado") => {
+        try {
+            const artigoParaEnviar = {
+                titulo,
+                conteudo,
+                autor_id: 7,
+                status: statusEnvio, // "rascunho" ou "publicado"
+                local: localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : null,
+                tags: tagsSelecionadas,
+            };
 
-              if (id) {
-                await putArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
-              } else {
-                await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
-              }
+            if (id) {
+              await putArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
+            } else {
+              await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
+            }
 
-              setMostrarConfirmacaoEnvio(false);
-              setPopupSucessoMensagem(
-                status === "rascunho"
-                  ? "Artigo salvo como rascunho!"
-                  : id
-                  ? "Artigo atualizado com sucesso!"
-                  : "Artigo enviado com sucesso!"
-              );
-              setMostrarSucesso(true);
-          } catch (e) {
-              console.error(e);
-              setErroFormulario({ mensagem: e.message, tipo: "erro" });
-          }
-      };
+            setMostrarConfirmacaoEnvio(false);
+            setPopupSucessoMensagem(
+              status === "rascunho"
+                ? "Artigo salvo como rascunho!"
+                : id
+                ? "Artigo atualizado com sucesso!"
+                : "Artigo enviado com sucesso!"
+            );
+            setMostrarSucesso(true);
+        } catch (e) {
+            console.error(e);
+            setErroFormulario({ mensagem: e.message, tipo: "erro" });
+        }
+    };
 
     const handleCancelarEnvio = () => { setMostrarConfirmacaoEnvio(false); };
 

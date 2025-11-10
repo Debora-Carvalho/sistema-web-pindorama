@@ -27,7 +27,7 @@ function PaginaVisualizarEventosAdmin() {
     
     // 1. Estados e Hooks
     const { id, loading: authLoading } = useAuth();
-    const { eventos, loading: eventosLoading, error: eventosError } = useGetEventosAdmin(id);
+    const { eventos, loading: eventosLoading, error: eventosError, refetch } = useGetEventosAdmin(id);
     const { deletarEvento } = useEventos();
     const [filtro, setFiltro] = useState("");
 
@@ -85,7 +85,8 @@ function PaginaVisualizarEventosAdmin() {
                           limite={null}
                           actions={{
                               onEditar: handleEditar,
-                              onExcluir: handleExcluir
+                              onExcluir: handleExcluir,
+                              refetch
                           }}
                       />
               </div>

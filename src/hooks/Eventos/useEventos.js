@@ -20,15 +20,14 @@ export function useEventos() {
             formData.append("evento[local]", dados.local);
             formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
+            formData.append("evento[status]", dados.status);
+
+            dados.tags.forEach((tag) => {
+              formData.append("evento[tags][]", tag);
+            });
 
             if (imagemFile) {
                 formData.append("imagem", imagemFile);
-            }
-
-            if (dados.tags) {
-                dados.tags.forEach((tag) => {
-                    formData.append("evento[tags][]", tag);
-                });
             }
 
             const response = await fetch(API_URL, {
@@ -96,6 +95,7 @@ export function useEventos() {
             formData.append("evento[local]", dados.local);
             formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
+            formData.append("evento[status]", dados.status);
 
             // Tags
             if (dados.tags) {
