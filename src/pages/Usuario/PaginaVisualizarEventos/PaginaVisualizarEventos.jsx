@@ -1,6 +1,5 @@
 // React and Style
 import React, { useState, useEffect } from 'react';
-import { useState } from "react";
 import styles from './PaginaVisualizarEventos.module.scss';
 // Components
 import Header from '../../../components/Header/Header.jsx';

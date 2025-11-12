@@ -16,7 +16,7 @@ import { formatarData } from "../../../Helpers/formatarDataHora.js"
 import MiniPlayer from '../../../components/MiniPlayer/MiniPlayer.jsx'
 import { FaPlay } from 'react-icons/fa'
 import audioTeste from '../../../assets/audio/Final.mp3'
-
+import useMediaQuery from '../../../hooks/useMediaQuery.js'
 const mockEvento = {
     id: 1,
     titulo: "Festança de Forró",
