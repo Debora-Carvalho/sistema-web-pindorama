@@ -1,19 +1,17 @@
+// React and Style
+import React, { useState, useEffect } from 'react';
 import { useState } from "react";
 import styles from './PaginaVisualizarEventos.module.scss';
-import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+// Components
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import Loading from '../../../components/Loading/Loading.jsx';
-// import eventos from "../../../json/db-mock-eventos.json";
-import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
-
-function decodeHtml(html) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = html;
-    return txt.value;
-}
+// Hooks e Helpers
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaVisualizarEventos() {
     useTituloDocumento("Eventos | Pindorama"); // mudando o Title da pagina
@@ -59,7 +57,6 @@ function PaginaVisualizarEventos() {
                 </main>
 
                 <Footer />
-
             </div>
         </>
     )

@@ -128,7 +128,10 @@ export default function DropdownCard({ id, actions }) {
                             aberto={popupSucessoAberto}
                             mensagem="Artigo excluído com sucesso!"
                             textoBotao="Fechar"
-                            onBotaoClick={() => setPopupSucessoAberto(false)}
+                              onBotaoClick={async () => {
+                              setPopupDestaqueSucessoAberto(false);
+                              await actions.refetch(); //Manda o useGetArtigosAdmin (que manda o useEffect trabalhar) recarregar os artigos!
+                          }}
                         />
                     </div>
                 </div>

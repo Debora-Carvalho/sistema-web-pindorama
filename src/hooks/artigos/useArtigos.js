@@ -48,11 +48,12 @@ export function useArtigos() {
   }
 
   // GET /artigos all
-  async function getArtigos() {
+  async function getArtigos(autorId = null) { //aceita o id mas se não passar nada, tudo bem tambem
     setLoading(true);
     setErro(null);
     try {
-      const response = await fetch(API_URL);
+      const url = autorId ? `${API_URL}?autor_id=${autorId}` : API_URL; //se autor existir? entao ele pega os artigos desse autor : se nao pega tudo mesmo 
+      const response = await fetch(url);
       if (!response.ok) throw new Error("Erro ao carregar artigos");
       return await response.json();
     } catch (err) {

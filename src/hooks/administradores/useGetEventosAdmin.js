@@ -1,43 +1,35 @@
-import { useState, useEffect } from 'react';
-
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${API_BASE_URL}/eventos`;
+import { useState, useEffect, useCallback } from 'react';
+import { useEventos } from '../Eventos/useEventos.js'
 
 export const useGetEventosAdmin = (autorId) => {
     const [eventos, setEventos] = useState([]);
     const [loading, setLoading] = useState(false); 
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const { listarEventos } = useEventos(); //usando a conexão ja existentes
+
+    const fetchEventos = useCallback(async () => {
         if (!autorId) {
             setLoading(false);
             setEventos([]);
             return;
         }
+        setLoading(true);
+        setError(null);
 
-        const fetchEventos = async () => {
-            setLoading(true);
-            setError(null);
+        try {
+            const data = await listarEventos(autorId);
+            setEventos(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [autorId]);
 
-            try {
-                const url = `${API_URL}?autor_id=${autorId}`;
-                
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar os eventos do autor');
-                }
-                const data = await response.json();
-                setEventos(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    useEffect(() => {
+      fetchEventos();
+    },[fetchEventos]);
 
-        fetchEventos();
-
-    }, [autorId]); 
-
-    return { eventos, loading, error };
+    return { eventos, loading, error, refetch: fetchEventos };
 };

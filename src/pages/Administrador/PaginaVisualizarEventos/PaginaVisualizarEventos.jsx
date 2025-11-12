@@ -1,48 +1,97 @@
+//Style e React
+import { useState } from 'react';
 import styles from './PaginaVisualizarEventos.module.scss';
-import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom'; 
+import { motion } from 'framer-motion';
+//Components
+import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
-import Logo from '../../../assets/images/pindorama_logo5.png';
-import { useAuth } from '../../../contexts/AuthContext.jsx';
-
+import Logotipo from "../../../components/Logotipo/Logotipo.jsx";
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
-// import eventos from '../../../json/db-mock-eventos.json';
-import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js'
+import Loading from "../../../components/Loading/Loading.jsx";
+//Contexts e Hooks
+import { useAuth } from '../../../contexts/AuthContext.jsx';
+import { useGetEventosAdmin } from '../../../hooks/administradores/useGetEventosAdmin.js';
+import { useEventos } from '../../../hooks/Eventos/useEventos.js';
+
+const pageTransition = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+    transition: { duration: 0.5 }
+};
 
 function PaginaVisualizarEventosAdmin() {
-    const handleSelect = (item) => {
-        console.log("Selecionado:", item);
-        alert(`Você selecionou: ${item.titulo}`);
+    const navigate = useNavigate(); // usando navigate para vincular ListCards a pag detalhes eventos
+    
+    // 1. Estados e Hooks
+    const { id, loading: authLoading } = useAuth();
+    const { eventos, loading: eventosLoading, error: eventosError, refetch } = useGetEventosAdmin(id);
+    const { deletarEvento } = useEventos();
+    const [filtro, setFiltro] = useState("");
+
+    const handleEditar = (id) => {
+        navigate(`/adm/criar-evento/${id}`);// navega para editar evento
     };
 
-    const { id, loading: authLoading } = useAuth();
-    const { eventos, loading: eventosLoading, error } = useGetEventosAdmin(id);
+    const handleExcluir = async (id) => {
+      await deletarEvento(id);
+    };
+
+    const eventosFiltrados = eventos.filter((a) =>
+        a.titulo.toLowerCase().includes(filtro.toLowerCase())
+    );
+
+    const eventosAdaptados = eventosFiltrados.map((a) => ({
+        id: a.id,
+        tipo: "evento",
+        titulo: a.titulo,
+        url_imagem: a.url_imagem,
+        link: `/detalhes-evento/${a.id}`,
+        status: a.status
+    }));
 
     return (
-        <div className={styles.containerVisualizar}>
-            <link to="/adm/inicio"> 
-              <img className={styles.logo} src={Logo} alt="Logo do Pindorama" />
-            </link>
-            <nav className={styles.navbar}>
+        <motion.div
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageTransition}
+            transition={pageTransition.transition}
+        >
+          <div className={styles.containerVisualizar}>
+              <div className={styles.header}>
+                <Logotipo tipo='admin' />
                 <HeaderAdmin />
-            </nav>
-            <div className={styles.topo}>
-                <BarraPesquisa itens={eventos} onSelect={handleSelect} />
-                <button className={styles.btnAdicionar} onClick={() => window.location.href = "/adm/criar-evento"}>
-                    <BiSolidAddToQueue className={styles.iconAdd} />
-                </button>
             </div>
-            <div className={styles.containerCards}>
-                {/* Lembrar de colocar o component de carregamento e erro */}
-                    {authLoading || eventosLoading ? (
-                        <p>Carregando...</p>
-                    ) : error ? (
-                        <p>Ocorreu um erro ao carregar os eventos: {error}</p>
-                    ) : (
-                <ListaCardsAdmin cards={eventos} limite={null} />
-                    )}
-            </div>
-        </div>
+              <div className={styles.topo}>
+                  <BarraPesquisa
+                        itens={eventos}
+                        onSelect={(item) => console.log("Selecionado:", item)}
+                        onInputChange={(valor) => setFiltro(valor)}
+                    />
+                    <button
+                        className={styles.btnAdicionar}
+                        onClick={() => window.location.href = "/adm/criar-evento"}
+                    >
+                        <BiSolidAddToQueue className={styles.iconAdd} />
+                    </button>
+              </div>
+              <div className={styles.containerCards}>
+                  {eventosLoading && <Loading />}
+                      <ListaCardsAdmin
+                          cards={eventosAdaptados}
+                          limite={null}
+                          actions={{
+                              onEditar: handleEditar,
+                              onExcluir: handleExcluir,
+                              refetch
+                          }}
+                      />
+              </div>
+          </div>
+        </motion.div>
     )
 }
 

@@ -31,7 +31,11 @@
 
 .backgroundEvento {
     background-color: var(--secondary-500);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.backgroundEventoRascunho {
+  background-color: #c1a78c; // um verde clarinho, pode ajustar
 }
 
 .dropdownOpcoesContainer {

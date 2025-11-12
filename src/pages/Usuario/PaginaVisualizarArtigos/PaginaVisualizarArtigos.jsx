@@ -1,13 +1,17 @@
+// React and Style
 import { useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
-import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import { Link } from "react-router-dom";
+// Components
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
+import Loading from '../../../components/Loading/Loading.jsx';
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
-import { Link } from "react-router-dom";
-import Loading from '../../../components/Loading/Loading.jsx';
+// Hooks e Helpers
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaVisualizarArtigos() {

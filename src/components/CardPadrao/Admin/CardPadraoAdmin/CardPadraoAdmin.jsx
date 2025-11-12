@@ -8,8 +8,14 @@ function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions , status }) {
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
-    const backgroundClasse =
-        tipo === "artigo" ? status === "rascunho" ? styles.backgroundRascunho : styles.backgroundArtigo : styles.backgroundEvento;
+const backgroundClasse =
+    tipo === "artigo"
+        ? status === "rascunho"
+            ? styles.backgroundRascunho
+            : styles.backgroundArtigo
+        : status === "rascunho"
+            ? styles.backgroundEventoRascunho
+            : styles.backgroundEvento;
 
     const tituloClasse =
         tipo === "artigo" ? styles.tituloArtigo : styles.tituloEvento;
@@ -35,7 +41,7 @@ function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions , status }) {
                     {descricao}
                 </p> */}
                 {/* Adicionando titulo do botão para rascunho */}
-              <Link to={link} className={botaoClasse}> {tipo === "artigo" ? status === "rascunho" ? "Ler artigo de rascunho" : "Ler artigo completo" : "Ver evento completo"} </Link>
+              <Link to={link} className={botaoClasse}> {status === "rascunho" ? tipo === "artigo" ? "Ler artigo de rascunho" : "Ler evento de rascunho" : tipo === "artigo" ? "Ler artigo completo" :"Ver evento completo"} </Link>
             </div>
         </div>
     );
