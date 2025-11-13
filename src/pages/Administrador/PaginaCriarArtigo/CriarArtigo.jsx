@@ -1,6 +1,6 @@
 // Style e React
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams} from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
 import styles from './CriarArtigo.module.scss';
 // Components
@@ -38,7 +38,7 @@ function PaginaCriarArtigo() {
 
     // --- Hook personalizado para lidar com artigos ---
     const { putArtigo, getArtigoById, postArtigo, loading, erro } = useArtigos();
-    
+
     // --- Estados do Formulário ---
     const [titulo, setTitulo] = useState('');
     const [conteudo, setConteudo] = useState('');
@@ -57,6 +57,7 @@ function PaginaCriarArtigo() {
     const [mostrarSucesso, setMostrarSucesso] = useState(false);
     const [popupSucessoMensagem, setPopupSucessoMensagem] = useState('');
     const [acaoAposSucesso, setAcaoAposSucesso] = useState(null);
+    const [enviando, setEnviando] = useState(false);
 
     // Novo estado para controlar o status
     const [statusEnvio, setStatusEnvio] = useState("publicado");
@@ -92,7 +93,7 @@ function PaginaCriarArtigo() {
             setMostrarConfirmacaoExcluir(true);
         }
     };
-    
+
     const handleConfirmarExclusao = () => {
         setTitulo('');
         setConteudo('');
@@ -137,10 +138,10 @@ function PaginaCriarArtigo() {
         } else if (status === "rascunho") {
             // Rascunho: pelo menos um campo deve estar preenchido
             if (formularioVazio) return mostrarErro('Preencha pelo menos um campo para salvar como rascunho.');
-            
+
             if (!titulo.trim()) setTitulo("Rascunho sem título");
             if (conteudoVazio) setConteudo("<p>Conteúdo do rascunho</p>");
-          }
+        }
 
         // Se passou nas validações
         setMostrarConfirmacaoEnvio(true);
@@ -148,6 +149,9 @@ function PaginaCriarArtigo() {
     };
 
     const executarEnvio = async (status = "publicado") => {
+        if (enviando) return; // impede cliques duplos
+        setEnviando(true);
+
         try {
             const artigoParaEnviar = {
                 titulo,
@@ -159,23 +163,25 @@ function PaginaCriarArtigo() {
             };
 
             if (id) {
-              await putArtigo(id, artigoParaEnviar, imagemCapa || null ); // modo edição
+                await putArtigo(id, artigoParaEnviar, imagemCapa || null); // modo edição
             } else {
-              await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
+                await postArtigo(artigoParaEnviar, imagemCapa); // modo criação
             }
 
             setMostrarConfirmacaoEnvio(false);
             setPopupSucessoMensagem(
-              status === "rascunho"
-                ? "Artigo salvo como rascunho!"
-                : id
-                ? "Artigo atualizado com sucesso!"
-                : "Artigo enviado com sucesso!"
+                status === "rascunho"
+                    ? "Artigo salvo como rascunho!"
+                    : id
+                        ? "Artigo atualizado com sucesso!"
+                        : "Artigo enviado com sucesso!"
             );
             setMostrarSucesso(true);
         } catch (e) {
             console.error(e);
             setErroFormulario({ mensagem: e.message, tipo: "erro" });
+        } finally {
+            setEnviando(false);
         }
     };
 
@@ -191,27 +197,27 @@ function PaginaCriarArtigo() {
     };
 
     useEffect(() => {
-      if (id) {
-        async function carregar() {
-          try {
-            const artigo = await getArtigoById(id);
-            setTitulo(artigo.titulo);
-            setConteudo(artigo.conteudo);
-            setTagsSelecionadas(artigo.tags || []);
-            if (artigo.local && artigo.local.includes(" - ")) {
-              const [cidade, estado] = artigo.local.split(" - ");
-              setLocalSelecionado({ cidade, estado });
-            } else {
-              setLocalSelecionado(null);
+        if (id) {
+            async function carregar() {
+                try {
+                    const artigo = await getArtigoById(id);
+                    setTitulo(artigo.titulo);
+                    setConteudo(artigo.conteudo);
+                    setTagsSelecionadas(artigo.tags || []);
+                    if (artigo.local && artigo.local.includes(" - ")) {
+                        const [cidade, estado] = artigo.local.split(" - ");
+                        setLocalSelecionado({ cidade, estado });
+                    } else {
+                        setLocalSelecionado(null);
+                    }
+                    setPreviewCapa(artigo.url_imagem || "");
+                    // imagemCapa não precisa ser setado agora, só quando trocar
+                } catch (e) {
+                    console.error("Erro ao carregar artigo", e);
+                }
             }
-            setPreviewCapa(artigo.url_imagem || "");
-            // imagemCapa não precisa ser setado agora, só quando trocar
-          } catch (e) {
-            console.error("Erro ao carregar artigo", e);
-          }
+            carregar();
         }
-        carregar();
-      }
     }, [id]);
 
     return (
@@ -276,21 +282,21 @@ function PaginaCriarArtigo() {
                         Limpar
                     </button>
                     <div className={styles.botoesDireita}>
-                      <button
-                          type="button"
-                          className={styles.botaoRascunho}
-                          onClick={(e) => handleSubmit(e, "rascunho")}
-                      >
-                          Salvar como rascunho
-                      </button>
+                        <button
+                            type="button"
+                            className={styles.botaoRascunho}
+                            onClick={(e) => handleSubmit(e, "rascunho")}
+                        >
+                            Salvar como rascunho
+                        </button>
 
-                      <button
-                          type="button"
-                          className={styles.botaoEnviar}
-                          onClick={(e) => handleSubmit(e, "publicado")}
-                      >
-                          Enviar
-                      </button>
+                        <button
+                            type="button"
+                            className={styles.botaoEnviar}
+                            onClick={(e) => handleSubmit(e, "publicado")}
+                        >
+                            Enviar
+                        </button>
                     </div>
                 </div>
             </form>
@@ -303,14 +309,14 @@ function PaginaCriarArtigo() {
             />
 
             <PopupConfirmar
-              aberto={mostrarConfirmacaoEnvio}
-              mensagem={
-                statusEnvio === "rascunho"
-                  ? "Tudo pronto para enviar como rascunho?"
-                  : "Tudo pronto para publicar?"
-              }
-              onCancelar={handleCancelarEnvio}
-              onConfirmar={() => executarEnvio(statusEnvio)}
+                aberto={mostrarConfirmacaoEnvio}
+                mensagem={
+                    statusEnvio === "rascunho"
+                        ? "Tudo pronto para enviar como rascunho?"
+                        : "Tudo pronto para publicar?"
+                }
+                onCancelar={handleCancelarEnvio}
+                onConfirmar={() => executarEnvio(statusEnvio)}
             />
 
             <PopupSucesso

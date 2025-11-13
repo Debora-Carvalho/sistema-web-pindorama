@@ -1,5 +1,5 @@
 // React and Style
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './PaginaVisualizarEventos.module.scss';
 // Components
 import Header from '../../../components/Header/Header.jsx';
@@ -22,16 +22,15 @@ function PaginaVisualizarEventos() {
         .map(e => ({
             id: e.id,
             tipo: "evento",
-            titulo: decodeHtml(e.titulo),
+            titulo: e.titulo,
             url_imagem: e.url_imagem,
             conteudo: decodeHtml(e.conteudo),
             link: `/detalhes-evento/${e.id}`
         }));
 
-    // filtro do texto da barra de pesquisa
     const eventosFiltrados = eventosAdaptados.filter(a =>
         a.titulo.toLowerCase().includes(textoBusca.toLowerCase())
-    );
+    );// filtro do texto da barra de pesquisa
 
     return (
         <>
@@ -49,8 +48,7 @@ function PaginaVisualizarEventos() {
                         />
                     </div>
 
-                    {/* Lembrar de colocar o component de carregamento e erro */}
-                    {loading && <Loading />}
+                    {loading && <Loading />}{/* Lembrar de colocar o component de carregamento e erro */}
                     {error && <p>Ocorreu um erro ao carregar os eventos: {error}</p>}
                     <ListaCards cards={eventosFiltrados} limite={null} />
                 </main>

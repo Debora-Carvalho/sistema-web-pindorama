@@ -49,6 +49,7 @@ function PaginaCriarEvento() {
     const [acaoAposSucesso, setAcaoAposSucesso] = useState(null);
     const [calendarioAberto, setCalendarioAberto] = useState(false);
     const [localLinkModalAberto, setLocalLinkModalAberto] = useState(false);
+    const [enviando, setEnviando] = useState(false);
 
 
     const [loadingBusca, setLoadingBusca] = useState(isEdicao);
@@ -149,6 +150,9 @@ function PaginaCriarEvento() {
     };
 
     const executarEnvio = async (status = "publicado") => {
+        if (enviando) return; // impede cliques duplos
+        setEnviando(true);
+        
         try {
             const eventoParaEnviar = {
                 titulo,
@@ -168,7 +172,7 @@ function PaginaCriarEvento() {
             
             setMostrarConfirmacaoEnvio(false);
             setPopupSucessoMensagem(
-              status === "rascunho"
+                status === "rascunho"
                 ? "Evento salvo como rascunho!"
                 : id
                 ? "Evento atualizado com sucesso!"
@@ -178,6 +182,8 @@ function PaginaCriarEvento() {
         } catch (e) {
             console.error(e);
             setErroFormulario({ mensagem: e.message, tipo: "erro" });
+        } finally {
+            setEnviando(false);
         }
     };
 
@@ -207,7 +213,7 @@ function PaginaCriarEvento() {
                             const dataUTC = new Date(evento.data);
                             const dataLocal = new Date(dataUTC.getUTCFullYear(), dataUTC.getUTCMonth(), dataUTC.getUTCDate());
                             setDataEvento(dataLocal);
-                          }
+                        }
                         setPreviewCapa(evento.url_imagem || "");
                     } else {
                         throw new Error("Evento não encontrado.");
