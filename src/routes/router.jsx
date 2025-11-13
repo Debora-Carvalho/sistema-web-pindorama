@@ -12,6 +12,7 @@ import PaginaDetalhesEvento from "../pages/Usuario/PaginaDetalhesEvento/PaginaDe
 import PaginaMapa from "../pages/Usuario/PaginaMapa/PaginaMapa.jsx";
 import PaginaSobreMim from "../pages/Usuario/PaginaSobreMim/PaginaSobreMim.jsx";
 import PaginaOrganizacoes from "../pages/Usuario/PaginaOrganizacoes/PaginaOrganizacoes.jsx";
+import PaginaAjuda from "../pages/Usuario/PaginaAjuda/PaginaAjuda.jsx";
 
 // ROTAS ADMINISTRADOR
 import AdminLayout from '../layouts/AdminLayout.jsx';
@@ -49,6 +50,7 @@ const AnimatedRoutes = () => {
 				<Route path="/mapa" element={<PaginaMapa />} />
 				<Route path="/sobre" element={<PaginaSobreMim />} />
 				<Route path="/organizacoes" element={<PaginaOrganizacoes />} />
+				<Route path="/ajuda" element={<PaginaAjuda />} />
 				<Route path='/teste' element={<Teste />} />
 
 				{/*rota somente para teste e visualização da tela*/}
@@ -62,12 +64,13 @@ const AnimatedRoutes = () => {
 						<Route path="/adm/criar-artigo" element={<PaginaCriarArtigo />} />
 						<Route path="/adm/criar-artigo/:id" element={<PaginaCriarArtigo />} />
 						<Route path="/adm/criar-evento" element={<PaginaCriarEvento />} />
-            <Route path="/adm/criar-evento/:id" element={<PaginaCriarEvento />} />
+            			<Route path="/adm/criar-evento/:id" element={<PaginaCriarEvento />} />
 						<Route path="/adm/visualizar-artigos" element={<PaginaVisualizarArtigosAdmin />} />
 						<Route path="/adm/visualizar-eventos" element={<PaginaVisualizarEventosAdmin />} />
 						<Route path="/adm/configuracoes" element={<PaginaConfiguracoesAdmin />} />
 					</Route>
 				</Route>
+				
 				{/* ROTA 404 */}
 				<Route path="*" element={<PaginaNaoEncontrado />} />
 			</Routes>

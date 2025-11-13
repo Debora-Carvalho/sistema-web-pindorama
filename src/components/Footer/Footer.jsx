@@ -24,6 +24,7 @@ function Footer() {
 						<Link to='/eventos' className={styles.itemLinkFooter}>Eventos</Link>
 						<Link to='/organizacoes' className={styles.itemLinkFooter}>Organizações</Link>
 						<Link to='/sobre' className={styles.itemLinkFooter}>Sobre a autora</Link>
+						<Link to='/ajuda' className={styles.itemLinkFooter}>FAQ - Ajuda</Link>
 					</div>
 				</div>
 
