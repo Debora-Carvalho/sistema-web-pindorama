@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "topic": "geral",
+        "question": "O que é o site Pindorama?",
+        "answer": "O Pindorama é uma aplicação web dedicada à difusão de conteúdos sobre o Patrimônio Cultural Imaterial Brasileiro. Ele reúne artigos, eventos e registros culturais que valorizam as tradições, saberes e manifestações culturais do país."
+    },
+    {
+        "id": 2,
+        "topic": "geral",
+        "question": "Preciso criar uma conta para acessar o Pindorama?",
+        "answer": "Não. O acesso ao conteúdo do Pindorama é totalmente livre e gratuito. Somente a administradora possui login, utilizado para cadastrar e gerenciar artigos e eventos."
+    },
+    {
+        "id": 3,
+        "topic": "geral",
+        "question": "Quem é responsável pelos conteúdos publicados?",
+        "answer": "Todo o conteúdo é gerenciado pela administradora do site, responsável pela curadoria, produção e publicação de artigos e eventos relacionados ao patrimônio cultural imaterial brasileiro."
+    },
+    {
+        "id": 4,
+        "topic": "geral",
+        "question": "Posso enviar sugestões ou tirar dúvidas?",
+        "answer": "Sim. É possível entrar em contato com a administradora através do formulário 'Contate-me', disponível no rodapé do site e também na página 'Sobre a Autora'."
+    },
+    {
+        "id": 5,
+        "topic": "geral",
+        "question": "O Pindorama possui aplicativo?",
+        "answer": "No momento, o Pindorama é uma aplicação web responsiva, acessível em computadores e dispositivos móveis, mas ainda não possui uma versão de aplicativo."
+    },
+    {
+        "id": 6,
+        "topic": "artigo",
+        "question": "O que encontro na seção de artigos?",
+        "answer": "Os artigos apresentam informações e reflexões sobre manifestações culturais, tradições, festas e expressões artísticas reconhecidas como patrimônio imaterial. Eles são escritos e organizados pela administradora."
+    },
+    {
+        "id": 7,
+        "topic": "artigo",
+        "question": "Posso comentar ou salvar um artigo?",
+        "answer": "Ainda não. No momento, os usuários podem apenas visualizar, compartilhar e enviar sugestões via formulário, mas não comentar ou salvar conteúdos para leitura posterior."
+    },
+    {
+        "id": 8,
+        "topic": "evento",
+        "question": "O que são os eventos exibidos no site?",
+        "answer": "Os eventos destacam celebrações, encontros e atividades culturais relacionados ao patrimônio imaterial. Eles podem incluir festas tradicionais, apresentações artísticas ou feiras culturais."
+    },
+    {
+        "id": 9,
+        "topic": "evento",
+        "question": "Como os eventos aparecem na página inicial?",
+        "answer": "Alguns eventos são destacados pela administradora na página inicial, por sua relevância ou atualidade. É possível visualizar a lista completa na aba 'Eventos'."
+    },
+        {
+        "id": 10,
+        "topic": "galeria",
+        "question": "O que é a Galeria do Pindorama?",
+        "answer": "A Galeria é uma coletânea de imagens provenientes de uploads realizados nos artigos e eventos cadastrados pela administradora. Ela apresenta registros visuais de celebrações, manifestações culturais e momentos significativos do patrimônio imaterial brasileiro."
+    },
+    {
+        "id": 11,
+        "topic": "galeria",
+        "question": "Como posso acessar a Galeria de imagens?",
+        "answer": "Você pode acessar a Galeria clicando em 'Ver mais' na visualização de imagens da Página Inicial ou diretamente na aba 'Galeria' do menu principal."
+    },
+    {
+        "id": 12,
+        "topic": "galeria",
+        "question": "Como posso saber de onde vêm as imagens da Galeria?",
+        "answer": "Sim. Cada imagem está vinculada a um artigo ou evento que indica sua origem. Ao clicar em um card de imagem, é possível acessar os créditos e visualizar o conteúdo relacionado."
+    },
+    {
+        "id": 13,
+        "topic": "galeria",
+        "question": "As imagens da Galeria podem ser baixadas?",
+        "answer": "Atualmente não. As imagens são exibidas apenas para visualização, respeitando os direitos autorais e a integridade dos conteúdos publicados."
+    },
+    {
+        "id": 14,
+        "topic": "mapa",
+        "question": "Qual é a função do mapa do Brasil no site?",
+        "answer": "O mapa interativo exibe pontos geográficos vinculados a artigos e eventos. Cada ponto representa um local relacionado a uma manifestação cultural ou evento registrado no site."
+    },
+    {
+        "id": 15,
+        "topic": "mapa",
+        "question": "Como posso interagir com o mapa?",
+        "answer": "Ao clicar em um ponto do mapa, o usuário pode visualizar o nome do evento ou artigo relacionado, acessar mais detalhes e explorar o conteúdo completo vinculado àquela localidade."
+    },
+    {
+        "id": 16,
+        "topic": "acessibilidade",
+        "question": "O Pindorama possui recursos de acessibilidade?",
+        "answer": "Sim. O site conta com integração ao widget de acessibilidade UserWay, que permite ajustar o tamanho do texto, contraste, espaçamento e outras preferências visuais."
+    },
+    {
+        "id": 17,
+        "topic": "acessibilidade",
+        "question": "Posso ativar leitura por áudio nos textos?",
+        "answer": "Sim. Em páginas de artigos e eventos, há um ícone de áudio que permite ouvir a leitura automática do texto, facilitando a navegação para pessoas com deficiência visual ou baixa visão."
+    },
+    {
+        "id": 18,
+        "topic": "acessibilidade",
+        "question": "O site oferece modo claro e escuro?",
+        "answer": "Sim. O Pindorama permite alternar entre temas claro e escuro para proporcionar maior conforto visual, de acordo com a preferência do usuário."
+    },
+    {
+        "id": 19,
+        "topic": "privacidade",
+        "question": "O Pindorama coleta dados pessoais?",
+        "answer": "Não. O site não exige cadastro nem coleta dados sensíveis dos usuários. As únicas informações enviadas são as fornecidas voluntariamente pelo formulário de contato."
+    },
+    {
+        "id": 20,
+        "topic": "privacidade",
+        "question": "Onde posso acessar os Termos de Uso e a Política de Privacidade?",
+        "answer": "Os links para os modais de Termos de Uso e Política de Privacidade estão disponíveis no rodapé do site, podendo ser abertos a qualquer momento para consulta."
+    }
+]

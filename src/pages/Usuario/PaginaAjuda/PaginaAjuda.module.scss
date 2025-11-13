@@ -1,0 +1,141 @@
+@use "../../../styles/abstracts/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--background-primary);
+    min-height: 100vh;
+}
+
+.secao {
+    margin-bottom: 3rem;
+
+}
+
+.containerItems {
+    width: 100%;
+    max-width: 1000px;
+    padding: 2rem 1.25rem;
+
+    h2 {
+        font-family: $font-family-texto;
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    h3 {
+        font-family: $font-family-texto;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-top: 1.75rem;
+        margin-bottom: 0.75rem;
+        color: var(--secondary-500);
+    }
+}
+
+.listaPerguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dropdown {
+    border: 1px solid var(--secondary-500);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.dropdownPergunta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 0.5rem 0;
+}
+
+.dropdownPergunta:hover {
+    color: var(--secondary-500);
+}
+
+.dropdownPergunta.aberto {
+    color: var(--secondary-500);
+}
+
+.perguntaTexto {
+    flex: 1;
+    padding-right: 1rem;
+}
+
+.icone {
+    font-size: 3rem;
+    width: 28px;
+    text-align: center;
+    color: var(--secondary-500);
+}
+
+.dropdownResposta {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    line-height: 1.6;
+    font-size: 1.2rem;
+}
+
+.respostaTexto {
+    color: var(--text-primary);
+}
+
+.loadingWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    .containerItems {
+        padding: 1.5rem;
+
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .containerItems {
+        padding: 1rem;
+
+        h2 {
+            font-size: 1.9rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .dropdownPergunta {
+        font-size: 1rem;
+    }
+
+    .dropdownResposta {
+        font-size: 0.95rem;
+    }
+}
