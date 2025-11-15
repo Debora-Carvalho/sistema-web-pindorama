@@ -12,14 +12,21 @@
         padding: 5px;
 
         &:hover {
-            color: var(--background-secondary);
+            color: #9baf85;
         }
     }
 } 
 
 .active {
     background-color: var(--primary-300); 
+    border: 2px solid var(--primary-300);
     border-radius: 50%;
+
+    &:hover {
+        background-color: transparent; 
+        border: 2px solid var(--text-header-footer-user);
+        border-radius: 30px;
+    }
 }
 
 /* --- Até 880px --- */

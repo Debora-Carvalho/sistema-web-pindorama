@@ -58,11 +58,18 @@
 
 .cardDescricao {
     font-family: $font-family-texto;
-    -webkit-line-clamp: 3;
+    //-webkit-line-clamp: 3;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
     color: var(--text-primary);
     text-align: justify;
     margin-bottom: 1rem;
+}
+
+.cardBotoes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .btnArtigo,
@@ -96,8 +103,26 @@
     background: var(--secondary-600);
 
     &:hover {
-        background: var(--secondary-500);
+        background: var(--primary-300);
     }
+}
+
+.btnAudioArtigo {
+    font-size: 1.5rem;
+    color: var(--primary-400);
+
+    &:hover {
+        color: var(--secondary-500);
+    }    
+}
+
+.btnAudioEvento {
+    font-size: 1.5rem;
+    color: var(--secondary-600);
+
+    &:hover {
+        color: var(--secondary-500);
+    }    
 }
 
 // RESPONSIVIDADE --------------------
