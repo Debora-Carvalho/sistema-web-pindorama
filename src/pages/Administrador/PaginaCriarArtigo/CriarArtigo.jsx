@@ -106,6 +106,7 @@ function PaginaCriarArtigo() {
         setAcaoAposSucesso('permanecer');
         setMostrarSucesso(true);
     };
+
     const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };
 
     // --- Lógica de Envio ---
@@ -160,6 +161,7 @@ function PaginaCriarArtigo() {
                 status: statusEnvio, // "rascunho" ou "publicado"
                 local: localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : null,
                 tags: tagsSelecionadas,
+                data: new Date().toISOString()
             };
 
             if (id) {
