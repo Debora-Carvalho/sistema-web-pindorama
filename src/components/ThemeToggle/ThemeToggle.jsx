@@ -3,13 +3,12 @@ import styles from './ThemeToggle.module.scss';
 import {
 	ThemeContext,
 	DEFAULT_THEME,
-	DARK_THEME,
 	NORDESTINO_THEME,
 	INDIGENA_THEME
 } from '../../contexts/ThemeContext';
 
 import { LuSun } from "react-icons/lu";
-import { LuMoon } from "react-icons/lu";
+// import { LuMoon } from "react-icons/lu";
 import { RiCactusLine } from "react-icons/ri";
 import { BsFeather } from "react-icons/bs";
 
@@ -50,7 +49,7 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 	return (
 		<div className={styles.modalOverlayTheme}>
 			<div className={styles.containerModalTheme}>
-				<div className={styles.containerInfos}> 
+				<div className={styles.containerInfos}>
 					<h3>Alterar tema</h3>
 
 					<p>
@@ -61,9 +60,8 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 
 				<div className={styles.containerButtons}>
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === DEFAULT_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === DEFAULT_THEME ? styles.btnSelecionado : ""
+							}`}
 						onClick={() => handlePreview(DEFAULT_THEME)}
 						disabled={temaSelecionado === DEFAULT_THEME}
 					>
@@ -71,7 +69,7 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 						Default (tema padrão)
 					</button>
 
-					<button
+					{/* <button
 						className={`${styles.btnTheme} ${
       temaSelecionado === DARK_THEME ? styles.btnSelecionado : ""
     }`}
@@ -80,12 +78,11 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 					>
 						<LuMoon className={styles.btnThemeIcon} />
 						Dark (tema escuro)
-					</button>
+					</button> */}
 
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === NORDESTINO_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === NORDESTINO_THEME ? styles.btnSelecionado : ""
+							}`}
 						onClick={() => handlePreview(NORDESTINO_THEME)}
 						disabled={temaSelecionado === NORDESTINO_THEME}
 					>
@@ -94,9 +91,8 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 					</button>
 
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === INDIGENA_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === INDIGENA_THEME ? styles.btnSelecionado : ""
+							}`}
 						onClick={() => handlePreview(INDIGENA_THEME)}
 						disabled={temaSelecionado === INDIGENA_THEME}
 					>

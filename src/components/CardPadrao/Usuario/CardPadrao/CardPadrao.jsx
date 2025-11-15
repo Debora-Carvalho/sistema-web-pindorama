@@ -38,8 +38,8 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                     <button title={tipo === "artigo" ? "Ouvir o resumo do artigo" : "Ouvir o resumo do evento"}>
                         <LuVolume2 className={botaoAudioClasse} />
                     </button>
-                </div>               
-            </div>
+                </div>        
+            </div>   
         </div>
     );
 };

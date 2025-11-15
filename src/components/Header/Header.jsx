@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar.jsx';
 import Logotipo from '../Logotipo/Logotipo.jsx';
 import BtnToggleLightDark from '../BtnToggleLightDark/BtnToggleLightDark.jsx';
+import BtnToggleLightDarkMobile from "../BtnToggleLightDark/BtnToggleLightDarkMobile/BtnToogleLightDarkMobile.jsx";
 
 function Header({ acessibilidadeOverride, overrideClass, ocultarAcessibilidade }) {
 	const location = useLocation();
@@ -97,6 +98,7 @@ function Header({ acessibilidadeOverride, overrideClass, ocultarAcessibilidade }
 					</div>
 
 					<div className={styles.navbarLateral}>
+						<BtnToggleLightDarkMobile />
 						<Navbar />
 					</div>
 				</div>
