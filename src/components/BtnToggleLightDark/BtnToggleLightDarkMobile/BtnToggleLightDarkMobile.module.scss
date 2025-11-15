@@ -1,0 +1,24 @@
+.btnToggleSingle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .iconBtnToggleSingle {
+        font-size: 1.5rem;
+        color: var(--text-header-footer-user);
+
+        &:hover {
+            color: #9baf85;
+        }
+    }
+} 
+
+/* --- Até 880px --- */
+@media (max-width: 880px) {
+    .containerBtnThemeToggle {
+        .iconBtnToggleSingle {
+            font-size: 1.2rem;
+        }
+    } 
+}

@@ -1,9 +1,11 @@
 import styles from './Header.module.scss';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
+// import GroupBtnAcessibilidade from './GroupBtnAcessibilidade/GroupBtnAcessibilidade.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import Logotipo from '../Logotipo/Logotipo.jsx';
+import BtnToggleLightDark from '../BtnToggleLightDark/BtnToggleLightDark.jsx';
+import BtnToggleLightDarkMobile from "../BtnToggleLightDark/BtnToggleLightDarkMobile/BtnToogleLightDarkMobile.jsx";
 
 function Header({ acessibilidadeOverride, overrideClass, ocultarAcessibilidade }) {
 	const location = useLocation();
@@ -89,17 +91,18 @@ function Header({ acessibilidadeOverride, overrideClass, ocultarAcessibilidade }
 						>
 							Sobre a autora
 						</button>
+
+						{!ocultarAcessibilidade && (
+							<BtnToggleLightDark overrideClass={acessibilidadeOverride} />
+						)}
 					</div>
 
 					<div className={styles.navbarLateral}>
+						<BtnToggleLightDarkMobile />
 						<Navbar />
 					</div>
 				</div>
 			</div>
-
-			{!ocultarAcessibilidade && (
-				<GroupBtnAcessibilidade overrideClass={acessibilidadeOverride} />
-			)}
 		</header>
 
 
