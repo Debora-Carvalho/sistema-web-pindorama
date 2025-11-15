@@ -4,7 +4,7 @@ import { ThemeContext, DEFAULT_THEME, DARK_THEME } from '../../../contexts/Theme
 
 import { LuSun, LuMoon } from "react-icons/lu";
 
-export default function BtnToggleLightDark() {
+export default function BtnToggleLightDarkMobile() {
     const { globalTheme, setGlobalTheme } = useContext(ThemeContext);
 
     const toggleTheme = () => {
