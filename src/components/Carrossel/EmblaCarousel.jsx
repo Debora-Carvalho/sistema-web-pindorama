@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { NextButton, PrevButton } from './EmblaCarouselArrowButtons' // Removi o 'usePrevNextButtons' que não era usado
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './Embla.module.scss'
+import { useNavigate } from "react-router-dom";
 
 const EmblaCarousel = ({ slides, options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -38,6 +39,11 @@ const EmblaCarousel = ({ slides, options }) => {
   }, [emblaApi, selectedIndex, slides.length])
 
   const progress = slides.length > 1 ? (selectedIndex / (slides.length - 1)) * 100 : 0
+
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(slides[selectedIndex].link);
+    };
 
   return (
     <div className={styles.embla}>
@@ -76,7 +82,7 @@ const EmblaCarousel = ({ slides, options }) => {
                         transition={{ duration: 0.5 }}
                       >
                         <p>{slide.subtitulo}</p>
-                        <button className={styles.slide__btnCompleto}>{slide.botao}</button>
+                        <button className={styles.slide__btnCompleto} onClick={handleClick}>{slide.botao}</button>
                       </motion.div>
                     )}
                   </AnimatePresence>
