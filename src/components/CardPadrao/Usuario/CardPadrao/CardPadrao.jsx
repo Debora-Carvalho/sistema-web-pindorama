@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import styles from "./CardPadrao.module.scss"; 
+import React, { useState, useEffect } from "react";
+import styles from "./CardPadrao.module.scss";
 import { useNavigate } from "react-router-dom";
 
 import { LuVolume2, LuPause } from "react-icons/lu";
 
+import { useTts } from "../../../../hooks/conf/useTts"
+
 function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const {
+        synthesizeSpeech,
+        pauseAudio,
+        isPlaying: ttsPlaying,
+        loading,
+        error
+    } = useTts();
 
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
@@ -19,10 +29,18 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
     };
 
     const toggleAudio = () => {
-        setIsPlaying(prev => !prev);
-
-        // inserir o controle do áudio
+        if (ttsPlaying) {
+            pauseAudio();
+            setIsPlaying(false);
+        } else {
+            synthesizeSpeech(descricao.length > 150 ? titulo + descricao.slice(0, 150) + "…clique no botão para ler mais" : titulo + descricao)
+                .then(() => setIsPlaying(true));
+        }
     };
+
+    useEffect(() => {
+        setIsPlaying(ttsPlaying);
+    }, [ttsPlaying]);
 
     return (
         <div className={styles.card}>
@@ -44,7 +62,7 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                         {tipo === "artigo" ? "Ler artigo completo" : "Ver evento completo"}
                     </button>
 
-                    <button 
+                    <button
                         onClick={toggleAudio}
                         title={isPlaying ? "Pausar áudio" : "Ouvir o resumo"}
                     >
@@ -54,8 +72,8 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                             <LuVolume2 className={botaoAudioClasse} />
                         )}
                     </button>
-                </div>        
-            </div>   
+                </div>
+            </div>
         </div>
     );
 }

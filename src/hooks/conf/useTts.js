@@ -8,12 +8,16 @@ export const useTts = () => {
     const [error, setError] = useState(null);
     const [audioUrl, setAudioUrl] = useState(null);
     const [audio, setAudio] = useState(null);
-    const [currentWordIndex, setCurrentWordIndex] = useState(-1);
 
     const synthesizeSpeech = useCallback(async (text) => {
+        if (audio && audio.paused && audioUrl) {
+            audio.play();
+            return;
+        }
+
         if (audio) {
             audio.pause();
-            setAudio(null);
+            audio.currentTime = 0;
         }
         if (audioUrl) {
             URL.revokeObjectURL(audioUrl);
@@ -26,22 +30,13 @@ export const useTts = () => {
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text }),
             });
 
             if (!response.ok) {
                 const errorText = await response.text();
-                let errorMessage = `Erro HTTP: ${response.status} ${response.statusText}`;
-                try {
-                    const errorData = JSON.parse(errorText);
-                    if (errorData.error) {
-                        errorMessage = errorData.error;
-                    }
-                } catch (e) { }
-                throw new Error(errorMessage);
+                throw new Error(errorText);
             }
 
             const audioBlob = await response.blob();
@@ -53,42 +48,22 @@ export const useTts = () => {
             newAudio.onended = () => {
                 setAudio(null);
                 setAudioUrl(null);
-                setCurrentWordIndex(-1);
             };
 
             setAudio(newAudio);
             newAudio.play();
 
         } catch (err) {
-            console.error("Erro na síntese de voz:", err);
+            console.error("Erro TTS:", err);
             setError(err.message);
         } finally {
             setLoading(false);
         }
     }, [audio, audioUrl]);
 
-    useEffect(() => {
-        return () => {
-            if (audio) {
-                audio.pause();
-                setAudio(null);
-            }
-            if (audioUrl) {
-                URL.revokeObjectURL(audioUrl);
-                setAudioUrl(null);
-            }
-        };
-    }, [audio, audioUrl]);
-
     const pauseAudio = () => {
         if (audio) {
             audio.pause();
-            setAudio(null);
-            setCurrentWordIndex(-1);
-            if (audioUrl) {
-                URL.revokeObjectURL(audioUrl);
-                setAudioUrl(null);
-            }
         }
     };
 
@@ -97,7 +72,6 @@ export const useTts = () => {
         pauseAudio,
         loading,
         error,
-        audioUrl,
         isPlaying: !!audio && !audio.paused
     };
 }
