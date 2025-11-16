@@ -5,6 +5,7 @@ import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
 import Loading from "../../../components/Loading/Loading.jsx";
 import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
 import Logotipo from '../../../components/Logotipo/Logotipo.jsx';
+import ThemeToggle from '../../../components/ThemeToggle/ThemeToggle.jsx';
 
 function PaginaConfiguracoes() {
   useTituloDocumento("Configurações | Pindorama");
@@ -12,6 +13,7 @@ function PaginaConfiguracoes() {
   const navigate = useNavigate();
   const [leituraVozAtiva, setLeituraVozAtiva] = useState(false);
   const [modoNoturnoAtivo, setModoNoturnoAtivo] = useState(false);
+  const [modalTemaAberto, setModalTemaAberto] = useState(false);
 
   return (
     <>
@@ -65,13 +67,21 @@ function PaginaConfiguracoes() {
             <p>Mudar tema</p>
             <button
               className={styles.btnConfig}
-              onClick={() => navigate("/adm/")}
+              onClick={() => setModalTemaAberto(true)}
             >
               Alterar
             </button>
           </div>
         </div>
       </div>
+      {modalTemaAberto && (
+        <ThemeToggle
+          aberto={modalTemaAberto}
+          onCancelar={() => setModalTemaAberto(false)}
+          onConfirmar={() => setModalTemaAberto(false)}
+        />
+      )}
+
     </>
   );
 }
