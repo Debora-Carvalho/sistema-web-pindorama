@@ -1,20 +1,16 @@
-// React and Style
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styles from './PaginaDetalhesEvento.module.scss'
 import { AnimatePresence } from 'framer-motion';
 import DOMPurify from 'dompurify'
 import { FaPlay } from 'react-icons/fa'
-// Components
 import Header from '../../../components/Header/Header.jsx'
 import Footer from '../../../components/Footer/Footer.jsx'
 import Loading from '../../../components/Loading/Loading.jsx';
 import MiniPlayer from '../../../components/MiniPlayer/MiniPlayer.jsx'
-import audioTeste from '../../../assets/audio/Final.mp3'
 import PopupCompartilhar from '../../../components/Popups/PopupCompartilhar/PopupCompartilhar.jsx'
 import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
 import BtnCompartilhar from '../../../components/BtnCompartilhar/BtnCompartilhar.jsx'
-// Hooks and Helpers
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js'
 import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
 import { useGetEventoById } from '../../../hooks/Eventos/useGetEventoById.js'
@@ -22,6 +18,7 @@ import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 import { formatarData } from "../../../Helpers/formatarDataHora.js"
 
 import windowSize from '../../../components/HeaderAdmin/useWindowSize.js'
+import { useAudioPlayer } from '../../../hooks/conf/useAudioPlayer.js'
 
 function formatarLinkLocal(link) {
     try {
@@ -40,15 +37,25 @@ function formatarLinkLocal(link) {
 
 function PaginaDetalhesEvento() {
     const [playerAtivado, setPlayerAtivado] = useState(false);
-    
+    const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
+
     const { id } = useParams();
-    const { evento, loading: loadingEvento, error: errorEvento } = useGetEventoById();
+    const eventoUrl = window.location.href;
+
+    const { evento, loading: loadingEvento, error: errorEvento } = useGetEventoById(id);
     const { eventos, loading: loadingLista, error: errorLista } = useGetEventos();
+
+    const { audioUrl, isPlaying, setIsPlaying, synthesizeAndLoad, loading: loadingAudio, error: errorAudio } = useAudioPlayer();
+
+    useEffect(() => {
+        setPlayerAtivado(false);
+        setIsPlaying(false);
+    }, [id, setIsPlaying]);
+
     const eventosAdaptados = eventos
         .filter(e => e.status === "publicado")
-        .filter(e => e.id !== Number(id)) // exclui o artigo que ta mostrando
-        .map(e => {
-            const adaptado = {
+        .filter(e => e.id !== Number(id)) // exclui o evento que está mostrando
+        .map(e => ({
             id: e.id,
             tipo: "evento",
             titulo: e.titulo,
@@ -56,30 +63,42 @@ function PaginaDetalhesEvento() {
             conteudo: decodeHtml(e.conteudo),
             link: `/detalhes-evento/${e.id}`,
             tags: e.tags
-        };
-        return adaptado;
-        });
-    const { width } = windowSize();
-    const limiteDeEventos = width <= 1080 ? 4 : 3;
+        }));
 
     const eventosRelacionados = eventosAdaptados.filter(e => {
-        if (!e.tags || !evento.tags) return false;// verifica se ambos tem tags
-        return e.tags.some(tag => evento.tags.includes(tag));// aqui verifica se tem alguma tag em comum
+        if (!e.tags || !evento.tags) return false; // verifica se ambos têm tags
+        return e.tags.some(tag => evento.tags.includes(tag)); // verifica se tem alguma tag em comum
     });
 
     useTituloDocumento(evento ? `${evento.titulo} | Pindorama` : "Evento | Pindorama");
-    const conteudoSeguro = DOMPurify.sanitize(evento.conteudoHTML || evento.conteudo || '');
-    const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
-    const eventoUrl = window.location.href;
 
-    const tagsEvento = evento.tags || [];
-    const dataformatada = formatarData(evento.data, "datahora");
-    const autoraTexto = evento.autor
+    const conteudoSeguro = DOMPurify.sanitize(evento?.conteudoHTML || evento?.conteudo || '');
+    const tagsEvento = evento?.tags || [];
+    const dataformatada = formatarData(evento?.data, "datahora");
+    const autoraTexto = evento?.autor || { nome: "" };
+    const { width } = windowSize();
+    const limiteDeEventos = width <= 1080 ? 4 : 3;
+
+    const handleOuvirEvento = async () => {
+        if (!evento?.conteudo) return;
+
+        const textoLimpo = decodeHtml(evento.conteudo.replace(/<[^>]*>/g, " "));
+        const texto = `${evento.titulo}. ${textoLimpo}`;
+
+        const sucesso = await synthesizeAndLoad(texto);
+
+        if (sucesso) {
+            setPlayerAtivado(true);
+        } else if (errorAudio) {
+            console.error("Erro ao sintetizar e carregar áudio:", errorAudio);
+        }
+    };
 
     return (
         <>
             <div className={styles.container}>
                 <Header />
+
                 {(loadingEvento || loadingLista) ? (
                     <Loading />
                 ) : (
@@ -116,18 +135,18 @@ function PaginaDetalhesEvento() {
 
                                 <div className={styles.playerContainerWrapper}>
                                     {playerAtivado ? (
-                                        // SE ATIVADO: Mostra o player completo e toca
                                         <MiniPlayer
-                                            src={audioTeste}
-                                            autoPlay={true}
+                                            audioUrl={audioUrl}
+                                            isPlaying={isPlaying}
+                                            setIsPlaying={setIsPlaying}
                                         />
                                     ) : (
-                                        // SE NÃO ATIVADO: Mostra o botão compacto
                                         <button
                                             className={styles.playerCompacto}
-                                            onClick={() => setPlayerAtivado(true)}
+                                            onClick={handleOuvirEvento}
+                                            disabled={loadingAudio}
                                         >
-                                            <h4>Ouça este Evento</h4>
+                                            <h4>{loadingAudio ? "Gerando áudio..." : "Ouça este Evento"}</h4>
                                             <FaPlay className={styles.playIconCompacto} />
                                         </button>
                                     )}
@@ -136,7 +155,10 @@ function PaginaDetalhesEvento() {
 
                             <div className={styles.colunaDireita}>
                                 <div className={styles.imagemCapa}>
-                                    <img src={evento.url_imagem} alt={`Imagem de capa para o evento: ${evento.titulo}`} />
+                                    <img
+                                        src={evento.url_imagem}
+                                        alt={`Imagem de capa para o evento: ${evento.titulo}`}
+                                    />
                                 </div>
 
                                 <div className={styles.botoesAcaoDireita}>
@@ -169,9 +191,9 @@ function PaginaDetalhesEvento() {
                                 <ListaCards cards={eventosRelacionados} limite={limiteDeEventos} />
                             </div>
                         </section>
-
                     </main>
                 )}
+
                 <Footer />
             </div>
 
