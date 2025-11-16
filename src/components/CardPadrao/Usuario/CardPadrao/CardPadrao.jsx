@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "./CardPadrao.module.scss";
 import { useNavigate } from "react-router-dom";
 
-import { LuVolume2, LuPause } from "react-icons/lu";
+import { LuVolume2, LuPause, LuLoader } from "react-icons/lu";
 
-import { useTts } from "../../../../hooks/conf/useTts"
+import { useTts } from "../../../../hooks/conf/useTts";
 
 function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
     const navigate = useNavigate();
@@ -20,7 +20,6 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
 
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
-
     const botaoAudioClasse =
         tipo === "artigo" ? styles.btnAudioArtigo : styles.btnAudioEvento;
 
@@ -33,8 +32,11 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
             pauseAudio();
             setIsPlaying(false);
         } else {
-            synthesizeSpeech(descricao.length > 150 ? titulo + descricao.slice(0, 150) + "…clique no botão para ler mais" : titulo + descricao)
-                .then(() => setIsPlaying(true));
+            synthesizeSpeech(
+                descricao.length > 150
+                    ? titulo + descricao.slice(0, 150) + "…clique no botão para ler mais"
+                    : titulo + descricao
+            ).then(() => setIsPlaying(true));
         }
     };
 
@@ -49,12 +51,12 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
             </div>
 
             <div className={styles.cardConteudo}>
-                <h3 className={styles.cardTitulo}>
-                    {titulo}
-                </h3>
+                <h3 className={styles.cardTitulo}>{titulo}</h3>
 
                 <p className={styles.cardDescricao}>
-                    {descricao.length > 150 ? descricao.slice(0, 150) + "…ver mais" : descricao}
+                    {descricao.length > 150
+                        ? descricao.slice(0, 150) + "…ver mais"
+                        : descricao}
                 </p>
 
                 <div className={styles.cardBotoes}>
@@ -65,8 +67,11 @@ function CardPadrao({ imagem, tipo, titulo, descricao, link }) {
                     <button
                         onClick={toggleAudio}
                         title={isPlaying ? "Pausar áudio" : "Ouvir o resumo"}
+                        className={botaoAudioClasse}
                     >
-                        {isPlaying ? (
+                        {loading ? (
+                            <LuLoader className={botaoAudioClasse} />
+                        ) : isPlaying ? (
                             <LuPause className={botaoAudioClasse} />
                         ) : (
                             <LuVolume2 className={botaoAudioClasse} />
