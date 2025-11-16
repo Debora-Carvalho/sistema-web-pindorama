@@ -1,7 +1,6 @@
 // React and Style
 import { useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
-import { Link } from "react-router-dom";
 // Components
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
@@ -18,7 +17,6 @@ function PaginaVisualizarArtigos() {
     const { artigos, loading, error } = useGetArtigos();
     const [textoBusca, setTextoBusca] = useState("");
 
-    // Adaptando os artigos: filtrando apenas publicados e decodificando HTML
     const artigosAdaptados = artigos
         .filter(a => a.status === "publicado")
         .map(a => ({
@@ -30,12 +28,9 @@ function PaginaVisualizarArtigos() {
             link: `/detalhes-artigo/${a.id}`
         }));
 
-
-        
-    // filtro do texto da barra de pesquisa
     const artigosFiltrados = artigosAdaptados.filter(a =>
         a.titulo.toLowerCase().includes(textoBusca.toLowerCase())
-    );
+    );// filtro do texto da barra de pesquisa
 
     return (
         <>
@@ -55,11 +50,7 @@ function PaginaVisualizarArtigos() {
 
                     {loading && <Loading/>}
                     {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
-
                     <ListaCards cards={artigosFiltrados} limite={null} />
-                    
-                    {/* Botão de voltar ou outros links podem ser adicionados */}
-                    {/* <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link> */}
                 </main>
 
                 <Footer />

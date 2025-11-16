@@ -61,8 +61,8 @@ function PaginaVisualizarArtigosAdmin() {
         >
             <div className={styles.containerVisualizar}>
                 <div className={styles.header}>
-                  <Logotipo tipo='admin' />
-                  <HeaderAdmin />
+                    <Logotipo tipo='admin' />
+                    <HeaderAdmin />
                 </div>
                 <div className={styles.topo}>
                     <BarraPesquisa
@@ -83,9 +83,9 @@ function PaginaVisualizarArtigosAdmin() {
                         cards={artigosAdaptados}
                         limite={null}
                         actions={{
-                          onEditar: handleEditar,
-                          onExcluir: handleExcluir,
-                          refetch //Passando o refech que atualiza os card em exibição!
+                            onEditar: handleEditar,
+                            onExcluir: handleExcluir,
+                            refetch //Passando o refech que atualiza os card em exibição!
                         }}
                     />
                 </div>

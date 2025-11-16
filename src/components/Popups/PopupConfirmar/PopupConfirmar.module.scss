@@ -6,7 +6,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0,0,0, 0.6); /* desfoque do fundo*/
+    background: rgba(0, 0, 0, 0.6);
+    /* desfoque do fundo*/
     backdrop-filter: blur(1px);
     z-index: 99;
     display: flex;
@@ -14,29 +15,30 @@
     align-items: center;
     text-align: center;
     font-family: $font-family-subtitulo;
-    
+
     .popupBoxConfirmar {
         background-color: var(--primary-100);
         border-radius: 20px;
         padding: 1rem 2rem;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         text-align: center;
         max-width: 400px;
         width: 90%;
-        
+
         p {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .popupActions {
             margin-top: 15px;
             display: flex;
             justify-content: space-between;
             gap: 10px;
         }
-        
-        .btnConfirmar, .btnCancelar {
+
+        .btnConfirmar,
+        .btnCancelar {
             border: none;
             border-radius: 30px;
             padding: 0.8rem 2rem;
@@ -46,21 +48,28 @@
             transition: 0.3s;
             width: 100%;
         }
-        
+
         .btnConfirmar {
             background-color: var(--success);
             color: var(--text-secondary);
         }
-        
+
+        .btnConfirmarDisabled { //botão desabilidato
+            opacity: 0.6;
+            background-color: gray;
+            cursor: not-allowed;
+        }
+
+
         .btnConfirmar:hover {
             background-color: var(--secondary-500);
         }
-        
+
         .btnCancelar {
             background-color: var(--danger);
             color: var(--text-secondary);
         }
-        
+
         .btnCancelar:hover {
             background-color: var(--primary-500);
         }
@@ -74,8 +83,8 @@
 
     .popupBoxConfirmar {
         width: 90%;
-        max-width: 300px; 
-        margin: 0 auto; 
+        max-width: 300px;
+        margin: 0 auto;
         padding: 20px;
         border-radius: 20px;
 
@@ -83,7 +92,8 @@
             font-size: 0.9rem;
         }
 
-        .btnConfirmar, .btnCancelar {
+        .btnConfirmar,
+        .btnCancelar {
             padding: 0.6rem 1.5rem;
         }
     }

@@ -3,6 +3,7 @@ import Header from '../../../components/Header/Header'
 import carrosselStyles from './PaginaCarrossel.module.scss'
 import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js'
 import Loading from '../../../components/Loading/Loading.jsx'
+import { decodeHtml } from '../../../Helpers/decodeHtml.js'
 
 const PaginaCarrossel = () => {
     const OPTIONS = { dragFree: true, loop: true }
@@ -28,7 +29,8 @@ const PaginaCarrossel = () => {
             imagem: artigo.url_imagem,
             titulo: artigo.titulo,
             subtitulo: criarSumario(artigo.conteudo),
-            botao: 'Ver artigo completo'
+            botao: 'Ver artigo completo',
+            link: `/detalhes-artigo/${artigo.id}`
         }));
 
     if (loading) return <Loading />

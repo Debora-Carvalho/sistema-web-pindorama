@@ -1,74 +1,27 @@
+// React and Style
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import styles from './PaginaDetalhesEvento.module.scss'
-import useTituloDocumento from '../../../hooks/useTituloDocumento.js'
-import windowSize from '../../../components/HeaderAdmin/useWindowSize.js'
-import Header from '../../../components/Header/Header.jsx'
-import Footer from '../../../components/Footer/Footer.jsx'
-import PopupCompartilhar from '../../../components/Popups/PopupCompartilhar/PopupCompartilhar.jsx'
 import { AnimatePresence } from 'framer-motion';
 import DOMPurify from 'dompurify'
-import capaImagem from '../../../assets/images/igreja-artigo.png'
-import BtnCompartilhar from '../../../components/BtnCompartilhar/BtnCompartilhar.jsx'
-import CardPadrao from '../../../components/CardPadrao/Usuario/CardPadrao/CardPadrao.jsx'
-import { useEventos } from '../../../hooks/Eventos/useEventos.js';
-import { formatarData } from "../../../Helpers/formatarDataHora.js"
-import MiniPlayer from '../../../components/MiniPlayer/MiniPlayer.jsx'
 import { FaPlay } from 'react-icons/fa'
+// Components
+import Header from '../../../components/Header/Header.jsx'
+import Footer from '../../../components/Footer/Footer.jsx'
+import Loading from '../../../components/Loading/Loading.jsx';
+import MiniPlayer from '../../../components/MiniPlayer/MiniPlayer.jsx'
 import audioTeste from '../../../assets/audio/Final.mp3'
-import useMediaQuery from '../../../hooks/useMediaQuery.js'
-const mockEvento = {
-    id: 1,
-    titulo: "Festança de Forró",
-    autora: "Feito por: Kelly",
-    imagemCapa: capaImagem,
-    local: "https://www.google.com/maps/place/Av.+Padre+José+Maria,+202+-+Santo+Amaro,+São+Paulo+-+SP,+04753-060/@-23.653867,-46.7115142,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce5054b5923947:0x2a11c1747845520f!8m2!3d-23.653867!4d-46.7089339!16s%2Fg%2F11c1k9bxvp?entry=ttu&g_ep=EgoyMDI1MTAxNC.0wIKXMDSoASAFQAw%3D%3D",
-    dataEvento: "2025-08-13T12:00:00",
-    conteudoHTML: `
-        <h2>🎶 A Sanfona Vai Tocar! Prepare-se para uma Festa de Forró Inesquecível!</h2>
-        <p>Prepare-se para uma noite mágica, onde a sanfona chora, a zabumba bate e o triângulo não para!</p>
-        <p>Temos o prazer de convidar você para a nossa grande festa de forró, um evento pensado para celebrar a alegria da nossa música e da nossa dança.</p>
-        <p>A noite será comandada por <strong>shows ao vivo</strong> de tirar o fôlego, com bandas que trazem a autêntica energia do forró. Do xote romântico ao baião acelerado, a diversão é garantida!</p>
-        <p>E o mais importante: teremos um <strong>espaçoso salão de dança</strong> esperando por você. Não importa se você dança há anos ou se só quer arriscar os primeiros passos, o clima será de pura festa e confraternização.</p>
-        <p>Junte os amigos e venha viver essa experiência!</p>
-    `,
-    tags: ["Dança", "Festa", "Forró", "Nordeste"]
-};
+import PopupCompartilhar from '../../../components/Popups/PopupCompartilhar/PopupCompartilhar.jsx'
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
+import BtnCompartilhar from '../../../components/BtnCompartilhar/BtnCompartilhar.jsx'
+// Hooks and Helpers
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js'
+import { useGetEventos } from '../../../hooks/usuario/useGetEventos.js'
+import { useGetEventoById } from '../../../hooks/Eventos/useGetEventoById.js'
+import { decodeHtml } from "../../../Helpers/decodeHtml.js";
+import { formatarData } from "../../../Helpers/formatarDataHora.js"
 
-// const mockRelacionados = [
-//     {
-//         id: 2,
-//         imagem: capaRelacionado1,
-//         tipo: 'evento',
-//         titulo: 'As Cores e Significados por Trás das Fitinhas do Bonfim',
-//         descricao: 'Cada cor tem um desejo, uma prece. Descubra o que cada fitinha do Bonfim representa e como essa tradição se espalhou pelo mundo.',
-//         link: '/artigo/2'
-//     },
-//     {
-//         id: 3,
-//         imagem: capaRelacionado2,
-//         tipo: 'evento',
-//         titulo: 'Um Roteiro Histórico pelo Pelourinho em Salvador',
-//         descricao: 'Caminhe pelas ruas de paralelepípedos e explore a rica história, arquitetura e cultura do coração de Salvador. Um guia completo para o seu passeio.',
-//         link: '/artigo/3'
-//     },
-//     {
-//         id: 4,
-//         imagem: capaRelacionado3,
-//         tipo: 'evento',
-//         titulo: 'A Culinária Baiana: Sabores que Contam Histórias',
-//         descricao: 'Do acarajé ao vatapá, a culinária da Bahia é uma experiência única. Conheça os pratos principais e onde encontrar os melhores sabores.',
-//         link: '/artigo/4'
-//     },
-//     {
-//         id: 5,
-//         imagem: capaRelacionado1,
-//         tipo: 'evento',
-//         titulo: 'Festas Juninas: A Tradição que Aquece o Coração do Brasil',
-//         descricao: 'Das quadrilhas coloridas às comidas típicas, explore a magia das festas de São João pelo país.',
-//         link: '/artigo/5'
-//     }
-// ];
+import windowSize from '../../../components/HeaderAdmin/useWindowSize.js'
 
 function formatarLinkLocal(link) {
     try {
@@ -86,184 +39,139 @@ function formatarLinkLocal(link) {
 }
 
 function PaginaDetalhesEvento() {
-    const { id } = useParams();
-    const { buscarEvento, listarEventos, loading, erro } = useEventos();
-    const [evento, setEvento] = useState(null);
-    const [eventosRelacionados, setEventosRelacionados] = useState([]);
     const [playerAtivado, setPlayerAtivado] = useState(false);
-
-    // Carrega o evento específico
-    useEffect(() => {
-        const carregarEvento = async () => {
-            if (id) {
-                try {
-                    const eventoData = await buscarEvento(id);
-                    setEvento(eventoData);
-                } catch (err) {
-                    console.error('Erro ao carregar evento:', err);
-                    // Fallback para mock enquanto o backend não funciona
-                    setEvento(mockEvento);
-                }
-            }
+    
+    const { id } = useParams();
+    const { evento, loading: loadingEvento, error: errorEvento } = useGetEventoById();
+    const { eventos, loading: loadingLista, error: errorLista } = useGetEventos();
+    const eventosAdaptados = eventos
+        .filter(e => e.status === "publicado")
+        .filter(e => e.id !== Number(id)) // exclui o artigo que ta mostrando
+        .map(e => {
+            const adaptado = {
+            id: e.id,
+            tipo: "evento",
+            titulo: e.titulo,
+            url_imagem: e.url_imagem,
+            conteudo: decodeHtml(e.conteudo),
+            link: `/detalhes-evento/${e.id}`,
+            tags: e.tags
         };
-        carregarEvento();
-    }, [id]); // CORRIGIDO: removido buscarEvento
-
-    // Carrega eventos relacionados
-    useEffect(() => {
-        const carregarRelacionados = async () => {
-            try {
-                const todosEventos = await listarEventos();
-                const relacionados = todosEventos
-                    .filter(e => e.id !== parseInt(id))
-                    .slice(0, 4);
-                setEventosRelacionados(relacionados);
-            } catch (err) {
-                console.error('Erro ao carregar eventos relacionados:', err);
-            }
-        };
-        if (id) {
-            carregarRelacionados();
-        }
-    }, [id]); //  CORRIGIDO: removido listarEventos
-
+        return adaptado;
+        });
     const { width } = windowSize();
     const limiteDeEventos = width <= 1080 ? 4 : 3;
 
+    const eventosRelacionados = eventosAdaptados.filter(e => {
+        if (!e.tags || !evento.tags) return false;// verifica se ambos tem tags
+        return e.tags.some(tag => evento.tags.includes(tag));// aqui verifica se tem alguma tag em comum
+    });
+
+    useTituloDocumento(evento ? `${evento.titulo} | Pindorama` : "Evento | Pindorama");
+    const conteudoSeguro = DOMPurify.sanitize(evento.conteudoHTML || evento.conteudo || '');
     const [popupCompartilharAberto, setPopupCompartilharAberto] = useState(false);
     const eventoUrl = window.location.href;
 
-    const [isHovered, setIsHovered] = useState(false);
-    const isMobile = useMediaQuery('(max-width: 1080px)');
-    const [isTextoExpanded, setIsTextoExpanded] = useState(false);
-
-    const buttonVariants = {
-        initial: { width: '3.5rem', padding: '8px 40px', gap: '0rem' },
-        hover: { width: '12rem', padding: '8px 20px', gap: '0.8rem' },
-    };
-
-    const textVariants = {
-        initial: { opacity: 0, width: 0, x: -10 },
-        hover: { opacity: 1, width: 'auto', x: 0 },
-    };
-
-    // Use título do evento real ou fallback
-    useTituloDocumento(evento ? `${evento.titulo} | Pindorama` : "Evento | Pindorama");
-
-    // Loading state
-    if (loading) return <div className={styles.loading}>Carregando evento...</div>;
-    if (!evento) return <div className={styles.error}>Evento não encontrado</div>;
-
-    // Ajustado para a estrutura real da API (quando funcionar) ou mock
-    const conteudoSeguro = DOMPurify.sanitize(evento.conteudoHTML || evento.conteudo || '');
-    const imagemEvento = evento.imagemCapa || evento.url_imagem || capaImagem;
     const tagsEvento = evento.tags || [];
-    const dataEvento = evento.dataEvento || evento.data;
-    const autoraTexto = evento.autora || `Feito por: ${evento.autor_id === 7 ? 'Kelly' : 'Autor desconhecido'}`;
+    const dataformatada = formatarData(evento.data, "datahora");
+    const autoraTexto = evento.autor
 
     return (
         <>
             <div className={styles.container}>
                 <Header />
-                <main className={styles.conteudo}>
-                    <div className={styles.headerEvento}>
-                        <h1 className={styles.tituloEvento}>{evento.titulo}</h1>
-                        <p className={styles.autora}>{autoraTexto}</p>
-                    </div>
-
-                    <div className={styles.conteudoPrincipal}>
-                        <div className={styles.colunaEsquerda}>
-                            <div className={styles.textoContainer}>
-                                <div
-                                    className={styles.corpoTexto}
-                                    dangerouslySetInnerHTML={{ __html: conteudoSeguro }}
-                                />
-                            </div>
-
-                            <div className={styles.infoLocalEvento}>
-                                <p>
-                                    <strong>Local: </strong>
-                                    <a
-                                        href={evento.local}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {formatarLinkLocal(evento.local)}
-                                    </a>
-                                </p>
-                                <p>
-                                    <strong>Data e Hora:</strong> {formatarData(evento.dataEvento, "datahora")}
-                                </p>
-                            </div>
-
-                            <div className={styles.playerContainerWrapper}>
-                                {playerAtivado ? (
-                                    // SE ATIVADO: Mostra o player completo e toca
-                                    <MiniPlayer
-                                        src={audioTeste}
-                                        autoPlay={true}
-                                    />
-                                ) : (
-                                    // SE NÃO ATIVADO: Mostra o botão compacto
-                                    <button
-                                        className={styles.playerCompacto}
-                                        onClick={() => setPlayerAtivado(true)}
-                                    >
-                                        <h4>Ouça este artigo</h4>
-                                        <FaPlay className={styles.playIconCompacto} />
-                                    </button>
-                                )}
-                            </div>
+                {(loadingEvento || loadingLista) ? (
+                    <Loading />
+                ) : (
+                    <main className={styles.conteudo}>
+                        <div className={styles.headerEvento}>
+                            <h1 className={styles.tituloEvento}>{evento.titulo}</h1>
+                            <p className={styles.autora}>{autoraTexto.nome}</p>
                         </div>
 
-                        <div className={styles.colunaDireita}>
-                            <div className={styles.imagemCapa}>
-                                <img src={imagemEvento} alt={`Imagem de capa para o evento: ${evento.titulo}`} />
-                            </div>
-
-                            <div className={styles.botoesAcaoDireita}>
-                                <div className={styles.tags}>
-                                    {tagsEvento.map((tag, index) => (
-                                        <span key={`${tag}-${index}`} className={styles.tag}>
-                                            #{tag}
-                                        </span>
-                                    ))}
+                        <div className={styles.conteudoPrincipal}>
+                            <div className={styles.colunaEsquerda}>
+                                <div className={styles.textoContainer}>
+                                    <div
+                                        className={styles.corpoTexto}
+                                        dangerouslySetInnerHTML={{ __html: conteudoSeguro }}
+                                    />
                                 </div>
 
-                                <div className={styles.infoInferior}>
-                                    <BtnCompartilhar
-                                        className={styles.botaoShareLayout} 
-                                        onClick={() => setPopupCompartilharAberto(true)}
-                                    />
+                                <div className={styles.infoLocalEvento}>
+                                    <p>
+                                        <strong>Local: </strong>
+                                        <a
+                                            href={evento.local}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {formatarLinkLocal(evento.local)}
+                                        </a>
+                                    </p>
+                                    <p>
+                                        <strong>Data e Hora:</strong> {dataformatada}
+                                    </p>
+                                </div>
 
+                                <div className={styles.playerContainerWrapper}>
+                                    {playerAtivado ? (
+                                        // SE ATIVADO: Mostra o player completo e toca
+                                        <MiniPlayer
+                                            src={audioTeste}
+                                            autoPlay={true}
+                                        />
+                                    ) : (
+                                        // SE NÃO ATIVADO: Mostra o botão compacto
+                                        <button
+                                            className={styles.playerCompacto}
+                                            onClick={() => setPlayerAtivado(true)}
+                                        >
+                                            <h4>Ouça este Evento</h4>
+                                            <FaPlay className={styles.playIconCompacto} />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
 
+                            <div className={styles.colunaDireita}>
+                                <div className={styles.imagemCapa}>
+                                    <img src={evento.url_imagem} alt={`Imagem de capa para o evento: ${evento.titulo}`} />
+                                </div>
+
+                                <div className={styles.botoesAcaoDireita}>
+                                    <div className={styles.tags}>
+                                        {tagsEvento.map((tag, index) => (
+                                            <span key={`${tag}-${index}`} className={styles.tag}>
+                                                #{tag}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div className={styles.infoInferior}>
+                                        <BtnCompartilhar
+                                            className={styles.botaoShareLayout} 
+                                            onClick={() => setPopupCompartilharAberto(true)}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <section className={styles.eventosRelacionadosContainer}>
-                        <div className={styles.relacionadosHeader}>
-                            <h2 className={styles.tituloRelacionados}>Eventos relacionados</h2>
-                            <Link to="/eventos" className={styles.verMaisBotao}>
-                                Ver mais Eventos
-                            </Link>
-                        </div>
-                        <div className={styles.cardsContainer}>
-                            {eventosRelacionados.slice(0, limiteDeEventos).map((eventoRelacionado) => (
-                                <CardPadrao
-                                    key={eventoRelacionado.id}
-                                    imagem={eventoRelacionado.url_imagem || capaImagem}
-                                    tipo={'evento'}
-                                    titulo={eventoRelacionado.titulo}
-                                    descricao={(eventoRelacionado.conteudo || '').substring(0, 100) + '...'}
-                                    link={`/detalhes-evento/${eventoRelacionado.id}`}
-                                />
-                            ))}
-                        </div>
-                    </section>
+                        <section className={styles.eventosRelacionadosContainer}>
+                            <div className={styles.relacionadosHeader}>
+                                <h2 className={styles.tituloRelacionados}>Eventos relacionados</h2>
+                                <Link to="/eventos" className={styles.verMaisBotao}>
+                                    Ver mais Eventos
+                                </Link>
+                            </div>
+                            <div className={styles.cardsContainer}>
+                                <ListaCards cards={eventosRelacionados} limite={limiteDeEventos} />
+                            </div>
+                        </section>
 
-                </main>
+                    </main>
+                )}
                 <Footer />
             </div>
 
@@ -272,7 +180,7 @@ function PaginaDetalhesEvento() {
                     <PopupCompartilhar
                         aoFechar={() => setPopupCompartilharAberto(false)}
                         link={eventoUrl}
-                        imagem={imagemEvento}
+                        imagem={evento.url_imagem}
                         tipo="evento"
                     />
                 )}
