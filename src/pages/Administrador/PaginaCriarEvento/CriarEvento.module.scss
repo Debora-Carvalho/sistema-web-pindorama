@@ -40,6 +40,7 @@ body{
         "titulo     dropdowns"
         "editor     midia"
         "botoes     botoes";
+    align-items: start;
 }
 
 .campoTitulo {
@@ -56,22 +57,134 @@ body{
 
 .campoEditor {
     grid-area: editor;
+    height: 100%; 
 }
 
 .campoMidia {
     grid-area: midia;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    height: 100%;
+}
+
+.midiaSuperior {
+    flex: 1; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 0; 
+}
+
+.labelCapa {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.placeholderMidia {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--primary-100);
+    border: 2px dashed var(--primary-500);
+    border-radius: 20px;
+    color: var(--primary-400);
+    font-family: $font-family-subtitulo;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--neutral-secondary);
+        border-color: var(--secondary-900);
+        color: var(--secondary-900);
+    }
+}
+
+.iconePlaceholder {
+    font-size: 2rem;
+}
+
+.previewImagem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.midiaInferior {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputMidiaInfo {
+    width: 100%;
+    flex: 1; 
+    padding: 16px 24px; 
+    border: 2px solid var(--secondary-900);
+    background-color: var(--primary-100);
+    border-radius: 15px;
+    font-size: 1rem; 
+    color: var(--primary-500);
+    outline: none;
+    resize: none; 
+    font-family: inherit; 
+    line-height: 1.4;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+
+    &::placeholder {
+        color: var(--primary-400);
+        font-style: italic;
+        font-size: 0.9rem;
+    }
+
+    &:focus {
+        border-color: var(--primary-500);
+        background-color: white;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--primary-300); 
+        margin: 9px 0;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-500);
+        border-radius: 10px;
+        border: 1px solid transparent;
+    }
+}
+
+.previewImagem {
+    grid-area: midia;
+    cursor: pointer;
     background-color: var(--primary-100);
     border: 2px dashed var(--primary-500);
     border-radius: 20px;
     padding: 1rem;
     color: #a89a8c;
-}
-
-.campoMidia label {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
 }
 
 .mensagemErro {
@@ -178,16 +291,31 @@ body{
 @media (max-width: 720px) {
     .formGrid {
         grid-template-columns: 1fr;
-
         grid-template-areas:
             "titulo"
             "midia"
             "dropdowns"
             "editor"
             "botoes";
-
-
         gap: 1rem;
+        align-items: stretch;
+    }
+
+    .campoMidia {
+        height: auto;
+    }
+    
+    .midiaSuperior, .midiaInferior {
+        flex: none; 
+        height: auto;
+    }
+
+    .placeholderMidia {
+        height: 150px; 
+    }
+
+    .inputMidiaInfo {
+        height: 100px; 
     }
 
     .campoDropdowns {

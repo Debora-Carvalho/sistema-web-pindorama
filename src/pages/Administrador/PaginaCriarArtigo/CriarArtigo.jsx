@@ -1,7 +1,7 @@
 // Style e React
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FaTags, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaTags, FaMapMarkerAlt, FaCamera } from 'react-icons/fa';
 import styles from './CriarArtigo.module.scss';
 // Components
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
@@ -44,6 +44,11 @@ function PaginaCriarArtigo() {
     const [conteudo, setConteudo] = useState('');
     const [imagemCapa, setImagemCapa] = useState(null);
     const [previewCapa, setPreviewCapa] = useState('');
+    
+    // Novos estados de metadados da imagem
+    const [creditosImagem, setCreditosImagem] = useState(''); 
+    const [altImagem, setAltImagem] = useState(''); 
+
     const [localSelecionado, setLocalSelecionado] = useState(null);
     const [tagsSelecionadas, setTagsSelecionadas] = useState([]);
     const [erroFormulario, setErroFormulario] = useState(null);
@@ -84,7 +89,16 @@ function PaginaCriarArtigo() {
 
     // --- Lógica de Exclusão ---
     const handleExcluirClick = () => {
-        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !localSelecionado;
+        // Verifica se TODOS os campos estão vazios
+        const formularioEstaVazio = 
+            !titulo.trim() && 
+            (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && 
+            !imagemCapa && 
+            tagsSelecionadas.length === 0 && 
+            !localSelecionado && 
+            !creditosImagem && 
+            !altImagem;
+
         if (formularioEstaVazio) {
             setPopupSucessoMensagem('Não há informações para excluir.');
             setAcaoAposSucesso('permanecer');
@@ -99,6 +113,8 @@ function PaginaCriarArtigo() {
         setConteudo('');
         setImagemCapa(null);
         setPreviewCapa('');
+        setCreditosImagem('');
+        setAltImagem('');
         setLocalSelecionado(null);
         setTagsSelecionadas([]);
         setMostrarConfirmacaoExcluir(false);
@@ -130,14 +146,19 @@ function PaginaCriarArtigo() {
             !localSelecionado;
 
         if (status === "publicado") {
-            // Publicação: todos os campos obrigatórios
+            // --- VALIDAÇÕES PARA PUBLICAÇÃO ---
             if (!titulo.trim()) return mostrarErro('Por favor, adicione um título.');
             if (conteudoVazio) return mostrarErro('O conteúdo do artigo não pode estar vazio.');
             if (!imagemCapa && !previewCapa) return mostrarErro('Por favor, adicione uma imagem de capa.');
+            
+            if (!creditosImagem.trim()) return mostrarErro('Por favor, atribua os créditos da imagem.');
+            if (!altImagem.trim()) return mostrarErro('Por favor, adicione uma descrição para a imagem de capa.');
+            
             if (tagsSelecionadas.length === 0) return mostrarErro('Selecione pelo menos uma tag.');
             if (!localSelecionado) return mostrarErro('Selecione um local.');
+            
         } else if (status === "rascunho") {
-            // Rascunho: pelo menos um campo deve estar preenchido
+            // --- VALIDAÇÕES PARA RASCUNHO ---
             if (formularioVazio) return mostrarErro('Preencha pelo menos um campo para salvar como rascunho.');
 
             if (!titulo.trim()) setTitulo("Rascunho sem título");
@@ -161,6 +182,8 @@ function PaginaCriarArtigo() {
                 status: statusEnvio, // "rascunho" ou "publicado"
                 local: localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : null,
                 tags: tagsSelecionadas,
+                creditos_imagem: creditosImagem,
+                alt_imagem: altImagem,
                 data: new Date().toISOString()
             };
 
@@ -206,6 +229,10 @@ function PaginaCriarArtigo() {
                     setTitulo(artigo.titulo);
                     setConteudo(artigo.conteudo);
                     setTagsSelecionadas(artigo.tags || []);
+
+                    setCreditosImagem(artigo.creditos_imagem || '');
+                    setAltImagem(artigo.alt_imagem || ''); 
+                    
                     if (artigo.local && artigo.local.includes(" - ")) {
                         const [cidade, estado] = artigo.local.split(" - ");
                         setLocalSelecionado({ cidade, estado });
@@ -213,7 +240,6 @@ function PaginaCriarArtigo() {
                         setLocalSelecionado(null);
                     }
                     setPreviewCapa(artigo.url_imagem || "");
-                    // imagemCapa não precisa ser setado agora, só quando trocar
                 } catch (e) {
                     console.error("Erro ao carregar artigo", e);
                 }
@@ -263,18 +289,62 @@ function PaginaCriarArtigo() {
                         <FaMapMarkerAlt /> {localSelecionado ? `${localSelecionado.cidade} - ${localSelecionado.estado}` : 'Local'}
                     </button>
                 </div>
+                
+                {/* --- ÁREA DE MÍDIA (Capa + Créditos + Alt) --- */}
                 <div className={styles.campoMidia}>
-                    <label htmlFor="upload-capa">
-                        {previewCapa ? <img src={previewCapa} alt="Prévia da capa" className={styles.previewImagem} /> : <div className={styles.placeholderMidia}>Adicione sua mídia aqui</div>}
-                    </label>
-                    <input
-                        id="upload-capa"
-                        type="file"
-                        accept="image/png, image/jpeg, image/webp"
-                        onChange={handleImagemChange}
-                        style={{ display: 'none' }}
-                    />
+                    
+                    {/* METADE SUPERIOR: Imagem ou Caixa de Upload */}
+                    <div className={styles.midiaSuperior}>
+                        <label 
+                            htmlFor="upload-capa" 
+                            className={styles.labelCapa} 
+                        >
+                            {previewCapa ? (
+                                <img 
+                                    src={previewCapa} 
+                                    alt="Prévia da capa" 
+                                    className={styles.previewImagem} 
+                                />
+                            ) : (
+                                /* CAIXA DE PLACEHOLDER (Estilo original restaurado) */
+                                <div className={styles.placeholderMidia}>
+                                    <FaCamera className={styles.iconePlaceholder}/>
+                                    <span>Adicione a imagem de capa</span>
+                                </div>
+                            )}
+                        </label>
+                        <input
+                            id="upload-capa"
+                            type="file"
+                            accept="image/png, image/jpeg, image/webp"
+                            onChange={handleImagemChange}
+                            style={{ display: 'none' }}
+                        />
+                    </div>
+
+                    
+                    <div className={styles.midiaInferior}>
+                        <textarea 
+                            className={styles.inputMidiaInfo}
+                            placeholder="Créditos da imagem (Autor ou Link)"
+                            value={creditosImagem}
+                            onChange={(e) => setCreditosImagem(e.target.value)}
+                            maxLength={200}
+                            rows={2}
+                        />
+                        
+                        <textarea 
+                            className={styles.inputMidiaInfo}
+                            placeholder="Descreva a imagem de capa"
+                            value={altImagem}
+                            onChange={(e) => setAltImagem(e.target.value)}
+                            maxLength={200}
+                            rows={2}
+                        />
+                    </div>
+
                 </div>
+
                 <div className={styles.campoBotoes}>
                     <button
                         type="button"
