@@ -5,11 +5,11 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { IoEyeSharp } from "react-icons/io5";
 import { BsEyeSlashFill } from "react-icons/bs";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLogin } from '../../../hooks/login/useLogin.js'
 import PopupErro from '../../../components/Popups/PopupErro/PopupErro.jsx';
 import { tratamentoErro as tratarErro } from '../../../Helpers/tratamentoErro.js';
-import Carregando from '../../../components/Carregando/Carregando.jsx';
+import Loading from "../../../components/Loading/Loading.jsx";
 
 
 function PaginaLogin() {
@@ -23,8 +23,12 @@ function PaginaLogin() {
 
   const { data, loading, error, login } = useLogin();
 
+  const [carregando, setCarregando] = useState(true);
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (erroSenha) return;
     try {
       setErroMensagem(null);
       await login(senha);
@@ -35,6 +39,19 @@ function PaginaLogin() {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => setCarregando(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+
+  if (carregando) {
+    return <Loading />;
+  }
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className={styles.containerLogin}>
@@ -42,7 +59,7 @@ function PaginaLogin() {
           <img className={styles.imageLogin} src={cachorro} alt="Cachorro caramelo" />
         </div>
         <div className={styles.columForm}>
-          <button onClick={() => window.location.href = "/pagina-inicial-usuario"}>
+          <button type="button" onClick={() => window.location.href = "/inicio"}>
             <abbr title="Voltar para a página inicial de Pindorama">
               <IoArrowBackCircleOutline className={styles.btnVoltarInicial} />
             </abbr>
@@ -79,20 +96,16 @@ function PaginaLogin() {
 
               <button
                 className={styles.btnLogin}
-                //onClick={() => window.location.href = "/adm/inicio"}
                 type="submit"
                 disabled={loading}
               >
-                <FaArrowCircleRight className={styles.btnEntrarLogin} />
+                {loading ? (
+                  <span className={styles.spinnerMini}></span>
+                ) : (
+                  <FaArrowCircleRight className={styles.btnEntrarLogin} />
+                )}
               </button>
             </div>
-
-            {loading && (
-              <div className={styles.loaderOverlay}>
-                <Carregando />
-              </div>
-            )}
-
 
             {erroMensagem && (
               <PopupErro

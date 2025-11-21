@@ -3,7 +3,7 @@ import { useFormContato } from '../../../hooks/contato/useFormContato';
 import PopupSucesso from '../../Popups/PopupSucesso/PopupSucesso';
 import PopupErro from '../../Popups/PopupErro/PopupErro';
 import styles from './FormContato.module.scss';
-import Carregando from '../../../components/Carregando/Carregando.jsx';
+import Loading from "../../../components/Loading/Loading.jsx";
 
 
 function FormContato() {
@@ -48,7 +48,7 @@ function FormContato() {
 				<h2>Contate-me</h2>
 
 
-				{loading && <Carregando />}
+				{loading && <Loading />}
 
 				<div className={styles.groupInput}>
 					<div className={styles.itemGroupInput}>
