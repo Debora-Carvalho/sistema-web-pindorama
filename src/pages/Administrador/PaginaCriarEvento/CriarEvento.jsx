@@ -1,7 +1,7 @@
 // Styles e React
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FaTags, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import { FaTags, FaMapMarkerAlt, FaCalendarAlt, FaCamera } from 'react-icons/fa';
 import styles from './CriarEvento.module.scss';
 // Components
 import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
@@ -40,6 +40,10 @@ function PaginaCriarEvento() {
     const [linkLocal, setLinkLocal] = useState('');
     const [statusInicial, setStatusInicial] = useState('rascunho');
     const [statusEnvio, setStatusEnvio] = useState("publicado");
+
+    // Novos estados de metadados da imagem
+    const [creditosImagem, setCreditosImagem] = useState('');
+    const [altImagem, setAltImagem] = useState('');
 
     const [popupTagAberto, setPopupTagAberto] = useState(false);
     const [mostrarConfirmacaoExcluir, setMostrarConfirmacaoExcluir] = useState(false);
@@ -80,7 +84,7 @@ function PaginaCriarEvento() {
 
     // --- Lógica de Exclusão ---
     const handleExcluirClick = () => {
-        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !dataEvento && !linkLocal;
+        const formularioEstaVazio = !titulo.trim() && (!conteudo || conteudo === '<p><br data-mce-bogus="1"></p>') && !imagemCapa && tagsSelecionadas.length === 0 && !dataEvento && !linkLocal && !creditosImagem && !altImagem;
         if (formularioEstaVazio) {
             setPopupSucessoMensagem('Não há informações para excluir.');
             setAcaoAposSucesso('permanecer');
@@ -95,6 +99,8 @@ function PaginaCriarEvento() {
         setConteudo('');
         setImagemCapa(null);
         setPreviewCapa('');
+        setCreditosImagem('');
+        setAltImagem('');
         setTagsSelecionadas([]);
         setDataEvento(null);
         setLinkLocal('');
@@ -104,7 +110,7 @@ function PaginaCriarEvento() {
         setMostrarSucesso(true);
     };
 
-    const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };    
+    const handleCancelarExclusao = () => { setMostrarConfirmacaoExcluir(false); };
 
     // --- Lógica de Envio ---
     const handleSubmit = (event, status = "publicado") => {
@@ -134,6 +140,8 @@ function PaginaCriarEvento() {
             if (tagsSelecionadas.length === 0) return mostrarErro('Selecione pelo menos uma tag.');
             if (!dataEvento) return mostrarErro('Por favor, selecione uma data para o evento.');
             if (!linkLocal) return mostrarErro('Por favor, adicione um link para o local do evento.');
+            if (!creditosImagem.trim()) return mostrarErro('Por favor, atribua os créditos da imagem.');
+            if (!altImagem.trim()) return mostrarErro('Por favor, adicione uma descrição para a imagem de capa.');
         } else if (status === "rascunho") {
             if (formularioVazio) return mostrarErro('Preencha pelo menos um campo para salvar como rascunho.');
             // GAMBIARRA! Correto é editar tabela e modal de eventos validado apenas se o status for "publicado"
@@ -152,7 +160,7 @@ function PaginaCriarEvento() {
     const executarEnvio = async (status = "publicado") => {
         if (enviando) return; // impede cliques duplos
         setEnviando(true);
-        
+
         try {
             const eventoParaEnviar = {
                 titulo,
@@ -162,6 +170,8 @@ function PaginaCriarEvento() {
                 data: dataEvento ? dataEvento.toISOString().split('T')[0] : null,
                 local: linkLocal,
                 tags: tagsSelecionadas,
+                creditos_imagem: creditosImagem,
+                alt_imagem: altImagem
             };
 
             if (id) {
@@ -169,14 +179,14 @@ function PaginaCriarEvento() {
             } else {
                 await criarEvento(eventoParaEnviar, imagemCapa);
             }
-            
+
             setMostrarConfirmacaoEnvio(false);
             setPopupSucessoMensagem(
                 status === "rascunho"
-                ? "Evento salvo como rascunho!"
-                : id
-                ? "Evento atualizado com sucesso!"
-                : "Evento enviado com sucesso!"
+                    ? "Evento salvo como rascunho!"
+                    : id
+                        ? "Evento atualizado com sucesso!"
+                        : "Evento enviado com sucesso!"
             );
             setMostrarSucesso(true);
         } catch (e) {
@@ -215,6 +225,8 @@ function PaginaCriarEvento() {
                             setDataEvento(dataLocal);
                         }
                         setPreviewCapa(evento.url_imagem || "");
+                        setCreditosImagem(artigo.creditos_imagem || '');
+                        setAltImagem(artigo.alt_imagem || '');
                     } else {
                         throw new Error("Evento não encontrado.");
                     }
@@ -279,17 +291,59 @@ function PaginaCriarEvento() {
                         {linkLocal ? 'Link/Local Adicionado' : 'Local'}
                     </button>
                 </div>
+                {/* --- ÁREA DE MÍDIA (Capa + Créditos + Alt) --- */}
                 <div className={styles.campoMidia}>
-                    <label htmlFor="upload-capa">
-                        {previewCapa ? <img src={previewCapa} alt="Prévia da capa" className={styles.previewImagem} /> : <div className={styles.placeholderMidia}>Adicione sua mídia aqui</div>}
-                    </label>
-                    <input
-                        id="upload-capa"
-                        type="file"
-                        accept="image/png, image/jpeg, image/webp"
-                        onChange={handleImagemChange}
-                        style={{ display: 'none' }}
-                    />
+
+                    {/* METADE SUPERIOR: Imagem ou Caixa de Upload */}
+                    <div className={styles.midiaSuperior}>
+                        <label
+                            htmlFor="upload-capa"
+                            className={styles.labelCapa}
+                        >
+                            {previewCapa ? (
+                                <img
+                                    src={previewCapa}
+                                    alt="Prévia da capa"
+                                    className={styles.previewImagem}
+                                />
+                            ) : (
+                                /* CAIXA DE PLACEHOLDER (Estilo original restaurado) */
+                                <div className={styles.placeholderMidia}>
+                                    <FaCamera className={styles.iconePlaceholder} />
+                                    <span>Adicione a imagem de capa</span>
+                                </div>
+                            )}
+                        </label>
+                        <input
+                            id="upload-capa"
+                            type="file"
+                            accept="image/png, image/jpeg, image/webp"
+                            onChange={handleImagemChange}
+                            style={{ display: 'none' }}
+                        />
+                    </div>
+
+
+                    <div className={styles.midiaInferior}>
+                        <textarea
+                            className={styles.inputMidiaInfo}
+                            placeholder="Créditos da imagem (Autor ou Link)"
+                            value={creditosImagem}
+                            onChange={(e) => setCreditosImagem(e.target.value)}
+                            maxLength={200}
+                            rows={2}
+                        />
+
+                        <textarea
+                            className={styles.inputMidiaInfo}
+                            placeholder="Descreva a imagem de capa"
+                            value={altImagem}
+                            onChange={(e) => setAltImagem(e.target.value)}
+                            maxLength={200}
+                            rows={2}
+                        />
+                    </div>
+
                 </div>
                 <div className={styles.campoBotoes}>
                     <button
@@ -327,9 +381,9 @@ function PaginaCriarEvento() {
 
             <PopupConfirmar
                 aberto={mostrarConfirmacaoEnvio}
-                mensagem={statusEnvio === "rascunho" 
-                  ? "Tudo pronto para salvar como rascunho?" 
-                  : "Tudo pronto para publicar?"
+                mensagem={statusEnvio === "rascunho"
+                    ? "Tudo pronto para salvar como rascunho?"
+                    : "Tudo pronto para publicar?"
                 }
                 onCancelar={handleCancelarEnvio}
                 onConfirmar={() => executarEnvio(statusEnvio)}
