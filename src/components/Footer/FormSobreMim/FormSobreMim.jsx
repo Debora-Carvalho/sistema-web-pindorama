@@ -3,7 +3,7 @@ import { useFormContato } from '../../../hooks/contato/useFormContato';
 import PopupSucesso from '../../Popups/PopupSucesso/PopupSucesso';
 import PopupErro from '../../Popups/PopupErro/PopupErro';
 import styles from './FormSobreMim.module.scss';
-import Carregando from '../../Carregando/Carregando';
+import Loading from "../../../components/Loading/Loading.jsx";
 
 
 function FormSobreMim() {
@@ -47,7 +47,7 @@ function FormSobreMim() {
             <form className={styles.formContato} onSubmit={handleSubmit}>
                 <h2>Contate-me</h2>
 
-                {loading && <Carregando />}
+                {loading && <Loading />}
 
                 <div className={styles.groupInput}>
                     <div className={styles.itemGroupInput}>
