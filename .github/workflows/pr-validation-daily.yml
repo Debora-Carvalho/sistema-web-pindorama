@@ -1,4 +1,4 @@
-name: Pull Request Validation
+name: Pull Request Validation + Daily report
 
 # Pipeline executada quando um Pull Request for aberto/atualizado
 # Execução diária às 07:00 para gerar relatório de atualização do projeto
