@@ -23,12 +23,25 @@ import { validarFormulario } from '../../../Helpers/validarFormulario.js';
 const nomeAutora = "Kelly Cristina Marques";
 const mockLocais = [
     { id: 1, cidade: 'Recife', estado: 'PE' },
-    { id: 2, cidade: 'Salvador', estado: 'BA' },
-    { id: 3, cidade: 'São Paulo', estado: 'SP' },
-    { id: 4, cidade: 'Rio de Janeiro', estado: 'RJ' },
-    { id: 5, cidade: 'Belo Horizonte', estado: 'MG' },
-    { id: 6, cidade: 'Vitória', estado: 'ES' },
-    { id: 7, cidade: 'Palmas', estado: 'TO' },
+    { id: 2, cidade: 'Olinda', estado: 'PE' }, // Adição PE
+    { id: 3, cidade: 'Salvador', estado: 'BA' },
+    { id: 4, cidade: 'Feira de Santana', estado: 'BA' }, // Adição BA
+    { id: 5, cidade: 'São Paulo', estado: 'SP' },
+    { id: 6, cidade: 'Guarulhos', estado: 'SP' },
+    { id: 7, cidade: 'Rio de Janeiro', estado: 'RJ' }, // Adição RJ
+    { id: 8, cidade: 'Niterói', estado: 'RJ' }, // Adição RJ
+    { id: 9, cidade: 'Belo Horizonte', estado: 'MG' },
+    { id: 10, cidade: 'Contagem', estado: 'MG' }, // Adição MG
+    { id: 11, cidade: 'Vitória', estado: 'ES' },
+    { id: 12, cidade: 'Vila Velha', estado: 'ES' }, // Adição ES
+    { id: 13, cidade: 'Palmas', estado: 'TO' },
+    { id: 14, cidade: 'Araguaína', estado: 'TO' }, // Adição TO
+    { id: 15, cidade: 'Manaus', estado: 'AM' },
+    { id: 16, cidade: 'Parintins', estado: 'AM' }, // Adição AM
+    { id: 17, cidade: 'Porto Alegre', estado: 'RS' },
+    { id: 18, cidade: 'Canoas', estado: 'RS' }, // Adição RS
+    { id: 19, cidade: 'Brasília', estado: 'DF' },
+    { id: 20, cidade: 'Taguatinga', estado: 'DF' }, // Adição DF (dentro do Distrito Federal)
 ];
 
 function PaginaCriarArtigo() {
