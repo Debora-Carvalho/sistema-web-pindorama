@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import PopupMapa from "../Popups/PopupMapa/PopupMapa.jsx";
 import LegendaMapa from './LegendaMapa/LegendaMapa.jsx';
+import Loading from "../Loading/Loading.jsx";//loading
+
+const API_MAPA = import.meta.env.VITE_API_MAPA_URL;
 
 export default function Mapa() {
     const [popupAberto, setPopupAberto] = useState(false);
     const [artigoSelecionado, setArtigoSelecionado] = useState(null);
-
+    const [isLoaded, setIsLoaded] = useState(false); //loading
 
     useEffect(() => {
         const handleMessage = (event) => {
@@ -28,20 +31,23 @@ export default function Mapa() {
     }, []);
 
     return (
-        <>
-            <iframe
+      // loading espaço e piriquito embaixo
+        <div style={{ position: 'relative', height: '90vh' }}>
+            {!isLoaded && <Loading />} 
+            <iframe 
                 // Quando hospedar trocar 
-                src="http://localhost:8000/mapa/"
+                src={API_MAPA}
+                onLoad={() => setIsLoaded(true)}
                 style={{
                     width: "100%",
                     height: "90vh",
                     border: "none",
-                    display: "block"
+                    display: isLoaded ? "block" : "none" //loading
                 }}
                 title="Mapa com Artigos"
             />
-
-            <LegendaMapa />
+            {/* Loading */}
+            {isLoaded && <LegendaMapa />} 
 
             <PopupMapa
                 aberto={popupAberto}
@@ -50,6 +56,6 @@ export default function Mapa() {
                 textoBotao="Fechar"
                 onFechar={() => setPopupAberto(false)}
             />
-        </>
+        </div>
     );
 }
