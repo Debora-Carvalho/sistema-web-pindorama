@@ -87,11 +87,12 @@ function PaginaLogin() {
               </button>
             </div>
 
-            {loading && (
-              <div className={styles.loaderOverlay}>
-                <Carregando />
-              </div>
-            )}
+            <div
+              className={`${styles.loaderOverlay} ${loading ? styles.show : styles.hide}`}
+            >
+              <Carregando />
+            </div>
+
 
 
             {erroMensagem && (

@@ -1,27 +1,39 @@
 import { motion } from "framer-motion"
 import styles from './Carregando.module.scss'
 
-const dotVariants = {
-    jump: {
-        y: -30,
-        transition: { duration: 0.8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
+const containerVariants = {
+    animate: {
+        transition: {
+            staggerChildren: 0.3,
+            repeat: Infinity
+        }
     }
 }
 
-const containerVariants = {
+
+const dotVariants = {
+    initial: { opacity: 0 },
     animate: {
-        transition: { staggerChildren: 0.2 }
+        opacity: [0, 1, 0, 1, 0],
+        transition: {
+            duration: 5,
+            ease: "easeInOut"
+        }
     }
-}
+};
+
 
 function Carregando() {
     return (
-        <motion.div className={styles.container} variants={containerVariants} animate="animate">
-
+        <motion.div
+            className={styles.container}
+            variants={containerVariants}
+            initial="initial"
+            animate="animate"
+        >
             <motion.div className={styles.dot} variants={dotVariants} />
             <motion.div className={styles.dot} variants={dotVariants} />
             <motion.div className={styles.dot} variants={dotVariants} />
-
         </motion.div>
     )
 }
