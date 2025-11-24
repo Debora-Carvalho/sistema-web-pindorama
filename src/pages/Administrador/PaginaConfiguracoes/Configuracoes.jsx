@@ -14,6 +14,7 @@ function PaginaConfiguracoes() {
   const [modoNoturnoAtivo, setModoNoturnoAtivo] = useState(false);
   const [modalTemaAberto, setModalTemaAberto] = useState(false);
 
+  
   return (
     <>
       <header className={styles.header}>
