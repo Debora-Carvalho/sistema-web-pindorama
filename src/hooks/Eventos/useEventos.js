@@ -141,12 +141,45 @@ export function useEventos() {
         }
     }
 
+        // NOVO: Função para atualizar apenas o status do artigo
+    async function updateEventoStatus(id, novoStatus) {
+      setLoading(true);
+      setErro(null);
+      try {
+          const response = await fetch(`${API_URL}/${id}`, {
+              method: "PATCH", // PATCH é ideal para atualizar um único campo, mas PUT também funcionaria se o backend permitir
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                  // Seu backend Rails/API precisa aceitar um objeto 'artigo'
+                  evento: {
+                      status: novoStatus,
+                  },
+              }),
+          });
+
+          if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(`Erro ao atualizar status do artigo ${id}: ${errorText}`);
+          }
+
+          return await response.json();
+      } catch (err) {
+          setErro(err.message);
+          throw err;
+      } finally {
+          setLoading(false);
+      }
+  }
+
     return {
         atualizarEvento,
         buscarEvento,
         deletarEvento,
         listarEventos,
         criarEvento,
+        updateEventoStatus,
         loading,
         erro,
         eventos, //AGORA RETORNA OS EVENTOS DO ESTADO
