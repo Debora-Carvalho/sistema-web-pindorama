@@ -28,8 +28,18 @@ function PaginaVisualizarEventosAdmin() {
     // 1. Estados e Hooks
     const { id, loading: authLoading } = useAuth();
     const { eventos, loading: eventosLoading, error: eventosError, refetch } = useGetEventosAdmin(id);
-    const { deletarEvento } = useEventos();
+    const { deletarEvento, updateEventoStatus } = useEventos();
     const [filtro, setFiltro] = useState("");
+
+    const handleStatusChange = async (artigoId, novoStatus) => {
+        try {
+            await updateEventoStatus(artigoId, novoStatus);
+            refetch(); // Recarrega os dados para exibir o novo status
+        } catch (error) {
+            console.error("Erro ao atualizar status:", error);
+            alert(`Erro ao ${novoStatus === 'destacado' ? 'destacar' : 'encobrir'} o artigo.`);
+        }
+    };
 
     const handleEditar = (id) => {
         navigate(`/adm/criar-evento/${id}`);// navega para editar evento
@@ -43,7 +53,9 @@ function PaginaVisualizarEventosAdmin() {
         a.titulo.toLowerCase().includes(filtro.toLowerCase())
     );
 
-    const eventosAdaptados = eventosFiltrados.map((a) => ({
+    const eventosOrdenados = eventosFiltrados.sort((a, b) => b.id - a.id);
+
+    const eventosAdaptados = eventosOrdenados.map((a) => ({
         id: a.id,
         tipo: "evento",
         titulo: a.titulo,
@@ -86,6 +98,7 @@ function PaginaVisualizarEventosAdmin() {
                           actions={{
                               onEditar: handleEditar,
                               onExcluir: handleExcluir,
+                              onStatusChange: handleStatusChange,
                               refetch
                           }}
                       />
