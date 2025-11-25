@@ -7,16 +7,18 @@ import styles from './DropdownCard.module.scss';
 import PopupConfirmar from "../../../../Popups/PopupConfirmar/PopupConfirmar.jsx";
 import PopupSucesso from "../../../../Popups/PopupSucesso/PopupSucesso.jsx";
 
-export default function DropdownCard({ id, actions }) {
+export default function DropdownCard({ id, actions, status }) {
     const [aberto, setAberto] = useState(false);
     const [popupDestacarAberto, setPopupDestacarAberto] = useState(false);
     const [popupExcluirAberto, setPopupExcluirAberto] = useState(false);
     const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
     const [popupDestaqueSucessoAberto, setPopupDestaqueSucessoAberto] = useState(false);
-    const [destacado, setDestacado] = useState(false);
+    //const [destacado, setDestacado] = useState(false);
     
     const [isDisabled, setIsDisabled] = useState(false);
     const menuRef = useRef(null);
+
+    const estaDestacado = status === "destacado";
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -38,11 +40,20 @@ export default function DropdownCard({ id, actions }) {
         setAberto((prev) => !prev);
     };
 
-    const handleConfirmarDestacar = () => {
-        const novoEstado = !destacado;
-        setDestacado(novoEstado);
-        setPopupDestacarAberto(false);
-        setPopupDestaqueSucessoAberto(true);
+    const handleConfirmarDestacar = async () => {
+        const novoStatus = estaDestacado ? "publicado" : "destacado"; // Lógica de alternância
+        
+        try {
+            await actions.onStatusChange(id, novoStatus); // CHAMA A FUNÇÃO QUE ATUALIZA O DB
+            setPopupDestacarAberto(false);
+            setPopupDestaqueSucessoAberto(true);
+            // NÃO PRECISAMOS MAIS CHAMAR actions.refetch() AQUI, 
+            // pois ela já está no PaginaVisualizarArtigosAdmin.jsx dentro de handleStatusChange.
+        } catch (error) {
+            console.error("Erro ao destacar/encobrir artigo:", error);
+            setPopupDestacarAberto(false);
+            alert(`Falha ao alterar o status do artigo para ${novoStatus}.`);
+        }
     };
 
     const handleConfirmarExcluir = async () => {
@@ -79,18 +90,19 @@ export default function DropdownCard({ id, actions }) {
                             className={styles.btnDestacar}
                             onClick={() => setPopupDestacarAberto(true)}
                         >
-                            {destacado ? (
+                            {/* Ícone e Texto são baseados no estado REAL (estaDestacado) */}
+                            {estaDestacado ? (
                                 <MdOutlineHideImage className={styles.iconOptions} />
                             ) : (
                                 <PiHighlighterFill className={styles.iconOptions} />
                             )}
-                            {destacado ? "Encobrir" : "Destacar"}
+                            {estaDestacado ? "Encobrir" : "Destacar"}
                         </button>
 
                         <PopupConfirmar
                             aberto={popupDestacarAberto}
                             mensagem={
-                                destacado
+                                estaDestacado // <- Usamos estaDestacado para a mensagem
                                     ? "Tem certeza que deseja encobrir este artigo?"
                                     : "Tem certeza que deseja destacar este artigo?"
                             }
@@ -101,9 +113,11 @@ export default function DropdownCard({ id, actions }) {
                         <PopupSucesso
                             aberto={popupDestaqueSucessoAberto}
                             mensagem={
-                                destacado
-                                    ? "Artigo destacado com sucesso!"
-                                    : "Artigo encoberto com sucesso!"
+                                // Após a ação, estaDestacado se inverteu (embora o estado ainda não tenha atualizado)
+                                // Usamos o novo status para a mensagem de sucesso
+                                estaDestacado 
+                                    ? "Artigo encoberto com sucesso!"
+                                    : "Artigo destacado com sucesso!"
                             }
                             textoBotao="Fechar"
                             onBotaoClick={() => setPopupDestaqueSucessoAberto(false)}

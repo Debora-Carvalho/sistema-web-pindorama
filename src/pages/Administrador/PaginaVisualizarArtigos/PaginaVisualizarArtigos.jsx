@@ -26,8 +26,19 @@ function PaginaVisualizarArtigosAdmin() {
     const navigate = useNavigate();
     const { id, loading: authLoading } = useAuth();
     const { artigos, loading: artigosLoading, error: artigosError, refetch } = useGetArtigosAdmin(id);
-    const { deleteArtigo } = useArtigos();
+    const { deleteArtigo, updateArtigoStatus } = useArtigos();
     const [filtro, setFiltro] = useState("");
+
+    // NOVA FUNÇÃO: Atualiza o status do artigo
+    const handleStatusChange = async (artigoId, novoStatus) => {
+        try {
+            await updateArtigoStatus(artigoId, novoStatus);
+            refetch(); // Recarrega os dados para exibir o novo status
+        } catch (error) {
+            console.error("Erro ao atualizar status:", error);
+            alert(`Erro ao ${novoStatus === 'destacado' ? 'destacar' : 'encobrir'} o artigo.`);
+        }
+    };
 
     const handleExcluir = async (id) => {
         await deleteArtigo(id);
@@ -41,8 +52,10 @@ function PaginaVisualizarArtigosAdmin() {
         a.titulo.toLowerCase().includes(filtro.toLowerCase())
     );
 
+    const artigosOrdenados = artigosFiltrados.sort((a, b) => b.id - a.id);
+
     // adaptando artigos para o formato esperado pelo ListaCardsAdmin
-    const artigosAdaptados = artigosFiltrados.map((a) => ({
+    const artigosAdaptados = artigosOrdenados.map((a) => ({
         id: a.id,
         tipo: "artigo",
         titulo: a.titulo,
@@ -85,6 +98,7 @@ function PaginaVisualizarArtigosAdmin() {
                         actions={{
                             onEditar: handleEditar,
                             onExcluir: handleExcluir,
+                            onStatusChange: handleStatusChange,
                             refetch //Passando o refech que atualiza os card em exibição!
                         }}
                     />
