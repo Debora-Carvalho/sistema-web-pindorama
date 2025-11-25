@@ -59,7 +59,7 @@ function PaginaInicialAdmin() {
     const { width } = useWindowSize();
     const limiteDeCards = width <= 1080 ? 4 : 3;
     const { id, loading: authLoading } = useAuth();
-    const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigosAdmin(id);
+    const { artigos, loading: artigosLoading, error: artigosError, refetch } = useGetArtigosAdmin(id);
     const { eventos, loading: eventosLoading, error: eventosError } = useGetEventosAdmin(id);
     const { deletarArtigo } = useArtigos();
     const artigosRecentes = artigos.slice(0, 3);
@@ -145,7 +145,8 @@ function PaginaInicialAdmin() {
                                         limite={limiteDeCards}
                                         actions={{
                                             onEditar: handleEditar,
-                                            onExcluir: handleExcluir
+                                            onExcluir: handleExcluir,
+                                            refetch
                                         }}
                                     />
                                 </div>

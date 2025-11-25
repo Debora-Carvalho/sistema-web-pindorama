@@ -17,6 +17,7 @@ export const useGetEventos = () => {
                 }
                 const data = await response.json();
                 setEventos(data);
+                window.scrollTo({ top: 0, behavior: "smooth" })
             } catch (err) {
                 setError(err.message);
             } finally {

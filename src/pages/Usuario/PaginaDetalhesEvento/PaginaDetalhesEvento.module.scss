@@ -9,7 +9,7 @@
 }
 
 .conteudo {
-	padding: 2%;
+	padding: 0 2%;
 }
 
 .headerEvento {
@@ -98,73 +98,9 @@
 	}
 }
 
-.expandButton {
-	position: absolute;
-	top: 1rem;
-	right: 1.5rem;
-	background-color: rgba(0, 0, 0, 0.1);
-	border: none;
-	border-radius: 50%; 
-	width: 2.5rem;
-	height: 2.5rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 1rem;
-	cursor: pointer;
-	transition: background-color 0.2s ease, transform 0.2s ease;
-
-	svg{
-		color: var(--secondary-900);
-	}
-
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.2);
-		transform: scale(1.1);
-	}
-}
-
 .imagemCapa img {
 	border-radius: 20px;
 	height: 23rem;
-}
-
-.botaoShare {
-	background-color: var(--primary-400);
-	color: var(--neutral-secondary);
-	border-radius: 30px;
-	border: none;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-	margin-top: 1.5rem;
-
-	.faRegPaperPlane {
-		font-size: 2rem;
-		min-width: 2rem;
-		height: 2rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		pointer-events: none;
-	}
-
-	.shareText {
-		font-size: 1.2rem;
-		white-space: nowrap;
-		pointer-events: none;
-	}
-
-	@media (max-width: 720px) {
-		.shareText {
-			opacity: 1;
-			width: auto;
-			transform: translateX(0);
-			font-size: 1.4rem;
-		}
-	}
 }
 
 .tags {
@@ -182,6 +118,49 @@
 	border-radius: 30px;
 	color: var(--neutral-secondary);
 	font-family: $font-family-principal;
+}
+
+.infoInferior{
+	display: grid;
+	grid-template-columns: 1fr 1.5fr;
+	margin-top: 1rem;
+	align-items: center;
+}
+
+.playerContainerWrapper {
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.playerCompacto {
+    display: flex;
+    align-items: center;
+	justify-content: flex-start;
+    gap: 1rem;
+	width: 100%;
+    
+    h4 {
+        font-family: $font-family-principal;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primary-400);
+    }
+}
+
+.playIconCompacto {
+    font-size: 1.7rem;
+    color: var(--neutral-secondary);
+    background-color: var(--neutral-primary);
+    border-radius: 50%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .infoLocalEvento {
@@ -237,7 +216,7 @@
 }
 
 .cardsContainer {
-	display: grid;
+	//display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 2rem;
 }
@@ -317,6 +296,7 @@
 	.conteudoPrincipal {
 		grid-template-columns: 1fr;
 		grid-template-areas:
+			"audio"
             "imagem"
             "texto"
             "local"
@@ -336,6 +316,15 @@
 
 	.autora {
 		grid-area: autora;
+	}
+
+	.playerContainerWrapper{
+		margin-bottom: 2rem;
+	}
+
+	.audio{
+		grid-area: audio;
+		margin-bottom: 2rem;
 	}
 
 	.imagemCapa {

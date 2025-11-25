@@ -6,11 +6,29 @@
     padding: 40px 20px;
     gap: 10px;
 
-    h2 {
-        font-family: $font-family-texto;
-        font-size: 2.5rem;
-        text-align: start;
-        color: var(--text-primary);
+    .containerTopo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+
+        h2 {
+            font-family: $font-family-texto;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .btnVerMais {
+            font-family: $font-family-texto;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+
+            &:hover {
+                color: var(--secondary-500);
+            }
+        }
     }
 }
 

@@ -1,15 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import styles from './ThemeToggle.module.scss';
-import {
-	ThemeContext,
-	DEFAULT_THEME,
-	DARK_THEME,
-	NORDESTINO_THEME,
-	INDIGENA_THEME
-} from '../../contexts/ThemeContext';
+import { ThemeContext, DEFAULT_THEME, DARK_THEME, NORDESTINO_THEME, INDIGENA_THEME } from '../../contexts/ThemeContext';
 
 import { LuSun } from "react-icons/lu";
-import { LuMoon } from "react-icons/lu";
+// import { LuMoon } from "react-icons/lu";
 import { RiCactusLine } from "react-icons/ri";
 import { BsFeather } from "react-icons/bs";
 
@@ -23,12 +17,12 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 	useEffect(() => {
 		setModalAberto(aberto);
 		if (aberto) setTemaAnterior(globalTheme); // salva o tema atual antes da troca
-	}, [aberto]);
+	}, [aberto, globalTheme]);
 
 	// quando o usuário clica em um botão de tema → apenas pré-visualiza
 	const handlePreview = (novoTema) => {
 		setTemaSelecionado(novoTema);
-		setGlobalTheme(novoTema);
+		setGlobalTheme(novoTema); // já muda globalmente via hook
 	};
 
 	// cancelar: volta o tema anterior e fecha o modal
@@ -50,42 +44,35 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 	return (
 		<div className={styles.modalOverlayTheme}>
 			<div className={styles.containerModalTheme}>
-				<div className={styles.containerInfos}> 
+				<div className={styles.containerInfos}>
 					<h3>Alterar tema</h3>
-
 					<p>
 						Selecione abaixo um tema de cor para pré-visualizar a aparência do site.
-						Ao clicar em <b>Confirmar</b>, o novo tema será aplicado em todo o site para todos os usuários de Pindorama.
+						Ao clicar em <b>Confirmar</b>, o novo tema será aplicado em todo o site para todos os usuários.
 					</p>
 				</div>
 
 				<div className={styles.containerButtons}>
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === DEFAULT_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === DEFAULT_THEME ? styles.btnSelecionado : ""}`}
 						onClick={() => handlePreview(DEFAULT_THEME)}
 						disabled={temaSelecionado === DEFAULT_THEME}
 					>
 						<LuSun className={styles.btnThemeIcon} />
-						Default (tema padrão)
+						Default
 					</button>
 
-					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === DARK_THEME ? styles.btnSelecionado : ""
-    }`}
-						onClick={() => handlePreview(DARK_THEME)}
-						disabled={temaSelecionado === DARK_THEME}
-					>
-						<LuMoon className={styles.btnThemeIcon} />
-						Dark (tema escuro)
-					</button>
+					{/* <button
+            className={`${styles.btnTheme} ${temaSelecionado === DARK_THEME ? styles.btnSelecionado : ""}`}
+            onClick={() => handlePreview(DARK_THEME)}
+            disabled={temaSelecionado === DARK_THEME}
+          >
+            <LuMoon className={styles.btnThemeIcon} />
+            Dark
+          </button> */}
 
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === NORDESTINO_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === NORDESTINO_THEME ? styles.btnSelecionado : ""}`}
 						onClick={() => handlePreview(NORDESTINO_THEME)}
 						disabled={temaSelecionado === NORDESTINO_THEME}
 					>
@@ -94,9 +81,7 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 					</button>
 
 					<button
-						className={`${styles.btnTheme} ${
-      temaSelecionado === INDIGENA_THEME ? styles.btnSelecionado : ""
-    }`}
+						className={`${styles.btnTheme} ${temaSelecionado === INDIGENA_THEME ? styles.btnSelecionado : ""}`}
 						onClick={() => handlePreview(INDIGENA_THEME)}
 						disabled={temaSelecionado === INDIGENA_THEME}
 					>
@@ -109,18 +94,20 @@ export default function ThemeToggle({ aberto, onCancelar, onConfirmar }) {
 					<button
 						type="button"
 						className={styles.btnCancelar}
-						onClick={handleCancelar}>
+						onClick={handleCancelar}
+					>
 						Cancelar
 					</button>
 
 					<button
 						type="button"
 						className={styles.btnConfirmar}
-						onClick={handleConfirmar}>
+						onClick={handleConfirmar}
+					>
 						Confirmar
 					</button>
 				</div>
 			</div>
 		</div>
 	);
-};
+}

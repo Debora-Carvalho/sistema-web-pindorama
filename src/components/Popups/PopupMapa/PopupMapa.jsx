@@ -3,10 +3,11 @@ import Draggable from 'react-draggable';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from "react-icons/ai";
 import styles from './PopupMapa.module.scss';
+import { decodeHtml } from '../../../Helpers/decodeHtml';
 
 function PopupMapa({ aberto, titulo, descricao, textoBotao, linkDestino, onFechar }) {
     const nodeRef = useRef(null); //ref para o Draggable
-
+    const socorro = decodeHtml(descricao);
     if (!aberto) return null;
 
     return (
@@ -28,7 +29,7 @@ function PopupMapa({ aberto, titulo, descricao, textoBotao, linkDestino, onFecha
                         </button>
                     </div>
 
-                    <p>{descricao}</p>
+                    <p>{socorro}</p>
 
                     {linkDestino ? (
                         <Link to={linkDestino} className={styles.btnPopupMapa}>

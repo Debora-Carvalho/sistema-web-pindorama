@@ -1,13 +1,15 @@
+// React and Style
 import { useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
-import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+// Components
 import Header from '../../../components/Header/Header.jsx';
 import Footer from '../../../components/Footer/Footer.jsx';
 import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
-import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
-import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
-import { Link } from "react-router-dom";
 import Loading from '../../../components/Loading/Loading.jsx';
+import ListaCards from "../../../components/ListaCards/Usuario/ListaCards.jsx";
+// Hooks e Helpers
+import useTituloDocumento from '../../../hooks/useTituloDocumento.js';
+import { useGetArtigos } from '../../../hooks/usuario/useGetArtigos.js';
 import { decodeHtml } from "../../../Helpers/decodeHtml.js";
 
 function PaginaVisualizarArtigos() {
@@ -15,7 +17,6 @@ function PaginaVisualizarArtigos() {
     const { artigos, loading, error } = useGetArtigos();
     const [textoBusca, setTextoBusca] = useState("");
 
-    // Adaptando os artigos: filtrando apenas publicados e decodificando HTML
     const artigosAdaptados = artigos
         .filter(a => a.status === "publicado")
         .map(a => ({
@@ -27,12 +28,9 @@ function PaginaVisualizarArtigos() {
             link: `/detalhes-artigo/${a.id}`
         }));
 
-
-        
-    // filtro do texto da barra de pesquisa
     const artigosFiltrados = artigosAdaptados.filter(a =>
         a.titulo.toLowerCase().includes(textoBusca.toLowerCase())
-    );
+    );// filtro do texto da barra de pesquisa
 
     return (
         <>
@@ -52,11 +50,7 @@ function PaginaVisualizarArtigos() {
 
                     {loading && <Loading/>}
                     {error && <p>Ocorreu um erro ao carregar os artigos: {error}</p>}
-
                     <ListaCards cards={artigosFiltrados} limite={null} />
-                    
-                    {/* Botão de voltar ou outros links podem ser adicionados */}
-                    {/* <Link to="/" className={styles.btnVerMais}>Voltar para a home</Link> */}
                 </main>
 
                 <Footer />

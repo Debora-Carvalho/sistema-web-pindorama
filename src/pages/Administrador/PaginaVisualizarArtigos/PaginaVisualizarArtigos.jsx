@@ -1,15 +1,19 @@
+//Style e React
+import { useState } from "react";
 import styles from './PaginaVisualizarArtigos.module.scss';
-import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import { BiSolidAddToQueue } from "react-icons/bi";
-import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
-import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { useAuth } from '../../../contexts/AuthContext.jsx';
+//Components
+import HeaderAdmin from '../../../components/HeaderAdmin/HeaderAdmin.jsx';
+import BarraPesquisa from '../../../components/Barra de pesquisa/BarraPesquisa.jsx';
 import ListaCardsAdmin from '../../../components/ListaCards/Admin/ListaCardsAdmin.jsx';
-import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js';
 import Loading from "../../../components/Loading/Loading.jsx";
 import Logotipo from "../../../components/Logotipo/Logotipo.jsx";
+//Contexts e hooks
+import { useAuth } from '../../../contexts/AuthContext.jsx';
+import { useGetArtigosAdmin } from '../../../hooks/administradores/useGetArtigosAdmin.js';
+import { useArtigos } from '../../../hooks/artigos/useArtigos.js';
 
 const pageTransition = {
     initial: { opacity: 0, y: 20 },
@@ -19,10 +23,11 @@ const pageTransition = {
 };
 
 function PaginaVisualizarArtigosAdmin() {
-    const { id, loading: authLoading } = useAuth();
     const navigate = useNavigate();
-    const { artigos, loading: artigosLoading, error: artigosError } = useGetArtigosAdmin(id);
+    const { id, loading: authLoading } = useAuth();
+    const { artigos, loading: artigosLoading, error: artigosError, refetch } = useGetArtigosAdmin(id);
     const { deleteArtigo } = useArtigos();
+    const [filtro, setFiltro] = useState("");
 
     const handleExcluir = async (id) => {
         await deleteArtigo(id);
@@ -32,7 +37,12 @@ function PaginaVisualizarArtigosAdmin() {
         navigate(`/adm/criar-artigo/${id}`);
     };
 
-    const artigosAdaptados = artigos.map((a) => ({
+    const artigosFiltrados = artigos.filter((a) =>
+        a.titulo.toLowerCase().includes(filtro.toLowerCase())
+    );
+
+    // adaptando artigos para o formato esperado pelo ListaCardsAdmin
+    const artigosAdaptados = artigosFiltrados.map((a) => ({
         id: a.id,
         tipo: "artigo",
         titulo: a.titulo,
@@ -74,7 +84,8 @@ function PaginaVisualizarArtigosAdmin() {
                         limite={null}
                         actions={{
                             onEditar: handleEditar,
-                            onExcluir: handleExcluir
+                            onExcluir: handleExcluir,
+                            refetch //Passando o refech que atualiza os card em exibição!
                         }}
                     />
                 </div>

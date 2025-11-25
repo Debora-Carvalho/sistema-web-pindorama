@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import { FaFileAlt, FaCalendarCheck, FaMap, FaHeart } from 'react-icons/fa';
-import { FaImage, FaBuilding } from "react-icons/fa6";
+import { FaImage, FaBuilding, FaCircleQuestion } from "react-icons/fa6";
 import { MdInfo, MdOutlineSecurity } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import Logotipo from "../Logotipo/Logotipo";
@@ -62,6 +62,11 @@ const Navbar = () => {
             text: "Sobre a autora",
             icon: <FaHeart />,
             navigate: "/sobre",
+        },
+        {
+            text: "FAQ - Ajuda",
+            icon: <FaCircleQuestion />,
+            navigate: "/ajuda",
         },
         {
             text: "Políticas de privacidade",

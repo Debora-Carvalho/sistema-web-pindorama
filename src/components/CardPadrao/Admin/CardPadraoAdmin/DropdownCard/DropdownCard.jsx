@@ -14,7 +14,8 @@ export default function DropdownCard({ id, actions }) {
     const [popupSucessoAberto, setPopupSucessoAberto] = useState(false);
     const [popupDestaqueSucessoAberto, setPopupDestaqueSucessoAberto] = useState(false);
     const [destacado, setDestacado] = useState(false);
-
+    
+    const [isDisabled, setIsDisabled] = useState(false);
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -46,6 +47,7 @@ export default function DropdownCard({ id, actions }) {
 
     const handleConfirmarExcluir = async () => {
         try {
+            setIsDisabled(true);
             await actions.onExcluir(id);
             setPopupExcluirAberto(false);
             setPopupSucessoAberto(true);
@@ -122,13 +124,17 @@ export default function DropdownCard({ id, actions }) {
                             mensagem="Tem certeza que deseja excluir este artigo?"
                             onCancelar={() => setPopupExcluirAberto(false)}
                             onConfirmar={handleConfirmarExcluir}
+                            disabled={isDisabled}
                         />
 
                         <PopupSucesso
                             aberto={popupSucessoAberto}
                             mensagem="Artigo excluído com sucesso!"
                             textoBotao="Fechar"
-                            onBotaoClick={() => setPopupSucessoAberto(false)}
+                            onBotaoClick={async () => {
+                                setPopupDestaqueSucessoAberto(false);
+                                await actions.refetch(); //Manda o useGetArtigosAdmin (que manda o useEffect trabalhar) recarregar os artigos!
+                            }}
                         />
                     </div>
                 </div>

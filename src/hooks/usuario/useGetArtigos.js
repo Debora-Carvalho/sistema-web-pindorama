@@ -17,6 +17,7 @@ export const useGetArtigos = () => {
                 }
                 const data = await response.json();
                 setArtigos(data);
+                window.scrollTo({ top: 0, behavior: "smooth" })
             } catch (err) {
                 setError(err.message);
             } finally {
