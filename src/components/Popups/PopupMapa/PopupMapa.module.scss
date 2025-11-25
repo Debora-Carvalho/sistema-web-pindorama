@@ -35,7 +35,14 @@
         p {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
-            text-align: justify;
+            /* Alterado para left para as reticências ficarem bonitas */
+            text-align: left; 
+            /* Limita a 3 linhas */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .btnPopupMapa {
@@ -72,6 +79,13 @@
 
         .btnFecharPopup:hover {
             color: var(--secondary-500);
+        }
+
+        .btnSecundario {
+            margin-top: 10px; /* Separar os botões */
+            background-color: var(--primary-100) !important; /* Exemplo: Fundo claro */
+            color: var(--secondary-900) !important; /* Exemplo: Texto da cor principal */
+            border: 2px solid var(--secondary-900); /* Exemplo: Borda */
         }
     }
 }

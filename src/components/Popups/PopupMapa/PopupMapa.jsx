@@ -5,10 +5,15 @@ import { AiOutlineClose } from "react-icons/ai";
 import styles from './PopupMapa.module.scss';
 import { decodeHtml } from '../../../Helpers/decodeHtml';
 
+// Adicionamos a prop 'linkDestino' (que pode vir do Mapa.jsx como artigoSelecionado.link)
 function PopupMapa({ aberto, titulo, descricao, textoBotao, linkDestino, onFechar }) {
-    const nodeRef = useRef(null); //ref para o Draggable
-    const socorro = decodeHtml(descricao);
+    const nodeRef = useRef(null); 
+
     if (!aberto) return null;
+
+    const htmlDecodificado = decodeHtml(descricao);
+
+    const textoLimpo = htmlDecodificado.replace(/<[^>]*>?/gm, '');
 
     return (
         <div className={styles.popupOverlayMapa}>
@@ -29,17 +34,26 @@ function PopupMapa({ aberto, titulo, descricao, textoBotao, linkDestino, onFecha
                         </button>
                     </div>
 
-                    <p>{socorro}</p>
+                    <p className={styles.conteudoLimitado}>
+                        {textoLimpo}
+                    </p>
 
-                    {linkDestino ? (
+                    {/* NOVO BOTÃO: Ver Artigo (só aparece se houver um linkDestino) */}
+                    {linkDestino && (
                         <Link to={linkDestino} className={styles.btnPopupMapa}>
-                            {textoBotao}
+                            Ver Artigo
                         </Link>
-                    ) : (
-                        <button className={styles.btnPopupMapa} onClick={onFechar}>
-                            {textoBotao}
-                        </button>
                     )}
+
+                    {/* BOTÃO EXISTENTE: Fechar */}
+                    {/* A lógica foi simplificada, mantendo apenas o botão Fechar */}
+                    <button 
+                        className={styles.btnPopupMapa + (linkDestino ? ` ${styles.btnSecundario}` : '')} 
+                        onClick={onFechar}
+                    >
+                        Fechar
+                    </button>
+                    
                 </div>
             </Draggable>
         </div>

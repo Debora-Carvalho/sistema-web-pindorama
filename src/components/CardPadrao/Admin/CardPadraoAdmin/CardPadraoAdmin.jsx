@@ -27,7 +27,7 @@ function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions, status }) {
             </div>
 
             <div className={styles.dropdownOpcoesContainer}>
-                <DropdownCard id={id} actions={actions} />
+                <DropdownCard id={id} actions={actions} status={status} />
             </div>
 
             <div className={styles.cardConteudo}>

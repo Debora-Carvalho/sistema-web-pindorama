@@ -14,15 +14,17 @@ export default function Mapa() {
         const handleMessage = (event) => {
             if (event.data?.type === "abrirPopupArtigo") {
                 const artigo = event.data.data;
+                const linkDestino = `/detalhes-artigo/${artigo.id}`;
 
                 setArtigoSelecionado({
+                    id: artigo.id,
                     titulo: artigo.titulo,
-                    conteudo: decodeHtml(artigo.conteudo)
+                    conteudo: decodeHtml(artigo.conteudo),
+                    link: linkDestino
                 });
                 setPopupAberto(true);
             }
         };
-
         window.addEventListener("message", handleMessage);
 
         return () => {
@@ -53,6 +55,7 @@ export default function Mapa() {
                 aberto={popupAberto}
                 titulo={artigoSelecionado?.titulo || ""}
                 descricao={artigoSelecionado?.conteudo || ""}
+                linkDestino={artigoSelecionado?.link || ""}
                 textoBotao="Fechar"
                 onFechar={() => setPopupAberto(false)}
             />
