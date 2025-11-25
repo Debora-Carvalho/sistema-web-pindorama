@@ -37,6 +37,9 @@ function PaginaLogin() {
 
   return (
     <>
+    <div className={`${styles.loaderOverlay} ${loading ? styles.show : styles.hide}`}>
+  <Carregando />
+</div>
       <div className={styles.containerLogin}>
         <div className={styles.columDoguinho}>
           <img className={styles.imageLogin} src={cachorro} alt="Cachorro caramelo" />
@@ -86,13 +89,6 @@ function PaginaLogin() {
                 <FaArrowCircleRight className={styles.btnEntrarLogin} />
               </button>
             </div>
-
-            <div
-              className={`${styles.loaderOverlay} ${loading ? styles.show : styles.hide}`}
-            >
-              <Carregando />
-            </div>
-
 
 
             {erroMensagem && (
