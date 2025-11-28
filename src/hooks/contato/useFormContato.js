@@ -1,22 +1,22 @@
 import { useState, useCallback } from "react";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = `${API_BASE_URL}/api/contato`;
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
 export const useFormContato = () => {
     const [formData, setFormData] = useState({
-        nome: '',
-        email: '',
-        mensagem: ''
+        nome: "",
+        email: "",
+        mensagem: ""
     });
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
     const handleChange = useCallback((e) => {
         const { name, value } = e.target;
-        setFormData(prevData => ({
-            ...prevData,
+        setFormData(prev => ({
+            ...prev,
             [name]: value
         }));
         setError(null);
@@ -33,24 +33,32 @@ export const useFormContato = () => {
         setSuccess(false);
 
         try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ contato: formData }),
+            const formBody = new URLSearchParams({
+                access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+                name: formData.nome,
+                email: formData.email,
+                message: formData.mensagem
             });
 
-            if (response.ok) {
+            const response = await fetch(WEB3FORMS_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: formBody.toString()
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
                 setSuccess(true);
-                setFormData({ nome: '', email: '', mensagem: '' });
+                setFormData({ nome: "", email: "", mensagem: "" });
             } else {
-                const errorData = await response.json();
-                setError(errorData.error || 'Erro desconhecido ao enviar a mensagem.');
+                setError(data.message || "Erro ao enviar a mensagem.");
             }
         } catch (err) {
-            console.error('Erro de conexão:', err);
-            setError('Erro de conexão. Tente novamente mais tarde.');
+            console.error("Erro de conexão:", err);
+            setError("Erro de conexão. Tente novamente mais tarde.");
         } finally {
             setLoading(false);
         }
