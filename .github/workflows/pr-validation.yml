@@ -1,4 +1,4 @@
-name: Pull Request Validation
+name: Teste-PR
 
 # Pipeline executada quando um Pull Request for aberto ou atualizado com destino à branch "develop".
 on:
