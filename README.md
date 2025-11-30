@@ -1,8 +1,86 @@
-# 🌵 Pindorama
+<div align="center">
+    <img src="./.github/assets/pindorama_logo-final-inicio.png" alt="Logotipo na cor branca do Pindorama" height="100" title="Logotipo do Pindorama">
+</div>
 
-Aplicação web para difundir conteúdos sobre o Patrimônio Cultural Imaterial Brasileiro.
+<p align="justify">
+  <b>Pindorama</b> é uma aplicação web para difundir conteúdos sobre o Patrimônio Cultural Imaterial Brasileiro. Você pode acessar artigos informativos, eventos, galeria de fotos e um mapa interativo para explorar a cultura do Brasil de uma forma que nunca viu antes!
+  
+  O site está disponível em: https://pindorama-cultura.vercel.app/  
+</p>
 
-Acesse o site em: https://pindorama-cultura.vercel.app/
+<div align="center">
+    <img src="./.github/assets/capivara-default.png" alt="Ilustração de capivara utilizada no tema default do site" height="200" title="Ilustração de capivara utilizada no tema default do site">
+    <img src="./.github/assets/capivara-indigena.png" alt="Ilustração de capivara utilizada no tema indígena do site" height="200" title="Ilustração de capivara utilizada no tema indígena do site">
+    <img src="./.github/assets/capivara-nordestino.png" alt="Ilustração de capivara utilizada no tema nordestino do site" height="200" title="Ilustração de capivara utilizada no tema nordestino do site">
+</div>
+
+<br>
+
+## Artefatos (documentação) de Experiência do Usuário (UX)
+
+- [Criação de Persona](docs/ux-criacao-persona-pindorama.pdf)
+- [Pesquisa de satisfação](docs/ux-pesquisa-satisfacao-pindorama.pdf)
+- [Plano de suporte contínuo](docs/ux-plano-suporte-continuo-pindorama.pdf)
+
+<br>  
+
+## Screenshots (principais telas)
+
+<div align="center">
+  <img src="./.github/assets/screenshot1.png" alt="Screenshot 1 - Tela de entrada (carrossel de artigos)" height="220"  title="Tela de entrada (carrossel de artigos)">
+  <img src="./.github/assets/screenshot2.png" alt="Screenshot 2 - Tela de início (home)" height="220" title="Tela de início (home)">
+  <img src="./.github/assets/screenshot3.png" alt="Screenshot 3 - Tela de início (home) na versão escura" height="220" title="Tela de início (home) na versão escura">
+  <img src="./.github/assets/screenshot4.png" alt="Screenshot 4 - Visualização de artigos" height="220" title="Visualização de artigos">
+  <img src="./.github/assets/screenshot5.png" alt="Screenshot 5 - Visualização da galeria de fotos" height="220" title="Visualização da galeria de fotos">
+  <img src="./.github/assets/screenshot6.png" alt="Screenshot 6 - Visualização de detalhes do artigo" height="220" title="Visualização de detalhes do artigo">
+  <img src="./.github/assets/screenshot7.png" alt="Screenshot 7 - Visualização de detalhes do evento" height="220"title="Visualização de detalhes do evento">
+  <img src="./.github/assets/screenshot8.png" alt="Screenshot 8 - Compartilhar evento" height="220" title="Compartilhar evento">
+  <img src="./.github/assets/screenshot9.png" alt="Screenshot 9 - Mapa do Brasil interativo" height="220" title="Mapa do Brasil interativo">
+  <img src="./.github/assets/screenshot10.png" alt="Screenshot 10 - Sobre os órgãos de patrimonialização" height="220" title="Sobre os órgãos de patrimonialização">
+  <img src="./.github/assets/screenshot11.png" alt="Screenshot 11 - Sobre a autora" height="220" title="Sobre a autora">
+  <img src="./.github/assets/screenshot12.png" alt="Screenshot 12 - Tela de login" height="220" title="Tela de login">
+  <img src="./.github/assets/screenshot13.png" alt="Screenshot 13 - Tela de início (home) do administrador" height="220" title=Tela de início (home) do administrador">
+  <img src="./.github/assets/screenshot14.png" alt="Screenshot 14 - Criar artigo" height="220" title="Criar artigo">
+  <img src="./.github/assets/screenshot15.png" alt="Screenshot 15 - Visualização de artigos na tela de administrador" height="220" title="Visualização de artigos na tela de administrador">
+  <img src="./.github/assets/screenshot16.png" alt="Screenshot 16 - Editar artigo" height="220"title="Editar artigo">
+  <img src="./.github/assets/screenshot17.png" alt="Screenshot 17 - Configurações para o administrador" height="220" title="Configurações para o administrador">
+  <img src="./.github/assets/screenshot18.png" alt="Screenshot 18 - Visualização do FAQ (ajuda com dúvidas frequentes)" height="220" title="Visualização do FAQ (ajuda com dúvidas frequentes)">
+  <img src="./.github/assets/screenshot19.png" alt="Screenshot 19 - Política de privacidade" height="220" title="Política de privacidade">
+  <img src="./.github/assets/screenshot20.png" alt="Screenshot 20 - Termos de uso" height="220" title="Termos de uso">
+</div>
+
+<br>
+
+## Paleta de cores
+
+<img src=".github/assets/paleta-cores-pindorama.png" height="130" title="Paleta de cores principais utilizadas no site" />
+
+<br>
+
+## Stacks utilizadas
+
+**Front-end:** ![React](https://img.shields.io/badge/React-19.1.1-D47354)
+![React Router DOM](https://img.shields.io/badge/React_Router_DOM-7.9.1-D47354)
+![Sass](https://img.shields.io/badge/Sass-1.92.1-D47354)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.23.19-D47354)
+![MUI](https://img.shields.io/badge/MUI_@material-7.3.2-D47354)
+![React Icons](https://img.shields.io/badge/React_Icons-5.5.0-D47354)
+![React Leaflet](https://img.shields.io/badge/React_Leaflet-5.0.0-D47354)
+![React H5 Audio Player](https://img.shields.io/badge/React_H5_Audio_Player-3.10.1-D47354)
+![Embla Carousel](https://img.shields.io/badge/Embla_Carousel_React-8.6.0-D47354)
+![TinyMCE](https://img.shields.io/badge/TinyMCE-8.0.2-D47354)
+
+**Back-end:** ![Ruby](https://img.shields.io/badge/Ruby-3.4.5-405A37)
+![Ruby on Rails](https://img.shields.io/badge/Rails-8.0.0-405A37)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-405A37)
+![Docker](https://img.shields.io/badge/Docker-27-405A37)
+![Docker Compose](https://img.shields.io/badge/Docker_Compose-2.29-405A37)
+
+**Ilustrações:** ![Clip Studio Paint](https://img.shields.io/badge/Clip_Studio_Paint-1F1F1F?logo=clipstudiopaint&logoColor=white&style=for-the-badge)
+
+**Documentação e versionamento:** ![GitHub](https://img.shields.io/badge/GitHub-000000?logo=github&style=for-the-badge)
+![Notion](https://img.shields.io/badge/Notion-000000?logo=notion&style=for-the-badge)
+
 
 <br>
 
@@ -32,18 +110,6 @@ Acesse o site em: https://pindorama-cultura.vercel.app/
 - Informações resumidas
 - Carregamento rápido
 - Responsividade
-
-## Stack utilizada
-
-**Front-end:** React, Sass, Framer Motion
-
-**Back-end:** Ruby, Python, PostgreSQL
-
-<br>
-
-## Paleta de cores
-
-<img src=".github/assets/paleta-cores-pindorama.png" style="height:130px;" />
 
 <br>
 
@@ -90,4 +156,4 @@ Este projeto está protegido. Para mais detalhes, consulte o arquivo [LICENSE](L
 
 <br><br>
 
-📅 Última atualização: Set/2025
+📅 Última atualização: Dez/2025
