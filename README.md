@@ -73,6 +73,8 @@
 **Back-end:** ![Ruby](https://img.shields.io/badge/Ruby-3.4.5-405A37)
 ![Ruby on Rails](https://img.shields.io/badge/Rails-8.0.0-405A37)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-405A37)
+![Python](https://img.shields.io/badge/Python-3.12-405A37)
+![Folium](https://img.shields.io/badge/Folium-0.20.0-405A37)
 ![Docker](https://img.shields.io/badge/Docker-27-405A37)
 ![Docker Compose](https://img.shields.io/badge/Docker_Compose-2.29-405A37)
 
