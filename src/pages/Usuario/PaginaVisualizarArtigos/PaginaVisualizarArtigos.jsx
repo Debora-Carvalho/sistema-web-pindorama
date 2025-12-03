@@ -23,7 +23,7 @@ function PaginaVisualizarArtigos() {
             id: a.id,
             tipo: "artigo",
             titulo: a.titulo,
-            url_imagem: a.url_imagem,
+            url_imagem: a?.imagem?.url_imagem,
             conteudo: decodeHtml(a.conteudo),
             link: `/detalhes-artigo/${a.id}`
         }));

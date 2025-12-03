@@ -12,6 +12,7 @@ function ListaCardsAdmin({ cards, limite, actions }) {
                     id={card.id}
                     tipo={card.tipo}
                     imagem={card.url_imagem}
+                    descricao={card.descricao}
                     titulo={card.titulo}
                     link={card.link}
                     actions={actions}

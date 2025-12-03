@@ -46,11 +46,15 @@
     border-radius: 20px;
     max-width: 600px;
     width: 90%;
-    height: 85%;
-    max-height: fit-content;
+    
+    /* 💡 CORREÇÃO AQUI */
+    height: fit-content;    /* 1. Faz o modal se adaptar à altura do conteúdo */
+    max-height: 90vh;       /* 2. Limita o modal para no máximo 90% da altura da viewport */
+    /* ------------------ */
+    
     text-align: center;
     animation: fadeIn 0.3s ease-in-out;
-    overflow-y: auto;
+    overflow-y: auto; /* Permite scroll se o conteúdo (imagem grande) exceder 90vh */
     clip-path: inset(0 round 20px);
 }
 

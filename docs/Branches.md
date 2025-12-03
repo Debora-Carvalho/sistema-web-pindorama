@@ -1,6 +1,4 @@
 ## 🌿 Branches 
-- nova branch
-- feat/campo-creditos
 
 ### 📌 Convenção de Nomes
 

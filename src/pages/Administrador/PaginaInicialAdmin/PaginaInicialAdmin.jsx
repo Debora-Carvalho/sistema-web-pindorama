@@ -83,7 +83,8 @@ function PaginaInicialAdmin() {
         id: a.id,
         tipo: "artigo",
         titulo: a.titulo,
-        url_imagem: a.url_imagem,
+        url_imagem: a?.imagem?.url_imagem || "",
+        descricao: a?.imagem?.descricao || "",
         link: `/detalhes-artigo/${a.id}`,
         status: a.status
     }));

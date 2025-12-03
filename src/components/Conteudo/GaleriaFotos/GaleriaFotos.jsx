@@ -24,8 +24,8 @@ function GaleriaFotos() {
             .map((item) => ({
                 id: item.id,
                 titulo: item.titulo,
-                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
-                imagem: item.url_imagem,
+                descricao: item?.imagem?.descricao,
+                imagem: item?.imagem?.url_imagem,
                 link: `/detalhes-artigo/${item.id}`
             })),
             ...(eventos || [])
@@ -33,8 +33,8 @@ function GaleriaFotos() {
             .map((item) => ({
                 id: item.id,
                 titulo: item.titulo,
-                descricao: item.conteudo.replace(/<[^>]+>/g, ''),
-                imagem: item.url_imagem,
+                descricao: item?.imagem?.descricao,
+                imagem: item?.imagem?.url_imagem,
                 link: `/eventos/${item.id}`
             }))
         ];
