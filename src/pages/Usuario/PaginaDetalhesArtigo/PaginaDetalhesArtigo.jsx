@@ -49,7 +49,9 @@ function PaginaDetalhesArtigo() {
                 id: a.id,
                 tipo: "artigo",
                 titulo: a.titulo,
-                url_imagem: a.url_imagem,
+                url_imagem: a?.imagem?.url_imagem,
+                descricao: a?.imagem?.descricao,
+                autor: a?.autor?.nome,
                 conteudo: decodeHtml(a.conteudo),
                 link: `/detalhes-artigo/${a.id}`,
                 tags: a.tags
@@ -99,7 +101,7 @@ function PaginaDetalhesArtigo() {
                                     Publicado em: {formatarData(artigo.data, "data")}
                                 </p>
                             </div>
-                            <p className={styles.autora}>Kelly Cristina Marques</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
+                            <p className={styles.autora}>{artigo.autor.nome}</p>{/* {artigo.autor_id} Deveria ser usado, mas sem tempo*/}
                         </div>
 
                         <div className={styles.conteudoPrincipal}>
@@ -141,8 +143,8 @@ function PaginaDetalhesArtigo() {
                             <div className={styles.colunaDireita}>
                                 <div className={styles.imagemCapa}>
                                     <img
-                                        src={artigo.url_imagem}
-                                        alt={`Imagem de capa para o artigo: ${artigo.titulo}`}
+                                        src={artigo.imagem.url_imagem}
+                                        alt={ artigo.imagem.descricao ||`Imagem de capa para o artigo: ${artigo.titulo}`}
                                     />
                                 </div>
 

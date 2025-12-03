@@ -17,7 +17,7 @@ function ProximosEventos() {
         id: e.id,
         tipo: "evento",
         titulo: e.titulo,
-        url_imagem: e.url_imagem,
+        url_imagem: e?.imagem?.url_imagem,
         conteudo: decodeHtml(e.conteudo),
         link: `/detalhes-evento/${e.id}`
     }));
