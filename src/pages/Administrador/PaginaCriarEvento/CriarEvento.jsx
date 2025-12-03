@@ -219,20 +219,23 @@ function PaginaCriarEvento() {
                         setConteudo(evento.conteudo || '');
                         setTagsSelecionadas(evento.tags || []);
                         setLinkLocal(evento.local || '');
+                        
+                        setCreditosImagem(evento?.imagem?.creditos|| '');
+                        setAltImagem(evento?.imagem?.descricao || '');
+                        
                         if (evento.data) {
                             const dataUTC = new Date(evento.data);
                             const dataLocal = new Date(dataUTC.getUTCFullYear(), dataUTC.getUTCMonth(), dataUTC.getUTCDate());
                             setDataEvento(dataLocal);
                         }
-                        setPreviewCapa(evento.url_imagem || "");
-                        setCreditosImagem(artigo.creditos_imagem || '');
-                        setAltImagem(artigo.alt_imagem || '');
+                        setPreviewCapa(evento?.imagem?.url_imagem || "");
+                        
                     } else {
                         throw new Error("Evento não encontrado.");
                     }
                 } catch (e) {
                     // setErroFormulario({ mensagem: `Erro ao carregar o evento: ${e.message}`, tipo: "erro" });
-                    console.error("Erro ao carregar artigo", e);
+                    console.error("Erro ao carregar evento", e);
                     navigate('/adm/visualizar-eventos');
                 }
             };

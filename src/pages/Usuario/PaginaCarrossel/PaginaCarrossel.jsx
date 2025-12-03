@@ -26,7 +26,7 @@ const PaginaCarrossel = () => {
     const slidesMapeados = artigos
         .filter(artigo => artigo.status === "publicado" && artigo.url_imagem)
         .map(artigo => ({
-            imagem: artigo.url_imagem,
+            imagem: artigo?.imagem?.url_imagem,
             titulo: artigo.titulo,
             subtitulo: criarSumario(artigo.conteudo),
             botao: 'Ver artigo completo',

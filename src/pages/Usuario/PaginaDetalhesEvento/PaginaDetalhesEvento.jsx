@@ -59,7 +59,8 @@ function PaginaDetalhesEvento() {
             id: e.id,
             tipo: "evento",
             titulo: e.titulo,
-            url_imagem: e.url_imagem,
+            url_imagem: e?.imagem?.url_imagem,
+            descricao: e?.imagem?.descricao,
             conteudo: decodeHtml(e.conteudo),
             link: `/detalhes-evento/${e.id}`,
             tags: e.tags
@@ -156,7 +157,7 @@ function PaginaDetalhesEvento() {
                             <div className={styles.colunaDireita}>
                                 <div className={styles.imagemCapa}>
                                     <img
-                                        src={evento.url_imagem}
+                                        src={evento.imagem.url_imagem}
                                         alt={`Imagem de capa para o evento: ${evento.titulo}`}
                                     />
                                 </div>

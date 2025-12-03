@@ -243,8 +243,8 @@ function PaginaCriarArtigo() {
                     setConteudo(artigo.conteudo);
                     setTagsSelecionadas(artigo.tags || []);
 
-                    setCreditosImagem(artigo.creditos_imagem || '');
-                    setAltImagem(artigo.alt_imagem || ''); 
+                    setCreditosImagem(artigo?.imagem?.creditos || '');
+                    setAltImagem(artigo?.imagem?.descricao || ''); 
                     
                     if (artigo.local && artigo.local.includes(" - ")) {
                         const [cidade, estado] = artigo.local.split(" - ");
@@ -252,7 +252,7 @@ function PaginaCriarArtigo() {
                     } else {
                         setLocalSelecionado(null);
                     }
-                    setPreviewCapa(artigo.url_imagem || "");
+                    setPreviewCapa(artigo?.imagem?.url_imagem || "");
                 } catch (e) {
                     console.error("Erro ao carregar artigo", e);
                 }

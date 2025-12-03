@@ -59,7 +59,7 @@ function PaginaVisualizarEventosAdmin() {
         id: a.id,
         tipo: "evento",
         titulo: a.titulo,
-        url_imagem: a.url_imagem,
+        url_imagem: a?.imagem?.url_imagem,
         link: `/detalhes-evento/${a.id}`,
         status: a.status
     }));

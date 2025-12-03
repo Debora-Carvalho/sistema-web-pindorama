@@ -21,6 +21,8 @@ export function useEventos() {
             formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
             formData.append("evento[status]", dados.status);
+            formData.append("evento[creditos_imagem]", dados.creditos_imagem); 
+            formData.append("evento[alt_imagem]", dados.alt_imagem);
 
             dados.tags.forEach((tag) => {
               formData.append("evento[tags][]", tag);
@@ -96,6 +98,8 @@ export function useEventos() {
             formData.append("evento[data]", dados.data);
             formData.append("evento[autor_id]", dados.autor_id);
             formData.append("evento[status]", dados.status);
+            formData.append("evento[creditos_imagem]", dados.creditos_imagem); 
+            formData.append("evento[alt_imagem]", dados.alt_imagem);
 
             // Tags
             if (dados.tags) {

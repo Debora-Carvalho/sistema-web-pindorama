@@ -19,6 +19,8 @@ export function useArtigos() {
             formData.append("artigo[autor_id]", dados.autor_id);
             formData.append("artigo[status]", dados.status);
             formData.append("artigo[data]", dados.data);
+            formData.append("artigo[creditos_imagem]", dados.creditos_imagem); 
+            formData.append("artigo[alt_imagem]", dados.alt_imagem);
 
             // envia tags como array no formato Rails
             dados.tags.forEach((tag) => {
@@ -93,6 +95,8 @@ export function useArtigos() {
             formData.append("artigo[autor_id]", dados.autor_id);
             formData.append("artigo[status]", dados.status);
             formData.append("artigo[data]", dados.data);
+            formData.append("artigo[creditos_imagem]", dados.creditos_imagem); 
+            formData.append("artigo[alt_imagem]", dados.alt_imagem);
 
             dados.tags.forEach((tag) => {
                 formData.append("artigo[tags][]", tag);

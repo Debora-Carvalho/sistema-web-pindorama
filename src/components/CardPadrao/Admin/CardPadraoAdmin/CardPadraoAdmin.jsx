@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import DropdownCard from "./DropdownCard/DropdownCard.jsx";
 
-function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions, status }) {
+function CardPadraoAdmin({ id, imagem, descricao, tipo, titulo, link, actions, status }) {
     const botaoClasse =
         tipo === "artigo" ? styles.btnArtigo : styles.btnEvento;
 
@@ -23,7 +23,7 @@ function CardPadraoAdmin({ id, imagem, tipo, titulo, link, actions, status }) {
     return (
         <div className={`${styles.card} ${backgroundClasse}`}>
             <div className={styles.cardImagem}>
-                <img src={imagem} alt={`Capa do ${tipo} ${titulo}`} />
+                <img src={imagem} alt={descricao ||`Capa do ${tipo} ${titulo}`} />
             </div>
 
             <div className={styles.dropdownOpcoesContainer}>
